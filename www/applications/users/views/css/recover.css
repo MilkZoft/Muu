@@ -1,0 +1,39 @@
+.recover fieldset {
+	border: 1px solid #d1d1d1;
+	background-color: #F5F5F5;
+	color: #333;
+	margin: 0 auto;
+	width: 300px;
+	text-align: center;
+}
+
+.recover fieldset legend {
+	display: none;
+}
+
+.recover input {
+	border: 1px solid #d1d1d1;
+	width: 250px;
+	font-size: 1.2em;
+	color: #333;
+}
+
+.recover .submit {
+	border: 1px solid #d1d1d1;
+	font-size: 0.8em;
+	color: #666;
+	background-color: #F5F5F5;
+	height: 25px;
+	background-image: url('../images/button.png');
+}
+
+.recover a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #333;
+	font-size: 0.8em;
+}
+
+.recover a:hover {
+	color: #000;
+}

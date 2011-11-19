@@ -1,0 +1,93 @@
+.flashdata {
+	width:190px;
+	margin:0 auto;
+}
+
+.wrapper {
+	width:290px;
+	height:auto;
+	margin:0 auto;
+	text-align:center;
+	font-family:Verdana;
+}
+
+.login fieldset {
+	border: none;
+}
+
+.login fieldset legend {
+	display: none;
+}
+
+.login .center {
+	text-align: center;
+	font-weight: bold;
+	color:#439DD3;
+	font-size:1.3em;
+}
+
+.login .username {
+	border: 1px solid #d1d1d1;
+	width:250px;
+	height:30px;
+	font-size: 1.2em;
+	color: #333;
+}
+
+.login .password {
+	border: 1px solid #d1d1d1;
+	width:250px;
+	height:30px;
+	font-size: 1.2em;
+	color: #333;
+}
+
+.login .submit {
+	border: 1px solid #d1d1d1;
+	font-size: 1.2em;
+	width:250px;
+	height:35px;
+	color: #666;
+	background-color: #F5F5F5;
+}
+
+.login a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #333;
+	font-size: 0.8em;
+}
+
+.login a:hover {
+	color: #000;
+}
+
+.actions {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.additional {
+	font-size:.7em;
+	text-align:center;
+	color:#7F7F7F;
+}
+
+.additional a {
+	font-size:.9em;
+	text-align:center;
+	color:#7F7F7F;
+}
+
+.alert {
+	margin-top:105px;
+	font-size:1.5em;
+	text-align:center;
+}
+
+.good {
+	color:#439DD3;
+}

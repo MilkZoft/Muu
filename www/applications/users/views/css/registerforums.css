@@ -1,0 +1,78 @@
+.register fieldset {
+	font-family:Verdana;
+	font-size:1em;	
+	border:none;
+	color: #333;
+	margin: 0 auto;
+	width:300px;
+	text-align: center;
+}
+
+.register .center {
+	color:#439DD3;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.register fieldset legend {
+	display: none;
+}
+
+.register input {
+	border: 1px solid #d1d1d1;
+	width: 250px;
+	height:35px;
+	font-size: 1.2em;
+	color: #333;
+}
+
+.register .submit {
+	border: 1px solid #d1d1d1;
+	font-size:1.2em;
+	color: #666;
+	background-color: #F5F5F5;
+	height: 35px;
+}
+
+.register a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #333;
+	font-size: 0.8em;
+}
+
+.register a:hover {
+	color: #000;
+}
+
+.flashdata {
+	width:190px;
+	margin:0 auto;
+}
+
+.clear {
+	clear: both;
+}
+
+.additional {
+	font-size:.7em;
+	text-align:center;
+	color:#7F7F7F;
+}
+
+.additional a {
+	font-size:.9em;
+	text-align:center;
+	color:#7F7F7F;
+}
+
+.alert {
+	margin-top:105px;
+	font-size:1.5em;
+	text-align:center;
+}
+
+.good {
+	color:#439DD3;
+}
+

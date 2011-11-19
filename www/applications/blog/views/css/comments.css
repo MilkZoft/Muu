@@ -1,0 +1,57 @@
+#comments-header {
+	border-top: 1px dotted #CACACA;
+	border-bottom: 1px dotted #CACACA;
+	#padding: 10px;
+	color: #000;
+	font-size: 24px;
+	width: 100%;
+}
+
+#comments {
+	margin: 0 auto;
+	width: 100%;
+}
+
+
+.comment {
+	border-bottom: 1px dotted #BABABA;
+	margin-top: -13px;
+	padding: 0px;
+}
+
+.comment:hover {
+	background-color: #CACACA;
+}
+
+.comment-date {
+	margin: 0px;
+	padding: 0px;
+}
+
+.comment-user {
+	margin: 0px;
+	padding: 0px;
+}
+
+.comment-user-avatar {
+	float: left;
+	padding-right: 20px;
+	margin-bottom: 0px;
+	margin: 0px;
+}
+
+.comment-content {
+	float: left;
+	width: 100%;
+	text-align: justify;
+	width: 87%;
+	overflow: hidden;
+}
+
+.comment-message {
+	margin: 0px;
+	border: 1px solid red;
+}
+
+
+

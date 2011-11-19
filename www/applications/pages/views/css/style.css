@@ -1,0 +1,88 @@
+#pages {
+	color: #000000;
+	text-align: justify !important;
+	margin-top: 15px;
+}
+
+#pages h2 {
+	color: #859642;
+	font-size: 1.5em;
+	margin: 0;
+	margin-left: 30px;
+	margin-top: 30px;
+}
+
+#pages h3 { 
+	font-size: 1.2em;
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+
+#pages p {
+	margin-left: 30px;
+	margin-right: 50px;
+	margin-top: 10px;
+	font-size: 14px;
+}
+	
+#pages a {
+	text-decoration: none;
+	color: #333333;
+	background-color: transparent;
+}
+
+#pages a:hover {
+	text-decoration: none;
+	color: #0066FF;	
+	background-color: transparent;
+}
+
+.pages {
+	color: #000000;
+	text-align: justify !important;
+	background-image: url(../images/bg-ubicacion.png);
+	background-repeat: no-repeat;
+	margin-top: 15px;
+	height: 612px;
+}
+
+.margined { margin-top: 40px !important; }
+.green { color: #687E1B; }
+.actions { float: right; }
+
+.ubicacion-dec {
+	width: 618px;
+	height: 292px;
+	background-image: url(../images/ubicacion.jpg);
+	margin-left: 35px;
+}
+
+.item {
+	margin: auto !important;
+	height: auto;
+}
+
+.item div {
+	height: 280px;
+	margin-bottom: 20px;
+	background-color: #FFF;
+	width: 85%;
+	padding: 10px;
+	text-align: center;
+}
+
+.item div .image {
+	height: 180px;
+	background-color: transparent;
+}
+
+.item div span {
+	display: block;
+	font-size: 15px;
+	color: #36997D;
+}
+
+.push_10p {
+	margin-left: 35px !important;
+}

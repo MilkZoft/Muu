@@ -1,0 +1,14 @@
+#blog-archive ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+#blog-archive ul li a {
+	color: #2080b9;
+	text-decoration: none;
+}
+
+#blog-archive ul li a:hover {
+	color: #333;
+}

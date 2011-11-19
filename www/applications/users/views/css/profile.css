@@ -1,0 +1,99 @@
+.editProfile {
+	font-family:Verdana;
+	font-size:1em;
+}
+
+.editProfile fieldset {
+	border:none;
+	margin:0px;
+}
+
+.editUserProfile {
+	margin:0px;
+}
+
+.center {
+	text-align:center;
+	font-size:1.5em;
+	font-weight:bold;
+}
+
+.center2 {
+	margin-top:-10px;
+	text-align:center;
+	font-size:1.5em;
+	font-weight:bold;
+}
+
+.title {
+	font-size:.8em;
+	font-weight:bold;
+	display:block;
+	width:10%;
+	margin-left:10px;
+	margin-top:-15px;
+	position:absolute;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	border-radius:3px;
+}
+
+.set {
+	width:70%;
+	margin:0 auto;
+	height:auto;
+}
+
+.set2 {
+	width:72%;
+	margin:0 auto;
+	height:auto;
+}
+
+.important {
+	background-color:#42ABD6;
+}
+
+.main {
+	background-color:#44C9FF;
+	color:#fff;
+}
+
+.avatar {
+	width:90px;
+	height:160px;
+	margin-left:20px;
+	position:absolute;
+	margin-top:25px;
+}
+
+#avatar {
+	width:90px;
+	height:90px;
+	overflow:hidden;
+}
+
+
+.wrapper {
+	border:1px solid #42ABD6;
+	margin-top:-15px;
+}
+
+.blocktitle { 
+	display:block;
+	width:395px;
+	height:30px;
+	cursor:pointer;
+	margin-left:130px;
+	background-color:#F5F5F5;
+	font-size:.8em;
+	font-weight:bold;
+	text-indent:10px;
+	line-height:30px;
+	
+}
+
+.blocktitle:hover {
+	background-color:#E5E5E5;
+}

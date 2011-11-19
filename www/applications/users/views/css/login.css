@@ -1,0 +1,62 @@
+.login {
+	border: 1px solid #d1d1d1;
+	background-color: #F5F5F5;
+	color: #333;
+	margin: 0 auto;
+	width: 300px;
+	text-align: center;
+}
+
+.login fieldset {
+	border: none;
+}
+
+.login fieldset legend {
+	display: none;
+}
+
+.login .center {
+	text-align: center;
+	font-weight: bold;
+}
+
+.login .username {
+	border: 1px solid #d1d1d1;
+	width: 250px;
+	font-size: 1.2em;
+	color: #333;
+}
+
+.login .password {
+	border: 1px solid #d1d1d1;
+	width: 250px;
+	font-size: 1.2em;
+	color: #333;
+}
+
+.login .submit {
+	border: 1px solid #d1d1d1;
+	font-size: 0.8em;
+	color: #666;
+	background-color: #F5F5F5;
+	background-image: url('../images/button.png');
+}
+
+.login a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #333;
+	font-size: 0.8em;
+}
+
+.login a:hover {
+	color: #000;
+}
+
+.actions {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}

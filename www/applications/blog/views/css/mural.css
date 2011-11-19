@@ -1,0 +1,31 @@
+.mural-image {
+	width: 960px;
+	text-align: center;
+	z-index: 0;
+}
+
+.mural-info {
+	z-index: 1;
+	position:absolute;
+	height: 50px;
+	width: 960px;
+	margin-top: -56px;
+}
+
+
+.mural-title {
+	display: block;
+	opacity:0.8;
+	line-height: 50px;
+	background-color: #000;
+	color: #FFF;
+	text-align:center;
+	margin-top: 0px;
+	height: 50px;
+	text-decoration: none;
+}
+
+.mural-title:hover {
+	opacity: 1;
+	color: #00a8ff;
+}
