@@ -1,6 +1,6 @@
 ¿What is MuuCMS?
 ------------------------
-MuuCMS is a free and open source Content Management System (CMS) platform powered by ZanPHP Framework. You can develop any kain of application such as blog, gallery, forums, surveys, pages, links, users, videos, Twitter and Facebook applications integration, etc.
+MuuCMS is a free and open source Content Management System (CMS) platform powered by ZanPHP Framework. You can develop any kind of application such as blog, gallery, forums, surveys, pages, links, users, videos, Twitter and Facebook applications integration, etc.
 
 Server Requirements
 -------------------------
