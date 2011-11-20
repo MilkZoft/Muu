@@ -21,7 +21,7 @@ git clone git@github.com:MilkZoft/MuuCMS.git
 
 The next step is to set a constants of 2 configuration files. These files are located at: /core/config
 
-The first file to modify is the /core/config/config.constants.php which should change the following constants, and then import the SQL file in your PHPMyAdmin:
+The first file to modify is the /www/config/config.constants.php which should change the following constants, and then import the SQL file in your PHPMyAdmin:
 
     _domain: serves to specify the domain that our site will have.
     _modRewrite: toggles the stylization of URLs (TRUE or FALSE).
@@ -31,7 +31,7 @@ The first file to modify is the /core/config/config.constants.php which should c
     _webState: toggles the access to the website (Active or Inactive)
     _webLanguage: configure the default language of the website 
 
-The second file to configure is /core/config/config.database.php in the following constants:
+The second file to configure is /www/config/config.database.php in the following constants:
 
     _dbController: allows us to specify the database driver to use.
     _dbHost: allows us to configure the host where the database server (usually localhost).
