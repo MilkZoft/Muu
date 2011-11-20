@@ -4,7 +4,7 @@ All rights reserved.
 
 This license is a legal agreement between you and MilkZoft, Inc. for the use
 
-of ZanPHP Software (the "Software"). By obtaining the Software you
+of MuuCMS Software (the "Software"). By obtaining the Software you
 
 agree to comply with the terms and conditions of this license.
 
@@ -24,10 +24,10 @@ the following conditions are met:
 4. Any files that have been modified must carry notices stating the nature
    of the change and the names of those who changed them.
 5. Products derived from the Software must include an acknowledgment that
-   they are derived from ZanPHP in their documentation and/or other
+   they are derived from MuuCMS in their documentation and/or other
    materials provided with the distribution.
-6. Products derived from the Software may not be called "ZanPHP",
-   nor may "ZanPHP" appear in their name, without prior written
+6. Products derived from the Software may not be called "MuuCMS",
+   nor may "MuuCMS" appear in their name, without prior written
    permission from MilkZoft, Inc.
 
 INDEMNITY
