@@ -41,4 +41,7 @@ The second file to configure is /www/config/config.database.php in the following
     _dbPort: database port.
     _dbPfx: the prefix our tables have. 
 
-Once these steps, we have MuuCMS ready to work, go to your CPanel at http://localhost/MuuCMS/index.php/en/cpanel, username: admin, password: admin. 
+Once these steps, we have MuuCMS ready to work, go to your CPanel at http://localhost/MuuCMS/index.php/en/cpanel. 
+
+    Username: admin
+    Password: admin
