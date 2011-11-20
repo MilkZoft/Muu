@@ -19,7 +19,7 @@ To start working with MuuCMS, the first necessary step is to download it. Get Mu
 
 git clone git@github.com:MilkZoft/MuuCMS.git
 
-The next step is to set a constants of 2 configuration files. These files are located at: /core/config
+The next step is to set a constants of 2 configuration files. These files are located at: /www/config
 
 The first file to modify is the /www/config/config.constants.php which should change the following constants, and then import the SQL file in your PHPMyAdmin:
 
