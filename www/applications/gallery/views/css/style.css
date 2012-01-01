@@ -1,0 +1,312 @@
+.Clear {
+	clear:both;
+}
+
+.FullContainer {
+	margin:0 auto;
+	margin-top:30px;
+	width:840px;
+	height:100%;
+}
+
+.FullContainer2 {
+	margin:0 auto;
+	margin-top:30px;
+	width:840px;
+	height:100%;
+}
+
+.FullContainer p {
+	margin-top:0px;	
+}
+
+#GalleryContent {
+	margin:0 auto;
+	padding-top:20px;
+	padding-bottom:20px;
+	background-color:#EEE;
+	border:1px solid #CCCCCC;
+	width:100%;
+	height:100%;
+}
+
+.Row {
+	width:100%;
+	height:auto;
+	margin-top:5px;
+	margin-bottom:15px;
+}
+
+.GalleryImgCont {
+	float:left; 
+	width:166px; 
+	height:100%; 
+	text-align:center;
+}
+
+.GalleryImgCont img {
+	position:relative;
+	padding:3px;
+	border:1px solid #EEE;
+}
+
+.GalleryImgCont img:hover {
+	background-color:#45A1D9;
+}
+
+.GalleryImgCont a {
+	text-decoration:none;
+}
+
+.GalleryImgCont a:hover {
+	text-decoration:underline;
+}
+
+.GalleryImgCont a span { 
+	color:#3b5998;
+}
+
+.GalleryImgCont a img { 
+	opacity:0.6;
+	filter:alpha(opacity=50);
+}
+
+.GalleryImgCont a img:hover { 
+	opacity:1;
+}
+
+.GalleryDisplay {
+	width: 600px;
+	height: 100%;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.NPLinks {
+	float:right;
+	margin:0px;
+	margin-right:-5px;
+	margin-bottom:1px;
+	font-size:.8em;
+}
+
+.HLink { 
+	float:left;
+	font-size:.8em;
+}
+
+.HLink a {
+	color:#45A1D9;
+	text-decoration: none;
+}
+
+.HLink a:hover {
+	font-weight:bold;
+}
+	
+
+.NPLinks a {
+	color: #45A1D9;
+	text-decoration: none;
+}
+
+.NPLinks a:hover {
+	font-weight:bold;
+}
+
+.TitleAlbum {
+	font-weight: bold;
+	font-size: .8em;
+	margin-left:300px;
+	color: #000;
+}
+	
+.Paginate {
+	float:right;
+	margin-bottom:10px;
+	margin-right:-1px;
+	font-size:.85em;
+	color:#45A1D9;
+	text-decoration:none;
+}
+
+.Paginate a {
+	color:#45A1D9;
+	text-decoration:none;
+}
+
+.Paginate a:visited {
+	color:#45A1D9;
+	text-decoration:none;
+}
+
+.Paginate a:hover {
+	color:#31B1FF;
+	text-decoration:none;
+}
+
+
+
+#Albums a {
+	text-decoration: none;
+	color:#45A1D9;
+	font-size:.7em;
+	font-weight:bold;
+}
+
+.TotalPics { 
+	font-size:.8em;
+	color: #45A1D9;
+}
+
+#DoComment { 
+	margin: 0;
+	padding:10px 10px;
+	background-color: #eceff5;
+	border: 1px solid #ccc;
+	margin-top:-19px;
+	width: 380px;
+	height: 100%;
+}
+
+#DoComment textarea {
+	float:right;
+	margin:0px;
+	border:1px solid #ccc;
+}
+
+#DoComment .SubmitButton {
+	float:right;
+	margin-top:3px;
+	background-color:#3b5998;
+	color: #FFF;
+	border: 0;
+}
+
+#DoComment img {
+	float:left;
+}
+
+.EMessage {
+	float: right;
+	color: #3b5998;
+	font-size: .8em;
+	margin-top:-80px;
+	margin-right:105px;
+}
+
+.CommentsContainer {
+	margin: 0;
+	margin-top: 60px;
+	width: 380px;
+	height: 100%;
+}
+
+
+.CommentsContainer a {
+	text-decoration:none;
+	font-weight:bold;
+	color: #3b5998;
+	font-size:.6em;
+}
+
+.CommentsContainer a:hover {
+	text-decoration:underline;
+}	
+
+.CommentInd {
+	background-color: #eceff5;
+	border: 1px solid #ccc;
+	width: 400px;
+	height:100%;
+	margin-bottom:1px;
+}
+
+.CommentInd img {
+	float: left;
+	margin:5px 5px;
+}
+
+.TextComment {
+	text-align: justify;
+	width:350px;
+	float:left;
+	margin-right:-40px;
+	
+}
+
+.CommentsGallery {
+	font-size: .6em;
+	color:#000;
+}
+
+.DateGallery {
+	font-size: .55em;
+	color:#777777;
+}
+
+.ImgDescription {
+	font-size: .7em;
+	margin-top:10px;
+	width:380px;
+	color:#000;
+}
+
+.ImgView {
+	display:block;
+	width:auto;
+	margin:0 auto;
+}
+
+.InfoImg {
+	float: right;
+	font-size: .8em;
+	margin-top: -30px;
+	margin-right:-275px;
+	width:340px;
+	color:#000;
+}
+
+.ImgTitle {
+	color:#777;
+}
+
+.FontComment {
+	color:#CCCCCC;
+}
+
+.GeneralLinks a {
+	font-size:.95em;
+	color:#45A1D9;
+	text-decoration: none;
+}
+
+.GeneralLinks a:hover {
+	text-decoration:underline;
+}
+
+.GalleryCenter {
+	width: 100%;
+	height: 100%;
+	margin-left: 460px;
+}
+
+.Center {
+	text-align:center;
+	color:#45A1D9;
+	font-size:1.2em;	
+	font-weight:bold;
+}
+
+.Center a {
+	text-decoration:none;
+}
+
+.Center a:visited {
+	color:#45A1D9;
+}
+
+.Center a:hover {
+	color:#31B1FF;
+}

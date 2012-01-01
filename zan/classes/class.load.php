@@ -142,12 +142,18 @@ class ZP_Load {
      * @param bool $application = FALSE
      * @return void
      */
-	public function config($name) {
-		if(file_exists(_www . _sh . _config . _sh . _config . _dot . $name . _PHP)) {
-			include_once _www . _sh . _config . _sh . _config . _dot . $name . _PHP;
+	public function config($name, $application = FALSE) {
+		if($application) {
+			if(file_exists("www/applications/$application/config/config.$name.php")) {
+				include_once "www/applications/$application/config/config.$name.php";
+			} else {
+				die("$name config doesn't exists");
+			}
+		} elseif(file_exists("www/config/config.$name.php")) {
+			include_once "www/config/config.$name.php";
 		} else {
-			if(file_exists(_www . _sh . _applications . _sh . $name . _sh . _config . _sh . _config . _dot . $name . _PHP)) {
-				include_once _www . _sh . _applications . _sh . $name . _sh . _config . _sh . _config . _dot . $name . _PHP;
+			if(file_exists("www/applications/$name/config/config.$name.php")) {
+				include_once "www/applications/$name/config/config.$name.php";
 			} else {
 				die("$name config doesn't exists");
 			}
@@ -216,39 +222,47 @@ class ZP_Load {
 		$this->Templates->CSS($CSS, $application, $print);
 	}
 
-	public function driver($driver = NULL) {
-		if(file_exists(_corePath . _sh . _drivers . _sh . _driver . _dot . strtolower($driver) . _PHP)) {
-			$file = _corePath . _sh . _drivers . _sh . _driver . _dot . strtolower($driver) . _PHP;	
+	public function driver($driver = NULL, $type = "db") {
+		if(file_exists(_corePath . _sh . _drivers . _sh . $type . _sh . _driver . _dot . strtolower($driver) . _PHP)) {
+			$file = _corePath . _sh . _drivers . _sh . $type . _sh . _driver . _dot . strtolower($driver) . _PHP;	
 		} else {
 			$file = FALSE;	
 		}
+		if($type !== "cache"){
+			$this->Cache = $this->core("Cache");
 		
-		$this->Cache = $this->core("Cache");
-		
-		if(file_exists($file)) {							
-			if(class_exists($driver)) {
+			if(file_exists($file)) {							
+				if(class_exists($driver)) {
+					if($this->Cache->get($driver, "drivers")) {
+						return $this->Cache->get($driver, "drivers");	
+					} else {
+						return ZP_Singleton::instance("ZP_". $driver);
+					}
+				}
+			
 				if($this->Cache->get($driver, "drivers")) {
 					return $this->Cache->get($driver, "drivers");	
 				} else {
-					return ZP_Singleton::instance("ZP_". $driver);
+					include $file;
 				}
-			}
 			
-			if($this->Cache->get($driver, "drivers")) {
-				return $this->Cache->get($driver, "drivers");	
-			} else {
-				include $file;
-			}
-			
-			if(_cacheStatus) {
-				$$driver= ZP_Singleton::instance("ZP_". $driver);
-				
-				$this->Cache->save($$driver, $driver, "drivers");	
-			}
+				if(_cacheStatus) {
+					$$driver= ZP_Singleton::instance("ZP_". $driver);
+					
+					$this->Cache->save($$driver, $driver, "drivers");	
+				}
 
-			return ZP_Singleton::instance("ZP_". $driver);
-		} else {
-			die("$driver driver does not exists");
+				return ZP_Singleton::instance("ZP_". $driver);
+			} else {
+				die("$driver driver does not exists");
+			}
+		}else{
+			if(file_exists($file)) {	
+				include $file;
+				return ZP_Singleton::instance("ZP_". $driver);
+			} else {
+				die("$driver driver does not exists");
+			}
 		}
 	}
 	
@@ -267,7 +281,7 @@ class ZP_Load {
 			$this->$Class = $this->model($Class);
 		}
 
-		call_user_func_array(array($this->$Class, $method), $params);
+		return call_user_func_array(array($this->$Class, $method), is_array($params) ? $params : array());
 	}
 	
     /**

@@ -1,0 +1,1 @@
+$('.work-lightbox').prettyPhoto();
