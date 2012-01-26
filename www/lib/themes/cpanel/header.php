@@ -1,10 +1,12 @@
 <?php if(!defined("_access")) { die("Error: You don't have permission to access here..."); } ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?php print _webLang; ?>">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title><?php print $this->getTitle(); ?></title>
 	
+	<link href="<?php print _webURL . _sh . _www . "/lib/css/frameworks/bootstrap/bootstrap.min.css"; ?>" rel="stylesheet">
+
 	<?php 
 		print $this->themeCSS("cpanel"); 
     	
@@ -25,30 +27,26 @@
 </head>
 
 <body>
-	<?php
-		if(isset($isAdmin) and $isAdmin) {
-		?>
-			<div id="top-bar">
-				<?php
-					$li[] = a("&lsaquo;&lsaquo;" . __("Go back"), _webBase);
-					$li[] = " | " . span("bold", __("Welcome")).": " . SESSION("ZanUser");
-					$li[] = " | " . span("bold", __("Online users")) . ": $online";
-					$li[] = " | " . span("bold", __("Registered users")) . ": $registered";
-					$li[] = " | " . span("bold", __("Last user")) . ": " . a($lastUser["Username"], _webBase . _sh . _webLang .  "/users/editprofile/");
-					$li[] = " | " . a(__("Logout")."&rsaquo;&rsaquo;", _webBase . _sh . _webLang . "/cpanel/logout/")."";			
-					
-					print ul($li);				
-				?>
-			</div>
-		<?php
-		} else {
-		?>
-			<div id="top-bar-logout">
-				<a href="<?php print _webBase; ?>" title="<?php print __("Go back"); ?>">&lsaquo;&lsaquo; <?php print __("Go back"); ?></a>
-			</div>
-		<?php		
-		}
-	?>
+	<div class="content">
+     	<div class="row bg-white" title="header">
+		<?php 	if(isset($isAdmin) and $isAdmin) { ?>
+					<div id="top-bar">
+						<?php
+							$li[] = a("&lsaquo;&lsaquo;" . __("Go back"), _webBase);
+							$li[] = " | " . span("bold", __("Welcome")).": " . SESSION("ZanUser");
+							$li[] = " | " . span("bold", __("Online users")) . ": $online";
+							$li[] = " | " . span("bold", __("Registered users")) . ": $registered";
+							$li[] = " | " . span("bold", __("Last user")) . ": " . a($lastUser["Username"], _webBase . _sh . _webLang .  "/users/editprofile/");
+							$li[] = " | " . a(__("Logout")."&rsaquo;&rsaquo;", _webBase . _sh . _webLang . "/cpanel/logout/")."";			
+							
+							print ul($li);				
+						?>
+					</div>
+		<?php 	} else { ?>
+					<div id="top-bar-logout">
+						<a href="<?php print _webBase; ?>" title="<?php print __("Go back"); ?>">&lsaquo;&lsaquo; <?php print __("Go back"); ?></a>
+					</div>
+		<?php	} ?>
 	
 	<div id="container">
 		<div id="header">
@@ -99,4 +97,3 @@
 				}
 			?>
 		</div>
-

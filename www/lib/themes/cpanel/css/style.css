@@ -130,7 +130,6 @@ a:hover {
 
 #sidebar ul {
 	list-style: url(../images/arrow-blue.gif);
-	margin-left: -20px;
 }
 
 #sidebar a {
@@ -229,13 +228,12 @@ a:hover {
 }
 
 .resalt {
-	text-align: center;
 	font-size: 5em;
 	font-family: Georgia, Times, serif;
 	color: #CCC;
-	margin: 0 auto;
-	margin-right: 55px;
-	width: 750px;
+	width: 820px;
+	text-align: center;
+	margin-bottom: 50px;
 }
 
 .tiny-image {

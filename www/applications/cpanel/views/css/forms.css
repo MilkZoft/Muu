@@ -62,7 +62,7 @@
 }
 
 .form-add .required {
-	background-color: #d6f2ff;
+	border: 1px solid #00b4ff;
 }
 
 .form-add .save-cancel {

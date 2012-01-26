@@ -207,9 +207,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect(path($this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results . _sh . _trash));
 		} else {
-			redirect(path($this->application . _sh . _cpanel . _sh . _results);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results));
 		}
 	}
 	
@@ -260,9 +260,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect(path($this->application . _sh . _cpanel . _sh . _results);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results));
 		} else {
-			redirect(path($this->application . _sh . _cpanel . _sh . _add);
+			redirect(path($this->application . _sh . _cpanel . _sh . _add));
 		}
 	}
 	

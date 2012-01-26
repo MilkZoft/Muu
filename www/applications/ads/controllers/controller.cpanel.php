@@ -30,7 +30,7 @@ class CPanel_Controller extends ZP_Controller {
 	
 	public function index() {
 		if($this->isAdmin) {
-			$this->home();
+			redirect("cpanel");
 		} else {
 			$this->login();
 		}
@@ -60,8 +60,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
 		$this->template("content", $this->vars);
-		
-		$this->render();
 	}
 	
 	public function delete($ID = 0) {
@@ -117,8 +115,6 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
-			
-			$this->render();
 		} else {
 			redirect(_webBase. _sh. _webLang. _sh. $this->application. _sh. _cpanel . _sh . _results);
 		}
@@ -195,8 +191,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["view"]       = $this->view("results", TRUE, _cpanel);
 		
 		$this->template("content", $this->vars);
-		
-		$this->render();
 	}
 	
 	public function trash($ID = 0) {
