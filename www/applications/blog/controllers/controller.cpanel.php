@@ -101,10 +101,10 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results . _sh . _trash));
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
-		}	
+			redirect(path($this->application . _sh . _cpanel . _sh . _results));
+		}
 	}
 	
 	public function edit($ID = 0) {
@@ -113,7 +113,7 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results));
 		}
 
 		$this->title("Edit");
@@ -133,7 +133,7 @@ class CPanel_Controller extends ZP_Controller {
 		if(POST("edit")) {
 			$this->vars["alert"] = $this->$Model->cpanel("edit");
 		} elseif(POST("cancel")) {
-			redirect(_webBase . _sh . _webLang . _sh . _cpanel);
+			redirect(path(_cpanel));
 		} 
 		
 		$data = $this->$Model->getByID($ID);
@@ -153,9 +153,9 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["image_medium"]		= $data[0]["Image_Medium"];
 			$this->vars["edit"]      	  	= TRUE;	
 			$this->vars["action"]			= "edit";
-			$this->vars["href"]			  	= _webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . $this->vars["action"] . _sh . $this->vars["ID"] . _sh;	
+			$this->vars["href"]			  	= path($this->application . _sh . _cpanel . _sh . $this->vars["action"] . _sh . $this->vars["ID"]);	
 			$this->vars["muralImage"] 		= $this->$Model->getMuralByID(isLang() ? segment(4) : segment(3));
-			$this->vars["muralDeleteURL"] 	= ($this->vars["muralImage"]) ? _webPath . $this->application . _sh . _cpanel . _sh . "delete-mural" . _sh . $this->vars["ID"] . _sh  : NULL;
+			$this->vars["muralDeleteURL"] 	= ($this->vars["muralImage"]) ? path($this->application . _sh . _cpanel . _sh . "delete-mural" . _sh . $this->vars["ID"])  : NULL;
 			$this->vars["application"]		= $this->CPanel->getApplicationID($this->application);
 			$this->vars["categories"]		= $this->Categories->getCategories("edit");
 			$this->vars["categoriesRadio"]  = $this->Categories->getCategories("add", "radio", "parent");
@@ -178,7 +178,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect(_webBase. _sh. _webLang. _sh. $this->application. _sh. _cpanel . _sh . _results);
+			redirect(path($this->application . _sh. _cpanel . _sh . _results));
 		}
 	}
 	
@@ -196,7 +196,6 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->template("include", $this->vars);
-		
 		$this->render("header", "footer");
 		
 		exit;
@@ -208,9 +207,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results);
 		}
 	}
 	
@@ -261,9 +260,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect(path($this->application . _sh . _cpanel . _sh . _results);
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _add);
+			redirect(path($this->application . _sh . _cpanel . _sh . _add);
 		}
 	}
 	
