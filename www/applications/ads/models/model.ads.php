@@ -8,16 +8,10 @@ if(!defined("_access")) {
 
 class Ads_Model extends ZP_Model {
 	
-	private $route;
-	private $table;
-	private $primaryKey;
-	
 	public function __construct() {
 		$this->Db = $this->db();
-
-		$helpers = array("alerts", "time", "string", "security");
 		
-		$this->helper($helpers);
+		$this->helpers();
 	
 		$this->table = "ads";
 
@@ -27,9 +21,7 @@ class Ads_Model extends ZP_Model {
 		$this->config("images");
 	}
 
-	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		$this->Db->table($this->table);
-		
+	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {	
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave($action);
 		
@@ -49,9 +41,7 @@ class Ads_Model extends ZP_Model {
 		}
 	}
 	
-	private function all($trash, $order, $limit) {
-		$this->Db->table($this->table);
-		
+	private function all($trash, $order, $limit) {	
 		if(!$trash) {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
@@ -92,7 +82,7 @@ class Ads_Model extends ZP_Model {
 		}
 
 		if(FILES("image", "name")) {
-			$dir = _www . _sh . _lib . _sh . _files . _sh . _images . _sh . _ads . _sh;
+			$dir = "www/lib/files/images/ads/";
 			
 			$this->Files = $this->core("Files");										
 			
@@ -108,9 +98,7 @@ class Ads_Model extends ZP_Model {
 		}		
 	}
 	
-	private function save() {
-		$this->Db->table($this->table);
-		
+	private function save() {		
 		if($this->data["Principal"] > 0) {		
 			if($this->Db->findBySQL("Position = '". $this->data["Position"] ."' AND Principal = 1")) {
 				$this->Db->values("Principal = 0 WHERE Position = '". $this->data["Position"] ."'");
@@ -123,9 +111,7 @@ class Ads_Model extends ZP_Model {
 		return getAlert("The ad has been saved correctly", "success");	
 	}
 	
-	private function edit() {		
-		$this->Db->table($this->table);
-		
+	private function edit() {				
 		if($this->data["Principal"] > 0) {		
 			if($this->Db->findBySQL("Position = '$this->position' AND Principal = 1")) {
 				$this->Db->values("Principal = 0 WHERE Position = '". $this->data["Position"] ."'");
@@ -139,29 +125,28 @@ class Ads_Model extends ZP_Model {
 	}
 	
 	private function search($search, $field) {
-		$this->CPanel_Model = $this->model("Cpanel_Model");
+		if($search and $field) {
+			$data = $this->Db->findBySQL("$field LIKE '%$search%'", $this->table);
+		} else {
+			return FALSE;
+		}
 		
-		return $this->Cpanel_Model->getSearch($search, $field, $this->table);		
+		return $data;		
 	}
 	
 	public function getByID($ID) {
-		$this->Db->table($this->table);
-		$data = $this->Db->find($ID);
+		$data = $this->Db->find($ID, $this->table);
 		
 		return $data;
 	}
 	
-	public function getAds($position = NULL) {		
-		$this->Db->table($this->table);
-				
-		$data = $this->Db->findBySQL("Position = '$position' AND Situation = 'Active'");
+	public function getAds($position = NULL) {				
+		$data = $this->Db->findBySQL("Position = '$position' AND Situation = 'Active'", $this->table);
 		
 		return $data;
 	}
 	
-	public function click($ID) {
-		$this->Db->table($this->table);
-		
+	public function click($ID) {		
 		if($ID > 0) {
 			$this->Db->values("Clicks = (Clicks) + 1");			
 			$this->Db->save($ID);

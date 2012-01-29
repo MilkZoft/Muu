@@ -174,8 +174,7 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 										</td>';
 							}
 							
-							if(isset($column["Preview"])) {
-								
+							if(isset($column["Preview"])) {							
 								$HTML .= '
 										<td class="center">
 											<a href="' . $column["Preview"] . '" title="Banner" class="work-lightbox">
@@ -199,7 +198,7 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							}
 							
 							if(isset($column["Views"])) { 
-								$HTML .= '<td class="center">'. $column["Views"] .'</td>';																					                    
+								$HTML .= '<td class="center">'. $column["Views"] .'</td>'; 
 							}
 							
 							if(isset($column["Language"])) { 
@@ -639,7 +638,7 @@ function getSearch() {
 
 	$HTML  = formOpen(_webBase . _sh . _webLang . _sh . segment(1) . _sh . _cpanel . _sh . _results, "form-results-search");
 	$HTML .= br();
-	$HTML .= bold(" ". __("Search") . ":", FALSE);
+	$HTML .= bold("&nbsp". __("Search") . ":", FALSE);
 
 	$attributes = array(
 		"p" => FALSE,
@@ -661,7 +660,7 @@ function getSearch() {
 		$i++;
 	}
 	
-	$HTML .= formSelect(array("name" => "field", "class" => "small-input"), $fields);
+	$HTML .= formSelect(array("name" => "field", "class" => "span2"), $fields);
 	
 	$HTML .= bold(__("Order") . ":", FALSE);
 	
@@ -672,8 +671,8 @@ function getSearch() {
 	$options[1]["option"]   = __("Descending");
 	$options[1]["selected"] = FALSE;
 	
-	$HTML .= formSelect(array("name" => "order", "class" => "small-input"), $options);
-	$HTML .= formInput(array("name" => "seek", "type" => "submit", "value" => __("Seek")));	
+	$HTML .= formSelect(array("name" => "order"), $options);
+	$HTML .= formInput(array("name" => "seek", "type" => "submit", "class" => "btn info", "value" => __("Seek")));	
 	
 	return $HTML;
 }
