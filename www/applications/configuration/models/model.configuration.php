@@ -11,9 +11,7 @@ class Configuration_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 		
-		$helpers = array("alerts", "router", "time", "string", "validations");
-		
-		$this->helper($helpers);
+		$this->helpers();
 		
 		$this->table = "configuration";
 
@@ -21,8 +19,6 @@ class Configuration_Model extends ZP_Model {
 	}
 	
 	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {		
-		$this->Db->table($this->table);
-		
 		if($action === "edit") {
 			$validation = $this->editOrSave();
 			
@@ -38,10 +34,8 @@ class Configuration_Model extends ZP_Model {
 		}
 	}	
 	
-	public function all() {
-		$this->Db->table($this->table);
-	
-		return $this->Db->find(1);
+	public function all() {	
+		return $this->Db->find(1, $this->table);
 	}
 	
 	public function editOrSave() {

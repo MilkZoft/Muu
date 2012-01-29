@@ -510,18 +510,17 @@ class ZP_Load {
      */
 	public function model($model) {
 		$parts = explode("_", $model);
-		$model = strtolower($parts[0]);
-
+	
 		if(!$this->application) {
 			if(count($parts) === 2) {
-				$file = "www/applications/$model/models/model.$model.php";	
+				$file = "www/applications/". strtolower($parts[0]) ."/models/model.". strtolower($parts[0]) .".php";	
 			}		
 		} else {
 			if(count($parts) === 2) {
-				if(file_exists("www/applications/$this->application/models/model.$model.php") {
-					$file = "www/applications/$this->application/models/model.$model.php";
+				if(file_exists("www/applications/$this->application/models/model.". strtolower($parts[0]) .".php")) {
+					$file = "www/applications/$this->application/models/model.". strtolower($parts[0]) .".php";
 				} else {
-					$file = "www/applications/$this->application/models/model.$model.php";
+					$file = "www/applications/$this->application/models/model.". strtolower($parts[0]) .".php";
 				}
 			}
 		}
@@ -530,7 +529,7 @@ class ZP_Load {
 			if(class_exists($model)) { 
 				return ZP_Singleton::instance($model);
 			}
-			
+	
 			include $file;
 							
 			return ZP_Singleton::instance($model);
