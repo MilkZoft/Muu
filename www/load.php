@@ -52,7 +52,6 @@ if(is_array($data)) {
 	define("_webEmailRecieve", 	  $data[0]["Email_Recieve"]);
 	define("_webEmailSend",    	  $data[0]["Email_Send"]);
 	define("_webSituation",    	  $data[0]["Situation"]);
-	define("_defaultApplication", $data[0]["Application"]);
 
 	if(!_modRewrite) {
 		define("_webBase", _webURL . _sh . _index);

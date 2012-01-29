@@ -48,10 +48,10 @@ class ZP_Pagination extends ZP_Load {
      * @param integer $end
      * @param integer $start
      * @param string  $URL 
-     * @param string  $anchor = _top 
+     * @param string  $anchor = #top 
      * @return string value
      */
-	public function paginate($count, $end, $start, $URL, $anchor = _top) {
+	public function paginate($count, $end, $start, $URL, $anchor = "#top") {
 		$pageNav 	  = NULL;
 		$pagePrevious = NULL;
 		$pageFirst    = NULL;
@@ -95,7 +95,7 @@ class ZP_Pagination extends ZP_Load {
 				if($start == $next) {				
 					$pageNav .= '<span class="current">'. $pge .'</span> ';					
 				} else {				
-					$pageNav .= '<span class="bold"><a href="'. $URL . $pge . _sh . $anchor .'" title="'. $pge .'">'. $pge .'</a></span> ';
+					$pageNav .= '<span class="bold"><a href="'. $URL . $pge . "/" . $anchor .'" title="'. $pge .'">'. $pge .'</a></span> ';
 				}
 			}
 		
@@ -106,11 +106,11 @@ class ZP_Pagination extends ZP_Load {
 			}
 		
 			if($currentPage < $pages) {			
-				$pageNext = '<a href="'. $URL . ($currentPage + 1) . _sh . $anchor .'" title="'. __("Next") .'">'. __("Next") .'</a> ';
+				$pageNext = '<a href="'. $URL . ($currentPage + 1) . "/" . $anchor .'" title="'. __("Next") .'">'. __("Next") .'</a> ';
 			}
 		
 			if($start > 0) {
-				$pagePrevious = '<a href="'. $URL . ($currentPage - 1) . _sh . $anchor .'" title="'. __("Previous") .'">'. __("Previous") .'</a> ';
+				$pagePrevious = '<a href="'. $URL . ($currentPage - 1) . "/" . $anchor .'" title="'. __("Previous") .'">'. __("Previous") .'</a> ';
 			}			
 		}		
 			

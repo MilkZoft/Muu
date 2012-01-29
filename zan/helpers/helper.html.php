@@ -196,20 +196,20 @@ function li($list, $open = NULL) {
 }
 
 function loadCSS($CSS) {
-	return '<link rel="stylesheet" href="'. _webURL . _sh . $CSS .'" type="text/css" media="all" />';
+	return '<link rel="stylesheet" href="'. _webURL . "/" . $CSS .'" type="text/css" media="all" />';
 }
 
 function loadScript($js, $application = NULL, $external = FALSE) {
 	if(file_exists($js)) {		
-		return '<script type="text/javascript" src="'. _webURL . _sh . $js .'"></script>';
+		return '<script type="text/javascript" src="'. _webURL . "/" . $js .'"></script>';
 	} if($external) {
 		return '<script type="text/javascript" src="'. $js .'"></script>';
 	} else {
 		if(isset($application)) {
-			$file = _www . _sh . _applications . _sh . $application . _sh . _views . _sh . _js . _sh . $js . _dot . _js;
+			$file = "www/applications/$application/views/js/$js.js";
 			
 			if(file_exists($file)) {
-				return '<script type="text/javascript" src="'. _webURL . _sh . $file .'"></script>';
+				return '<script type="text/javascript" src="'. _webURL . "/" . $file .'"></script>';
 			}
 		}
 	}
