@@ -13,6 +13,10 @@ body {
 	color: #FFFFFF;
 }
 
+.caption thead tr {
+	text-align: center;
+}
+
 a {
 	color: #06F;
 	text-decoration: none;

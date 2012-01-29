@@ -126,7 +126,11 @@ class Ads_Model extends ZP_Model {
 	
 	private function search($search, $field) {
 		if($search and $field) {
-			$data = $this->Db->findBySQL("$field LIKE '%$search%'", $this->table);
+			if($field === "ID") {
+				$data = $this->Db->find($search, $this->table);	
+			} else {
+				$data = $this->Db->findBySQL("$field LIKE '%$search%'", $this->table);
+			}
 		} else {
 			return FALSE;
 		}

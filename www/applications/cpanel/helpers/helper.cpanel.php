@@ -576,7 +576,7 @@ function getTFoot($trash) {
 
 function getFields($application) {
 	if($application === "ads") {
-		return "ID_Ad, Title, Position, Banner, Principal, Situation";
+		return "ID, Title, Position, Banner, Principal, Situation";
 	} elseif($application === "applications") {
 		return "ID, Title, CPanel, Adding, BeDefault, Category, Comments, Situation";
 	} elseif($application === "blog") {

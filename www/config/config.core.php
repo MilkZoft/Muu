@@ -9,4 +9,4 @@ if(!defined("_access")) {
 /**
  * Core Path
  */
-define("_corePath", "../zan");
+define("_corePath", "zan");
