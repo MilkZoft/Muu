@@ -96,12 +96,14 @@ class ZP_Load {
      * @return object value
      */
 	public function classes($class = NULL, $application = NULL) {
-		if(file_exists(_www . _sh . _applications . _sh . $this->application . _sh . _classes . _sh . _class . _dot . strtolower($class) . _PHP)) {
-			$file = _www . _sh . _applications . _sh . $this->application . _sh . _classes . _sh . _class . _dot . strtolower($class) . _PHP;	
-		} elseif(file_exists(_www . _sh . _classes . _sh . _class . _dot . strtolower($class) . _PHP)) {
-			$file = _www . _sh . _classes . _sh . _class . _dot . strtolower($class) . _PHP;
-		} elseif(file_exists(_www . _sh . _applications . _sh . $application . _sh . _classes . _sh . _class . _dot . strtolower($class) . _PHP)) {
-			$file = _www . _sh . _applications . _sh . $application . _sh . _classes . _sh . _class . _dot . strtolower($class) . _PHP;
+		$class = strtolower($class);
+
+		if(file_exists("www/applications/$this->application/classes/class.$class.php")) {
+			$file = "www/applications/$this->application/classes/class.$class.php";	
+		} elseif(file_exists("www/classes/class.$class.php")) {
+			$file = "www/classes/class.$class.php";
+		} elseif(file_exists("www/applications/$application/classes/class.$class.php")) {
+			$file = "www/applications/$application/classes/class.$class.php";
 		} else {
 			$file = FALSE;	
 		}
@@ -168,15 +170,17 @@ class ZP_Load {
      */
 	public function controller($controller, $application = NULL) {
 		$parts = explode("_", $controller);
-	
+		
+		$controller = strtolower($parts[0]);
+
 		if(!$this->application) { 
-			if(file_exists(_www . _sh . _applications . _sh . $application . _sh . _controllers . _sh . _controller . _dot . strtolower($parts[0]) . _PHP)) {
-				$file = _www . _sh . _applications . _sh . $application . _sh . _controllers . _sh . _controller . _dot . strtolower($parts[0]) . _PHP;
+			if(file_exists("www/applications/$application/controllers/controller.$controller.php")) {
+				$file = "www/applications/$application/controllers/controller.$controller.php";
 			} elseif(count($parts) === 2) {
-				$file = _www . _sh . _applications . _sh . strtolower($parts[0]) . _sh . _controllers . _sh . _controller . _dot . strtolower($parts[0]) . _PHP;
+				$file = "www/applications/$controller/controllers/controller.$controller.php";
 			}		
 		} else {
-			if(file_exists(_www . _sh . _applications . _sh . $application . _sh . _controllers . _sh . _controller . _dot . strtolower($parts[0]) . _PHP)) {
+			if(file_exists("www/applications/$application/controllers/controller.$controller.php")) {
 				$file = _www . _sh . _applications . _sh . $application . _sh . _controllers . _sh . _controller . _dot . strtolower($parts[0]) . _PHP;
 			} elseif(file_exists(_www . _sh . _applications . _sh . $this->application . _sh . _controllers . _sh . _controller . _dot . strtolower($parts[0]) . _PHP)) {
 				$file = _www . _sh . _applications . _sh . $this->application . _sh . _controllers . _sh . _controller . _dot . strtolower($parts[0]) . _PHP;
