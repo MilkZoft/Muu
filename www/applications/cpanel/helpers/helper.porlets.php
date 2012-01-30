@@ -7,7 +7,7 @@ if(!defined("_access")) {
 }
 
 function porlet($porlet, $content, $type = "list", $float = "left") {
-	$skin = _webURL . _sh . _www . _sh . _lib . _sh . _themes . _sh . _cpanel;
+	$skin = _webURL . "/www/lib/themes/cpanel";
 	
 	$HTML = '<div class="box">';
 	

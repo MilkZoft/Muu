@@ -172,7 +172,6 @@ function execute() {
 						} 
 					}
 				}
-
 			}
 		}
 	}
@@ -285,13 +284,13 @@ function isController($controller, $application) {
 function whichApplication() {
 	if(file_exists("www/applications/" . segment(0) . "/controllers/controller." . segment(0) . ".php")) {
 		return segment(0); 
-	} elseif(file_exists(_www . _sh . _applications . _sh . segment(1) . _sh . _controllers . _sh . _controller . _dot . segment(1) . _PHP)) {
+	} elseif(file_exists("www/applications/". segment(1) ."/controllers/controller.". segment(1) .".php")) {
 		return segment(1);
-	} elseif(file_exists(_www . _sh . _applications . _sh . segment(0) . _sh . _models . _sh . _model . _dot . segment(0) . _PHP)) {
+	} elseif(file_exists("www/applications/". segment(0) ."/models/model.". segment(0) .".php")) {
 		return segment(0);
-	} elseif(file_exists(_www . _sh . _applications . _sh . segment(1) . _sh . _models . _sh . _model . _dot . segment(1) . _PHP)) {
+	} elseif(file_exists("www/applications/". segment(1) ."/models/model.". segment(1) .".php")) {
 		return segment(1);
-	} elseif(file_exists(_www . _sh . _applications . _sh . _defaultApplication . _sh . _controllers . _sh . _controller . _dot . _defaultApplication . _PHP)) {
+	} elseif(file_exists("www/applications/". _defaultApplication ."/controllers/controller.". _defaultApplication .".php")) {
 		return _defaultApplication;	
 	}
 	

@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/fonts.css" type="text/css">
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/style.css" type="text/css">
 	<?php print $this->getCSS(); ?>
-	<?php print $this->js(_lib . _sh . _scripts . _sh . _js . _sh . "jquery.js"); ?>
+	<?php print $this->js("lib/scripts/js/jquery.js"); ?>
 </head>
 
 <body>

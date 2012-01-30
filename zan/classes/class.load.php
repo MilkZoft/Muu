@@ -171,21 +171,19 @@ class ZP_Load {
 	public function controller($controller, $application = NULL) {
 		$parts = explode("_", $controller);
 		
-		$controller = strtolower($parts[0]);
-
 		if(!$this->application) { 
-			if(file_exists("www/applications/$application/controllers/controller.$controller.php")) {
-				$file = "www/applications/$application/controllers/controller.$controller.php";
+			if(file_exists("www/applications/$application/controllers/controller.". strtolower($parts[0]) .".php")) {
+				$file = "www/applications/$application/controllers/controller.". strtolower($parts[0]) .".php";
 			} elseif(count($parts) === 2) {
-				$file = "www/applications/$controller/controllers/controller.$controller.php";
+				$file = "www/applications/$controller/controllers/controller.". strtolower($parts[0]) .".php";
 			}		
 		} else {
-			if(file_exists("www/applications/$application/controllers/controller.$controller.php")) {
-				$file = "www/applications/$application/controllers/controller.$controller.php";
-			} elseif(file_exists("www/applications/$this->application/controllers/controller.$controller.php")) {
-				$file = "www/applications/$this->application/controllers/controller.$controller.php";
+			if(file_exists("www/applications/$application/controllers/controller.". strtolower($parts[0]) .".php")) {
+				$file = "www/applications/$application/controllers/controller.". strtolower($parts[0]) .".php";
+			} elseif(file_exists("www/applications/$this->application/controllers/controller.". strtolower($parts[0]) .".php")) {
+				$file = "www/applications/$this->application/controllers/controller.". strtolower($parts[0]) .".php";
 			} else {
-				$file = "www/applications/$controller/controllers/controller.$controller.php";
+				$file = "www/applications/$controller/controllers/controller.". strtolower($parts[0]) .".php";
 			}
 		}
 		

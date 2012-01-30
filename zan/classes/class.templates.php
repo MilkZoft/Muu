@@ -202,7 +202,7 @@ class ZP_Templates extends ZP_Load {
      */
 	public function isTheme() {
 		if(!is_null($this->theme)) {
-			$this->path = _www . _sh . _lib . _sh . _themes . _sh . $this->theme;
+			$this->path = "www/lib/themes/$this->theme";
 		} else {
 			$this->path = FALSE;
 		}

@@ -41,20 +41,21 @@ if(is_array($data)) {
 		define("_webLang", getXMLang(whichLanguage(), FALSE));
 	}
 
-	define("_webName", 		      $data[0]["Name"]);
-	define("_webSlogan", 	      $data[0]["Slogan_" . _webLanguage]);
-	define("_webURL", 		      $data[0]["URL"]);
-	define("_webTheme", 	      $data[0]["Theme"]);
-	define("_webGallery", 	      $data[0]["Gallery"]);
-	define("_webValidation",      $data[0]["Validation"]);
-	define("_webMessage",         $data[0]["Message"]);
-	define("_webActivation",      $data[0]["Activation"]);
-	define("_webEmailRecieve", 	  $data[0]["Email_Recieve"]);
-	define("_webEmailSend",    	  $data[0]["Email_Send"]);
-	define("_webSituation",    	  $data[0]["Situation"]);
+	define("_webName", 		   $data[0]["Name"]);
+	define("_webSlogan",       $data[0]["Slogan_" . _webLanguage]);
+	define("_webURL", 		   $data[0]["URL"]);
+	define("_webTheme", 	   $data[0]["Theme"]);
+	define("_webGallery", 	   $data[0]["Gallery"]);
+	define("_webValidation",   $data[0]["Validation"]);
+	define("_webMessage",      $data[0]["Message"]);
+	define("_webActivation",   $data[0]["Activation"]);
+	define("_webEmailRecieve", $data[0]["Email_Recieve"]);
+	define("_webEmailSend",    $data[0]["Email_Send"]);
+	define("_webSituation",    $data[0]["Situation"]);
+	define("_defaultApplication", $data[0]["Application"]);
 
 	if(!_modRewrite) {
-		define("_webBase", _webURL . _sh . _index);
+		define("_webBase", _webURL . _sh . "index.php");
 	} else {
 		define("_webBase", _webURL);
 	}

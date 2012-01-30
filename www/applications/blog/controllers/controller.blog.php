@@ -21,8 +21,7 @@ class Blog_Controller extends ZP_Controller {
 		$this->Blog_Model = $this->model("Blog_Model");
 		$this->Tags_Model = $this->model("Tags_Model");
 				
-		$helpers = array("router", "time");
-		$this->helper($helpers);
+		$this->helpers();
 				
 		$this->journal = FALSE;
 		
@@ -30,11 +29,11 @@ class Blog_Controller extends ZP_Controller {
 	}
 	
 	public function index() {
-		if(segment(2) === _category and segment(3) !== _page) {
+		if(segment(2) === "category" and segment(3) !== "page") {
 			$this->category();					
-		} elseif(segment(2) === _tag and segment(3)) {
+		} elseif(segment(2) === "tag" and segment(3)) {
 			$this->tag();
-		} elseif(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4)) and segment(5) and segment(5) !== _page) { 
+		} elseif(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4)) and segment(5) and segment(5) !== "page") { 
 			$this->slug();
 		} elseif(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4))) { 
 			$this->day();
@@ -246,7 +245,7 @@ class Blog_Controller extends ZP_Controller {
 		$year  = (isYear(segment(2)))  ? segment(2) : NULL;
 		$month = (isMonth(segment(3))) ? segment(3) : NULL;
 		$day   = (isDay(segment(4)))   ? segment(4) : NULL; 
-		$URL   = _webBase . _sh . _webLang . _sh . _blog . _sh . $year . _sh . $month . _sh . $day . _sh . segment(5);
+		$URL   = path("blog/$year/$month/$day/". segment(5));
 		
 		$vars["alert"]          = $alert;
 		$vars["ID_Post"]        = $data[0]["post"][0]["ID_Post"];
@@ -316,7 +315,7 @@ class Blog_Controller extends ZP_Controller {
 			$post  = __("Welcome to") . " ";
 			$post .= a(_webName, _webBase) . " ";
 			$post .= __("this is your first post, going to your") . " ";
-			$post .= a(__("Control Panel"), _webBase . _sh . _webLang . _sh . _cpanel) . " ";
+			$post .= a(__("Control Panel"), path("cpanel")) ." ";
 			$post .= __("and when you add a new post this post will be disappear automatically, enjoy it!");				
 			
 			$vars["hello"]    =  __("Hello World");
@@ -334,88 +333,88 @@ class Blog_Controller extends ZP_Controller {
 
 		if($type === "posts") {
 			if(isLang()) {
-				if(segment(2) === _page and segment(3) > 0) {
+				if(segment(2) === "page" and segment(3) > 0) {
 					$start = (segment(3) * _maxLimit) - _maxLimit;
 				} 	
 			} else {
-				if(segment(1) === _page and segment(2) > 0) {
+				if(segment(1) === "page" and segment(2) > 0) {
 					$start = (segment(2) * _maxLimit) - _maxLimit;
 				} 
 			}		
 			
 			$limit = $start .", ". _maxLimit;			
 			$count = $this->Blog_Model->count();
-			$URL   = _webBase . _sh . _webLang . _sh . _blog . _sh . _page . _sh;		
+			$URL   = path("blog/page/");		
 		} elseif($type === "categories") {
 			if(isLang()) { 
-				if(segment(2) === _category and segment(3) !== _page and segment(4) === _page and segment(5) > 0) {
+				if(segment(2) === "category" and segment(3) !== "page" and segment(4) === "page" and segment(5) > 0) {
 					$start = (segment(5) * _maxLimit) - _maxLimit;
 				} 		
 			} else {
-				if(segment(1) === _category and segment(2) !== _page and segment(3) === _page and segment(4) > 0) {
+				if(segment(1) === "category" and segment(2) !== "page" and segment(3) === "page" and segment(4) > 0) {
 					$start = (segment(4) * _maxLimit) - _maxLimit;
 				}
 			}	
 			
 			$limit = $start .", ". _maxLimit;		
-			$URL   = _webBase . _sh . _webLang . _sh . _blog . _sh . _category . _sh . segment(3) . _sh . _page . _sh;					
+			$URL   = path("blog/category/". segment(3) ."/page");					
 			$count = $this->Blog_Model->count("categories");			
 		} elseif($type === "day") {
 			if(isLang()) {
-				if(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4)) and segment(5) === _page and segment(6) > 0) {
+				if(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4)) and segment(5) === "page" and segment(6) > 0) {
 					$start = (segment(6) * _maxLimit) - _maxLimit;
 				}			
 			} else {
-				if(isYear(segment(1)) and isMonth(segment(2)) and isDay(segment(3)) and segment(4) === _page and segment(5) > 0) {
+				if(isYear(segment(1)) and isMonth(segment(2)) and isDay(segment(3)) and segment(4) === "page" and segment(5) > 0) {
 					$start = (segment(5) * _maxLimit) - _maxLimit;
 				}
 			}
 			
 			$limit = $start .", ". _maxLimit;	
 			$count = $this->Blog_Model->count("posts");
-			$URL   = _webBase . _sh . _webLang . _sh . _blog . _sh . segment(2) . _sh . segment(3) . _sh . segment(4) . _sh . _page . _sh;			
+			$URL   = path("blog/". segment(2) ."/". segment(3) ."/". segment(4) ."/page/");			
 		} elseif($type === "month") {
 			if(isLang()) {
-				if(isYear(segment(2)) and isMonth(segment(3)) and segment(4) === _page and segment(5) > 0) {
+				if(isYear(segment(2)) and isMonth(segment(3)) and segment(4) === "page" and segment(5) > 0) {
 					$start = (segment(5) * _maxLimit) - _maxLimit;
 				}			
 			} else {
-				if(isYear(segment(1)) and isMonth(segment(2)) and segment(3) === _page and segment(4) > 0) {
+				if(isYear(segment(1)) and isMonth(segment(2)) and segment(3) === "page" and segment(4) > 0) {
 					$start = (segment(4) * _maxLimit) - _maxLimit;
 				}
 			}
 		
 			$limit = $start .", ". _maxLimit;			
 			$count = $this->Blog_Model->count("posts");
-			$URL   = _webBase . _sh . _webLang . _sh . _blog . _sh . segment(2) . _sh . segment(3) . _sh . _page . _sh;		
+			$URL   = path("blog/". segment(2) ."/". segment(3) ."/page/");		
 		} elseif($type === "year") {
 			if(isLang()) {
-				if(isYear(segment(2)) and segment(3) === _page and segment(4) > 0) {
+				if(isYear(segment(2)) and segment(3) === "page" and segment(4) > 0) {
 					$start = (segment(4) * _maxLimit) - _maxLimit;
 				}			
 			} else {
-				if(isYear(segment(1)) and segment(2) === _page and segment(3) > 0) {
+				if(isYear(segment(1)) and segment(2) === "page" and segment(3) > 0) {
 					$start = (segment(3) * _maxLimit) - _maxLimit;
 				}
 			}
 		
 			$limit = $start .", ". _maxLimit;			
 			$count = $this->Blog_Model->count("posts");
-			$URL   = _webBase . _sh . _webLang . _sh . _blog . _sh . segment(2) . _sh . _page . _sh;			
+			$URL   = path("blog/". segment(2) ."/page/");			
 		} elseif($type === "tag") {
 			if(isLang()) {
-				if(segment(2) === _tag and segment(3) and segment(4) === _page and segment(5) > 0) {
+				if(segment(2) === "tag" and segment(3) and segment(4) === "page" and segment(5) > 0) {
 					$start = (segment(5) * _maxLimit) - _maxLimit;
 				}
 			} else {
-				if(segment(1) === _tag and segment(2) and segment(3) === _page and segment(4) > 0) {
+				if(segment(1) === "tag" and segment(2) and segment(3) === "page" and segment(4) > 0) {
 					$start = (segment(4) * _maxLimit) - _maxLimit;
 				}
 			}
 			
 			$limit = $start .", ". _maxLimit;
 			$count = $this->Blog_Model->count("tag");
-			$URL   = _webBase . _sh . _webLang . _sh . _blog . _sh . _tag . _sh . segment(3) . _sh . _page . _sh;
+			$URL   = path("blog/tag/". segment(3) ."/page/");
 		}
 		
 		if($count > _maxLimit) { 

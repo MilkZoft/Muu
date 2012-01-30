@@ -11,7 +11,7 @@ if(is_array($posts)) {
 			$post 			= array_shift($post);
 		}
 			
-		$URL 		= _webBase . _sh . _webLang . _sh . _blog . _sh . $post["Year"] . _sh . $post["Month"] . _sh . $post["Day"] . _sh . $post["Slug"];	
+		$URL 		= path("blog/". $post["Year"] ."/". $post["Month"] ."/". $post["Day"] ."/". $post["Slug"]);	
 		$categories = NULL;
 		$tags		= NULL;
 			
@@ -20,11 +20,11 @@ if(is_array($posts)) {
 		if(isset($dataCategories) and is_array($dataCategories)) {
 			foreach($dataCategories as $category) {
 				if($i === count($dataCategories) - 1) {
-					$categories .= a($category["Title"], _webPath . _blog . _sh . _category . _sh . $category["Slug"], FALSE, array("title" => $category["Title"]));
+					$categories .= a($category["Title"], path("blog/category/". $category["Slug"]), FALSE, array("title" => $category["Title"]));
 				} elseif($i === count($dataCategories) - 2) {
-					$categories .= a($category["Title"], _webPath . _blog . _sh . _category . _sh . $category["Slug"], FALSE, array("title" => $category["Title"])) ." ". __("and") ." ";
+					$categories .= a($category["Title"], path("blog/category/". $category["Slug"]), FALSE, array("title" => $category["Title"])) ." ". __("and") ." ";
 				} else {
-					$categories .= a($category["Title"], _webPath . _blog . _sh . _category . _sh . $category["Slug"], FALSE, array("title" => $category["Title"])) . ", ";
+					$categories .= a($category["Title"], path("blog/category/". $category["Slug"]), FALSE, array("title" => $category["Title"])) . ", ";
 				}
 				
 				$i++;
@@ -36,11 +36,11 @@ if(is_array($posts)) {
 		if(isset($dataTags) and is_array($dataTags)) {								
 			foreach($dataTags as $tag) {
 				if($i === count($dataTags) - 1) {
-					$tags .= a($tag["Title"], _webPath . _blog . _sh . _tag . _sh . $tag["Slug"], FALSE, array("title" => $tag["Title"]));
+					$tags .= a($tag["Title"], path("blog/tag/". $tag["Slug"]), FALSE, array("title" => $tag["Title"]));
 				} elseif($i === count($dataTags) - 2) {
-					$tags .= a($tag["Title"], _webPath . _blog . _sh . _tag . _sh . $tag["Slug"], FALSE, array("title" => $tag["Title"])) . " ". __("and") ." ";
+					$tags .= a($tag["Title"], path("blog/tag/". $tag["Slug"]), FALSE, array("title" => $tag["Title"])) . " ". __("and") ." ";
 				} else {
-					$tags .= a($tag["Title"], _webPath . _blog . _sh . _tag . _sh . $tag["Slug"], FALSE, array("title" => $tag["Title"])) . ", ";
+					$tags .= a($tag["Title"], path("blog/tag/". $tag["Slug"]), FALSE, array("title" => $tag["Title"])) . ", ";
 				}
 				
 				$i++;
