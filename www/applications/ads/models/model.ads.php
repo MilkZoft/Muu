@@ -100,9 +100,8 @@ class Ads_Model extends ZP_Model {
 	
 	private function save() {		
 		if($this->data["Principal"] > 0) {		
-			if($this->Db->findBySQL("Position = '". $this->data["Position"] ."' AND Principal = 1")) {
-				$this->Db->values("Principal = 0 WHERE Position = '". $this->data["Position"] ."'");
-				$this->Db->save(FALSE);
+			if($this->Db->findBySQL("Position = '". $this->data["Position"] ."' AND Principal = 1", $this->table)) {
+				$this->Db->updateBySQL($this->table, "Principal = 0 WHERE Position = '". $this->data["Position"] ."'");				
 			}
 		}
 		
@@ -114,9 +113,7 @@ class Ads_Model extends ZP_Model {
 	private function edit() {				
 		if($this->data["Principal"] > 0) {		
 			if($this->Db->findBySQL("Position = '$this->position' AND Principal = 1", $this->table)) {
-				
-				$this->Db->values("Principal = 0 WHERE Position = '". $this->data["Position"] ."'");
-				$this->Db->save(FALSE);
+				$this->Db->updateBySQL($this->table, "Principal = 0 WHERE Position = '". $this->data["Position"] ."'");				
 			}
 		}
 		
