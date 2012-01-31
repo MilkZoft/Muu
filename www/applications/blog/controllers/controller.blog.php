@@ -16,7 +16,6 @@ class Blog_Controller extends ZP_Controller {
 		$this->config("applications");
 		
 		$this->Templates  = $this->core("Templates");
-		$this->Pagination = $this->core("Pagination");
 		
 		$this->Blog_Model = $this->model("Blog_Model");
 		$this->Tags_Model = $this->model("Tags_Model");
@@ -86,22 +85,13 @@ class Blog_Controller extends ZP_Controller {
 		$this->CSS("journal", $this->application);
 		$this->CSS("videos", "videos");
 		$this->CSS("prettyPhoto", "videos");		
-		$this->CSS("pagination");
+		$this->CSS("pagination");						
 		
-		$this->Videos_Model = $this->model("Videos_Model");
-		
-		$videos = $this->Videos_Model->getVideos(12);		
-		
-		$data = $this->Blog_Model->getPosts(9, FALSE);
+		$data = $this->Blog_Model->getPosts(_maxLimitJournal, FALSE);
 			
 		if($data) {				
-			$vars["vblock1"] = "Canal 11";
-			$vars["vblock2"] = "Videos";
-			$vars["vblock3"] = "Radio en Línea";		
-			$vars["videos"]  = $videos;
-			$vars["posts"]   = $data;
-			$vars["view"][0] = $this->view("journal", TRUE);
-			$vars["view"][1] = $this->view("journal", TRUE, "videos");
+			$vars["posts"] = $data;
+			$vars["view"]  = $this->view("journal", TRUE);			
 	
 			$this->template("content", $vars);
 		} 
@@ -117,9 +107,9 @@ class Blog_Controller extends ZP_Controller {
 		if($data) {
 			$this->title("Blog - ". segment(2) ."/". segment(3) ."/". segment(4));
 			
-			$vars["posts"] 		= $data;
+			$vars["posts"] 	    = $data;
 			$vars["pagination"] = $this->pagination;
-			$vars["view"]  		= $this->view("posts", TRUE);
+			$vars["view"]  	    = $this->view("posts", TRUE);
 			
 			$this->template("content", $vars);			
 		} else {
@@ -137,9 +127,9 @@ class Blog_Controller extends ZP_Controller {
 		if($data) {
 			$this->title("Blog - ". segment(2) ."/". segment(3));
 			
-			$vars["posts"] 		= $data;
+			$vars["posts"] 	    = $data;
 			$vars["pagination"] = $this->pagination;
-			$vars["view"]  		= $this->view("posts", TRUE);
+			$vars["view"]  	    = $this->view("posts", TRUE);
 			
 			$this->template("content", $vars);			
 		} else {
@@ -160,9 +150,9 @@ class Blog_Controller extends ZP_Controller {
 		if($data) {
 			$this->title("Blog - ". segment(2));
 			
-			$vars["posts"] 		= $data;
+			$vars["posts"] 	    = $data;
 			$vars["pagination"] = $this->pagination;
-			$vars["view"]  		= $this->view("posts", TRUE);
+			$vars["view"]       = $this->view("posts", TRUE);
 			
 			$this->template("content", $vars);			
 		} else {
@@ -218,9 +208,9 @@ class Blog_Controller extends ZP_Controller {
 		$data  = $this->Blog_Model->getByTag($tag, $limit[0], $limit[1]);
 		
 		if($data) {
-			$vars["posts"] 		= $data;
+			$vars["posts"] 	    = $data;
 			$vars["pagination"] = $this->pagination;
-			$vars["view"]  		= $this->view("posts", TRUE);
+			$vars["view"]  	    = $this->view("posts", TRUE);
 			
 			$this->template("content", $vars);		
 		} else {
@@ -249,8 +239,8 @@ class Blog_Controller extends ZP_Controller {
 		
 		$vars["alert"]          = $alert;
 		$vars["ID_Post"]        = $data[0]["post"][0]["ID_Post"];
-		$vars["dataTags"] 		= $data[0]["tags"];
-		$vars["post"] 			= $data[0]["post"][0];
+		$vars["dataTags"] 	= $data[0]["tags"];
+		$vars["post"] 		= $data[0]["post"][0];
 		$vars["dataCategories"] = $data[0]["categories"];
 		$vars["dataComments"] 	= $data[0]["comments"];
 		$vars["URL"] 	        = $URL;					
@@ -308,7 +298,7 @@ class Blog_Controller extends ZP_Controller {
 		if($data) {			
 			$vars["posts"]      = $data;
 			$vars["pagination"] = $this->pagination;
-			$vars["view"]    	= $this->view("posts", TRUE);
+			$vars["view"]       = $this->view("posts", TRUE);
 			
 			$this->template("content", $vars);
 		} else {
@@ -418,7 +408,7 @@ class Blog_Controller extends ZP_Controller {
 		}
 		
 		if($count > _maxLimit) { 
-			$this->pagination = $this->Pagination->paginate($count, _maxLimit, $start, $URL);
+			$this->pagination = paginate($count, _maxLimit, $start, $URL);
 		} else {
 			$this->pagination = NULL;
 		}	
