@@ -22,8 +22,6 @@ class Blog_Model extends ZP_Model {
 	}
 	
 	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		$this->Db->table($this->table);
-		
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave($action);
 		
@@ -75,8 +73,8 @@ class Blog_Model extends ZP_Model {
 		);
 		
 		$this->categories = POST("categories"); 
-		$this->tags		  = POST("tags");
-		$this->URL        = _webPath . _blog . _sh . date("Y") . _sh . date("m") . _sh . date("d") . _sh . slug(POST("title", "clean"));
+		$this->tags	  = POST("tags");
+		$this->URL        = PATH("blog/". date("Y") ."/". date("m") ."/". date("d") ."/". slug(POST("title", "clean"));
 		$this->muralExist = POST("mural_exist");
 				
 		$this->Files = $this->core("Files");
@@ -84,7 +82,7 @@ class Blog_Model extends ZP_Model {
 		$this->mural = FILES("mural");
 		
 		if($this->mural["name"] !== "") {
-			$dir = _www . _sh . _lib . _sh . _files . _sh . _images . _sh . _mural . _sh;
+			$dir = "www/lib/files/images/mural/";
 
 			$this->mural = $this->Files->uploadImage($dir, "mural", "mural");
 		
@@ -93,24 +91,24 @@ class Blog_Model extends ZP_Model {
 			}
 		}
 		
-		$dir = _www . _sh . _lib . _sh . _files . _sh . _images . _sh . _blog . _sh;
+		$dir = "www/lib/files/images/blog/";
 		
 		$this->image = $this->Files->uploadImage($dir, "image", "resize", TRUE, TRUE, FALSE);
 
 		$data = array(
-			"ID_User"	   => SESSION("ZanUserID"),
-			"ID_URL"	   => 1,
-			"Slug"    	   => slug(POST("title", "clean")),
-			"Content" 	   => POST("content", "clean"),
-			"Author"	   => SESSION("ZanUser"),
+			"ID_User"      => SESSION("ZanUserID"),
+			"ID_URL"       => 1,
+			"Slug"         => slug(POST("title", "clean")),
+			"Content"      => POST("content", "clean"),
+			"Author"       => SESSION("ZanUser"),
 			"Year"	       => date("Y"),
 			"Month"	       => date("m"),
 			"Day"	       => date("d"),
 			"Image_Small"  => isset($this->image["small"])  ? $this->image["small"]  : NULL,
 			"Image_Medium" => isset($this->image["medium"]) ? $this->image["medium"] : NULL,
-			"Pwd"	   	   => (POST("pwd")) ? POST("pwd", "encrypt") : NULL,
+			"Pwd"	       => (POST("pwd")) ? POST("pwd", "encrypt") : NULL,
 			"Start_Date"   => now(4),
-			"Text_Date"	   => now(2)
+			"Text_Date"    => now(2)
 		);
 	
 		$this->Data->ignore(array("categories", "tags", "mural_exists", "mural", "pwd", "category", "language_category", "application", "mural_exist"));
@@ -164,34 +162,29 @@ class Blog_Model extends ZP_Model {
 		}		
 	}
 	
-	private function edit() {		
-		$this->Db->table("url", "URL");
-		$this->Db->values("'$this->URL'");
-		$this->Db->save(POST("ID_URL"));
+	private function edit() {	
+		$this->update("url", array("URL" => $this->URL), POST("ID_URL"));		
 		
-		$this->Db->update($this->table, $this->data, POST("ID"));
+		$this->Db->update($this->table, $this->data, POST("ID"));				
 		
-		$this->Db->table("re_categories_records");
-		
-		$purge = $this->Db->deleteBySQL("ID_Record = '". POST("ID") ."'");
+		$purge = $this->Db->deleteBySQL("ID_Record = '". POST("ID") ."'", "re_categories_records");
 
-		if(is_array($this->categories)) {
-			$this->Db->table("re_categories_applications");
-			
+		if(is_array($this->categories)) {						
 			foreach($this->categories as $category) {
-				$categories[] = $this->Db->findBy("ID_Category", $category);
-			}
-			
-			$this->Db->table("re_categories_records", "ID_Category2Application, ID_Record");
+				$categories[] = $this->Db->findBy("ID_Category", $category, "re_categories_applications");
+			}						
 			
 			foreach($categories as $category) {
 				$category = $category[0]["ID_Category2Application"];
-				$exist    = $this->Db->findBySQL("ID_Category2Application = '$category' AND ID_Record = '". POST("ID") ."'");
+				$exist    = $this->Db->findBySQL("ID_Category2Application = '$category' AND ID_Record = '". POST("ID") ."'", "re_categories_records");
 				
 				if(!$exist) {
-					$this->Db->values("'$category', '". POST("ID") ."'");
-					
-					$insert = $this->Db->save();	
+					$data = array(
+							"ID_Category2Application" => $category,
+							"ID_Record"		  => POST("ID")
+						);
+						
+					$insert = $this->Db->insert($this->table, $data);					
 				}
 			}
 		}
@@ -202,24 +195,23 @@ class Blog_Model extends ZP_Model {
 	
 		if(!is_array($this->mural) and !$this->muralExist) {
 			$values = array(
-				"ID_Post" 	=> POST("ID"),
-				"Title"		=> $this->data["Title"],
-				"URL"		=> $this->URL, 
-				"Image"		=> $this->mural
+				"ID_Post" => POST("ID"),
+				"Title"	  => $this->data["Title"],
+				"URL"	  => $this->URL, 
+				"Image"	  => $this->mural
 			);
 		
 			$this->Db->insert("mural", $values);	
 		} elseif(!is_array($this->mural) and $this->muralExist) {
 			unlink($this->muralExist);
-			
-			$this->Db->table("mural");
-			$this->Db->deleteBy("ID_Post", POST("ID"));
+						
+			$this->Db->deleteBy("ID_Post", POST("ID"), "mural");
 			
 			$values = array(
-				"ID_Post" 	=> POST("ID"),
-				"Title"		=> $this->title,
-				"URL"		=> $this->URL, 
-				"Image"		=> $this->mural
+				"ID_Post" => POST("ID"),
+				"Title"	  => $this->title,
+				"URL"	  => $this->URL, 
+				"Image"	  => $this->mural
 			);
 			
 			$this->Db->insert("mural", $values);	
@@ -230,7 +222,11 @@ class Blog_Model extends ZP_Model {
 	
 	private function search($search, $field) {
 		if($search and $field) {
-			$data = $this->Db->findBySQL("$field LIKE '%$search%'", $this->table);
+			if($field === "ID") {
+				$data = $this->Db->find($search, $this->table);	
+			} else {
+				$data = $this->Db->findBySQL("$field LIKE '%$search%'", $this->table);
+			}
 		} else {
 			return FALSE;
 		}
@@ -238,28 +234,26 @@ class Blog_Model extends ZP_Model {
 		return $data;
 	}
 	
-	public function count($type = "posts") {	
-		$this->Db->table($this->table);
-		
+	public function count($type = "posts") {					
 		if(isLang()) {
 			$year  = isYear(segment(1))  ? segment(1) : FALSE;
 			$month = isMonth(segment(2)) ? segment(2) : FALSE;
-			$day   = isDay(segment(3))	 ? segment(3) : FALSE;
+			$day   = isDay(segment(3))   ? segment(3) : FALSE;
 		} else {
 			$year  = isYear(segment(0))  ? segment(0) : FALSE;
 			$month = isMonth(segment(1)) ? segment(1) : FALSE;
-			$day   = isDay(segment(2))	 ? segment(2) : FALSE;			
+			$day   = isDay(segment(2))   ? segment(2) : FALSE;			
 		}
 
 		if($type === "posts") {									
 			if($year and $month and $day) {
-				$count = $this->Db->countBySQL("Language = '$this->language' AND Year = '$year' AND Month = '$month' AND Day = '$day' AND Situation = 'Active'");
+				$count = $this->Db->countBySQL("Language = '$this->language' AND Year = '$year' AND Month = '$month' AND Day = '$day' AND Situation = 'Active'", $this->table);
 			} elseif($year and $month) {
-				$count = $this->Db->countBySQL("Language = '$this->language' AND Year = '$year' AND Month = '$month' AND Situation = 'Active'");
+				$count = $this->Db->countBySQL("Language = '$this->language' AND Year = '$year' AND Month = '$month' AND Situation = 'Active'", $this->table);
 			} elseif($year) {
-				$count = $this->Db->countBySQL("Language = '$this->language' AND Year = '$year' AND Situation = 'Active'");
+				$count = $this->Db->countBySQL("Language = '$this->language' AND Year = '$year' AND Situation = 'Active'", $this->table);
 			} else {
-				$count = $this->Db->countBySQL("Language = '$this->language' AND Situation = 'Active'");
+				$count = $this->Db->countBySQL("Language = '$this->language' AND Situation = 'Active'", $this->table);
 			}
 		} elseif($type === "comments") {
 			$count = 0;
@@ -276,10 +270,8 @@ class Blog_Model extends ZP_Model {
 		return isset($count) ? $count : 0;
 	}
 	
-	public function getArchive() {
-		$this->Db->table($this->table);
-		
-		$data = $this->Db->findFirst();
+	public function getArchive() {				
+		$data = $this->Db->findFirst($this->table);
 		
 		if($data) {
 			$date["year"]  = $data[0]["Year"];
@@ -297,11 +289,8 @@ class Blog_Model extends ZP_Model {
 		return $data;
 	}
 	
-	public function getMuralByID($ID_Post) {
-		$this->Db->table("mural", "Image");
-		$this->Db->encode(TRUE);
-		
-		$data = $this->Db->findBy("ID_Post", $ID_Post);
+	public function getMuralByID($ID_Post) {				
+		$data = $this->Db->findBy("ID_Post", $ID_Post, "mural");
 	
 		return $data;
 	}
@@ -313,15 +302,15 @@ class Blog_Model extends ZP_Model {
 		if($posts) {
 			$i = 0;
 			
-			$this->Tags_Model 		= $this->model("Tags_Model");
+			$this->Tags_Model 	= $this->model("Tags_Model");
 			$this->Categories_Model = $this->model("Categories_Model");
 			
 			foreach($posts as $post) {
-				$tags 		= $this->Tags_Model->getTags(3, $post["ID_Post"]);
+				$tags 	    = $this->Tags_Model->getTags(3, $post["ID_Post"]);
 				$categories = $this->Categories_Model->getCategoriesByRecord(3, $post["ID_Post"]);
 				
-				$data[$i]["post"] 		= $post;
-				$data[$i]["tags"] 		= $tags;
+				$data[$i]["post"] 	= $post;
+				$data[$i]["tags"] 	= $tags;
 				$data[$i]["categories"] = $categories;
 				$i++;
 			}
@@ -341,16 +330,16 @@ class Blog_Model extends ZP_Model {
 			$this->Db->values($values);								
 			$this->Db->save($post[0]["ID_Post"]);			
 			
-			$this->Tags_Model 		= $this->model("Tags_Model");
+			$this->Tags_Model 	= $this->model("Tags_Model");
 			$this->Categories_Model = $this->model("Categories_Model");
 			$this->Comments_Model   = $this->model("Comments_Model");
 			
-			$tags 		= $this->Tags_Model->getTags(3, $post[0]["ID_Post"]);
+			$tags 	    = $this->Tags_Model->getTags(3, $post[0]["ID_Post"]);
 			$categories = $this->Categories_Model->getCategoriesByRecord(3, $post[0]["ID_Post"]);
 			$comments   = $this->Comments_Model->getCommentsByRecord(3, $post[0]["ID_Post"]);
 		
-			$data[0]["post"] 	   = $post;
-			$data[0]["tags"] 	   = $tags;
+			$data[0]["post"]       = $post;
+			$data[0]["tags"]       = $tags;
 			$data[0]["categories"] = $categories;
 			$data[0]["comments"]   = $comments;
 									
@@ -378,15 +367,15 @@ class Blog_Model extends ZP_Model {
 		if($posts) {
 			$i = 0;
 			
-			$this->Tags_Model 		= $this->model("Tags_Model");
+			$this->Tags_Model 	= $this->model("Tags_Model");
 			$this->Categories_Model = $this->model("Categories_Model");
 			
 			foreach($posts as $post) {
-				$tags 		= $this->Tags_Model->getTags(3, $post["ID_Post"]);
+				$tags 	    = $this->Tags_Model->getTags(3, $post["ID_Post"]);
 				$categories = $this->Categories_Model->getCategoriesByRecord(3, $post["ID_Post"]);
 				
-				$data[$i]["post"] 		= $post;
-				$data[$i]["tags"] 		= $tags;
+				$data[$i]["post"] 	= $post;
+				$data[$i]["tags"] 	= $tags;
 				$data[$i]["categories"] = $categories;
 				$i++;
 			}
@@ -409,15 +398,15 @@ class Blog_Model extends ZP_Model {
 		if($posts) {
 			$i = 0;
 			
-			$this->Tags_Model 		= $this->model("Tags_Model");
+			$this->Tags_Model 	= $this->model("Tags_Model");
 			$this->Categories_Model = $this->model("Categories_Model");
 			
 			foreach($posts as $post) {
-				$tags 		= $this->Tags_Model->getTags(3, $post["ID_Post"]);
+				$tags 	    = $this->Tags_Model->getTags(3, $post["ID_Post"]);
 				$categories = $this->Categories_Model->getCategoriesByRecord(3, $post["ID_Post"]);
 				
-				$data[$i]["post"] 		= $post;
-				$data[$i]["tags"] 		= $tags;
+				$data[$i]["post"] 	= $post;
+				$data[$i]["tags"] 	= $tags;
 				$data[$i]["categories"] = $categories;
 				$i++;
 			}
@@ -428,11 +417,8 @@ class Blog_Model extends ZP_Model {
 		return FALSE;	
 	}
 	
-	public function getByID($ID) {
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
-		
-		$data = $this->Db->find($ID);
+	public function getByID($ID) {			
+		$data = $this->Db->find($ID, $this->table);
 		
 		return $data;
 	}
@@ -458,15 +444,15 @@ class Blog_Model extends ZP_Model {
 		if($posts) {
 			$i = 0;
 			
-			$this->Tags_Model 		= $this->model("Tags_Model");
+			$this->Tags_Model 	= $this->model("Tags_Model");
 			$this->Categories_Model = $this->model("Categories_Model");
 			
 			foreach($posts as $post) {
-				$tags 		= $this->Tags_Model->getTags(3, $post["ID_Post"]);
+				$tags 	    = $this->Tags_Model->getTags(3, $post["ID_Post"]);
 				$categories = $this->Categories_Model->getCategoriesByRecord(3, $post["ID_Post"]);
 				
-				$data[$i]["post"] 		= $post;
-				$data[$i]["tags"] 		= $tags;
+				$data[$i]["post"] 	= $post;
+				$data[$i]["tags"] 	= $tags;
 				$data[$i]["categories"] = $categories;
 				$i++;
 			}
@@ -482,16 +468,12 @@ class Blog_Model extends ZP_Model {
 		$this->mural   = POST("muralExist");
 	
 		unlink($this->mural);
-			
-		$this->Db->table("mural");
-		$this->Db->deleteBy("ID_Post", $this->ID_Post);
+					
+		$this->Db->deleteBy("ID_Post", $this->ID_Post, "mural");
 	}
 	
 	public function removePassword($ID) {
-		$this->Db->values("Pwd = ''");
-		$this->Db->table($this->table);
-	
-		$this->Db->save($ID);
+		$this->Db->update($this->table, array("Pwd" => ""), $ID);		
 	}
 		
 }
