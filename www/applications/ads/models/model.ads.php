@@ -66,9 +66,9 @@ class Ads_Model extends ZP_Model {
 		);
 
 		$data = array(
-			"ID_User"	 => SESSION("ZanUserID"),
+			"ID_User"    => SESSION("ZanUserID"),
 			"Start_Date" => now(4),
-			"End_Date"	 => now(4) + 2419200
+			"End_Date"   => now(4) + 2419200
 		);
 
 		if($action === "edit") {
@@ -113,7 +113,8 @@ class Ads_Model extends ZP_Model {
 	
 	private function edit() {				
 		if($this->data["Principal"] > 0) {		
-			if($this->Db->findBySQL("Position = '$this->position' AND Principal = 1")) {
+			if($this->Db->findBySQL("Position = '$this->position' AND Principal = 1", $this->table)) {
+				
 				$this->Db->values("Principal = 0 WHERE Position = '". $this->data["Position"] ."'");
 				$this->Db->save(FALSE);
 			}
