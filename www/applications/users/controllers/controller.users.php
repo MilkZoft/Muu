@@ -12,8 +12,7 @@ class Users_Controller extends ZP_Controller {
 		$this->Templates   = $this->core("Templates");
 		$this->Users_Model = $this->model("Users_Model");
 		
-		$helpers = array("alerts", "router", "security", "sessions");
-		$this->helper($helpers);
+		$this->helpers();
 		
 		$this->application = $this->app("users");
 		
@@ -24,37 +23,11 @@ class Users_Controller extends ZP_Controller {
 		if(SESSION("ZanUserID") > 0) {
 			$this->Users_Model->setRank(SESSION("ZanUserID"));
 		}
-			
-		if(segment(2) === "logout" and segment(3) !== "") {
-			$this->logout();
-		} elseif(segment(2) === "recover" and segment(3) !== "") {
-			$this->recover();
-		} elseif(segment(2) === "register" and segment(3) !== "") {
-			$this->register();
-		} elseif(segment(2) === "activate" and segment(4) !== "") {
-			$this->activate();
-		} elseif(segment(2) === "editprofile"  and segment(3) !== "") {
-			$this->editProfile();
-		} elseif(segment(2) === "profile" and segment(3) > 0) {
-			$this->profile();
-		} elseif(segment(2) === "editprofile") {
-			$this->editProfile();
-		} elseif(segment(2) === "activate") {
-			$this->activate();
-		} elseif(segment(2) === "register") {
-			$this->register();
-		} elseif(segment(2) === "recover") {
-			$this->recover();
-		} elseif(segment(2) === "login") {
-			$this->login();
-		} else {
-			redirect(_webBase);
-		}
 	}
 	
 	public function logout() {
 		if(segment(3)) {
-			unsetSessions(_webBase . _sh . _webLang . _sh . segment(3));
+			unsetSessions(path(segment(3)));
 		} else {
 			unsetSessions(_webBase);
 		}		
@@ -81,7 +54,7 @@ class Users_Controller extends ZP_Controller {
 					SESSION("ZanUserPrivilegeID", $user[0]["ID_Privilege"]);
 					SESSION("ZanUserPrivilege", $user[0]["Privilege"]);
 					
-					redirect(_webBase . _sh . _webLang . _sh . "users" . _sh . "editprofile" . _sh . "activate");	
+					redirect(path("users" . _sh . "editprofile" . _sh . "activate"));	
 				} else {
 					showAlert("An error occurred when attempting to activate your account!", _webBase);
 				}
@@ -165,7 +138,7 @@ class Users_Controller extends ZP_Controller {
 					$vars["google"]   = $google;
 					$vars["user"]     = $user;				
 					$vars["action"]   = "send";
-					$vars["href"]     = _webBase . _sh . _webLang . _sh . $this->application . _sh . "editprofile" . _sh;
+					$vars["href"]     = path($this->application . _sh . "editprofile" . _sh);
 					$vars["view"]     = $this->view("editprofile", $this->application, TRUE);
 				} else {
 					$vars["view"] = $this->view("error", $this->application, TRUE);
@@ -223,7 +196,7 @@ class Users_Controller extends ZP_Controller {
 						$vars["google"]   = $google;
 						$vars["user"]     = $user;				
 						$vars["action"]   = "send";
-						$vars["href"]     = _webBase . _sh . _webLang . _sh . $this->application . _sh . "editprofile" . _sh;
+						$vars["href"]     = path($this->application . _sh . "editprofile" . _sh);
 						$vars["view"]     = $this->view("editprofile", $this->application, TRUE);					
 					}
 				} else {
@@ -342,26 +315,26 @@ class Users_Controller extends ZP_Controller {
 					redirect(POST("URL"));
 				}
 			} elseif($from === "cpanel") {
-				showAlert("Incorrect Login", _webBase . _sh . _webLang . _sh . _cpanel);
+				showAlert("Incorrect Login", path("cpanel"));
 			} else {
 				if($from === "forums") { 
-					$vars["href"] 		= _webBase . _sh . _webLang . _sh . "users" . _sh . "login" . _sh . $from;
+					$vars["href"] 		= path("users" . _sh . "login" . _sh . $from);
 					$vars["noregister"] = TRUE;
 					$vars["alert"] 		= getAlert("Incorrect Login");
 					$vars["view"]  		= $this->view("login", $vars);
 				} else { 
-					$vars["href"] 	= _webBase . _sh . _webLang . _sh . "users" . _sh . "login";
+					$vars["href"] 	= path("users" . _sh . "login");
 					$vars["alert"] 	= getAlert("Incorrect Login");
 					$vars["view"]  	= $this->view("login", TRUE);
 				}		
 			}		
 		} else {
 			if($from === "forums") { 
-				$vars["href"] 		= _webBase . _sh . _webLang . _sh . "users" . _sh . "login" . _sh . $from;
+				$vars["href"] 		= path("users" . _sh . "login" . _sh . $from);
 				$vars["noregister"] = TRUE;
 				$vars["view"]  		= $this->view("login", $vars);
 			} else { 
-				$vars["href"] = _webBase . _sh . _webLang . _sh . "users" . _sh . "login";
+				$vars["href"] = path("users" . _sh . "login");
 				$vars["view"] = $this->view("login", TRUE);
 			}
 		}
@@ -402,7 +375,6 @@ class Users_Controller extends ZP_Controller {
 		}
 		
 		$this->template("content", $vars);
-		$this->render();
 	}
 	
 	public function register() {
@@ -428,20 +400,20 @@ class Users_Controller extends ZP_Controller {
 					$vars["success"] = TRUE;
 				}
 				
-				$vars["href"] = _webBase . _sh . _webLang . _sh . "users" . _sh . "register" . _sh . $from;
+				$vars["href"] = path("users" . _sh . "register" . _sh . $from);
 				$vars["view"] = $this->view("register", $this->application, $vars);				
 			} else {
 				$vars["alert"] = $this->Users_Model->setUser();
-				$vars["href"]  = _webBase . _sh . _webLang . _sh . "users" . _sh . "register";
+				$vars["href"]  = path("users" . _sh . "register");
 				$vars["view"]  = $this->view("register", TRUE);
 			}
 		} else {
 			if($from === "forums") { 
 				$vars["forums"] = TRUE;
-				$vars["href"] = _webBase . _sh . _webLang . _sh . "users" . _sh . "register" . _sh . $from;
+				$vars["href"]   = path("users" . _sh . "register" . _sh . $from);
 				$vars["view"]   = $this->view("register", $this->application);
 			} else { 
-				$vars["href"] = _webBase . _sh . _webLang . _sh . "users" . _sh . "register";
+				$vars["href"] = path("users" . _sh . "register");
 				$vars["view"] = $this->view("register", $this->application);
 			}			
 		}

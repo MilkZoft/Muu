@@ -25,7 +25,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->Templates = $this->core("Templates");
 		
-		$this->Templates->theme(_cpanel);
+		$this->Templates->theme("cpanel");
 		
 		$this->js("external");
 	}
@@ -44,10 +44,10 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->helper("porlets", $this->application);
 		
-		$this->vars["lastPosts"] = porlet(__("Last posts"), $this->CPanel_Model->home("blog"));
-		$this->vars["lastPages"] = porlet(__("Last pages"), $this->CPanel_Model->home("pages"), "list", "right");
-		$this->vars["lastLinks"] = porlet(__("Last links"), $this->CPanel_Model->home("links"));
-		$this->vars["lastUsers"] = porlet(__("Last users"), $this->CPanel_Model->home("users"), "list", "right");
+		$this->vars["lastPosts"] = porlet(__(_("Last posts")), $this->CPanel_Model->home("blog"));
+		$this->vars["lastPages"] = porlet(__(_("Last pages")), $this->CPanel_Model->home("pages"), "list", "right");
+		$this->vars["lastLinks"] = porlet(__(_("Last links")), $this->CPanel_Model->home("links"));
+		$this->vars["lastUsers"] = porlet(__(_("Last users")), $this->CPanel_Model->home("users"), "list", "right");
 		$this->vars["view"] 	 = $this->view("home", TRUE);
 		
 		$this->template("content", $this->vars);
@@ -72,7 +72,7 @@ class CPanel_Controller extends ZP_Controller {
 	}
 	
 	public function logout() {
-		unsetSessions(_webBase . _sh . _webLang . _sh . _cpanel);
+		unsetSessions(path("cpanel"));
 	}
 	
 }

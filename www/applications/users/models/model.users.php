@@ -119,19 +119,7 @@ class Users_Model extends ZP_Model {
 	}
 	
 	private function edit() {
-		if(strlen($this->pwd2) > 0 and strlen($this->pwd2) < 6) {
-			return getAlert("Invalid password");
-		}
-		
-		$data = $this->Db->call("updateUser($this->ID, '$this->username', '$this->pwd', '$this->email', '$this->status', $this->privilege)");
-		
-		if(isset($data[0]["Email_Exists"])) {
-			return getAlert("This user already exists");
-		} elseif(isset($data[0]["Username_Exists"])) {
-			return getAlert("This user already exists");
-		} elseif(isset($data[0]["User_Not_Exists"])) {
-			return getAlert("This user not exists");
-		}
+		//FALTA EDICIÓN
 		
 		return getAlert("The user has been edit correctly", "success");
 	}
@@ -532,18 +520,15 @@ class Users_Model extends ZP_Model {
 		return $data;
 	}
 	
-	public function getForProfile($ID) {
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
+	public function getForProfile($ID) {	
+		$data[0] = $this->Db->find($ID, $this->table);
 		
-		$data[0] = $this->Db->find($ID);
 		if(!$data[0]) {
 			return FALSE;
 		}
 		
-		$this->Db->table("users_information");
-		$this->Db->encode(TRUE);
-		$data[1] = $this->Db->findBySQL("ID_User = '$ID'");
+		$data[1] = $this->Db->findBySQL("ID_User = '$ID'", "users_information");
+		
 		if(!$data[1]) {
 			return FALSE;
 		}

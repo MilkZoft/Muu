@@ -183,7 +183,7 @@ class ZP_Load {
 			} elseif(file_exists("www/applications/$this->application/controllers/controller.". strtolower($parts[0]) .".php")) {
 				$file = "www/applications/$this->application/controllers/controller.". strtolower($parts[0]) .".php";
 			} else {
-				$file = "www/applications/$controller/controllers/controller.". strtolower($parts[0]) .".php";
+				$file = "www/applications/". strtolower($parts[0]) ."/controllers/controller.". strtolower($parts[0]) .".php";
 			}
 		}
 		

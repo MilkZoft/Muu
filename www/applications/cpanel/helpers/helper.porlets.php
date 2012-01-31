@@ -18,10 +18,10 @@ function porlet($porlet, $content, $type = "list", $float = "left") {
 	}
 	
 	$HTML .= '<div class="box-top">';
-	$HTML .= '	<img src="' . $skin . '/images/box-border-top-left.gif" alt="corner left top" class="float-left" />'; 
-	$HTML .= '	<img src="' . $skin . '/images/arrow-grey.gif" alt="Arrow" />';
-	$HTML .= '		&nbsp; <span class="bold grey">' . $porlet . '</span>';
-	$HTML .= ' 	<img src="' . $skin . '/images/box-border-top-right.gif" alt="corner left top" class="float-right" />';
+	$HTML .= '	<img src="'. $skin .'/images/box-border-top-left.gif" alt="corner left top" class="float-left" />'; 
+	$HTML .= '	<img src="'. $skin .'/images/arrow-grey.gif" alt="Arrow" />';
+	$HTML .= '		&nbsp; <span class="bold grey">'. $porlet .'</span>';
+	$HTML .= ' 	<img src="'. $skin .'/images/box-border-top-right.gif" alt="corner left top" class="float-right" />';
 	$HTML .= '</div>';
 			
 	$HTML .= '<div class="box-content">';
@@ -45,8 +45,8 @@ function porlet($porlet, $content, $type = "list", $float = "left") {
 	$HTML .= '</div>';
 			
 	$HTML .= '	<div class="box-bottom">'; 														
-	$HTML .= '		<img src="' . $skin . '/images/box-border-bottom-left.gif" alt="corner left bottom" class="float-left" />';
-	$HTML .= '		<img src="' . $skin . '/images/box-border-bottom-right.gif" alt="corner right bottom" class="float-right" />';
+	$HTML .= '		<img src="'. $skin .'/images/box-border-bottom-left.gif" alt="corner left bottom" class="float-left" />';
+	$HTML .= '		<img src="'. $skin .'/images/box-border-bottom-right.gif" alt="corner right bottom" class="float-right" />';
 	$HTML .= '	</div>';
 	$HTML .= '</div>';
 	
