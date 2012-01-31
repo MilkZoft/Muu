@@ -8,8 +8,6 @@ if(!defined("_access")) {
 
 class Ads_Controller extends ZP_Controller {
 	
-	private $pagination = NULL;
-	
 	public function __construct() {		
 		$this->Ads_Model = $this->model("Ads_Model");
 		
@@ -17,7 +15,7 @@ class Ads_Controller extends ZP_Controller {
 	}
 	
 	public function index($action = NULL, $position = "Top") {
-		
+		redirect(_webBase);	
 	}
 	
 	public function ads($position) {
