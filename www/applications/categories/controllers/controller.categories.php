@@ -11,8 +11,7 @@ class Categories_Controller extends ZP_Controller {
 	public function __construct() {		
 		$this->Templates  = $this->core("Templates");
 		
-		$helpers = array("router", "time");
-		$this->helper($helpers);
+		$this->helpers();
 		
 		$this->application = "categories";
 		
@@ -20,7 +19,7 @@ class Categories_Controller extends ZP_Controller {
 	}
 	
 	public function index() {
-
+		redirect(_webBase);
 	}
 	
 	public function getCategories($type = "checkbox", $name = "categories") {

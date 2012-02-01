@@ -222,7 +222,7 @@ class Categories extends ZP_Load {
 						$attrs = array(
 							"id"	   => $name,
 							"text"     => getLanguage($category["Language"], TRUE), 
-							"name"     => $name . "[]", 
+							"name"     => $name ."[]", 
 							"value"    => $category["ID_Category"], 
 							"position" => "right",
 							"checked"  => $check

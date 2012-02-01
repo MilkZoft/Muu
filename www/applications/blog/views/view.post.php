@@ -1,7 +1,7 @@
 <?php if(!defined("_access")) { die("Error: You don't have permission to access here..."); } 
 
 if(is_array($post)) {				
-	$URL 		= _webBase . _sh . _webLang . _sh . _blog . _sh . $post["Year"] . _sh . $post["Month"] . _sh . $post["Day"] . _sh . $post["Slug"];		
+	$URL 		= path("blog/". $post["Year"] ."/". $post["Month"] ."/". $post["Day"] ."/". $post["Slug"];		
 	$categories = NULL;
 	$tags		= NULL;
 	
@@ -10,11 +10,12 @@ if(is_array($post)) {
 	if(isset($dataCategories) and is_array($dataCategories)) {
 		foreach($dataCategories as $category) {
 			if($i === count($dataCategories) - 1) {
-				$categories .= '<a href="'. _webBase . _sh . _webLang . _sh . _blog . _sh . _category . _sh . $category["Slug"] .'" title="'. $category["Title"] .'">'. $category["Title"] .'</a>';
+				$categories .= '<a href="'. path("blog/category/". $category["Slug"]) .'" title="'. $category["Title"] .'">'. $category["Title"] .'</a>';
 			} elseif($i === count($dataCategories) - 2) {
-				$categories .= '<a href="'. _webBase . _sh . _webLang . _sh . _blog . _sh . _category . _sh . $category["Slug"] .'" title="'. $category["Title"] .'">'. $category["Title"] .'</a> '. __("and") .' ';
+				$categories .= '<a href="'. path("blog/category/". $category["Slug"]) .'" title="'. $category["Title"] .'">'. $category["Title"] .'</a> '; 
+				$categories .= __(_("and")) .' ';
 			} else {
-				$categories .= '<a href="'. _webBase . _sh . _webLang . _sh . _blog . _sh . _category . _sh . $category["Slug"] .'" title="'. $category["Title"] .'">'. $category["Title"] .'</a>, ';
+				$categories .= '<a href="'. path("blog/category/". $category["Slug"]) .'" title="'. $category["Title"] .'">'. $category["Title"] .'</a>, ';
 			}
 			
 			$i++;
@@ -26,11 +27,11 @@ if(is_array($post)) {
 	if(isset($dataTags) and is_array($dataTags)) {								
 		foreach($dataTags as $tag) {
 			if($i === count($dataTags) - 1) {
-				$tags .= '<a href="'. _webBase . _sh . _webLang . _sh . _blog . _sh . _tag . _sh . $tag["Slug"] .'" title="'. $tag["Title"] .'">'. $tag["Title"] .'</a>';
+				$tags .= '<a href="'. path("blog/tag/". $tag["Slug"]) .'" title="'. $tag["Title"] .'">'. $tag["Title"] .'</a>';
 			} elseif($i === count($dataTags) - 2) {
-				$tags .= '<a href="'. _webBase . _sh . _webLang . _sh . _blog . _sh . _tag . _sh . $tag["Slug"] .'" title="'. $tag["Title"] .'">'. $tag["Title"] .'</a> '. __("and") .' ';
+				$tags .= '<a href="'. path("blog/tag/". $tag["Slug"]) .'" title="'. $tag["Title"] .'">'. $tag["Title"] .'</a> '. __(_("and")) .' ';
 			} else {
-				$tags .= '<a href="'. _webBase . _sh . _webLang . _sh . _blog . _sh . _tag . _sh . $tag["Slug"] .'" title="'. $tag["Title"] .'">'. $tag["Title"] .'</a>, ';
+				$tags .= '<a href="'. path("blog/tag/". $tag["Slug"]) .'" title="'. $tag["Title"] .'">'. $tag["Title"] .'</a>, ';
 			}
 			
 			$i++;
@@ -38,7 +39,7 @@ if(is_array($post)) {
 	}		
 
 	if($categories) {
-		$in = __("in");
+		$in = __(_("in"));
 	} else {
 		$in = NULL;
 	}
@@ -52,15 +53,15 @@ if(is_array($post)) {
 			</a>
 		</div>
 		
-			<div class="post-left">
-				<?php print __("Published") . " " . howLong($post["Start_Date"]) . " " . $in . " ". $categories ." " . __("by") . " " . $post["Author"]; ?>
-				<br />
-				<?php 
-					if($tags) {
-						print __("Tags") . ": " . $tags; 
-					} 
-				?>
-			</div>
+		<div class="post-left">
+			<?php print __(_("Published")) . " " . howLong($post["Start_Date"]) . " " . $in . " ". $categories ." " . __(_("by")) . " " . $post["Author"]; ?>
+			<br />
+			<?php 
+				if($tags) {
+					print __(_("Tags")) . ": " . $tags; 
+				} 
+			?>
+		</div>
 		
 		<div class="post-right">
 			<?php print getTotal($post["Comments"], "comment", "comments"); ?>
@@ -72,5 +73,6 @@ if(is_array($post)) {
 			<?php print bbCode($post["Content"]); ?>
 		</div>
 	</div>	
+	
 	<?php
 }

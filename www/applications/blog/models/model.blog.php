@@ -398,15 +398,15 @@ class Blog_Model extends ZP_Model {
 		if($posts) {
 			$i = 0;
 			
-			$this->Tags_Model 	= $this->model("Tags_Model");
+			$this->Tags_Model 	    = $this->model("Tags_Model");
 			$this->Categories_Model = $this->model("Categories_Model");
 			
 			foreach($posts as $post) {
 				$tags 	    = $this->Tags_Model->getTags(3, $post["ID_Post"]);
 				$categories = $this->Categories_Model->getCategoriesByRecord(3, $post["ID_Post"]);
 				
-				$data[$i]["post"] 	= $post;
-				$data[$i]["tags"] 	= $tags;
+				$data[$i]["post"] 	    = $post;
+				$data[$i]["tags"]    	= $tags;
 				$data[$i]["categories"] = $categories;
 				$i++;
 			}
@@ -444,15 +444,15 @@ class Blog_Model extends ZP_Model {
 		if($posts) {
 			$i = 0;
 			
-			$this->Tags_Model 	= $this->model("Tags_Model");
+			$this->Tags_Model 		= $this->model("Tags_Model");
 			$this->Categories_Model = $this->model("Categories_Model");
 			
 			foreach($posts as $post) {
 				$tags 	    = $this->Tags_Model->getTags(3, $post["ID_Post"]);
 				$categories = $this->Categories_Model->getCategoriesByRecord(3, $post["ID_Post"]);
 				
-				$data[$i]["post"] 	= $post;
-				$data[$i]["tags"] 	= $tags;
+				$data[$i]["post"] 		= $post;
+				$data[$i]["tags"] 		= $tags;
 				$data[$i]["categories"] = $categories;
 				$i++;
 			}
@@ -475,5 +475,5 @@ class Blog_Model extends ZP_Model {
 	public function removePassword($ID) {
 		$this->Db->update($this->table, array("Pwd" => ""), $ID);		
 	}
-		
+	
 }

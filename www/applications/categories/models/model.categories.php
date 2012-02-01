@@ -10,17 +10,14 @@ class Categories_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 
-		$helpers = array("alerts", "router");
-		$this->helper($helpers);
+		$this->helpers();
 		
 		$this->language = whichLanguage();
 		$this->table 	= "categories";
 	}
 	
 	
-	public function cpanel($action, $limit = NULL, $order = "ID_Category DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		$this->Db->table($this->table);
-		
+	public function cpanel($action, $limit = NULL, $order = "ID_Category DESC", $search = NULL, $field = NULL, $trash = FALSE) {		
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave();
 			
@@ -43,15 +40,15 @@ class Categories_Model extends ZP_Model {
 	private function all($trash, $order, $limit) {
 		if(!$trash) {
 			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBySQL("State != 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '".$_SESSION["ZanAdminID"]."' AND State != 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBy("State", "Deleted", NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanAdminID") ."' AND State = 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND State = 'Deleted'", $this->table, NULL, $order, $limit);
 			}
 		}
 		
@@ -109,8 +106,6 @@ class Categories_Model extends ZP_Model {
 	}
 	
 	public function getCategoriesByApplication($application, $language) {		
-		
-		//PROCEDURE
 		$query = "SELECT ID_Application FROM muu_applications WHERE Slug = '$application'";
  
 		$ID_Application = $this->Db->query($query);
@@ -123,8 +118,6 @@ class Categories_Model extends ZP_Model {
 		WHERE muu_re_categories_applications.ID_Application = '$ID_Application' AND muu_categories.Language = '$language' ORDER BY ID_Category DESC;";
 		
 		$this->data = $this->Db->query($query);
-		//END PROCEDURE
-		//$data = $this->Db->call("getCategoriesByApp('blog', 'Spanish')");
 			
 		return $this->data;
 	}
@@ -141,8 +134,7 @@ class Categories_Model extends ZP_Model {
 	}
 	
 
-	public function getSomeCategories($lastID = NULL, $language) {			
-		
+	public function getSomeCategories($lastID = NULL, $language) {					
 		if(!is_null($lastID)) {
 			$lastID = "AND muu_categories.ID_Category > $lastID";
 		}
@@ -173,7 +165,7 @@ class Categories_Model extends ZP_Model {
 			$temp = $category["ID_Category"];
 			$i++;
 		}
-		____($categories);
+	
 		return $this->data;
 	}
 

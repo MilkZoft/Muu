@@ -6,7 +6,7 @@
 	
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
-			print p(__(ucfirst(whichApplication())), "resalt");
+			print p(__(_(ucfirst(whichApplication()))), "resalt");
 			
 			print isset($alert) ? $alert : NULL;
 	
@@ -16,35 +16,35 @@
 						print '<th>Categorías</th>';
 						
 						foreach($apps as $app) {
-							print '<th>'.$app["option"].'</th>';
+							print '<th>'. $app["option"] .'</th>';
 						}
+
 					print '</tr>';
 					
-					//____($appsCategories);
-					
 					$temp = NULL;
-					foreach($appsCategories as $appsCategory) {	
-							
+
+					foreach($appsCategories as $appsCategory) {			
 						if($temp !== $appsCategory["ID_Category"]) {
 							if(!is_null($temp)) { 
 								print "</tr>"; 
 							}
 							
 							print "<tr>";
-								print '<td>'.$appsCategory["Title"].'</td>';
+								print '<td>'. $appsCategory["Title"] .'</td>';
+
 								foreach($apps as $app) {
-									if($app["value"] == $appsCategory["App"]) {
-										print '<td>Sí</td>';
+									if($app["value"] === $appsCategory["App"]) {
+										print '<td>'. __(_("Yes")) .'</td>';
 									} else {
-										print '<td>No</td>';
+										print '<td>'. __(_("No")) .'</td>';
 									}
 								}
 						} else {
 							foreach($apps as $app) {
 									if($app["value"] == $appsCategory["App"]) {
-										print '<td>Sí</td>';
+										print '<td>'. __(_("Yes")) .'</td>';
 									} else {
-										print '<td>No</td>';
+										print '<td>'. __(_("No")) .'</td>';
 									}
 								}
 						}	

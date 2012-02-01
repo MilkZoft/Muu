@@ -10,7 +10,7 @@
 
 	<div id="blog-archive">
 		<ul>
-			<p class="center bold"><?php print __("Archive"); ?></p>
+			<p class="center bold"><?php print __(_("Archive")); ?></p>
 			<?php
 				for($i = $lastYear; $i >= $firstYear; $i--) {
 					if($i === $lastYear) {
@@ -23,7 +23,7 @@
 							
 							?>
 								<li>
-									&raquo; <a href="<?php print _webBase . _sh . _webLang . _sh . _blog . _sh . $i . _sh . $m . _sh; ?>" title="<?php print month($m) . ' ' . $i; ?>"><?php print month($m) . ' ' . $i; ?></a>
+									&raquo; <a href="<?php print path("blog/$i/$m/"); ?>" title="<?php print month($m) . ' ' . $i; ?>"><?php print month($m) . ' ' . $i; ?></a>
 								</li>
 							<?php
 						}										
@@ -37,7 +37,7 @@
 							
 							?>
 								<li>
-									&raquo; <a href="<?php print _webBase . _sh . _webLang . _sh . _blog . _sh . $i . _sh . $m . _sh; ?>" title="<?php print month($m) . ' ' . $i; ?>"><?php print month($m) . ' ' . $i; ?></a>
+									&raquo; <a href="<?php print path("blog/$i/$m/"); ?>" title="<?php print month($m) . ' ' . $i; ?>"><?php print month($m) . ' ' . $i; ?></a>
 								</li>
 							<?php
 						}

@@ -12,13 +12,10 @@ $ID_User        = (SESSION("ZanUserID")) ? (int) SESSION("ZanUserID") : 0;
 
 ?>
 
-<!-- Comments Header -->
 <div id="comments-header">
-	<span class="comments-header uppercase bold">Comentarios</span>
+	<span class="comments-header uppercase bold"><?php print __(_("Comments"); ?></span>
 </div>
 
-
-<!-- Comments -->
 <div id="comments">
 	<?php if($dataComments) { ?>
 		<?php foreach($dataComments as $comment) { ?>
@@ -39,7 +36,7 @@ $ID_User        = (SESSION("ZanUserID")) ? (int) SESSION("ZanUserID") : 0;
 				<div class="clear"></div>
 					
 				<div class="comment-user-avatar">
-					<img class="avatar" src="http://www.camu-divan.org/phpThumb/phpThumb.php?src=/upload/Telematica.png&w=64&h=64&f=png" alt="<?php print $comment["Username"]; ?>" />
+					<img class="avatar" src="#" alt="<?php print $comment["Username"]; ?>" />
 				</div>
 			
 				<div class="comment-content">
@@ -53,7 +50,7 @@ $ID_User        = (SESSION("ZanUserID")) ? (int) SESSION("ZanUserID") : 0;
 		<?php } ?>	
 	<?php } else { ?> 
 		<div class="empty-comments">
-			<p>No existen comentarios para este Post. ¡Se el Primero en dejar un Comentario!</p>
+			<p><?php print __(_("There are no comments for this post.Be the first to leave a comment!")); ?></p>
 		</div>
 	<?php } ?>
 </div>
@@ -61,28 +58,31 @@ $ID_User        = (SESSION("ZanUserID")) ? (int) SESSION("ZanUserID") : 0;
 <a name="post"></a>
 <?php print ($alert) ? $alert : NULL; ?>
 
-<!-- Comment Form -->
 <div class="" id="comment-post">
 	<div class="add-form">
 		<form id="form-add" class="form-add" action="<?php print $URL; ?>/#post" method="post" enctype="multipart/form-data">
 				
-			<?php if($ID_User > 0) { ?>
+			<?php 
+				if($ID_User > 0) { 
+			?>
 					<p class="field">
-						<a href=""><?php print $username; ?></a>
+						<a href="#"><?php print $username; ?></a>
 					</p>
-			<?php } else { ?>
+			<?php 
+				} else { 
+			?>
 					<p class="field">
-						<label for="name"><?php print __("Name");?>: </label> <br />
+						<label for="name"><?php print __(_("Name"));?>: </label> <br />
 						<input type="text" name="name" id="name" value="<?php print $name; ?>" maxlength="40" />
 					</p>
 					
 					<p class="field">
-						<label for="email"><?php print __("Email");?>: </label> <br />
+						<label for="email"><?php print __(_("Email"));?>: </label> <br />
 						<input type="text" name="email" id="email" value="<?php print $email; ?>" maxlength="60" />
 					</p>
 					
 					<p class="field">
-						<label for="website"><?php print __("Website");?>: </label> <br />
+						<label for="website"><?php print __(_("Website"));?>: </label> <br />
 						<input type="text" name="website" id="website" value="<?php print $website; ?>" maxlength="80" />
 					</p>	
 			<?php } ?>
@@ -92,7 +92,7 @@ $ID_User        = (SESSION("ZanUserID")) ? (int) SESSION("ZanUserID") : 0;
 			</p>
 					
 			<p class="post">			
-				<input type="submit" name="post-comment" value="<?php print __("Comment");?>" />
+				<input type="submit" name="post-comment" value="<?php print __(_("Comment"));?>" />
 			</p>
 				
 			<input name="ID_Application" type="hidden" value="<?php print $ID_Application; ?>" />
@@ -105,6 +105,7 @@ $ID_User        = (SESSION("ZanUserID")) ? (int) SESSION("ZanUserID") : 0;
 </div>
 
 <?php
-$vars["redirect"] = $URL;
-$vars["action"]   = $URL;
-$this->view("twitter", "twitter", $vars);
+	$vars["redirect"] = $URL;
+	$vars["action"]   = $URL;
+	
+	$this->view("twitter", "twitter", $vars);

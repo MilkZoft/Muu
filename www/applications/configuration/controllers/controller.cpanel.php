@@ -7,9 +7,7 @@ if(!defined("_access")) {
 }
 
 class CPanel_Controller extends ZP_Controller {
-	
-	private $vars = array();
-	
+		
 	public function __construct() {		
 		$this->app("cpanel");
 		
@@ -43,8 +41,8 @@ class CPanel_Controller extends ZP_Controller {
 	public function edit() {		
 		$this->title("Edit");
 		
-		$this->CSS("forms", _cpanel);
-		$this->CSS("misc", _cpanel);
+		$this->CSS("forms", "cpanel");
+		$this->CSS("misc", "cpanel");
 		$this->CSS("categories", "categories");
 		
 		$this->js("tiny-mce");
@@ -58,13 +56,13 @@ class CPanel_Controller extends ZP_Controller {
 		if(POST("edit")) {
 			$this->vars["alert"] = $this->$Model->cpanel("edit");
 		} elseif(POST("cancel")) {
-			redirect(_webBase . _sh . _webLang . _sh . _cpanel);
+			redirect("cpanel");
 		} 
 		
 		$data = $this->$Model->getByID(1);
 	
 		if($data) {
-			$this->Library 	  = $this->classes("Library", _cpanel);
+			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");
 			$this->Applications_Model = $this->model("Applications_Model");
 
@@ -89,13 +87,13 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["situation"]    = recoverPOST("situation",   $data[0]["Situation"]);
 			$this->vars["edit"]         = TRUE;	
 			$this->vars["action"]	    = "edit";
-			$this->vars["href"]		    = _webBase . _sh . _webLang . _sh . whichApplication() . _sh . _cpanel . _sh . _edit . _sh;
+			$this->vars["href"]		    = path(whichApplication() . _sh . "cpanel" . _sh . "edit" . _sh);
 		
 			$this->vars["view"] = $this->view("edit", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect(_webBase. _sh. _webLang. _sh. $this->application. _sh. _cpanel . _sh . _results);
+			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
 		}
 	}
 	
@@ -109,7 +107,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Users_Controller->login("cpanel");
 		} else {
 			$this->vars["URL"]  = getURL();
-			$this->vars["view"] = $this->view("login", TRUE, _cpanel);
+			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
 		$this->template("include", $this->vars);

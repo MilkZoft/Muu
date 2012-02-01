@@ -22,7 +22,8 @@ if(is_array($posts)) {
 				if($i === count($dataCategories) - 1) {
 					$categories .= a($category["Title"], path("blog/category/". $category["Slug"]), FALSE, array("title" => $category["Title"]));
 				} elseif($i === count($dataCategories) - 2) {
-					$categories .= a($category["Title"], path("blog/category/". $category["Slug"]), FALSE, array("title" => $category["Title"])) ." ". __("and") ." ";
+					$categories .= a($category["Title"], path("blog/category/". $category["Slug"]), FALSE, array("title" => $category["Title"])) ." "; 
+					$categories .= __(_("and")) ." ";
 				} else {
 					$categories .= a($category["Title"], path("blog/category/". $category["Slug"]), FALSE, array("title" => $category["Title"])) . ", ";
 				}
@@ -38,7 +39,7 @@ if(is_array($posts)) {
 				if($i === count($dataTags) - 1) {
 					$tags .= a($tag["Title"], path("blog/tag/". $tag["Slug"]), FALSE, array("title" => $tag["Title"]));
 				} elseif($i === count($dataTags) - 2) {
-					$tags .= a($tag["Title"], path("blog/tag/". $tag["Slug"]), FALSE, array("title" => $tag["Title"])) . " ". __("and") ." ";
+					$tags .= a($tag["Title"], path("blog/tag/". $tag["Slug"]), FALSE, array("title" => $tag["Title"])) . " ". __(_("and")) ." ";
 				} else {
 					$tags .= a($tag["Title"], path("blog/tag/". $tag["Slug"]), FALSE, array("title" => $tag["Title"])) . ", ";
 				}
@@ -69,11 +70,11 @@ if(is_array($posts)) {
 			</div>
 			
 			<div class="post-left">
-				<?php print __("Published") ." ". howLong($post["Start_Date"]) ." ". $in ." ". $categories ." ". __("by") ." ". $post["Author"]; ?>
+				<?php print __(_("Published")) ." ". howLong($post["Start_Date"]) ." ". $in ." ". $categories ." ". __(_("by")) ." ". $post["Author"]; ?>
 				<br />
 				<?php 
 					if($tags) {
-						print __("Tags") .": ". $tags; 
+						print __(_("Tags")) .": ". $tags; 
 					} 
 				?>
 			</div>

@@ -17,7 +17,7 @@
 	<?php
 		if(is_array($mural)) {				
 			foreach($mural as $post) {
-			?>
+	?>
 				<div class="mural-image">
 					<img src="<?php print _webURL . _sh . $post["Image"]; ?>" class="no-border">
 				
@@ -27,7 +27,7 @@
 						</a>
 					</div>					
 				</div>
-			<?php      			
+	<?php      			
 			}
 		}
 	?>		
