@@ -7,7 +7,7 @@ if(!defined("_access")) {
 }
 
 function getCheckbox($ID, $disabled = NULL) {
-	return '<input id="records" name="records[]" value="'. $ID .'" type="checkbox" '.$disabled.'/>';	
+	return '<input id="records" name="records[]" value="'. $ID .'" type="checkbox" '. $disabled .'/>';	
 }
 
 function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FALSE) {
@@ -15,14 +15,14 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 	
 	$HTML  = '	<table id="results" class="results">
 					<caption class="caption">
-						<span class="bold">' . $caption . '</span>
+						<span class="bold">'. $caption .'</span>
 					</caption>
 					
 					<thead>
 						<tr>';
 	
 						for($i = 0; $i <= count($thead) - 1; $i++) {
-							$HTML .= '<th>' . $thead[$i] . '</th>';
+							$HTML .= '<th>'. $thead[$i] .'</th>';
 						}
 	
 	$HTML .= '			</tr>
@@ -30,8 +30,8 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 					
 					<tfoot>
 						<tr>
-							<td colspan="' . $colspan . '">
-								<span class="bold">' . __("Total") . ':</span> ' . $total . '
+							<td colspan="'. $colspan .'">
+								<span class="bold">'. __(_("Total")) .':</span> '. $total .'
 							</td>
 						</tr>
 					</tfoot>		  
@@ -96,19 +96,19 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							}
 									
 							if(isset($column["Controller"])) { 
-								$HTML .= '<td class="center">'. __($column["Controller"]) .'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Controller"])) .'</td>';
 							}
 							
 							if(isset($column["Model"])) { 
-								$HTML .= '<td class="center">'. __($column["Model"]).'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Model"])) .'</td>';
 							}
 							
 							if(isset($column["CPanel"])) { 
-								$HTML .= '<td class="center">'. __($column["CPanel"]).'</td>';
+								$HTML .= '<td class="center">'. __(_($column["CPanel"])) .'</td>';
 							}
 							
 							if(isset($column["Adding"])) { 
-								$HTML .= '<td class="center">'. __($column["Adding"]).'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Adding"])) .'</td>';
 							}
 							
 							if(isset($column["Author"])) { 
@@ -123,6 +123,7 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 								$HTML .= '<td class="center">
 											<a rel="external" title="'. $column["Title"] .'" href="'. $column["URL"] .'">'. cut($column["URL"], 35, "word") .'</a>
 										  </td>';
+
 								$HTML .= '<td class="center">'. __($column["Category"]) .'</td>';
 							}
 							
@@ -168,8 +169,8 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 								
 								$HTML .= '
 										<td class="center">
-											<a href="' . $column["Image"] . '" title="Banner" class="image-lightbox">
-												' . __("view image") . '
+											<a href="'. $column["Image"] .'" title="Banner" class="image-lightbox">
+												'. __(_("Preview")) .'
 											</a>
 										</td>';
 							}
@@ -177,22 +178,22 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							if(isset($column["Preview"])) {							
 								$HTML .= '
 										<td class="center">
-											<a href="' . $column["Preview"] . '" title="Banner" class="work-lightbox">
-												' . __("view image") . '
+											<a href="'. $column["Preview"] .'" title="Banner" class="work-lightbox">
+												'. __(_("Preview")) .'
 											</a>
 										</td>';
 								
 								$HTML .= '
 										<td class="center">
-											<a href="' . $column["Preview1"] . '" title="Banner" class="work-lightbox">
-												' . __("view image") . '
+											<a href="'. $column["Preview1"] .'" title="Banner" class="work-lightbox">
+												'. __(_("Preview")) .'
 											</a>
 										</td>';
 								
 								$HTML .= '
 										<td class="center">
-											<a href="' . $column["Preview2"] . '" title="Banner" class="work-lightbox">
-												' . __("view image") . '
+											<a href="'. $column["Preview2"] .'" title="Banner" class="work-lightbox">
+												'. __(_("Preview")) .'
 											</a>
 										</td>';
 							}
@@ -208,17 +209,17 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							if(isset($column["Banner"])) {
 								$HTML .= '
 								<td class="center">
-									<a href="' . _webURL . _sh . $column["Banner"] . '" title="Banner" class="banner-lightbox">
-										' . __("view banner") . '
+									<a href="'. _webURL . _sh . $column["Banner"] .'" title="Banner" class="banner-lightbox">
+										'. __(_("Preview")) .'
 									</a>
 								</td>';
 							}
 							
 							if(isset($column["Principal"])) { 
 								if($column["Principal"]) {
-									$HTML .= '<td class="center">'. __("Yes") .'</td>';
+									$HTML .= '<td class="center">'. __(_("Yes")) .'</td>';
 								} else {
-									$HTML .= '<td class="center">'. __("No") .'</td>';
+									$HTML .= '<td class="center">'. __(_("No")) .'</td>';
 								}
 							}
 							
@@ -227,7 +228,7 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							}
 							
 							if(isset($column["Follow"])) { 
-								$HTML .= '<td class="center">'. __($column["Follow"]).'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Follow"])) .'</td>';
 							}
 							
 							if(isset($column["Time"])) { 
@@ -239,28 +240,28 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							}
 							
 							if(isset($column["Type"])) { 
-								$HTML .= '<td class="center">'. __($column["Type"]) .'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Type"])) .'</td>';
 							}
 							
 							if(isset($column["Topics"])) { 
-								$HTML .= '<td class="center">'. __($column["Topics"]) .'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Topics"])) .'</td>';
 							}
 							
 							if(isset($column["Replies"])) { 
-								$HTML .= '<td class="center">'. __($column["Replies"]) .'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Replies"])) .'</td>';
 							}
 							
 							if(isset($column["ID_YouTube"])) {
 								$HTML .= '
 								<td class="center">
 									<a href="http://www.youtube.com/watch?v='. $column["ID_YouTube"] .'" class="video-lightbox" title="'. $title .'">
-										'. __("view video") .'
+										'. __(_("Preview")) .'
 									</a>
 								</td>';
 							}
 							
 							if(isset($column["Situation"])) { 
-								$HTML .= '<td class="center">'. __($column["Situation"]) .'</td>';
+								$HTML .= '<td class="center">'. __(_($column["Situation"])) .'</td>';
 							}		
 														
 							if(isset($column["Action"])) { 
@@ -273,17 +274,17 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 				</table>
 		
 				<div class="table-options" style="position: relative; z-index: 1; margin-bottom: 25px;">
-					&nbsp;'. __("Select") .': 
-					<a onclick="checkAll(\'records\')" class="pointer" title="'. __("All") .'">'. __("All") .'</a> 
-					<a onclick="unCheckAll(\'records\')" class="pointer" title="'. __("None") .'">'. __("None") .'</a><br />';
+					&nbsp;'. __(_("Select")) .': 
+					<a onclick="checkAll(\'records\')" class="pointer" title="'. __(_("All")) .'">'. __(_("All")) .'</a> 
+					<a onclick="unCheckAll(\'records\')" class="pointer" title="'. __(_("None")) .'">'. __(_("None")) .'</a><br />';
 					
 					if(segment(3) === "trash") { 
-						$HTML .= '	&nbsp;<input name="restore" value="'. __("Restore") .'" type="submit" class="small-input" />
-									&nbsp;<input name="delete" value="'. __("Delete") .'" type="submit" class="small-input" />';
-					} elseif($comments === TRUE) { 
-						$HTML .= '	&nbsp;<input name="deleteComments" value="'. __("Delete") .'" type="submit" class="small-input" />';
+						$HTML .= '	&nbsp;<input name="restore" value="'. __(_("Restore")) .'" type="submit" class="small-input" />
+									&nbsp;<input name="delete" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
+					} elseif($comments) { 
+						$HTML .= '	&nbsp;<input name="deleteComments" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
 					} else { 
-						$HTML .= '	&nbsp;<input name="trash" value="'. __("Send to trash") .'" type="submit" class="small-input" />';
+						$HTML .= '	&nbsp;<input name="trash" value="'. __(_("Send to trash")) .'" type="submit" class="small-input" />';
 					}
 					
 	$HTML .= '	</div>';
@@ -489,20 +490,19 @@ function getTFoot($trash) {
 				$tFoot = $CPanel_Model->getTFoot($a, "Situation", $record["Situation"], 	  			$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "Action",    $action, 			      	  			$tFoot);
 			} elseif($application === "comments") {
-				
 				$Applications_Model = $Load->model("Applications_Model");
 				$Application = $Applications_Model->getApplication($record["ID_Application"]);
 				
 				$Users_Model = $Load->model("Users_Model");
 				$result      = $Users_Model->getUsername($record["ID_User"]);
 				
-				if($result === FALSE) {
+				if(!$result) {
 					$Username = $record["Name"];
 				} else {
 					$Username  = $result["Username"];
 				}
 				
-				$tFoot = $CPanel_Model->getTFoot($a, "checkbox",  getCheckbox($record["ID_Comment"]), 	$tFoot);
+				$tFoot = $CPanel_Model->getTFoot($a, "checkbox",  	getCheckbox($record["ID_Comment"]), $tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "i", 		    $color, 				  			$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "ID", 		    $record["ID_Comment"], 	      	  	$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "Application", $Application, 	      	  			$tFoot);
@@ -527,7 +527,6 @@ function getTFoot($trash) {
 				$tFoot = $CPanel_Model->getTFoot($a, "Situation",	$record["Situation"], 	  	  		$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "Action",    	$action, 			      	  		$tFoot);	
 			} elseif($application === "categories") {
-				
 				$Applications_Model    = $Load->model("Applications_Model");
 				$ID_Application        = $Applications_Model->getApplicationByCategory($record["ID_Category"]);
 				$record["Application"] = $Applications_Model->getApplication($ID_Application);
@@ -562,10 +561,9 @@ function getTFoot($trash) {
 				$j++;
 			}
 		}
-		
 	} else {
 		if($application !== "comments") {
-			redirect(_webBase . _sh . _webLang ._sh . $application . _sh . _cpanel . _sh .  _add);
+			redirect(path($application . _sh . "cpanel" . _sh .  "add");
 		} else {
 			return FALSE;
 		}
@@ -610,17 +608,16 @@ function getFields($application) {
 function getSearch() {
 	global $Load;
 	
-	$Load->helper("forms");
-	$Load->helper("html");
+	$Load->helper(array("forms", "html"));
 
 	$application = whichApplication();
 	
 	if($application === "users") {
 		$field = "username";
-		$name  = __("Username");
+		$name  = __(_("Username"));
 	} else {
 		$field = "title";
-		$name  = __("Title");			
+		$name  = __(_("Title"));			
 	}
 	
 	$fields = array(
@@ -636,19 +633,19 @@ function getSearch() {
 			)
 	);
 
-	$HTML  = formOpen(_webBase . _sh . _webLang . _sh . segment(1) . _sh . _cpanel . _sh . _results, "form-results-search");
+	$HTML  = formOpen(path($application . _sh . "cpanel" . _sh . "results"), "form-results-search");
 	$HTML .= br();
-	$HTML .= bold("&nbsp". __("Search") . ":", FALSE);
+	$HTML .= bold("&nbsp". __(_("Search")) .":", FALSE);
 
 	$attributes = array(
-		"p" => FALSE,
-		"name" => "search",
+		"p" 	=> FALSE,
+		"name" 	=> "search",
 		"class" => "small-input"
 	);
 
 	$HTML .= formInput($attributes);
 
-	$HTML .= bold(" ". __("Field") .":", FALSE);
+	$HTML .= bold(" ". __(_("Field")) .":", FALSE);
 	
 	$i = 0;		
 
@@ -662,17 +659,17 @@ function getSearch() {
 	
 	$HTML .= formSelect(array("name" => "field", "class" => "span2"), $fields);
 	
-	$HTML .= bold(__("Order") . ":", FALSE);
+	$HTML .= bold(__(_("Order")) . ":", FALSE);
 	
 	$options[0]["value"]    = "ASC";
-	$options[0]["option"]   = __("Ascending");
+	$options[0]["option"]   = __(_("Ascending"));
 	$options[0]["selected"] = TRUE;
 	$options[1]["value"]    = "DESC";
-	$options[1]["option"]   = __("Descending");
+	$options[1]["option"]   = __(_("Descending"));
 	$options[1]["selected"] = FALSE;
 	
 	$HTML .= formSelect(array("name" => "order"), $options);
-	$HTML .= formInput(array("name" => "seek", "type" => "submit", "class" => "btn info", "value" => __("Seek")));	
+	$HTML .= formInput(array("name" => "seek", "type" => "submit", "class" => "btn info", "value" => __(_("Seek"))));	
 	
 	return $HTML;
 }

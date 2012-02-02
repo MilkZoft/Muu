@@ -8,10 +8,6 @@ if(!defined("_access")) {
 
 class Feedback_Model extends ZP_Model {
 	
-	private $route;
-	private $table;
-	private $primaryKey;
-	
 	public function __construct() {
 		$this->Db = $this->db();
 		
@@ -20,11 +16,10 @@ class Feedback_Model extends ZP_Model {
 		$this->Email = $this->core("Email");
 		$this->Email->setLibrary(_wEmailLibrary);
 		
-		$this->Email->fromName  = decode(_webName);
+		$this->Email->fromName  = _webName;
 		$this->Email->fromEmail = _webEmailSend;
 		
-		$helpers = array("alerts", "router", "validations", "time");
-		$this->helper($helpers);
+		$this->helpers();
 		
 		$this->table = "feedback";
 	}
@@ -50,7 +45,7 @@ class Feedback_Model extends ZP_Model {
 	}
 	
 	private function all($trash, $order, $limit) {
-		if($trash === FALSE) {
+		if(!$trash) {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
@@ -67,27 +62,24 @@ class Feedback_Model extends ZP_Model {
 		return $data;	
 	}
 	
-	public function read($ID = false, $state = "Read") {
+	public function read($ID = false, $situation = "Read") {
 		if($ID) {
-			$this->Db->table($this->table);
-			$this->Db->values("Situation = '$state'");								
-			$this->Db->save($ID);
+			$this->Db->update($this->table, array("Situation" => $situation), $ID);
 		}
 	}
 	
 	public function getByID($ID) {
-		$this->Db->table($this->table);
-		$data = $this->Db->find($ID);
+		$data = $this->Db->find($ID, $this->table);
 		
 		return $data;
 	}
 	
 	public function send() {
-		if(POST("name") === NULL) {
+		if(!POST("name")) {
 			return getAlert("You need to write your name");
 		} elseif(!isEmail(POST("email"))) {
 			return getAlert("Invalid E-Mail");
-		} elseif(POST("message") === NULL) {
+		} elseif(!POST("message")) {
 			return getAlert("You need to write a message");
 		}
 		
@@ -117,9 +109,9 @@ class Feedback_Model extends ZP_Model {
 	
 	private function sendResponse() {
 		$this->Email->email	  = POST("email");
-		$this->Email->subject = __("Automatic response") . " - " . decode(_webName);
+		$this->Email->subject = __(_("Automatic response")) . " - " . decode(_webName);
 		$this->Email->message = 	'
-									<p>'. __("Your message has been sent successfully, we will contact you as soon as possible, thank you very much!") .'</p>							
+									<p>'. __(_("Your message has been sent successfully, we will contact you as soon as possible, thank you very much!")) .'</p>							
 									<p><a href="' . _webBase . '" title="' . decode(_webName) . '">' . decode(_webName) . '</p>									
 									';
 		$this->Email->send();
@@ -127,15 +119,15 @@ class Feedback_Model extends ZP_Model {
 	
 	private function sendMail() {
 		$this->Email->email	  = _webEmailSend;
-		$this->Email->subject = __("New Message") . " - " . decode(_webName);
+		$this->Email->subject = __(_("New Message")) ." - ". decode(_webName);
 		$this->Email->message = 	'
-									<p>'. __("Message") .'</p>									
-									<p><strong>'. __("Name") .':</strong> <br /> '    . POST("name")    . '</p>									
-									<p><strong>'. __("Email") .':</strong> <br /> '   . POST("email")   . '</p>									
-									<p><strong>'. __("Company") .':</strong> <br /> ' . POST("company") . '</p>									
-									<p><strong>'. decode( __("Phone")) .':</strong> <br /> '   . POST("phone")   . '</p>									
-									<p><strong>'. __("Subject") .':</strong> <br /> ' . POST("subject") . '</p>									
-									<p><strong>'. __("Message") .':</strong> <br /> ' . POST("message", "decode", FALSE) . '</p>									
+									<p>'. __(_("Message")) .'</p>									
+									<p><strong>'. __(_("Name")) .':</strong> <br /> '    . POST("name")    . '</p>									
+									<p><strong>'. __(_("Email")) .':</strong> <br /> '   . POST("email")   . '</p>									
+									<p><strong>'. __(_("Company")) .':</strong> <br /> ' . POST("company") . '</p>									
+									<p><strong>'. __(_("Phone")) .':</strong> <br /> '   . POST("phone")   . '</p>									
+									<p><strong>'. __(_("Subject")) .':</strong> <br /> ' . POST("subject") . '</p>									
+									<p><strong>'. __(_("Message")) .':</strong> <br /> ' . POST("message", "decode", FALSE) . '</p>									
 									';
 		$this->Email->send();
 		

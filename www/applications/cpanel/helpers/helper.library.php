@@ -69,37 +69,38 @@ function getLibrary($type) {
 	
 	if($type === "images") {
 		$px   = "i";
-		$text = __("Images library");
+		$text = __(_("Images library"));
 		$path = "lib/files/images/uploaded/";
 	} elseif($type === "documents") {
 		$px   = "d";
-		$text = __("Documents library");
+		$text = __(_("Documents library"));
 		$path = "lib/files/documents/uploaded/";
 	}
 			
 	if(segment(4) === "edit") {
 		$action = segment(3) . _sh . segment(4) . _sh . segment(5);	
-	} elseif(segment(3) === "new") {
+	} elseif(segment(3) === "add") {
 		$action = segment(3);	
 	}						
 	
-	$URL = _webBase . _sh . _webLang . _sh . _cpanel . _sh . segment(2);	
+	$URL = path(whichApplication() . "/cpanel/";	
 	
-	$alert  = 'onclick="document.getElementById(\''. ucfirst(segment(2)) .'\').target=\'\';';
-	$alert .= 'document.getElementById(\''. ucfirst(segment(2)) .'\').action=\''. $URL .'/'. $action .'/#'. $px .'Library\';';
+	$alert  = 'onclick="document.getElementById(\''. ucfirst(whichApplication()) .'\').target=\'\';';
+	$alert .= 'document.getElementById(\''. ucfirst(whichApplication()) .'\').action=\''. $URL .'/'. $action .'/#'. $px .'Library\';';
 	$alert .= 'return confirm(\''. __("Do you want to delete the file?") .'\');"'; 		
 	
-	$event 		  = "onclick=\"document.getElementById('". ucfirst(segment(2)) ."').target=''; ";
-	$event 		 .= "document.getElementById('". ucfirst(segment(2)) ."').action='". $URL . _sh . $action . _sh ."#". $px . "Library';\""; 
-	$eventUpload  = "onclick=\"document.getElementById('". ucfirst(segment(2)) ."').target='". $px ."Upload';";
-	$eventUpload .= "document.getElementById('". ucfirst(segment(2)) ."').action='". _webBase . _sh . _webLang ."/cpanel/upload/library/". strtolower($type) ."/#". $px ."Library'; javascript:submit();\"";
+	$event 		  = "onclick=\"document.getElementById('". ucfirst(whichApplication()) ."').target=''; ";
+	$event 		 .= "document.getElementById('". ucfirst(whichApplication()) ."').action='". $URL . _sh . $action . _sh ."#". $px . "Library';\""; 
+	$eventUpload  = "onclick=\"document.getElementById('". ucfirst(whichApplication()) ."').target='". $px ."Upload';";
+	$eventUpload .= "document.getElementById('". ucfirst(whichApplication()) ."').action='". path("/cpanel/upload/library/". strtolower($type) ."/#". $px ."Library") ."';";
+	$eventUpload .= "javascript:submit();\"";
 						
 	$HTML = '<a name="'. $px .'Library">';
 	
 	if($type === "images") {
-		$anchorEvents = "onclick=\"showElement(document.getElementById('". $px ."-library'));\" title=\"". __("Click to show or hide") ."\" class=\"pointer\"";
+		$anchorEvents = "onclick=\"showElement(document.getElementById('". $px ."-library'));\" title=\"". __(_("Click to show or hide")) ."\" class=\"pointer\"";
 	} else {
-		$anchorEvents = "onclick=\"showElement(document.getElementById('". $px ."-library1'));\" title=\"". __("Click to show or hide") ."\" class=\"pointer\"";
+		$anchorEvents = "onclick=\"showElement(document.getElementById('". $px ."-library1'));\" title=\"". __(_("Click to show or hide")) ."\" class=\"pointer\"";
 	}
 	
 	$HTML .= '<p class="field">';
@@ -152,7 +153,7 @@ function getLibrary($type) {
 			
 	if(count(getDirs($path)) > 1) {
 		$HTML .= '<select name="'. $px .'Dirbase" class="input" size="1">'. getDirs($path) .'</select>';
-		$HTML .= '<input name="'. $px .'Go" type="submit" value="'. __("Go") .'" class="input" '. $event .' /><br /><br />';
+		$HTML .= '<input name="'. $px .'Go" type="submit" value="'. __(_("Go")) .'" class="input" '. $event .' /><br /><br />';
 	}
 		
 	$value = (POST($px . "Dirbase")) ? POST($px . "Dirbase") : $path;
@@ -179,15 +180,15 @@ function getLibrary($type) {
 	
 	if(SESSION("ZanUserPrivilegeID") < 3) {
 		$HTML .= '<input name="'. $px .'Dirname" type="text" class="input" />';
-		$HTML .= '<input name="'. $px .'Make" type="submit" value="'. __("Make directory") .'" '. $event .' /> <br />';
-		$HTML .= '<span class="small bold">'. __("The new folders will be created and the files will be uploaded in:") .'</span><br />';
+		$HTML .= '<input name="'. $px .'Make" type="submit" value="'. __(_("Make directory")) .'" '. $event .' /> <br />';
+		$HTML .= '<span class="small bold">'. __(_("The new folders will be created and the files will be uploaded in:")) .'</span><br />';
 		$HTML .= $part . '<br />';
 	
 		if($type === "images") {
-			$HTML .= '<span class="small bold">'. __("Support files") .': jpg, jpeg, png, gif '. __("and") .' bmp.</span>';
+			$HTML .= '<span class="small bold">'. __(_("Support files")) .': jpg, jpeg, png, gif '. __(_("and")) .' bmp.</span>';
 		} elseif($type === "Documents") {
-			$formats = "csv, doc, docx, exe, pdf, ppt, pptx, rar, xls, xlsx   ".__("and")." zip";
-			$HTML .= '<span class="small bold">'. __("Support files") .': '. $formats;
+			$formats = "csv, doc, docx, exe, pdf, ppt, pptx, rar, xls, xlsx   ". __(_("and")) ." zip";
+			$HTML .= '<span class="small bold">'. __(_("Support files")) .': '. $formats;
 		}
 		
 		$HTML .= '<br />';		
@@ -204,11 +205,11 @@ function getLibrary($type) {
 	$HTML .= '<div id="'. $px .'-upload-message"></div>';
 	
 	if(SESSION("ZanUserPrivilegeID") < 3) {
-		$HTML .= '<input name="" type="submit" value="'. __("Delete") .'" class="submit float-right" '. $alert .' />';		
+		$HTML .= '<input name="" type="submit" value="'. __(_("Delete")) .'" class="submit float-right" '. $alert .' />';		
 	}
 	
 	$HTML .= '<input type="file" name="'. $px .'File" /> ';
-	$HTML .= '<input type="submit" name="'. $px .'Upload" value="'. __("Upload") .'" '. $events .' /><br />';
+	$HTML .= '<input type="submit" name="'. $px .'Upload" value="'. __(_("Upload")) .'" '. $events .' /><br />';
 	$HTML .= '<iframe name="'. $px .'Upload" class="no-display"></iframe>';
 	$HTML .= '</div>';
 	
@@ -314,12 +315,19 @@ function getFiles($type) {
 				
 				$HTML .= '	<li>
 								<input name="'. $px .'Library[]" value="'. $path . $files[$i] .'" /> <span class="small">'. $num .'</span>
-								<a href="'. _webURL . _sh . $path . $files[$i] .'" title="'. __("Preview image") .'">'. span("tiny-image tiny-search", "&nbsp;&nbsp;&nbsp;&nbsp;") .'</a>
-								<a href="'.$files[$i] .'" title="'. __("Insert image") .'" class="pointer" onclick="javascript:insertHTML('. $HTML .');">'. span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") .'</a>
+								
+								<a href="'. _webURL . _sh . $path . $files[$i] .'" title="'. __(_("Preview image")) .'">
+									'. span("tiny-image tiny-search", "&nbsp;&nbsp;&nbsp;&nbsp;") .'
+								</a>
+								
+								<a href="'.$files[$i] .'" title="'. __(_("Insert image")) .'" class="pointer" onclick="javascript:insertHTML('. $HTML .');">
+									'. span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") .'
+								</a>
 							</li>';
 			} elseif($type == "documents") {												
 				$icon = $Files->getType($files[$i], TRUE, TRUE, TRUE);
-				$HTML = '\'<a href=\\\''. _webURL . _sh . $path . $files[$i] .'\\\' title=\\\''. $files[$i] .'\\\'><img src=\\\''. $icon[0] .'\\\' alt=\\\''. $files[$i] .'\\\' /></a>\'';
+				$HTML  = '\'<a href=\\\''. _webURL . _sh . $path . $files[$i] .'\\\' title=\\\''. $files[$i] .'\\\'>';
+				$HTML .= '<img src=\\\''. $icon[0] .'\\\' alt=\\\''. $files[$i] .'\\\' /></a>\'';
 				
 				if($i < 9) {
 					$num = "0" . ($i + 1); 
@@ -329,8 +337,14 @@ function getFiles($type) {
 
 				$HTML .= '	<li>
 								<input name="'. $px .'Library[]" value="'. $path . $files[$i] .'" type="checkbox" /> <span class="small">'. $num .'</span>
-								<a href="'. _webURL . _sh . $path . $files[$i] .'" title="'. __("Download file") .'">'. span("tiny-image tiny-file", "&nbsp;&nbsp;&nbsp;&nbsp;") .'</a>
-								<a href="'.$files[$i] .'" title="'. __("Insert file") .'" class="pointer" onclick="javascript:insertHTML('. $HTML .');">'. span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") .'</a>
+
+								<a href="'. _webURL . _sh . $path . $files[$i] .'" title="'. __(_("Download file")) .'">
+									'. span("tiny-image tiny-file", "&nbsp;&nbsp;&nbsp;&nbsp;") .'
+								</a>
+								
+								<a href="'.$files[$i] .'" title="'. __("Insert file") .'" class="pointer" onclick="javascript:insertHTML('. $HTML .');">
+									'. span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") .'
+								</a>
 							</li>';																															
 			}
 		}	
@@ -374,15 +388,15 @@ function getPath($path, $element = NULL, $type = FALSE) {
 	$records = NULL;
 
 	if(!$dir) {
-		redirect(_webBase . _sh . _webLang . _sh . _cpanel);
+		redirect("cpanel");
 	}
 	
 	while($element = $dir->read()) {			
 		$directory = $path . $element . _sh;						
 
 		if($element !== "." and $element !== ".." and !is_dir($directory)) {
-			if($element !== _cpanel and $element !== _config) {
-				if($type === TRUE) {
+			if($element !== "cpanel" and $element !== "config") {
+				if($type) {
 					if($element === $element) {
 						$records[] = '<option selected="selected">'. encode($element) .'</option>';					
 					} else {

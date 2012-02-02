@@ -73,11 +73,11 @@ class Library extends ZP_Load {
 		if($type === "images") {
 			$this->px   = "i";
 			$this->path = "www/lib/files/images/uploaded/";
-			$text = __("Images library");
+			$text = __(_("Images library"));
 		} elseif($type === "documents") {
 			$this->px   = "d";
 			$this->path = "www/lib/files/documents/uploaded/";
-			$text = __("Documents library");
+			$text = __(_("Documents library"));
 		}
 				
 		if(isLang()) {
@@ -214,13 +214,12 @@ class Library extends ZP_Load {
 
 				$attributes = array(
 								"name"   => $this->px . "Make", 
-								"value"  => __("Make directory"),
+								"value"  => __(_("Make directory")),
 								"type"   => "submit",
 								"class"  => "small-submit",
 								"events" => $event
-				);
+				);	
 				
-							
 				$HTML .= formInput($attributes);	
 
 				$HTML .= br();
@@ -235,7 +234,7 @@ class Library extends ZP_Load {
 					
 					$attributes = array(
 									"name"   => $this->px . "Go", 
-									"value"  => __("Go"),
+									"value"  => __(_("Go")),
 									"type"   => "submit",
 									"class"  => "small-submit",
 									"events" => $event
@@ -247,15 +246,15 @@ class Library extends ZP_Load {
 				}
 			
 				$HTML .= br();			
-				$HTML .= small(span("bold", __("The new folders will be created and the files will be uploaded in") . ": ") . $part);
+				$HTML .= small(span("bold", __(_("The new folders will be created and the files will be uploaded in")) . ": ") . $part);
 				
 				$HTML .= br();
 				
 				if($type === "images") {
-					$HTML .= small(span("bold", __("Support files")) . ": jpg, jpeg, png, gif ".__("and")." bmp.");				
+					$HTML .= small(span("bold", __(_("Support files"))) . ": jpg, jpeg, png, gif ". __(_("and")) ." bmp.");				
 				} elseif($type === "documents") {
-					$formats = "csv, doc, docx, exe, pdf, ppt, pptx, rar, xls, xlsx   ".__("and")." zip";
-					$HTML   .= small(span("bold", __("Support files")) . ": " . $formats);					
+					$formats = "csv, doc, docx, exe, pdf, ppt, pptx, rar, xls, xlsx   ". __(_("and")) ." zip";
+					$HTML   .= small(span("bold", __(_("Support files"))) .": ". $formats);					
 				}
 				
 				$HTML .= br();		
@@ -273,7 +272,7 @@ class Library extends ZP_Load {
 			if(SESSION("ZanUserPrivilegeID") < 3) {
 				$attributes = array(
 								"name"   => $this->px . "Delete", 
-								"value"  => __("Delete"),
+								"value"  => __(_("Delete")),
 								"type"   => "submit",
 								"class"  => "small-submit float-right",
 								"events" => $alert
@@ -479,9 +478,12 @@ class Library extends ZP_Load {
 						"onclick" => "javascript:insertHTML($img);"
 					);
 					
-					$HTML .= li(formCheckbox($attributes) . small($num) .
-								a(span("tiny-image tiny-file", "&nbsp;&nbsp;&nbsp;&nbsp;"), _webURL . _sh . $path . $files[$i], FALSE, array("title" => __("Download file"))) .
-								a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs));																															
+					$span  = span("tiny-image tiny-file", "&nbsp;&nbsp;&nbsp;&nbsp;");
+
+					$HTML .= li(formCheckbox($attributes);
+					$HTML .= small($num);
+					$HTML .= a($span, _webURL . _sh . $path . $files[$i], FALSE, array("title" => __(_("Download file"))));
+					$HTML .= a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs));							
 				}
 			}	
 		
@@ -528,15 +530,15 @@ class Library extends ZP_Load {
 		$options = NULL;
 		
 		if(!$dir) {
-			showAlert("Uploads directories does not exists", _webBase . _sh . _webLang . _sh . _cpanel);
+			showAlert("Uploads directories does not exists", path("cpanel"));
 		}
 		
 		while($element = $dir->read()) {			
 			$directory = $path . $element . _sh;						
 			
 			if($element !== "." and $element !== ".." and !is_dir($directory)) { 
-				if($element !== _cpanel and $element !== _config) {
-					if($types === TRUE) { 
+				if($element !== "cpanel" and $element !== "config") {
+					if($types) { 
 						if($element === $option) {
 							$options[] = '<option selected="selected">'. encode($element) .'</option>';					
 						} else {

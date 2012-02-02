@@ -11,49 +11,49 @@
 		$message = $data[0]["Message"];
 		$date    = $data[0]["Text_Date"];
 		$state   = $data[0]["Situation"];
-		$back    = _webBase. _sh. _webLang. _sh. whichApplication() . _sh. _cpanel . _sh . _results;
+		$back    = path(whichApplication() . _sh . "cpanel" . _sh . "results");
 	} else {
-		redirect(_webBase. _sh. _webLang. _sh. whichApplication() . _sh. _cpanel . _sh . _results);
+		redirect(path(whichApplication() . _sh . "cpanel" . _sh . "results"));
 	}
 ?>
 
 <div class="add-form">
 	<p class="field">
-		<strong><?php print __("Name"); ?></strong><br />
-		<p><?php print $name;?></p>
+		<strong><?php print __(_("Name")); ?></strong><br />
+		<?php print $name;?>
 	</p>
 	
 	<p class="field">
-		<strong><?php print __("Email"); ?></strong><br />
-		<p><?php print $email;?></p>
+		<strong><?php print __(_("Email")); ?></strong><br />
+		<?php print $email;?>
 	</p>
 	
 	<p class="field">
-		<strong><?php print __("Date"); ?></strong><br />
-		<p><?php print $date;?></p>
+		<strong><?php print __(_("Date")); ?></strong><br />
+		<?php print $date;?>
 	</p>
 	
 	<p class="field">
-		<strong><?php print __("Subject"); ?></strong><br />
-		<p><?php print $subject;?></p>
+		<strong><?php print __(_("Subject")); ?></strong><br />
+		<?php print $subject;?>
 	</p>
 	
 	<p class="field">
-		<strong><?php print __("Phone"); ?></strong><br />
-		<p><?php print $phone;?></p>
+		<strong><?php print __(_("Phone")); ?></strong><br />
+		<?php print $phone;?>
 	</p>
 	
 	<p class="field">
-		<strong><?php print __("Company"); ?></strong><br />
-		<p><?php print $company;?></p>
+		<strong><?php print __(_("Company")); ?></strong><br />
+		<?php print $company;?>
 	</p>
 	
 	<p class="field">
-		<strong><?php print __("Message"); ?></strong><br />
-		<p><?php print $message;?></p>
+		<strong><?php print __(_("Message")); ?></strong><br />
+		<?php print $message;?>
 	</p>
 	
 	<p>
-		<a href="<?php print $back;?>" title="<?php print __(whichApplication());?>"><?php print __("Back");?></a>
+		<a href="<?php print $back;?>" title="<?php print __(_("Back")); ?>"><?php print __(_("Back"));?></a>
 	</p>
 </div>
