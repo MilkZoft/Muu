@@ -74,7 +74,7 @@ class Blog_Model extends ZP_Model {
 		
 		$this->categories = POST("categories"); 
 		$this->tags	  = POST("tags");
-		$this->URL        = PATH("blog/". date("Y") ."/". date("m") ."/". date("d") ."/". slug(POST("title", "clean"));
+		$this->URL        = PATH("blog/". date("Y")) ."/". date("m") ."/". date("d") ."/". slug(POST("title", "clean"));
 		$this->muralExist = POST("mural_exist");
 				
 		$this->Files = $this->core("Files");
