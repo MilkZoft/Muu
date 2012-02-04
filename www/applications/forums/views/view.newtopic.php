@@ -33,14 +33,14 @@
 				if(SESSION("ZanUserMethod") and SESSION("ZanUserMethod") === "twitter") { 
 			?>
 					<p class="checkTwitter">
-						<input type="checkbox" value="Yes" name="tweet"  checked="checked" />  <?php print __(_("Post in Twitter")) ;?>
+						<input type="checkbox" value="Yes" name="tweet"  checked="checked" />  <?php print __(_("Post in Twitter")) ; ?>
 					</p>
 			<?php 
 				} 
 			?>	
 				<p class="field">
-					<input class="btn" id="<?php print $action;?>" name="doAction" value="<?php print __(_(ucfirst($action))). " ". __(_("Topic")); ?>" type="submit" />
-					<input class="input button" id="cancel" name="cancel" value="<?php print __(_("Cancel")) ;?>" type="submit" />
+					<input class="btn" id="<?php print $action; ?>" name="doAction" value="<?php print __(_(ucfirst($action))). " ". __(_("Topic")); ?>" type="submit" />
+					<input class="input button" id="cancel" name="cancel" value="<?php print __(_("Cancel")) ; ?>" type="submit" />
 				</p>
 					
 				<input name="ID_Forum" type="hidden" value="<?php print $ID; ?>" />

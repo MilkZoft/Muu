@@ -296,82 +296,135 @@
 <?php 
 			} 
 ?>
-							<tr>
-								<td class="topicContent">
-									<div class="topicData">
-										<p><?php print $reply["Content"]; ?></p>
-										<?php if($data["topic"][0]["Sign"] !== "") { ?>
-											<p class="sign"><?php print $reply["Sign"]; ?></p>
-										<?php } ?>										
-									</div>
-								</td>
-							</tr>
-			<?php 		} 
-					} ?>
+				<tr>
+					<td class="topicContent">
+						<div class="topicData">
+							<p><?php print $reply["Content"]; ?></p>
+<?php 						
+							if($data["topic"][0]["Sign"] !== "") { 
+?>
+								<p class="sign"><?php print $reply["Sign"]; ?></p>
+<?php 
+							} 
+?>										
+						</div>
+					</td>
+				</tr>
+<?php
+		} 
+	} 
+?>
 		</tbody>
 	</table>
 </div>
+
 <div class="pagination2">
-		<?php 
-			if(isset($pagination)) {
-				print $pagination;
-			} 
-		?>
+<?php 
+	if(isset($pagination)) {
+		print $pagination;
+	} 
+?>
 </div>
+
 <div class="clear"></div>
+
 <div class="forumsFooter">
 	<div class="privileges">
 		<p class="footerTitle"><?php print __("Extra information"); ?>.</p>
-		<img src="<?php print $avatar; ?>" title="<?php print ((SESSION("ZanUser")) ? SESSION("ZanUser") : __("Sign up, please") . " :)"); ?>" alt="<?php print __("A user avatar"); ?>" />
-		<?php if(SESSION("ZanUserID")) { ?>
-			<?php if(SESSION("ZanUserPrivilege") === "Super Admin") { ?>
-				<p class="<?php if(SESSION("ZanUserMethod")) { print "onlineUserInfo2"; } else { print "onlineUserInfo"; } ?>"><?php print __("Hi there!, "); ?> <a href="<?php print path("users" . _sh . "editprofile" . _sh; ?>" title="<?php print SESSION("ZanUser"); ?>"><?php print SESSION("ZanUser"); ?></a>. <br /> <?php print __("Here are your statistics"); ?>: <br />
+		
+		<img src="<?php print $avatar; ?>" title="<?php print ((SESSION("ZanUser")) ? SESSION("ZanUser") : __("Sign up, please") ." :)"); ?>" alt="<?php print __("A user avatar"); ?>" />
+
+<?php 
+		if(SESSION("ZanUserID")) { 
+			if(SESSION("ZanUserPrivilege") === "Super Admin") { 
+?>
+				<p class="<?php print (SESSION("ZanUserMethod")) ? "onlineUserInfo2" : "onlineUserInfo"; ?>">
+					<?php print __("Hi there!, "); ?> 
+					<a href="<?php print path("users/editprofile"); ?>" title="<?php print SESSION("ZanUser"); ?>"><?php print SESSION("ZanUser"); ?></a>. <br /> 
+					<?php print __("Here are your statistics"); ?>: <br />
+					
 					<ul class="userStatistics">
-						<li><strong><?php print __("Topics"); ?>:</strong> <?php print $stats[0]["Topics"]; ?></li>
+						<li><strong><?php print __("Topics"); ?>:</strong>  <?php print $stats[0]["Topics"];  ?></li>
 						<li><strong><?php print __("Replies"); ?>:</strong> <?php print $stats[0]["Replies"]; ?></li>
-						<li><strong><?php print __("Visits"); ?>:</strong> <?php print $stats[0]["Visits"]; ?></li>
+						<li><strong><?php print __("Visits"); ?>:</strong>  <?php print $stats[0]["Visits"];  ?></li>
 					</ul>
 				</p>
+
 				<ul class="lsprivileges2">
-					<li><?php print __("You can"); ?> <a href="<?php print path(_cpanel . _sh . _forums . _sh . "action" . _sh . "save"; ?>" title="<?php print __("Create Forums"); ?>"><?php print __("create"); ?></a> <?php print __("new forums"); ?>.</li>
+					<li>
+						<?php print __("You can"); ?> 
+						<a href="<?php print path("forums/cpanel/add"); ?>" title="<?php print __("Create Forums"); ?>"><?php print __("create"); ?></a> 
+						<?php print __("new forums"); ?>.
+					</li>
 					<li><?php print __("You can create new topics"); ?>.</li>
 					<li><?php print __("You can reply to topics"); ?>.</li>
 					<li><?php print __("You can send private messages"); ?>.</li>
 				</ul>
-			<?php } elseif(SESSION("ZanUserPrivilege") === "Member") { ?>
-				<p class="<?php if(SESSION("ZanUserMethod")) { print "onlineUserInfo2"; } else { print "onlineUserInfo"; } ?>"><?php print __("Hi there!, "); ?> <a href="<?php print path("users" . _sh . "editprofile" . _sh; ?>" title="<?php print SESSION("ZanUser"); ?>"><?php print SESSION("ZanUser"); ?></a>. <br /> <?php print __("Here are your statistics"); ?>: <br />
+<?php 
+			} elseif(SESSION("ZanUserPrivilege") === "Member") { 
+?>
+				<p class="<?php print (SESSION("ZanUserMethod")) ? "onlineUserInfo2" : "onlineUserInfo"; ?>">
+					<?php print __("Hi there!, "); ?> 
+					<a href="<?php print path("users/editprofile"); ?>" title="<?php print SESSION("ZanUser"); ?>">
+						<?php print SESSION("ZanUser"); ?>
+					</a>. <br /> 
+					
+					<?php print __("Here are your statistics"); ?>: <br />
+					
 					<ul class="userStatistics">
-						<li><strong><?php print __("Topics"); ?>:</strong> <?php print $stats[0]["Topics"]; ?></li>
+						<li><strong><?php print __("Topics"); ?>:</strong>  <?php print $stats[0]["Topics"];  ?></li>
 						<li><strong><?php print __("Replies"); ?>:</strong> <?php print $stats[0]["Replies"]; ?></li>
-						<li><strong><?php print __("Visits"); ?>:</strong> <?php print $stats[0]["Visits"]; ?></li>
+						<li><strong><?php print __("Visits"); ?>:</strong>  <?php print $stats[0]["Visits"];  ?></li>
 					</ul>
 				</p>
+
 				<ul class="lsprivileges2">
 					<li class="noprivilege"><?php print __("You can <strong>NOT</strong> create new forums"); ?>.</li>
 					<li><?php print __("You can create new topics"); ?>.</li>
 					<li><?php print __("You can reply to topics"); ?>.</li>
 					<li><?php print __("You can send private messages"); ?>.</li>
 				</ul>
-			<?php } ?>
-		<?php } else { ?> 
-			<p class="noUserInfo"><?php print __("Hi there!, you should"); ?> <a class="signIn" href="<?php print path("users" . _sh . "login" . _sh . "forums"; ?>" title="<?php print __("Login"); ?>"><?php print __("login"); ?></a> <?php print __("to enjoy full access to the forums"); ?>.
-			<br /><?php print __("If you don't have an account, you can create it"); ?> <a class="signUp" href="<?php print path("users" . _sh . "register" . _sh . "forums"; ?>" title="<?php print __("Sign up"); ?>"><?php print __("here"); ?></a>.
+<?php 
+			} 
+ 		} else { 
+?> 
+			<p class="noUserInfo">
+				<?php print __("Hi there!, you should"); ?> 
+				<a class="signIn" href="<?php print path("users/login/forums"); ?>" title="<?php print __("Login"); ?>">
+					<?php print __("login"); ?>
+				</a> 
+
+				<?php print __("to enjoy full access to the forums"); ?>. <br />
+				<?php print __("If you don't have an account, you can create it"); ?> 
+				<a class="signUp" href="<?php print path("users/register/forums"); ?>" title="<?php print __("Sign up"); ?>"><?php print __("here"); ?></a>.
 			</p>
+
 			<ul class="lsprivileges">
 				<li class="noprivilege"><?php print __("You can <strong>NOT</strong> create new forums"); ?>.</li>
 				<li class="noprivilege"><?php print __("You can <strong>NOT</strong> create new topics"); ?>.</li>
 				<li class="noprivilege"><?php print __("You can <strong>NOT</strong> reply to topics"); ?>.</li>
 				<li class="noprivilege"><?php print __("You can <strong>NOT</strong> send private messages"); ?>.</li>
 			</ul>
-		<?php } ?>
+<?php 
+		} 
+?>
 	</div>
+	
 	<div class="lastUsers">
 		<p class="footerTitle"><?php print __("Last registered users"); ?>.</p>
+		
 		<ol>
-		<?php foreach($users as $user) { ?>
-			<li><a href="<?php print path(_users . _sh . "profile" . _sh . $user["ID_User"]; ?>" title="<?php print $user["Username"]; ?>"><?php print $user["Username"]; ?></a></li>
-		<?php } ?>
+<?php 
+		foreach($users as $user) { 
+?>
+			<li>
+				<a href="<?php print path("users/profile/". $user["ID_User"]); ?>" title="<?php print $user["Username"]; ?>"><?php print $user["Username"]; ?></a>
+			</li>
+<?php 
+		} 
+?>
 		</ol>
 	</div>
+	
 	<div class="clear"></div>
 </div>
