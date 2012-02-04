@@ -11,7 +11,7 @@
 		$state 	     = recoverPOST("state",       $data[0]["State"]);
 		$edit        = TRUE;
 		$action	     = "edit";
-		$href	     = _webBase . _sh . _webLang . _sh . _cpanel . _sh . segment(2) . _sh . _action . _sh . $action . _sh . $ID;
+		$href	     = path($this->application . _sh . "cpanel" . _sh . "edit" . _sh . $ID);
 	} else {
 	    $ID  	     = 0;
 		$title       = recoverPOST("title");
@@ -21,7 +21,7 @@
 		$medium 	 = recoverPOST("medium");
 		$state 	     = recoverPOST("state");
 		$action	     = "save";
-		$href	     = _webBase . _sh . _webLang . _sh . _cpanel . _sh . segment(2) . _sh . _action . _sh . $action;
+		$href	     = path($this->application . _sh . "cpanel" . _sh . "add" . _sh);
 	}
 ?>
 
@@ -59,19 +59,18 @@
 					<input id="file" name="files[]" type="file" tabindex="4" class="addImg input required" />
 					<span id="addImg">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</p>
+				
 				<div class="clear"></div>
 			
 			<?php } else { ?>
-			
 				<p class="field">
 					&raquo; <?php print __("Image"); ?><br />
 					<input id="file" name="file" type="file" tabindex="4" class="input required" />
 				</p>
-							
 			<?php } ?>
 			
 			<p class="field">
-				&raquo; <?php print __("Album") . " ("  . __("Write a album or select") . ")";?><br />
+				&raquo; <?php print __("Album") ." (". __("Write a album or select") .")";?><br />
 				<input id="category" name="category" type="text" value="" tabindex="4" class="input" />
 			</p>
 	
@@ -85,28 +84,27 @@
 							<?php } else { ?>
 								<option value="<?php print $cat["ID_Category"]?>"><?php print $cat["Title"]; ?></option>
 							<?php } ?>
-							
 						<?php } ?>
 					<? } ?>
-					
 				</select>
 			</p>
 			
 			<p class="field">
-				&raquo; <?php print __("State"); ?><br />
-				<select id="state" name="state" size="1" tabindex="5" class="select">
-					<option value="Active" <?php print ($state === "Active")  ? 'selected="selected"' : NULL; ?>>
+				&raquo; <?php print __("Situation"); ?><br />
+				<select id="situation" name="situation" size="1" tabindex="5" class="select">
+					<option value="Active" <?php print ($situation === "Active") ? 'selected="selected"' : NULL; ?>>
 						<?php print __("Active"); ?>
 					</option>
-					<option value="Inactive" <?php print ($state === "Inactive")  ? 'selected="selected"' : NULL; ?>>
+
+					<option value="Inactive" <?php print ($state === "Inactive") ? 'selected="selected"' : NULL; ?>>
 						<?php print __("Inactive"); ?>
 					</option>
 				</select>
 			</p>
 			
 			<p class="save-cancel">
-				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(ucfirst($action)); ?>" type="submit" class="submit save" tabindex="6" />
-				<input id="cancel" name="cancel" value="<?php print __("Cancel"); ?>" type="submit" class="submit cancel" tabindex="7" />
+				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(ucfirst($action)); ?>" type="submit" class="submit save" />
+				<input id="cancel" name="cancel" value="<?php print __("Cancel"); ?>" type="submit" class="submit cancel" />
 			</p>
 			
 			<input name="ID_Image" type="hidden" value="<?php print $ID; ?>" />
