@@ -25,12 +25,12 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->Templates = $this->core("Templates");
 		
-		$this->Templates->theme(_cpanel);
+		$this->Templates->theme("cpanel");
 	}
 	
 	public function index() {
 		if($this->isAdmin) {
-			$this->home();
+			redirect("cpanel");
 		} else {
 			$this->login();
 		}
@@ -45,18 +45,18 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->js("add", "polls");	
 		
-		$this->CSS("forms", _cpanel);
+		$this->CSS("forms", "cpanel");
 		
-		$this->Library = $this->classes("Library", _cpanel);
+		$this->Library = $this->classes("Library", "cpanel");
 				
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
 		if(POST("save")) {
 			$this->vars["alert"] = $this->$Model->cpanel("save");
 		} elseif(POST("cancel")) {
-			redirect(_webBase . _sh . _webLang . _sh . _cpanel);
+			redirect("cpanel");
 		}
 		
 		$this->vars["ID"]        = 0;
@@ -66,13 +66,10 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["situation"] = recoverPOST("state");
 		$this->vars["edit"]      = FALSE;
 		$this->vars["action"]	 = "save";
-		$this->vars["href"]		 = _webPath . _polls . _sh . _cpanel . _sh . "add";
-
-		$this->vars["view"] = $this->view("add", TRUE, $this->application);
+		$this->vars["href"]		 = path("polls/cpanel/add");
+		$this->vars["view"]      = $this->view("add", TRUE, $this->application);
 		
 		$this->template("content", $this->vars);
-		
-		$this->render();
 	}
 	
 	public function delete($ID = 0) {
@@ -81,9 +78,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
+			redirect($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash");
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect($this->application . _sh . "cpanel" . _sh . "results");
 		}	
 	}
 	
@@ -93,33 +90,33 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect($this->application . _sh . "cpanel" . _sh . "results");
 		}
 
 		$this->title("Edit");
 		
-		$this->CSS("forms", _cpanel);
-		$this->CSS("misc", _cpanel);
+		$this->CSS("forms", "cpanel");
+		$this->CSS("misc", "cpanel");
 		$this->CSS("categories", "categories");
 		
 		$this->js("tiny-mce");
 		$this->js("insert-html");
 		$this->js("show-element");	
 		
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
 		if(POST("edit")) {
 			$this->vars["alert"] = $this->$Model->cpanel("edit");
 		} elseif(POST("cancel")) {
-			redirect(_webBase . _sh . _webLang . _sh . _cpanel);
+			redirect("cpanel");
 		} 
 		
 		$data = $this->$Model->getByID($ID);
 		
 		if($data) {
-			$this->Library 	  = $this->classes("Library", _cpanel);
+			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");
 			
 			$this->vars["ID"]  	     = recoverPOST("ID", 	    $data[0]["ID_Poll"]);
@@ -129,15 +126,12 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["situation"] = recoverPOST("state",     $data[0]["State"]);
 			$this->vars["edit"]      = TRUE;
 			$this->vars["action"]	 = "edit";
-			$this->vars["href"]		 = _webPath . _polls . _sh . _cpanel . _sh . "edit" . _sh . $ID;
-		
-			$this->vars["view"] = $this->view("add", TRUE, $this->application);
+			$this->vars["href"]		 = path("polls/cpanel/edit/$ID");
+			$this->vars["view"]      = $this->view("add", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
-			
-			$this->render();
 		} else {
-			redirect(_webBase. _sh. _webLang. _sh. $this->application. _sh. _cpanel . _sh . _results);
+			redirect($this->application . _sh . "cpanel" . _sh . "results");
 		}
 	}
 	
@@ -151,7 +145,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Users_Controller->login("cpanel");
 		} else {
 			$this->vars["URL"]  = getURL();
-			$this->vars["view"] = $this->view("login", TRUE, _cpanel);
+			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
 		$this->template("include", $this->vars);
@@ -167,9 +161,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
+			redirect($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash");
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect($this->application . _sh . "cpanel" . _sh . "results");
 		}
 	}
 	
@@ -179,8 +173,10 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->title("Manage ". $this->application);
-		$this->CSS("results", _cpanel);
+		
+		$this->CSS("results", "cpanel");
 		$this->CSS("pagination");
+
 		$this->js("checkbox");
 		
 		$this->helper("inflect");		
@@ -208,12 +204,10 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["pagination"] = $pagination;
 		$this->vars["trash"]  	  = $trash;	
 		$this->vars["search"] 	  = getSearch(); 
-		$this->vars["table"]      = getTable(__("Manage " . ucfirst($this->application)), $thead, $tFoot, $total);					
-		$this->vars["view"]       = $this->view("results", TRUE, _cpanel);
+		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
+		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
 		
 		$this->template("content", $this->vars);
-		
-		$this->render();
 	}
 	
 	public function trash($ID = 0) {
@@ -222,9 +216,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect($this->application . _sh . "cpane" . _sh . "results");
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _add);
+			redirect($this->application . _sh . "cpanel" . _sh . "add");
 		}
 	}
 	
@@ -233,7 +227,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 		
-		$this->Library = $this->classes("Library", _cpanel);	
+		$this->Library = $this->classes("Library", "cpanel");
 			
 		$this->Library->upload();
 	}

@@ -11,7 +11,7 @@ class Polls_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 		
-		$this->helper(array("time", "alerts", "router"));
+		$this->helpers();
 		
 		$this->table = "polls";
 		
@@ -19,8 +19,6 @@ class Polls_Model extends ZP_Model {
 	}
 	
 	public function cpanel($action, $limit = NULL, $order = "ID_Poll DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		$this->Db->table($this->table);
-		
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave();
 			
@@ -45,13 +43,13 @@ class Polls_Model extends ZP_Model {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '".$_SESSION["ZanAdminID"]."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanAdminID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
 			}
 		}
 		
@@ -111,8 +109,6 @@ class Polls_Model extends ZP_Model {
 	}
 	
 	private function edit() {
-		$this->Db->table($this->table);
-		
 		$this->Db->values("Title = '$this->title', Type = '$this->type', State = '$this->state'");								
 		$this->Db->save($this->ID);
 		
@@ -132,13 +128,9 @@ class Polls_Model extends ZP_Model {
 	}
 	
 	public function getByID($ID) {
-		$this->Db->table($this->table);
+		$data = $this->Db->find($ID, $this->table);
 		
-		$data = $this->Db->find($ID);
-		
-		$this->Db->table("polls_answers", "Answer");
-		
-		$data2 = $this->Db->findBy("ID_Poll", $ID);
+		$data2 = $this->Db->findBy("ID_Poll", $ID, $this->table);
 		
 		if($data2) {
 			foreach($data2 as $answer) {
@@ -149,17 +141,11 @@ class Polls_Model extends ZP_Model {
 		return $data;
 	}
 	
-	public function getLastPoll() {
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
-		
-		$data1 = $this->Db->findLast();
+	public function getLastPoll() {		
+		$data1 = $this->Db->findLast($this->table);
 		
 		if($data1) {
-			$this->Db->table("polls_answers");
-			$this->Db->encode(TRUE);
-			
-			$data2 = $this->Db->findBy("ID_Poll", $data1[0]["ID_Poll"]);
+			$data2 = $this->Db->findBy("ID_Poll", $data1[0]["ID_Poll"], "polls_answers");
 			
 			$data["question"] = $data1[0];
 			$data["answers"]  = $data2;
@@ -177,9 +163,7 @@ class Polls_Model extends ZP_Model {
 		$date	   = now(4);
 		$end	   = $date + 3600;
 		
-		$this->Db->table("polls_ips");
-		
-		$data = $this->Db->findBySQL("ID_Poll = '$ID_Poll' AND IP = '$IP' AND End_Date > $date");
+		$data = $this->Db->findBySQL("ID_Poll = '$ID_Poll' AND IP = '$IP' AND End_Date > $date", "polls_ips");
 		
 		if($data) {
 			showAlert("You've previously voted on this poll", _webBase);

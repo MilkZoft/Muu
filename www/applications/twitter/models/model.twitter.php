@@ -9,7 +9,8 @@ if(!defined("_access")) {
 class Twitter_Model extends ZP_Load {
 	
 	public function __construct() {
-		$this->Db = $this->core("Db");
+		$this->Db = $this->db();
+
 		$this->Twitter_Api   = $this->library("Twitter", NULL, TRUE);
 	}
 	
@@ -38,7 +39,7 @@ class Twitter_Model extends ZP_Load {
 	}
 	
 	public function tweet($tweet) {
-		return $this->Twitter_Api->tweet(utf8_encode($tweet));
+		return $this->Twitter_Api->tweet(encode($tweet));
 	}
 	
 	public function getAcount($username) {
@@ -53,11 +54,11 @@ class Twitter_Model extends ZP_Load {
 		if($title !== "" and $URL !== "") {
 			if(strlen($title) > 104) {
 				$_title = substr($title, 0, 101);
-				$_title = $_title . "...";  
+				$_title = $_title ."...";  
 				$title  = $_title;
 			}
 			
-			return $this->tweet($title . " " . $URL);
+			return $this->tweet($title ." ". $URL);
 		}
 	}
 	
@@ -76,10 +77,11 @@ class Twitter_Model extends ZP_Load {
 		
 		if(!$exist) {
 			$this->helper("time");
+
 			$date         = now(4);
 			$imageProfile = str_replace("normal", "bigger", $user->profile_image_url);
 			
-			if($user->url === NULL) {
+			if(!$user->url) {
 				$website = "http://twitter.com/" . $user->screen_name;
 			} else {
 				$website = $user->url;
@@ -109,8 +111,7 @@ class Twitter_Model extends ZP_Load {
 	}
 	
 	public function exist($username) {
-		$this->Db->table("users", "ID_User, Privilege");
-		$result = $this->Db->findBySQL("Username = '$username' AND Type = 'Twitter'");
+		$result = $this->Db->findBySQL("Username = '$username' AND Type = 'Twitter'", "users");
 		
 		if($result) {
 			return $result[0];

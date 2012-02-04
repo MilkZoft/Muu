@@ -3,7 +3,7 @@
 	if(isset($poll["answers"])) {
 		if(!COOKIE("ZanPoll")) {
 			?>
-				<form id="polls" method="post" action="<?php print _webBase . _sh . _webLang . _sh . _polls . _sh . "vote"; ?>">			
+				<form id="polls" method="post" action="<?php print path("polls/vote"); ?>">			
 					<p>
 						<strong><?php print $poll["question"]["Title"];?></strong>
 					</p>
@@ -62,15 +62,16 @@
 								}			
 
 								$style = "width: ". intval($percentage) ."%; background-color: ". $color[$i] .";";
-								?>
+						?>
 								
-									<span style="margin-left:5px;"><?php print $answers["Answer"]; ?></span> <br />
-									<div class="poll-graphic" style="border: 1px solid <?php print $color[$i]; ?>;">
-										<span class="poll-graphic-bar bold" style="<?php print $style; ?>"><?php print $percentage; ?>%</span>
-									</div>
+								<span style="margin-left:5px;"><?php print $answers["Answer"]; ?></span> <br />
 								
-								<?php
-									$i++;
+								<div class="poll-graphic" style="border: 1px solid <?php print $color[$i]; ?>;">
+									<span class="poll-graphic-bar bold" style="<?php print $style; ?>"><?php print $percentage; ?>%</span>
+								</div>
+								
+						<?php
+								$i++;
 								
 								$percentage = 0;
 							}
@@ -81,7 +82,7 @@
 						<br />
 						<strong><?php print __("Total");?>:</strong> <?php print $show; ?>
 					</p>
-						<?php
+					<?php
 			}
 		}
 	}

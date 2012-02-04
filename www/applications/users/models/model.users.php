@@ -258,6 +258,35 @@ class Users_Model extends ZP_Model {
 			
 		return $user;
 	}
+
+	public function getOnlineUsers() {	
+		$date = time();
+		$time = 10;
+		$time = $date - $time * 60;
+		$IP   = getIP();		
+		$user = SESSION("ZanUser");
+				
+		$this->Db->deleteBySQL("Start_Date < $time", "users_online_anonymous");
+		$this->Db->deleteBySQL("Start_Date < $time", "users_online");
+
+		if($user !== "") {		
+			$users = $this->Db->findBy("User", $user, "users_online");
+			
+			if(!$users) {			
+				$this->Db->insert("users_online", array("User" => $user, "Start_Date" => $date));
+			} else {			
+				$this->Db->updateBySQL("users_online", "Start_Date = '$date' WHERE User = '$user'");						
+			}		
+		} else {
+			$users = $this->Db->findBy("IP", $IP, "users_online_anonymous");
+									
+			if(!$users) {						
+				$this->Db->insert("users_online_anonymous", array("IP" => $IP, "Start_Date" => $date));	
+			} else {			
+				$this->Db->updateBySQL("users_online_anonymous", "Start_Date = '$date' WHERE IP = '$IP'");		
+			}	
+		}
+	}
 	
 	public function isAllow($permission = "view", $application = NULL) {			
 		if(SESSION("ZanUserPrivilegeID") and !SESSION("ZanUserApplication")) {	
@@ -280,36 +309,28 @@ class Users_Model extends ZP_Model {
 		}
 	}
 	
-	public function getPermissions($ID_Privilege, $ID_Application, $permission) {
-		$this->Db->table("re_permissions_privileges", "Adding, Deleting, Editing, Viewing");	
-		
-		$data = $this->Db->findBySQL("ID_Privilege = '$ID_Privilege' AND ID_Application = '$ID_Application'");
+	public function getPermissions($ID_Privilege, $ID_Application, $permission) {		
+		$data = $this->Db->findBySQL("ID_Privilege = '$ID_Privilege' AND ID_Application = '$ID_Application'", "re_permissions_privileges");
 
 		if($permission === "add") { 
-			return ($data[0]["Adding"]) ? TRUE : FALSE;
+			return ($data[0]["Adding"])   ? TRUE : FALSE;
 		} elseif($permission === "delete") {
 			return ($data[0]["Deleting"]) ? TRUE : FALSE;
 		} elseif($permission === "edit") {
-			return ($data[0]["Editing"]) ? TRUE : FALSE;
+			return ($data[0]["Editing"])  ? TRUE : FALSE;
 		} elseif($permission === "view") {
-			return ($data[0]["Viewing"]) ? TRUE : FALSE;
+			return ($data[0]["Viewing"])  ? TRUE : FALSE;
 		}
 	}
 	
-	public function recover() {
-		$helpers = array("alerts", "time", "validations");
-		
-		$this->helper($helpers);		
-		
+	public function recover() {		
 		if(POST("recover")) {
 			$username = POST("username");
 			$email	  = POST("email");
 			
 			if($username or isEmail($email)) {
 				if($username) {
-					$this->Db->table($this->table);
-					
-					$data = $this->Db->findBy("Username", $username);
+					$data = $this->Db->findBy("Username", $username, $this->table);
 				
 					if(!$data) {
 						return getAlert("This user does not exists in our database");
@@ -319,20 +340,26 @@ class Users_Model extends ZP_Model {
 						$startDate = now(4);
 						$endDate   = $startDate + 86400;
 						
-						$this->Db->table("tokens");
-						
-						$data = $this->Db->findBySQL("ID_User = '$userID' AND Action = 'Recover' AND Situation = 'Active'");
+						$data = $this->Db->findBySQL("ID_User = '$userID' AND Action = 'Recover' AND Situation = 'Active'", "tokens");
 						
 						if(!$data) {
-							$this->Db->table("tokens", "ID_User, Token, Start_Date, End_Date");
-							$this->Db->values("'$userID', '$token', '$startDate', '$endDate'");							
-							$this->Db->save();
+							$data = array(
+										"ID_User" 	 => $userID,
+										"Token"		 => $token,
+										"Start_Date" => $startDate,
+										"End_Date"	 => $endDate
+									);
+							
+							$this->Db->insert("tokens", $data);
 							
 							$this->Email->email		= $email;
-							$this->Email->subject	= __("Recover Password") . " - " . _webName;
+							$this->Email->subject	= __(_("Recover Password")) ." - ". _webName;
 							$this->Email->message	= 	'
-														<p>To recover your password, you need to access here.</p>
-														<p>You need access to this link: <a href="' . _webBase . '/' . _webLang . '/users/recover/' . $token . '">Recover Password</a></p>
+														<p>'. __(_("To recover your password, you need to access here")) .'.</p>
+														<p>
+															'. __(_("You need access to this link:")).' 
+															<a href="'. path("users/recover/$token") .'">'. __(_("Recover Password")) .'</a>
+														</p>
 														';
 							$this->Email->send();							
 						} else {
@@ -340,9 +367,7 @@ class Users_Model extends ZP_Model {
 						}
 					}
 				} elseif(isEmail($email)) {
-					$this->Db->table($this->table);
-					
-					$data = $this->Db->findBy("Email", $email);
+					$data = $this->Db->findBy("Email", $email, $this->table);
 					
 					if(!$data) {
 						return getAlert("This e-mail does not exists in our database");
@@ -352,20 +377,24 @@ class Users_Model extends ZP_Model {
 						$startDate = now(4);
 						$endDate   = $startDate + 86400;
 						
-						$this->Db->table("tokens");
-						
-						$data = $this->Db->findBySQL("ID_User = '$userID' AND Action = 'Recover' AND Situation = 'Active'");
+						$data = $this->Db->findBySQL("ID_User = '$userID' AND Action = 'Recover' AND Situation = 'Active'", "tokens");
 						
 						if(!$data) {
-							$this->Db->table("tokens", "ID_User, Token, Start_Date, End_Date");
-							$this->Db->values("'$userID', '$token', '$startDate', '$endDate'");							
-							$this->Db->save();
+							$data = array(
+										"ID_User" 	 => $userID,
+										"Token"		 => $token,
+										"Start_Date" => $startDate,
+										"End_Date"	 => $endDate
+									);
+							
+							$this->Db->insert("tokens", $data);
 							
 							$this->Email->email		= $email;
-							$this->Email->subject	= __("Recover Password") . " - " . _webName;
+							$this->Email->subject	= __(_("Recover Password")) ." - ". _webName;
 							$this->Email->message	= 	'
-														<p>To recover your password, you need to access here.</p>
-														<p>You need access to this link: <a href="' . _webBase . '/' . _webLang . '/users/recover/' . $token . '">Recover Password</a></p>
+														<p>'. __(_("To recover your password, you need to access here")) .'.</p>
+														<p>'. __(_("You need access to this link:")) .' 
+														<a href="' . path("users/recover/$token") .'">'. __(_("Recover Password")) .'</a></p>
 														';
 							$this->Email->send();							
 						} else {
@@ -384,13 +413,7 @@ class Users_Model extends ZP_Model {
 	}
 	
 	public function setUser($mode = FALSE) {		
-		$helpers = array("alerts", "time", "validations");
-		
-		$this->helper($helpers);
-		
-		if(isset($_POST["register"])) {
-			$this->Db->table($this->table);
-			
+		if(isset($_POST["register"])) {	
 			$username = trim(POST("username"));
 			$password = (POST("password") != "") ? POST("password", "decode-encrypt") : NULL;
 			$email	  = POST("email");
@@ -405,13 +428,13 @@ class Users_Model extends ZP_Model {
 				return getAlert("Invalid e-mail");
 			}
 			
-			$data = $this->Db->findBy("Username", $username);
+			$data = $this->Db->findBy("Username", $username, $this->table);
 		
 			if($data) {
 				return getAlert("This user already exists");
 			}
 			
-			$data = $this->Db->findBy("Email", $email);
+			$data = $this->Db->findBy("Email", $email, $this->table);
 			
 			if($data) {
 				return getAlert("This e-mail already exists");
@@ -438,24 +461,29 @@ class Users_Model extends ZP_Model {
 				$this->Db->insert("re_privileges_users", array("ID_Privilege" => "4", "ID_User" => $ID_User));
 				
 				$this->Email->email   = $email;
-				$this->Email->subject = __("Account Activation") . " - " . _webName;
+				$this->Email->subject = __(_("Account Activation")) ." - ". _webName;
 				
 				if($mode === "forums") { 
 					$this->Email->message	= 	'
-						<p>Your account has been created</p>
-						<p>You need access to this link: <a href="' . _webBase . '/' . _webLang . '/users/activate/' . $code . '/forums">Activate account</a></p>
+						<p>'. __(_("Your account has been created")) .'</p>
+						<p>'. __(_("You need access to this link:")) .' 
+							<a href="'. path("users/activate/$code/forums") .'">'. __(_("Activate account")) .'</a>
+						</p>
 					';
 				} else {
 					$this->Email->message	= 	'
-						<p>Your account has been created</p>
-						<p>You need access to this link: <a href="' . _webBase . '/' . _webLang . '/users/activate/' . $code . '">Activate account</a></p>
+						<p>'. __(_("Your account has been created")) .'</p>
+						<p>'. __(_("You need access to this link:")) .' 
+							<a href="'path("users/activate/$code") .'">'. __(_("Activate account")) .'</a>
+						</p>
 					';
 				}
 				
 				$this->Email->send();
 
 				if($mode === "forums") {
-					$result["message"] = __("The account has been created correctly, we will send you an e-mail so you can activate your account");		
+					$result["message"] = __(_("The account has been created correctly, we will send you an e-mail so you can activate your account"));		
+					
 					return $result;
 				} else {
 					return getAlert("The account has been created correctly, we will send you an e-mail so you can activate your account", "success");
@@ -469,40 +497,30 @@ class Users_Model extends ZP_Model {
 	}
 	
 	public function last() {
-		$this->Db->table($this->table, "ID_User, Username");
-		
-		$last = $this->Db->findLast();
+		$last = $this->Db->findLast($this->table);
 		
 		return ($last) ? $last[0] : NULL;
 	}
 	
-	public function registered() {
-		$this->Db->table($this->table);
-		
-		$registered = $this->Db->countAll();
+	public function registered() {		
+		$registered = $this->Db->countAll($this->table);
 		
 		return $registered;
 	}
 	
 	public function online($all = TRUE) {		
-		$this->Db->table("users_online");
+		$registered = $this->Db->countAll("users_online");
 		
-		$registered = $this->Db->countAll();
-		
-		$this->Db->table("users_online_anonymous");
-		
-		$anonymous = $this->Db->countAll();							
+		$anonymous = $this->Db->countAll("users_online_anonymous");
 		
 		$total = $registered + $anonymous;
 		
-		return ($all === TRUE) ? $total : $anonymous;	
+		return ($all) ? $total : $anonymous;	
 	}	
 	
 	public function isToken($token = FALSE, $action = NULL) {
-		if($token !== FALSE and isset($action)) {
-			$this->Db->table("tokens");
-			
-			$data = $this->Db->findBySQL("Token = '$token' AND Action = '$action' AND Situation = 'Active'");
+		if($token and isset($action)) {
+			$data = $this->Db->findBySQL("Token = '$token' AND Action = '$action' AND Situation = 'Active'", "tokens");
 			
 			if(!$data) {
 				showAlert("Invalid Token");
@@ -527,7 +545,7 @@ class Users_Model extends ZP_Model {
 			return FALSE;
 		}
 		
-		$data[1] = $this->Db->findBySQL("ID_User = '$ID'", "users_information");
+		$data[1] = $this->Db->findBySQL("ID_User = '$ID'", "users_information", $this->table);
 		
 		if(!$data[1]) {
 			return FALSE;
@@ -544,7 +562,6 @@ class Users_Model extends ZP_Model {
 	
 	public function editProfile() {
 		if(POST("edit")) {
-			
 			if(POST("website")) {
 				if(POST("website") !== "http://") {
 					if(!ping(POST("website"))) {
@@ -556,6 +573,7 @@ class Users_Model extends ZP_Model {
 			}
 		
 			$ID = POST("ID_User");
+
 			if(isset($alert)) {
 				$website = "";
 			} else {
@@ -579,8 +597,7 @@ class Users_Model extends ZP_Model {
 			$sign     = POST("sign", "decode", FALSE);
 						
 			if(!POST("userTwitter")) {
-				$this->Db->table($this->table, "Avatar");
-				$actualAvatar = $this->Db->find($ID);
+				$actualAvatar = $this->Db->find($ID, $this->table);
 			
 				if(FILES("file", "name") !== "") {
 					$this->Files = $this->core("Files");
@@ -591,7 +608,7 @@ class Users_Model extends ZP_Model {
 					$this->Files->fileError = FILES("file", "error");
 					$this->Files->fileTmp   = FILES("file", "tmp_name");
 					
-					$dir = _lib . _sh . _files . _sh . _images . _sh . "users" . _sh;
+					$dir = "www/lib/files/images/users/";
 								
 					if(!file_exists($dir)) {
 						mkdir($dir, 0777); 				
@@ -603,9 +620,11 @@ class Users_Model extends ZP_Model {
 							
 					$upload = $this->Files->upload($dir);
 					
-					if($upload["upload"] === TRUE) {
-						$this->Images   = $this->core("Images");
+					if($upload["upload"]) {
+						$this->Images = $this->core("Images");
+						
 						$avatar = $this->Images->getResize("mini", $dir, $upload["filename"], _minOriginal, _maxOriginal);
+						
 						@unlink($dir . $upload["filename"]);
 					} else {
 						$alert2 = getAlert($upload["message"]);
@@ -622,62 +641,70 @@ class Users_Model extends ZP_Model {
 				$avatar = "";
 			}
 				
-			$this->Db->table($this->table);
-			
-			
 			if($avatar === "") {
-				$values = "Website = '$website', Sign = '$sign'";
-				$this->Db->values($values);
-				$update = $this->Db->save($ID);
+				$this->Db->update($this->table, array("Website" => $website, "Sign" => $sign), $ID);
+				
 				if($update) {
-					$this->Db->encode(TRUE);
-					$data[0] = $this->Db->find($ID);
+					$data[0] = $this->Db->find($ID, $this->table);
 				} else {
 					return FALSE;
 				}
 			} else {
-				$values = "Website = '$website', Sign = '$sign', Avatar = '$avatar'";
-				$this->Db->values($values);
-				$update = $this->Db->save($ID);
+				$this->Db->update($this->table, array("Website" => $website, "Sign" => $sign, "Avatar" => $avatar), $ID);
+				
 				if($update) {
-					$this->Db->encode(TRUE);
-					$data[0] = $this->Db->find($ID);
+					$data[0] = $this->Db->find($ID, $this->table);
 				} else {
 					return FALSE;
 				}
 			}
-			
-			$this->Db->table("users_information");
-			
-			
-			$userinfo = $this->Db->findBySQL("ID_User = '$ID'");
+						
+			$userInfo = $this->Db->findBySQL("ID_User = '$ID'", "users_information");
+
 			$ID2 = $userinfo[0]["ID_User"];
 			
-			$values = "Name = '$name', Phone = '$phone', Company = '$company', Gender = '$gender', Birthday = '$birthday', Country = '$country', District = '$district', Town = '$town', Facebook = '$facebook', Twitter = '$twitter', Linkedin = '$linkedin', Google = '$google'";
-			$this->Db->values($values);
-			$update = $this->Db->save($ID2);
+			$data = array(
+						"Name" 	   => $name,
+						"Phone"    => $phone, 
+						"Company"  => $company, 
+						"Gender"   => $gender, 
+						"Birthday" => $birthday, 
+						"Country"  => $country, 
+						"District" => $district, 
+						"Town" 	   => $town, 
+						"Facebook" => $facebook, 
+						"Twitter"  => $twitter, 
+						"Linkedin" => $linkedin, 
+						"Google"   => $google
+					);
+
+			$update = $this->Db->update("users_information", $data, $ID2);
+			
 			if($update) {
-				$this->Db->encode(TRUE);
-				$data[1] = $this->Db->find($ID2);
+				$data[1] = $this->Db->find($ID2, "users_information");
 			} else {
 				return FALSE;
 			}
 			
 			if($data) {
 				$success = TRUE;
+
 				if(isset($alert)) {
 					$data[2][] = $alert;
+					
 					$success = FALSE;
 				}
 				
 				if(isset($alert2)) {
 					$data[2][] = $alert2;
+					
 					$success = FALSE;
 				}
 
 				if($success === TRUE) {
 					$data[2][0] = getAlert("Your profile has been edited correctly", "success");
 				}
+
 				return $data;
 			} else {
 				return FALSE;
@@ -689,21 +716,20 @@ class Users_Model extends ZP_Model {
 	}
 	
 	public function setRank($ID_User, $rank = FALSE) {
-		$ranks[0] = "Beginner";
-		$ranks[1] = "Advanced Beginner";
-		$ranks[2] = "Member";
-		$ranks[3] = "Full Member";
-		$ranks[4] = "Silver Member";
-		$ranks[5] = "Gold Member";
-		$ranks[6] = "Platinum Member";
-		$ranks[7] = "God of the Forum";
-		$ranks[8] = "Moderator";
-		$ranks[9] = "Administrator";
+		$ranks[0]  = "Beginner";
+		$ranks[1]  = "Advanced Beginner";
+		$ranks[2]  = "Member";
+		$ranks[3]  = "Full Member";
+		$ranks[4]  = "Silver Member";
+		$ranks[5]  = "Gold Member";
+		$ranks[6]  = "Platinum Member";
+		$ranks[7]  = "God of the Forum";
+		$ranks[8]  = "Moderator";
+		$ranks[9]  = "Administrator";
 		$ranks[10] = "Super Administrator";
 			
 		if(!$rank) {
-			$this->Db->table("users");
-			$user = $this->Db->find($ID_User);
+			$user = $this->Db->find($ID_User, "users");
 			
 			$normalPoints = $user[0]["Topics"] + $user[0]["Replies"];
 			$visitPoints  = $user[0]["Visits"] / 50;
@@ -718,85 +744,55 @@ class Users_Model extends ZP_Model {
 				switch($points) {
 					case ($points < 50): 
 						if($actualRank !== $ranks[0]) {
-							$values = "Rank = '$ranks[0]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
-							
+							$this->Db->update($this->table, array("Rank" => $ranks[0], $ID_User));
 						}
 					break;
 					
 					case ($points >= 50 and $points < 100):
 						if($actualRank !== $ranks[1]) {
-							$values = "Rank = '$ranks[1]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
+							$this->Db->update($this->table, array("Rank" => $ranks[1], $ID_User));
 						}
 					break;
 					
 					case ($points >= 100 and $points < 200):
 						if($actualRank !== $ranks[2]) {
-							$values = "Rank = '$ranks[2]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
+							$this->Db->update($this->table, array("Rank" => $ranks[2], $ID_User));
 						}
 					break;
 					
 					case ($points >= 200 and $points < 350):
 						if($actualRank !== $ranks[3]) {
-							$values = "Rank = '$ranks[3]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
+							$this->Db->update($this->table, array("Rank" => $ranks[3], $ID_User));
 						}
 					break;
 					
 					case ($points >= 200 and $points < 350):
-						if($actualRank !== $ranks[3]) {
-							$values = "Rank = '$ranks[3]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
+						if($actualRank !== $ranks[4]) {
+							$this->Db->update($this->table, array("Rank" => $ranks[4], $ID_User));
 						}
 					break;
 					
 					case ($points >= 350 and $points < 550):
-						if($actualRank !== $ranks[4]) {
-							$values = "Rank = '$ranks[4]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
+						if($actualRank !== $ranks[5]) {
+							$this->Db->update($this->table, array("Rank" => $ranks[5], $ID_User));
 						}
 					break;
 					
 					case ($points >= 550 and $points < 800):
-						if($actualRank !== $ranks[5]) {
-							$values = "Rank = '$ranks[5]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
-						}
-					break;
-					
-					case ($points >= 800 and $points < 1100):
 						if($actualRank !== $ranks[6]) {
-							$values = "Rank = '$ranks[6]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
+							$this->Db->update($this->table, array("Rank" => $ranks[6], $ID_User));
 						}
 					break;
 					
-					case ($points > 1100):
+					case ($points >= 1000):
 						if($actualRank !== $ranks[7]) {
-							$values = "Rank = '$ranks[7]'";
-							$this->Db->values($values);
-							$this->Db->save($ID_User);
+							$this->Db->update($this->table, array("Rank" => $ranks[7], $ID_User));
 						}
 					break;
 				}
 			}
 		} else {
-			$this->Db->table("users");
-			
-			$values = "Rank = '$ranks[$rank]'";
-			
-			$this->Db->values($values);
-			$this->Db->save($ID_User);
+			$this->Db->update($this->table, array("Rank" => $ranks[$rank], $ID_User));
 		}		
 	}
 }
