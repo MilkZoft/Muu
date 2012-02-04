@@ -8,21 +8,16 @@ if(!defined("_access")) {
 
 class Gallery_Model extends ZP_Model {
 	
-	private $route;
-	private $table;
-	private $primaryKey;
-	
 	public function __construct() {
 		$this->Db = $this->db();		
-		$this->helper(array("time", "alerts", "router"));		
-		$this->table      = "gallery";
-		$this->primaryKey = $this->Db->table($this->table);
-		$this->language   = whichLanguage(); 
+		
+		$this->helpers();
+				
+		$this->table    = "gallery";
+		$this->language = whichLanguage(); 
 	}
 	
-	public function cpanel($action, $limit = NULL, $order = "ID_Image DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		$this->Db->table($this->table);
-		
+	public function cpanel($action, $limit = NULL, $order = "ID_Image DESC", $search = NULL, $field = NULL, $trash = FALSE) {	
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave($action);
 			
@@ -43,36 +38,32 @@ class Gallery_Model extends ZP_Model {
 	}
 	
 	private function all($trash, $order, $limit) {
-		if($trash === FALSE) {
+		if(!$trash) {
 			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBySQL("State != 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '".$_SESSION["ZanAdminID"]."' AND State != 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
 			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBy("State", "Deleted", NULL, $order, $limit);
+				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanAdminID") ."' AND State = 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
 			}
 		}
 		
 		return $data;	
 	}
 	
-	private function editOrSave($action) {
-		$helpers = array("alerts", "time", "validations");
-		
-		$this->helper($helpers);
-		
-		if(POST("title") === NULL) {
+	private function editOrSave($action) {		
+		if(!POST("title")) {
 			return getAlert("You need to write a title");
 		}
 				
-		if(POST("category") === NULL and POST("ID_Category") === "0") {
+		if(!POST("category") and POST("ID_Category") === "0") {
 			$this->category = 0;
 		} else {
-			if(POST("category") !== NULL) {
+			if(POST("category")) {
 				$this->category = POST("category");
 				$categorynice   = nice($this->category);
 				
@@ -85,7 +76,6 @@ class Gallery_Model extends ZP_Model {
 		
 		if($action === "edit") {
 			if(FILES("file", "name") !== "") {
-				
 				$this->Files = $this->core("Files");
 				
 				$this->Files->filename  = FILES("file", "name");
@@ -94,13 +84,12 @@ class Gallery_Model extends ZP_Model {
 				$this->Files->fileError = FILES("file", "error");
 				$this->Files->fileTmp   = FILES("file", "tmp_name");
 				
-				if($this->category === NULL or $this->category === 0) {
-					$dir = _lib . _sh . _files . _sh . _images . _sh . "gallery" . _sh . "unknown" . _sh;
+				if(!$this->category or $this->category === 0) {
+					$dir = "www/lib/files/images/gallery/unknown/";
 				} else {
-					$this->Db->table("categories", "Nice");
-					$data = $this->Db->find($this->category);
+					$data = $this->Db->find($this->category, $this->table);
 					
-					$dir = _lib . _sh . _files . _sh . _images . _sh . "gallery" . _sh . $data[0]["Nice"] . _sh;
+					$dir = "www/lib/files/images/gallery/". $data[0]["Nice"] ."/";
 				}
 				
 				if(!file_exists($dir)) {
@@ -109,7 +98,7 @@ class Gallery_Model extends ZP_Model {
 						
 				$upload = $this->Files->upload($dir);
 				
-				if($upload["upload"] === TRUE) {
+				if($upload["upload"]) {
 					$this->Images   = $this->core("Images");
 					
 					$this->original = $this->Images->getResize("original", $dir, $upload["filename"], _minOriginal, _maxOriginal);
@@ -133,37 +122,34 @@ class Gallery_Model extends ZP_Model {
 		$this->title       = POST("title", "decode", "escape");
 		$this->nice        = nice($this->title);
 		$this->description = POST("description");
-		$this->state       = POST("state");
+		$this->Situation   = POST("Situation");
 		$this->date1       = now(4);
 		$this->date2 	   = now(2);
-		
-		
 	}
 	
 	private function save() {
-		
 		if(is_array(FILES("files", "name"))) {
 			$filecount = count(FILES("files", "name"));
+			
 			$this->Files = $this->core("Files");
 			
 			$i = 0;
-			$noimage = 0;
+			$noImage = 0;
+			
 			foreach($_FILES["files"]["name"] as $file) {							
-				if(FILES("files", "name", $i) !== "") {		
-						
+				if(FILES("files", "name", $i) !== "") {				
 					$this->Files->filename  = FILES("files", "name", $i);
 					$this->Files->fileType  = FILES("files", "type", $i);
 					$this->Files->fileSize  = FILES("files", "size", $i);
 					$this->Files->fileError = FILES("files", "error", $i);
 					$this->Files->fileTmp   = FILES("files", "tmp_name", $i);
 					
-					if($this->category === NULL or $this->category === 0) {
-						$dir = _lib . _sh . _files . _sh . _images . _sh . "gallery" . _sh . "unknown" . _sh;
+					if(!$this->category or $this->category === 0) {
+						$dir = "www/lib/files/images/gallery/unknown/";
 					} else {
-						$this->Db->table("categories", "Nice");
-						$data = $this->Db->find($this->category);
+						$data = $this->Db->find($this->category, $this->table);
 						
-						$dir = _lib . _sh . _files . _sh . _images . _sh . "gallery" . _sh . $data[0]["Nice"] . _sh;
+						$dir = "www/lib/files/images/gallery/". $data[0]["Nice"] ."/";
 					}
 					
 					if(!file_exists($dir)) {
@@ -172,7 +158,7 @@ class Gallery_Model extends ZP_Model {
 							
 					$upload = $this->Files->upload($dir);
 					
-					if($upload["upload"] === TRUE) {
+					if($upload["upload"]) {
 						$this->Images   = $this->core("Images");
 						
 						$this->original = $this->Images->getResize("original", $dir, $upload["filename"], _minOriginal, _maxOriginal);
@@ -182,28 +168,30 @@ class Gallery_Model extends ZP_Model {
 						return getAlert($upload["message"]);
 					}	
 					
-					$query ="setImage(". SESSION("ZanUserID") .", $this->category, '$this->title', '$this->nice', '$this->description', '$this->small', '$this->medium', '$this->original', '$this->date1', '$this->date2', '$this->state')";
-					$data  = $this->Db->call($query);	
-								
+					$query  = "setImage(". SESSION("ZanUserID") .", $this->category, '$this->title', '$this->nice', '$this->description', '$this->small', ";
+					$query .= "'$this->medium', '$this->original', '$this->date1', '$this->date2', '$this->Situation')";
+					
+					$data = $this->Db->call($query);				
 				} else {
-					$noimage++;
+					$noImage++;
 				}	
+
 				$i++;				
 			}	
 		} 
 
-		if($noimage === $filecount) {
+		if($noImage === $filecount) {
 			return getAlert("Selected Image");
 		} else {
 			return getAlert("The image has been saved correctly", "success");
 		}
-		
-		
 	}
 	
 	private function edit() {
-		$query = "updateImage($this->ID, $this->category, '$this->title', '$this->nice', '$this->description', '$this->small', '$this->medium', '$this->original', '$this->state')";
-		$data  = $this->Db->call($query);
+		$query  = "updateImage($this->ID, $this->category, '$this->title', '$this->nice', '$this->description', '$this->small', ";
+		$query .= "'$this->medium', '$this->original', '$this->Situation')";
+		
+		$data = $this->Db->call($query);
 							
 		if(isset($data[0]["Image_Not_Exists"])) {
 			return getAlert("This image not exists");
@@ -213,8 +201,7 @@ class Gallery_Model extends ZP_Model {
 	}
 	
 	public function getByID($ID, $mode = FALSE) {
-		if($mode === FALSE) {
-			
+		if(!$mode) {	
 			$data = $this->Db->call("getImage('$ID')");
 
 			if(!isset($data[0]["ID_Category"])) {
@@ -222,27 +209,24 @@ class Gallery_Model extends ZP_Model {
 			}
 						
 			return $data;
-			
 		} else {
-			
-			$this->Db->table($this->table);	
-			$this->Db->encode(TRUE);	
-			$record = $this->Db->find($ID);
+			$record = $this->Db->find($ID, $this->table);
 			
 			if($record) {
-				$data["ID"] = $record[0]["ID_Image"];
-				$data["Title"] = $record[0]["Title"];
-				$data["Nice"] = $record[0]["Nice"];
-				$data["Album"] = $record[0]["Album"];
-				$data["Album_Nice"] = $record[0]["Album_Nice"];
+				$data["ID"] 		 = $record[0]["ID_Image"];
+				$data["Title"]	 	 = $record[0]["Title"];
+				$data["Nice"] 		 = $record[0]["Nice"];
+				$data["Album"] 		 = $record[0]["Album"];
+				$data["Album_Nice"]  = $record[0]["Album_Nice"];
 				$data["Description"] = $record[0]["Description"];
-				$data["Original"] = _webURL . _sh . $record[0]["Original"];
-				$data["prev"] = _webBase . _sh . _webLang.  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."prev"  . _sh . "#Image";
-				$data["next"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."next"  . _sh . "#Image";
-				$data["home"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh;
-				$data["back"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . "album" . _sh . $data["Album_Nice"];			
-				return $data;
+				$data["Original"]    = _webURL . _sh . $record[0]["Original"];
+
+				$data["prev"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/prev/#image");
+				$data["next"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/next/#image");
+				$data["home"] 		 = path("gallery");
+				$data["back"] 		 = path("gallery/album/". $data["Album_Nice"]);			
 				
+				return $data;
 			} else {
 				return false;
 			}
@@ -255,52 +239,52 @@ class Gallery_Model extends ZP_Model {
 		return $data;	
 	}
 	
-	public function getCount($album = NULL) {
-		$this->Db->table($this->table);
-		
+	public function getCount($album = NULL) {		
 		if(!$album) {
-			return $this->Db->countBySQL("State = 'Active'");
+			return $this->Db->countBySQL("Situation = 'Active'", $this->table);
 		} else {
-			return $this->Db->countBySQL("State = 'Active' AND Album_Nice = '$album'");
+			return $this->Db->countBySQL("Situation = 'Active' AND Album_Nice = '$album'", $this->table);
 		}
 	}
 	
-	public function getByAlbum($album = NULL, $limit) {						
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
-		
+	public function getByAlbum($album = NULL, $limit) {							
 		if(!$album) {
-			$records = $this->Db->findBySQL("State = 'Active'", NULL, "ID_Image Desc", $limit);
+			$records = $this->Db->findBySQL("Situation = 'Active',", $this->table, NULL, "ID_Image Desc", $limit);
+			
 			if($records) { 
 				$i = 0;
+
 				foreach($records as $record) {
-					$data[$i]["ID_Image"] = $record["ID_Image"];
-					$data[$i]["Title"] = $record["Title"];
-					$data[$i]["Nice"] = $record["Nice"];
+					$data[$i]["ID_Image"] 	 = $record["ID_Image"];
+					$data[$i]["Title"] 		 = $record["Title"];
+					$data[$i]["Nice"] 		 = $record["Nice"];
 					$data[$i]["Description"] = $record["Description"];
-					$data[$i]["Small"] = $record["Small"];
-					$data[$i]["Album"] = $record["Album"];
-					$data[$i]["Album_Nice"] = $record["Album_Nice"];
-					$data[$i]["Start_Date"] = $record["Start_Date"];
-					$data[$i]["Text_Date"] = $record["Text_Date"];
+					$data[$i]["Small"] 		 = $record["Small"];
+					$data[$i]["Album"] 		 = $record["Album"];
+					$data[$i]["Album_Nice"]  = $record["Album_Nice"];
+					$data[$i]["Start_Date"]  = $record["Start_Date"];
+					$data[$i]["Text_Date"]   = $record["Text_Date"];
+					
 					$i++;				
 				}
 			} 
 		} else {
+			$records = $this->Db->findBySQL("Album_Nice = '$album' AND Situation = 'Active'", NULL, "ID_Image Desc", $limit);
 			
-			$records = $this->Db->findBySQL("Album_Nice = '$album' AND State = 'Active'", NULL, "ID_Image Desc", $limit);
 			if($records) { 
 				$i = 0;
+				
 				foreach($records as $record) {
-					$data[$i]["ID_Image"] = $record["ID_Image"];
-					$data[$i]["Title"] = $record["Title"];
-					$data[$i]["Nice"] = $record["Nice"];
+					$data[$i]["ID_Image"] 	 = $record["ID_Image"];
+					$data[$i]["Title"] 		 = $record["Title"];
+					$data[$i]["Nice"] 		 = $record["Nice"];
 					$data[$i]["Description"] = $record["Description"];
-					$data[$i]["Small"] = $record["Small"];
-					$data[$i]["Album"] = $record["Album"];
-					$data[$i]["Album_Nice"] = $record["Album_Nice"];
-					$data[$i]["Start_Date"] = $record["Start_Date"];
-					$data[$i]["Text_Date"] = $record["Text_Date"];
+					$data[$i]["Small"] 		 = $record["Small"];
+					$data[$i]["Album"] 		 = $record["Album"];
+					$data[$i]["Album_Nice"]  = $record["Album_Nice"];
+					$data[$i]["Start_Date"]  = $record["Start_Date"];
+					$data[$i]["Text_Date"]   = $record["Text_Date"];
+					
 					$i++;				
 				}
 			} 
@@ -314,115 +298,103 @@ class Gallery_Model extends ZP_Model {
 	}
 	
 	public function getNext($ID, $album = "none") {
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
-		$record = $this->Db->findBySQL("ID_Image > '$ID' AND Album_Nice = '$album' AND State = 'Active' LIMIT 1");
+		$record = $this->Db->findBySQL("ID_Image > '$ID' AND Album_Nice = '$album' AND Situation = 'Active' LIMIT 1", $this->table);
 	
 		if($record) {
-			$data["ID"] = $record[0]["ID_Image"];
-			$data["Title"] = $record[0]["Title"];
-			$data["Nice"] = $record[0]["Nice"];
-			$data["Album"] = $record[0]["Album"];
-			$data["Album_Nice"] = $record[0]["Album_Nice"];
+			$data["ID"] 		 = $record[0]["ID_Image"];
+			$data["Title"] 		 = $record[0]["Title"];
+			$data["Nice"] 		 = $record[0]["Nice"];
+			$data["Album"] 		 = $record[0]["Album"];
+			$data["Album_Nice"]  = $record[0]["Album_Nice"];
 			$data["Description"] = $record[0]["Description"];
-			$data["Original"] = _webURL . _sh . $record[0]["Original"];
-			$data["prev"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."prev"  . _sh . "#Image";
-			$data["next"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."next"  . _sh . "#Image";
-			$data["home"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh;
-			$data["back"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . "album" . _sh . $data["Album_Nice"];
+			$data["Original"] 	 = _webURL . _sh . $record[0]["Original"];
+			$data["prev"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/prev/#image");
+			$data["next"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/next/#image");
+			$data["home"] 		 = path("gallery");
+			$data["back"] 		 = path("gallery/album/". $data["Album_Nice"]);
 		
 			return $data;			
 		} else {
-			return false;
+			return FALSE;
 		}
 	}
 	
 	public function getPrev($ID, $album = "none") {
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
-		$record = $this->Db->findBySQL("ID_Image < '$ID' AND Album_Nice = '$album' AND State = 'Active' ORDER BY ID_Image Desc LIMIT 1");
-		#____($record);
+		$record = $this->Db->findBySQL("ID_Image < '$ID' AND Album_Nice = '$album' AND Situation = 'Active' ORDER BY ID_Image Desc LIMIT 1", $this->table);
+		
 		if($record) {
-			$data["ID"] = $record[0]["ID_Image"];
-			$data["Title"] = $record[0]["Title"];
-			$data["Nice"] = $record[0]["Nice"];
-			$data["Album"] = $record[0]["Album"];
-			$data["Album_Nice"] = $record[0]["Album_Nice"];
+			$data["ID"] 		 = $record[0]["ID_Image"];
+			$data["Title"] 	 	 = $record[0]["Title"];
+			$data["Nice"] 		 = $record[0]["Nice"];
+			$data["Album"] 		 = $record[0]["Album"];
+			$data["Album_Nice"]  = $record[0]["Album_Nice"];
 			$data["Description"] = $record[0]["Description"];
-			$data["Original"] = _webURL . _sh . $record[0]["Original"];
-			$data["prev"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."prev"  . _sh . "#Image";
-			$data["next"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."next"  . _sh . "#Image";
-			$data["home"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh;
-			$data["back"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . "album" . _sh . $data["Album_Nice"];
+			$data["Original"] 	 = _webURL . _sh . $record[0]["Original"];
+
+			$data["prev"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/prev/#image");
+			$data["next"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/next/#image");
+			$data["home"] 		 = path("gallery");
+			$data["back"] 		 = path("gallery/album/". $data["Album_Nice"]);
 		
 			return $data;
-			
 		} else {
-			return false;
+			return FALSE;
 		}
-
 	}
 	
 	public function getLast($album = "none") {
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
-		$record = $this->Db->findBySQL("State = 'Active' AND Album_Nice = '$album' ORDER BY ID_Image DESC LIMIT 1");
+		$record = $this->Db->findBySQL("Situation = 'Active' AND Album_Nice = '$album' ORDER BY ID_Image DESC LIMIT 1", $this->table);
 		
 		if($record) {
-			$data["ID"] = $record[0]["ID_Image"];
-			$data["Title"] = $record[0]["Title"];
-			$data["Nice"] = $record[0]["Nice"];
-			$data["Album"] = $record[0]["Album"];
-			$data["Album_Nice"] = $record[0]["Album_Nice"];
+			$data["ID"] 		 = $record[0]["ID_Image"];
+			$data["Title"] 		 = $record[0]["Title"];
+			$data["Nice"] 		 = $record[0]["Nice"];
+			$data["Album"] 		 = $record[0]["Album"];
+			$data["Album_Nice"]  = $record[0]["Album_Nice"];
 			$data["Description"] = $record[0]["Description"];
-			$data["Original"] = _webURL . _sh . $record[0]["Original"];
-			$data["prev"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."prev"  . _sh . "#Image";
-			$data["next"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."next"  . _sh . "#Image";
-			$data["home"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh;
-			$data["back"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . "album" . _sh . $data["Album_Nice"];
+			$data["Original"] 	 = _webURL . _sh . $record[0]["Original"];
+
+			$data["prev"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/prev/#image");
+			$data["next"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/next/#image");
+			$data["home"] 		 = path("gallery");
+			$data["back"] 		 = path("gallery/album/". $data["Album_Nice"]);
 		
 			return $data;
-			
 		} else {
-			return false;
+			return FALSE;
 		}
-
 	}
 	
 	public function getFirst($album = "none") {
-		$this->Db->table($this->table);
-		$this->Db->encode(TRUE);
-		$record = $this->Db->findBySQL("State = 'Active' AND Album_Nice = '$album' ORDER BY ID_Image ASC LIMIT 1");
+		$record = $this->Db->findBySQL("Situation = 'Active' AND Album_Nice = '$album' ORDER BY ID_Image ASC LIMIT 1", $this->table);
 		
 		if($record) {
-			$data["ID"] = $record[0]["ID_Image"];
-			$data["Title"] = $record[0]["Title"];
-			$data["Nice"] = $record[0]["Nice"];
-			$data["Album"] = $record[0]["Album"];
-			$data["Album_Nice"] = $record[0]["Album_Nice"];
+			$data["ID"] 		 = $record[0]["ID_Image"];
+			$data["Title"] 		 = $record[0]["Title"];
+			$data["Nice"] 		 = $record[0]["Nice"];
+			$data["Album"] 		 = $record[0]["Album"];
+			$data["Album_Nice"]  = $record[0]["Album_Nice"];
 			$data["Description"] = $record[0]["Description"];
-			$data["Original"] = _webURL . _sh . $record[0]["Original"];
-			$data["prev"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."prev"  . _sh . "#Image";
-			$data["next"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . _image . _sh . $data["ID"] . _sh . $data["Album_Nice"] . _sh ."next"  . _sh . "#Image";
-			$data["home"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh;
-			$data["back"] = _webBase . _sh . _webLang .  _sh . _gallery . _sh . "album" . _sh . $data["Album_Nice"];
+			$data["Original"] 	 = _webURL . _sh . $record[0]["Original"];
+
+			$data["prev"] 		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/prev/#image");
+			$data["next"]  		 = path("gallery/image/". $data["ID"] ."/". $data["Album_Nice"] ."/next/#image");
+			$data["home"] 		 = path("gallery");
+			$data["back"] 		 = path("gallery/album/". $data["Album_Nice"]);
 		
 			return $data;
-			
 		} else {
-			return false;
+			return FALSE;
 		}
 	}
 	
-	public function getAlbums() {
-		$this->Db->table($this->table);	
-		$this->Db->encode(TRUE);	
-		$data = $this->Db->findBySQL("State = 'Active' AND Album != 'None' GROUP BY Album", NULL, NULL, NULL);	
+	public function getAlbums() {	
+		$data = $this->Db->findBySQL("Situation = 'Active' AND Album != 'None' GROUP BY Album", $this->table);	
 		
 		if($data) {
 			return $data;
 		} else {
-			return false;
+			return FALSE;
 		}
 	}
 	
