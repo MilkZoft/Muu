@@ -146,9 +146,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
+			redirect($this->application . "/cpanel/results/trash");
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect($this->application . "/cpanel/results");
 		}
 	}
 	
@@ -201,8 +201,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 		
-		if($this->CPanel_Model->trash($ID)) {
-			
+		if($this->CPanel_Model->trash($ID)) {			
 			redirect($this->application . "/cpanel/results");
 		} else {
 			redirect($this->application . "/cpanel/add");
