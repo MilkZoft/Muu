@@ -3,7 +3,7 @@
  * Access from index.php:
  */
 if(!defined("_access")) {
-	die("Error: You don't have permission to access here...");
+	die("Error: You don't have permission to access here..."));
 }
 ?>
 
@@ -11,7 +11,7 @@ if(!defined("_access")) {
 
 	<form class="register" action="<?php print $href;?>" method="post">
 		<fieldset>
-			<legend><?php print __("Register"); ?></legend>
+			<legend><?php print __(_("Register")); ?></legend>
 			
 			<?php
 				if(isset($alert)) {
@@ -20,26 +20,26 @@ if(!defined("_access")) {
 			?>
 			
 			<p class="center">
-				<?php print __("Register"); ?>
+				<?php print __(_("Register")); ?>
 			</p>
 			
 			<p>
-				<strong><?php print __("Username"); ?>:</strong><br />
-				<input id="username" class="username" name="username" type="text" value="<?php print recoverPOST("username"); ?>" tabindex="1" />
+				<strong><?php print __(_("Username")); ?>:</strong><br />
+				<input id="username" class="username" name="username" type="text" value="<?php print recoverPOST("username")); ?>" tabindex="1" />
 			</p>	
 			
 			<p>
-				<strong><?php print __("Password"); ?>:</strong><br />
-				<input id="password" class="password" name="password" type="password" value="<?php print recoverPOST("password"); ?>" tabindex="2" />
+				<strong><?php print __(_("Password")); ?>:</strong><br />
+				<input id="password" class="password" name="password" type="password" value="<?php print recoverPOST("password")); ?>" tabindex="2" />
 			</p>
 			
 			<p>
-				<strong><?php print __("E-Mail"); ?>:</strong><br />
-				<input id="email" class="email" name="email" type="text" value="<?php print recoverPOST("email"); ?>" tabindex="3" />
+				<strong><?php print __(_("E-Mail")); ?>:</strong><br />
+				<input id="email" class="email" name="email" type="text" value="<?php print recoverPOST("email")); ?>" tabindex="3" />
 			</p>
 			
 			<p>
-				<input class="submit" name="register" type="submit" value="<?php print __("Register"); ?>" tabindex="4" />
+				<input class="submit" name="register" type="submit" value="<?php print __(_("Register")); ?>" tabindex="4" />
 			</p>
 		</fieldset>
 	</form>
@@ -50,7 +50,7 @@ if(!defined("_access")) {
 			<?php print $alert["message"] . "!";?>
 		</p>
 		<p class="additional">
-			<?php print __("Click on the close button below, or out of the box, to return to the forums") . "!";?>
+			<?php print __(_("Click on the close button below, or out of the box, to return to the forums")) . "!";?>
 		</p>
 	</div>
 <?php } ?>

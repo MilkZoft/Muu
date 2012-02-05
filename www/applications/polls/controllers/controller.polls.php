@@ -12,8 +12,7 @@ class Polls_Controller extends ZP_Controller {
 		$this->Templates   = $this->core("Templates");
 		$this->Polls_Model = $this->model("Polls_Model");
 		
-		$helpers = array("router", "security", "sessions");
-		$this->helper($helpers);
+		$this->helpers();
 		
 		$this->application = "polls";
 		
@@ -42,7 +41,7 @@ class Polls_Controller extends ZP_Controller {
 	
 	public function vote() {
 		if(!POST("answer")) {
-			showAlert(__("You must select an answer"), _webBase);
+			showAlert("You must select an answer", _webBase);
 		}		
 		
 		$this->Polls_Model->vote();

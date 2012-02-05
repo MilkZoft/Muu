@@ -8,14 +8,10 @@ if(!defined("_access")) {
 
 class Links_Model extends ZP_Model {
 	
-	private $route;
-	private $table;
-	private $primaryKey;
-	
 	public function __construct() {
 		$this->Db = $this->db();
 		
-		$this->helper("router");
+		$this->helpers();
 		
 		$this->table = "links";
 
@@ -47,13 +43,13 @@ class Links_Model extends ZP_Model {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '".$_SESSION["ZanAdminID"]."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanAdminID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
 			}
 		}
 		

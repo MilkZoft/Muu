@@ -11,7 +11,7 @@ class Pages_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 		
-		$this->helper(array("time", "alerts", "router"));
+		$this->helpers();
 		
 		$this->table    = "pages";
 		$this->language = whichLanguage(); 
@@ -103,7 +103,7 @@ class Pages_Model extends ZP_Model {
 	}
 	
 	public function getByDefault() {
-		$data = $this->Db->findBySQL("Language = '$this->language' AND Principal = 1 AND Situation = 'Active'");
+		$data = $this->Db->findBySQL("Language = '$this->language' AND Principal = 1 AND Situation = 'Active'", $this->table);
 			
 		return $data;
 	}
@@ -114,16 +114,16 @@ class Pages_Model extends ZP_Model {
 		}
 				
 		if(!$invert) {
-			$data = $this->Db->find($ID);
+			$data = $this->Db->find($ID, $this->table);
 		} else {
-			$data = $this->Db->findBy("ID_Translation", $ID, NULL, "Language ASC, Title", NULL);
+			$data = $this->Db->findBy("ID_Translation", $ID, $this->table, NULL, "Language ASC, Title", NULL);
 		}
 		
 		return $data;
 	}		
 	
 	public function getBySlug($slug) {		
-		$data = $this->Db->findBySQL("Slug = '$slug' AND Language = '$this->language' AND Situation = 'Active'");
+		$data = $this->Db->findBySQL("Slug = '$slug' AND Language = '$this->language' AND Situation = 'Active'", $this->table);
 
 		return $data;
 	}
@@ -134,10 +134,8 @@ class Pages_Model extends ZP_Model {
 		return (is_array($data)) ? $data[0][$this->primaryKey] : FALSE;
 	}
 	
-	public function getByID($ID) {
-		$this->Db->table($this->table);
-		
-		$data = $this->Db->find($ID);
+	public function getByID($ID) {		
+		$data = $this->Db->find($ID, $this->table);
 		
 		return $data;
 	}

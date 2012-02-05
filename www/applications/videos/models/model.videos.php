@@ -11,10 +11,10 @@ class Videos_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 		
-		$this->helper(array("time", "alerts", "router"));
+		$this->helpers(;
 		
 		$this->table       = "videos";
-		$this->primaryKey  = $this->Db->table($this->table);
+		
 		$this->language    = whichLanguage(); 
 		$this->application = whichApplication();
 		

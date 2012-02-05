@@ -14,7 +14,7 @@ class Ajax_Controller extends ZP_Controller {
 	}
 	
 	public function index() {
-		
+		redirect();
 	}
 	
 	public function next($next = FALSE) {
@@ -28,7 +28,7 @@ class Ajax_Controller extends ZP_Controller {
 			$vars["response"] = FALSE;
 		}
 		
-		print json_encode($vars);
+		print json($vars);
 	}
 	
 	public function search($search = FALSE) {
@@ -42,6 +42,6 @@ class Ajax_Controller extends ZP_Controller {
 			$vars["response"] = FALSE;
 		}
 		
-		print json_encode($vars);
+		print json($vars);
 	}
 }

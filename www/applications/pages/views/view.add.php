@@ -12,7 +12,7 @@
 		$language  = recoverPOST("language",  $data[0]["Language"]);
 		$edit      = TRUE;
 		$action    = "edit";
-		$href	   = _webBase . _sh . _webLang . _sh . whichApplication() . _sh . _cpanel . _sh . $action . _sh . $ID . _sh;
+		$href	   = path(whichApplication() . _sh . "cpanel" . _sh . $action . _sh . $ID . _sh);
 	} else {
 		$ID        = 0;
 		$title     = recoverPOST("title");
@@ -22,7 +22,7 @@
 		$language  = recoverPOST("language");
 		$edit      = FALSE;
 		$action	   = "save";
-		$href 	   = _webBase . _sh . _webLang . _sh . whichApplication() . _sh . _cpanel . _sh . "add" . _sh;
+		$href 	   = path(whichApplication() . _sh . "cpanel" . _sh . "add" . _sh);
 	}
 
 	print div("add-form", "class");

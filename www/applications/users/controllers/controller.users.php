@@ -223,7 +223,6 @@ class Users_Controller extends ZP_Controller {
 		
 		$this->Users_Model->setRank($user);
 		
-		//$this->js("editprofile", $this->application);
 		$this->CSS("profile", $this->application);
 		
 		$user = $this->Users_Model->getForProfile($user);

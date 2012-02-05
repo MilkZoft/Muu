@@ -18,25 +18,29 @@
 		
 		<div class="social">
 			<?php if($twitter) { ?>
-				<a class="sn" id="twitter" rel="external" href="http://twitter.com/<?php print $user[1][0]["Twitter"];?>" title="<?php print $user[1][0]["Twitter"];?>"><img src="<?php print $twitter;?>" alt="twitter.com"/></a>
+				<a class="sn" id="twitter" rel="external" href="http://twitter.com/<?php print $user[1][0]["Twitter"];?>" title="<?php print $user[1][0]["Twitter"];?>">	<img src="<?php print $twitter;?>" alt="twitter.com"/>
+				</a>
 			<?php } ?>
 			<?php if($facebook) { ?>
-				<a class="sn" id="facebook" rel="external" href="http://facebook.com/<?php print $user[1][0]["Facebook"];?>" title="<?php print $user[1][0]["Facebook"];?>"><img src="<?php print $facebook;?>" alt="facebook.com"/></a>
+				<a class="sn" id="facebook" rel="external" href="http://facebook.com/<?php print $user[1][0]["Facebook"];?>" title="<?php print $user[1][0]["Facebook"];?>">
+					<img src="<?php print $facebook;?>" alt="facebook.com"/>
+				</a>
 			<?php } ?>
 			<?php if($linkedin) { ?>
-				<a class="sn" id="linkedin" rel="external" href="http://linkedin.com/<?php print $user[1][0]["Linkedin"];?>" title="<?php print $user[1][0]["Linkedin"];?>"><img src="<?php print $linkedin;?>" alt="linkedin.com"/></a>
+				<a class="sn" id="linkedin" rel="external" href="http://linkedin.com/<?php print $user[1][0]["Linkedin"];?>" title="<?php print $user[1][0]["Linkedin"];?>">
+					<img src="<?php print $linkedin;?>" alt="linkedin.com"/>
+				</a>
 			<?php } ?>
 			<?php if($google) { ?>
-				<a class="sn" id="google" href="http://plus.google.com/<?php print $user[1][0]["Google"];?>/about" rel="external" title="<?php print $user[1][0]["Google"];?>"><img src="<?php print $google;?>" alt="plus.google.com"/></a>
+				<a class="sn" id="google" href="http://plus.google.com/<?php print $user[1][0]["Google"];?>/about" rel="external" title="<?php print $user[1][0]["Google"];?>">
+					<img src="<?php print $google;?>" alt="plus.google.com"/>
+				</a>
 			<?php } ?>
 		</div>
 		
 		<div class="clear"></div>
 		
 		<div class="wrapper">
-			<p></p>
-
 		</div>
-		
 	</div>
 </div>

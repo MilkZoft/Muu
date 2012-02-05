@@ -8,8 +8,7 @@ class Tags_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 
-		$helpers = array("alerts", "router");
-		$this->helper($helpers);
+		$this->helpers();
 		
 		$this->language = whichLanguage();
 		$this->table 	= "tags";
@@ -70,9 +69,7 @@ class Tags_Model extends ZP_Model {
 			foreach($tags as $tag) {
 				$slug = slug(encode($tag));
 					
-				$this->Db->table("tags");
-
-				$seek = $this->Db->findBy("Slug", $slug);
+				$seek = $this->Db->findBy("Slug", $slug, "tags");
 				
 				if(!$seek) {
 					if($tag !== "") {
@@ -87,9 +84,7 @@ class Tags_Model extends ZP_Model {
 					$ID_Tag = $seek[0]["ID_Tag"];
 				}
 				
-				$this->Db->table("re_tags_applications");
-
-				$seek = $this->Db->findBySQL("ID_Application = '$application' AND ID_Tag = '$ID_Tag'");
+				$seek = $this->Db->findBySQL("ID_Application = '$application' AND ID_Tag = '$ID_Tag'", "re_tags_applications");
 				
 				if(!$seek) {
 					$data = array(
@@ -101,10 +96,8 @@ class Tags_Model extends ZP_Model {
 				} else {
 					$ID_Tag2Application = $seek[0]["ID_Tag2Application"];
 				}
-					
-				$this->Db->table("re_tags_records");
-
-				$seek = $this->Db->findBySQL("ID_Tag2Application = '$ID_Tag2Application' AND ID_Record = '$ID'");
+				
+				$seek = $this->Db->findBySQL("ID_Tag2Application = '$ID_Tag2Application' AND ID_Record = '$ID'", "re_tags_records");
 				
 				if(!$seek) {
 					$data = array(

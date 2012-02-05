@@ -14,9 +14,10 @@ class Videos_Controller extends ZP_Controller {
 		$this->Videos_Model = $this->model("Videos_Model");
 		
 		$this->config("videos");
+
 		$this->helpers();
 		
-		$this->application = "videos";
+		$this->application = $this->app("videos");
 		
 		$this->Templates->theme(_webTheme);
 	}
@@ -39,13 +40,10 @@ class Videos_Controller extends ZP_Controller {
 		if($videos) {			
 			$vars["pagination"] = $this->pagination;
 			$vars["videos"] 	= $videos;			
-			$vars["view"] 		= $this->view("videos", TRUE, $this->application);
+			$vars["view"] 		= $this->view("videos", TRUE);
 		
 			$this->template("content", $vars);
 		} 
-		
-		$this->render();
-	
 	}
 	
 	private function limit() { 	
@@ -65,10 +63,10 @@ class Videos_Controller extends ZP_Controller {
 		
 		$limit = $start .", ". _maxLimitVideos;			
 		$count = $this->Videos_Model->count();
-		$URL   = _webPath . "videos" . _sh;			
+		$URL   = path("videos/");			
 		
 		if($count > _maxLimitVideos) { 
-			$this->pagination = $this->Pagination->paginate($count, _maxLimitVideos, $start, $URL);
+			$this->pagination = paginate($count, _maxLimitVideos, $start, $URL);
 		} else {
 			$this->pagination = NULL;
 		}	

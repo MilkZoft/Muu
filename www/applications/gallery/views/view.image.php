@@ -1,46 +1,64 @@
 <?php if(!defined("_access")) die("Error: You don't have permission to access here..."); ?>
 
 
-<div class="FullContainer">
-	<div class="HLink">
-		<a name="Image" href="<?php print $picture["home"] . _top;?>" title="<?=__("Gallery");?>"><?php print __("Gallery");?></a>
+<div class="full-container">
+	<div class="h-link">
+		<a name="image" href="<?php print $picture["home"];?>/#top" title="<?php print __(_("Gallery")); ?>"><?php print __(_("Gallery")); ?></a>
 	</div>
-	<?if($count > 1) { ?>
-	<div class="NPLinks">
-		<a id="Previous" href="<?php print $picture["prev"];?>" title="<?print __("Previous");?>"><?php print __("Previous");?></a>
-		<a id="Next"     href="<?php print $picture["next"];?>" title="<?print __("Next");?>"><?php print __("Next");?></a>
-		<br />
-	</div>
-	<? } ?>
-	<div class="Clear"></div>
+
+	<?php
+		if($count > 1) { 
+	?>
+			<div class="np-links">
+				<a id="previous" href="<?php print $picture["prev"];?>" title="<?print __(_("Previous")); ?>"><?php print __(_("Previous")); ?></a>
+				<a id="next" href="<?php print $picture["next"];?>" title="<?print __(_("Next")); ?>"><?php print __(_("Next")); ?></a>
+				<br />
+			</div>
+	<?php 
+		} 
+	?>
 	
-	<div id="GalleryContent">
-		<? if($count > 1) { ?>
-			<a id="Next" href="<?php print $picture["next"];?>">
-				<img class="ImgView" src="<?php print $picture["Original"];?>" alt="<?php print $picture["Title"];?>" />
+	<div class="clear"></div>
+	
+	<div id="gallery-content">
+	<?php 
+		if($count > 1) { 
+	?>
+			<a id="next" href="<?php print $picture["next"];?>">
+				<img class="images-view" src="<?php print $picture["Original"];?>" alt="<?php print $picture["Title"];?>" />
 			</a>
-		<? } else { ?>
-			<img class="ImgView" src="<?php print $picture["Original"];?>" alt="<?php print $picture["Title"];?>" />
-		<? } ?>
+	<?php 
+		} else { 
+	?>
+			<img class="images-view" src="<?php print $picture["Original"];?>" alt="<?php print $picture["Title"];?>" />
+	<?php 
+		} 
+	?>
 	</div>
 	
-	<div class="ImgDescription">
+	<div class="images-description">
 		<span><?php print $picture["Description"];?></span>
 	</div>
+	
 	<br/>
-	<div class="InfoImg">
-		<span class="ImgTitle"><?php print __("Album");?>:</span><br />
-		<div class="GeneralLinks">
-		<? if($picture["Album"] !== "None") { ?>
-			<a href="<?php print $picture["back"] . _sh . _top;?>" title="<?php print $picture["Album"];?>"><?php print $picture["Album"];?></a>
-		<? } else { ?>
-			<a href="<?php print $picture["home"] . _top;?>" title="<?php print __("None");?>"><?php print __("None");?></a>
-		<? } ?>	
+	
+	<div class="info-images">
+		<span class="images-title"><?php print __(_("Album")); ?>:</span><br />
+		
+		<div class="general-links">
+		<?php 
+			if($picture["Album"] !== "None") { 
+		?>
+				<a href="<?php print $picture["back"] . "/#top";?>" title="<?php print $picture["Album"];?>"><?php print $picture["Album"];?></a>
+		<?php 	
+			} else {
+		?>
+			<a href="<?php print $picture["home"] ."/";?>" title="<?php print __(_("None")); ?>"><?php print __(_("None")); ?></a>
+		<?php 
+			} 
+		?>	
 		</div>
 	</div>
-	
 </div>
 
-<br/>
-<br/>
-<br/>
+<br/><br/><br/>

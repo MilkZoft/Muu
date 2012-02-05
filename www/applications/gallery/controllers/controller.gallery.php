@@ -12,14 +12,14 @@ class Gallery_Controller extends ZP_Controller {
 	private $pagination = NULL;
 	
 	public function __construct() {	
-		
 		$this->config("gallery");
+
 		$this->Templates     = $this->core("Templates");
 		$this->Pagination    = $this->core("Pagination");
 		$this->Gallery_Model = $this->model("Gallery_Model");
 		$this->Users_Model   = $this->model("Users_Model");	
 		
-		$this->application   = "gallery";
+		$this->application   = $this->app("gallery");
 		
 		$this->Templates->theme(_webTheme);
 		
@@ -33,11 +33,11 @@ class Gallery_Controller extends ZP_Controller {
 			$this->getNext();		
 		} elseif(segment(2) === "image" and segment(3) > 0) {
 			$this->showImage();			
-		} elseif(segment(2) === "album" and segment(3) !== "" and segment(4) === _page and segment(5) > 0) {		
+		} elseif(segment(2) === "album" and segment(3) !== "" and segment(4) === "page" and segment(5) > 0) {		
 			$this->showGallery();			
 		} elseif(segment(2) === "album" and segment(3) !== "")	{		
 			$this->showGallery();			
-		} elseif(segment(2) === "albums" and segment(3) === _page and segment(4) > 0) {		
+		} elseif(segment(2) === "albums" and segment(3) === "page" and segment(4) > 0) {		
 			$this->showGallery();		
 		} else {			
 			$this->showGallery();			
@@ -52,15 +52,16 @@ class Gallery_Controller extends ZP_Controller {
 		$this->js("jquery.jcarousel.min", $this->application);
 		$this->js("albums", $this->application);
 			
-		if(segment(2) === _page and segment(3) > 0) {
+		if(segment(2) === "page" and segment(3) > 0) {
 			$page = segment(3);
-		} elseif(segment(4) === _page and segment(5) > 0) {
+		} elseif(segment(4) === "page" and segment(5) > 0) {
 			$page = segment(5);
 		} else {
 			$page = 0;
 		}
 										
 		$end = _maxLimit;	
+		
 		if($page === 0) {
 			$start = 0; 
 		} else { 
@@ -70,18 +71,19 @@ class Gallery_Controller extends ZP_Controller {
 		$limit = $start .", ". $end;						
 		
 		if($album === NULL) {
-			$data = $this->Gallery_Model->getByAlbum(FALSE, $limit);			
+			$data  = $this->Gallery_Model->getByAlbum(FALSE, $limit);			
 			$count = $this->Gallery_Model->getCount();
-			$URL   = _webBase . _sh . _webLang . _sh . _gallery . _sh . _page . _sh;
-		} elseif($album !== "") {
-			$data = $this->Gallery_Model->getByAlbum($album, $limit);
 			
+			$URL   = path("gallery/page");
+		} elseif($album !== "") {
+			$data  = $this->Gallery_Model->getByAlbum($album, $limit);
 			$count = $this->Gallery_Model->getCount($album);
-			$URL   = _webBase . _sh . _webLang . _sh . _gallery . _sh . "album" . _sh . $album . _sh . _page . _sh;
+
+			$URL   = path("gallery/album/". $album ."/page/");
 		}
 		
 		if($count > $end) {
-			 $pagination = $this->Pagination->paginate($count, _maxLimit, $start, $URL);
+			 $pagination = paginate($count, _maxLimit, $start, $URL);
 		}
 	
 		if(!$data) {				
@@ -95,8 +97,9 @@ class Gallery_Controller extends ZP_Controller {
 			$vars["count"]    = $count;
 			$vars["pictures"] = $data;
 			
-			if($this->effect !== TRUE) {								
+			if(!$this->effect) {								
 				$albums = $this->Gallery_Model->getAlbums();
+				
 				$vars["albums"]  = $albums;
 				$vars["view"][0] = $this->view("gallery", $this->application, TRUE);
 				$vars["view"][1] = $this->view("albums", $this->application, TRUE);
@@ -105,18 +108,14 @@ class Gallery_Controller extends ZP_Controller {
 			}
 			
 			$this->template("content", $vars);
-			
-			
 		}	
-		
-		$this->render();			
 	}
 	
 	public function showImage() {		
 		$data = $this->Gallery_Model->getByID(segment(3), TRUE);
 	
 		if(!$data) {
-			redirect(_webBase . _sh . _webLang . _sh . _gallery);
+			redirect(path("gallery");
 		}
 		
 		if($data["Album"] !== "None") {
@@ -147,30 +146,26 @@ class Gallery_Controller extends ZP_Controller {
 		$vars["count"]   = $count;
 		$vars["picture"] = $data;
 					
-		if(_webGalleryComments === TRUE) {
-			$vars["view"][0]  = $this->view("image", $this->application, TRUE);
+		if(_webGalleryComments) {
+			$vars["view"][0] = $this->view("image", $this->application, TRUE);
 			$vars["view"][1] = $this->view("comments", $this->application, TRUE);
 		} else {
 			$vars["view"]   = $this->view("image", $this->application, TRUE);			
 		}
 
 		$this->template("content", $vars);
-		$this->Render();
-		
 	}
 	
 	public function getNext() { 
-			
 		if(segment(4) !== "none") {
 			$prev = $this->Gallery_Model->getPrev(filter(segment(3)), segment(4));
-			$last  = $this->Gallery_Model->getLast(segment(4));	
+			$last = $this->Gallery_Model->getLast(segment(4));	
 		} else {
 			$prev = $this->Gallery_Model->getPrev(filter(segment(3)));
-			$last  = $this->Gallery_Model->getLast();				
+			$last = $this->Gallery_Model->getLast();				
 		}
 		
-		if($prev !== FALSE) {		
-			
+		if($prev !== FALSE) {
 			//Comentarios...
 			/*
 			if(isset($_POST["publishComment"])) {
@@ -203,20 +198,17 @@ class Gallery_Controller extends ZP_Controller {
 			$vars["count"] 	 = $count;
 			$vars["picture"] = $prev;
 			
-			if(_webGalleryComments === TRUE) {
-				$vars["view"][0]  = $this->view("image", $this->application, TRUE);
+			if(_webGalleryComments) {
+				$vars["view"][0] = $this->view("image", $this->application, TRUE);
 				$vars["view"][1] = $this->view("comments", $this->application, TRUE);
 			} else {
-				$vars["view"]   = $this->view("image", $this->application, TRUE);			
+				$vars["view"] = $this->view("image", $this->application, TRUE);			
 			}
 
 			$this->template("content", $vars);
-			$this->Render();
-		
 		} else {
-			
-			if($last === FALSE) {
-				redirect(_webBase . _sh . _webLang . _sh . _gallery);
+			if(!$last) {
+				redirect(path("gallery");
 			}
 			
 			/*
@@ -249,32 +241,27 @@ class Gallery_Controller extends ZP_Controller {
 			$vars["count"]   = $count;
 			$vars["picture"] = $last;
 			
-			if(_webGalleryComments === TRUE) {
-				$vars["view"][0]  = $this->view("image", $this->application, TRUE);
+			if(_webGalleryComments) {
+				$vars["view"][0] = $this->view("image", $this->application, TRUE);
 				$vars["view"][1] = $this->view("comments", $this->application, TRUE);
 			} else {
 				$vars["view"]   = $this->view("image", $this->application, TRUE);			
 			}
 
 			$this->template("content", $vars);
-			$this->Render();
-			
 		}
-		
 	}
 			
-	public function getPrev() {
-			
+	public function getPrev() {	
 		if(segment(4) !== "none") {
-			$next = $this->Gallery_Model->getNext(filter(segment(3)), segment(4));
+			$next  = $this->Gallery_Model->getNext(filter(segment(3)), segment(4));
 			$first = $this->Gallery_Model->getFirst(segment(4));
 		} else {
-			$next = $this->Gallery_Model->getNext(filter(segment(3)));
+			$next  = $this->Gallery_Model->getNext(filter(segment(3)));
 			$first = $this->Gallery_Model->getFirst();
 		}
 		
-		if($next!== FALSE) {			
-			
+		if($next) {			
 			/*
 			if(isset($_POST["publishComment"])) {
 				$error = $this->Gallery_Model->saveComment();
@@ -297,7 +284,7 @@ class Gallery_Controller extends ZP_Controller {
 			}
 			*/
 			
-			if($this->next["Album"] != "None") {
+			if($this->next["Album"] !== "None") {
 				$count = $this->Gallery_Model->getCount($this->next["Album_Nice"]);
 			} else {
 				$count = $this->Gallery_Model->getCount();
@@ -306,20 +293,17 @@ class Gallery_Controller extends ZP_Controller {
 			$vars["count"] 	 = $count;
 			$vars["picture"] = $this->next;
 			
-			if(_webGalleryComments === TRUE) {
-				$vars["view"][0]  = $this->view("image", $this->application, TRUE);
+			if(_webGalleryComments) {
+				$vars["view"][0] = $this->view("image", $this->application, TRUE);
 				$vars["view"][1] = $this->view("comments", $this->application, TRUE);
 			} else {
-				$vars["view"]   = $this->view("image", $this->application, TRUE);			
+				$vars["view"] = $this->view("image", $this->application, TRUE);			
 			}
 
 			$this->template("content", $vars);
-			$this->Render();
-			
 		} else {
-		
-			if($first === FALSE) {
-				redirect(_webBase . _sh . _webLang . _sh . _gallery);
+			if(!$first) {
+				redirect(path("gallery");
 			}
 			
 			/*
@@ -345,7 +329,7 @@ class Gallery_Controller extends ZP_Controller {
 			
 			*/
 			
-			if($first["Album"] != "None") {
+			if($first["Album"] !== "None") {
 				$count = $this->Gallery_Model->getCount($first["Album_Nice"]);
 			} else {
 				$count = $this->Gallery_Model->getCount();
@@ -354,16 +338,14 @@ class Gallery_Controller extends ZP_Controller {
 			$vars["count"] 	 = $count;
 			$vars["picture"] = $first;
 			
-			if(_webGalleryComments === TRUE) {
-				$vars["view"][0]  = $this->view("image", $this->application, TRUE);
+			if(_webGalleryComments) {
+				$vars["view"][0] = $this->view("image", $this->application, TRUE);
 				$vars["view"][1] = $this->view("comments", $this->application, TRUE);
 			} else {
-				$vars["view"]   = $this->view("image", $this->application, TRUE);			
+				$vars["view"] = $this->view("image", $this->application, TRUE);			
 			}
 
 			$this->template("content", $vars);
-			$this->Render();
-			
 		}
 	}
 	
