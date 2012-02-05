@@ -1,6 +1,5 @@
-<?php if(!defined("_access")) die("Error: You don't have permission to access here...")); ?>
-		
-<?php
+<?php if(!defined("_access")) die("Error: You don't have permission to access here..."); 
+
 	if(isset($data)) {
 		$ID  	     = recoverPOST("ID", 	      $data[0]["ID_Video"]);
 		$URL         = recoverPOST("URL",         $data[0]["URL"]);
@@ -12,8 +11,8 @@
 		$action		 = "edit";
 	} else {
 		$ID          = 0;
-		$URL         = recoverPOST("URL"));
-		$situation 	 = recoverPOST("situation"));
+		$URL         = recoverPOST("URL");
+		$situation 	 = recoverPOST("situation");
 		$edit        = FALSE;
 		$action		 = "save";
 	}
@@ -119,7 +118,7 @@
 			</p>
 			
 			<p class="save-cancel">
-				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(_(ucfirst($action)); ?>" type="submit" class="submit save" />
+				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(_(ucfirst($action))); ?>" type="submit" class="submit save" />
 				<input id="cancel" name="cancel" value="<?php print __(_("Cancel")); ?>" type="submit" class="submit cancel" tabindex="6" />
 			</p>
 		</fieldset>

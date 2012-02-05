@@ -43,17 +43,9 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->title("Add");
 		
-		$this->js("tiny-mce");
-		$this->js("insert-html");
-		$this->js("show-element");	
-		
 		$this->CSS("forms", "cpanel");
 		
-		$this->Library = $this->classes("Library", "cpanel");
-		
-		$this->vars["imagesLibrary"]    = $this->Library->getLibrary("images"); 
-		$this->vars["documentsLibrary"] = $this->Library->getLibrary("documents");
-		$this->vars["alert"] 			= FALSE;
+		$this->vars["alert"] = FALSE;
 		
 		$Model = ucfirst($this->application) . "_Model";
 		
@@ -94,14 +86,8 @@ class CPanel_Controller extends ZP_Controller {
 		$this->title("Edit");
 		
 		$this->CSS("forms", "cpanel");
-		$this->CSS("misc", "cpanel");
-		$this->CSS("categories", "categories");
 		
-		$this->js("tiny-mce");
-		$this->js("insert-html");
-		$this->js("show-element");	
-		
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
@@ -114,9 +100,6 @@ class CPanel_Controller extends ZP_Controller {
 		$data = $this->$Model->getByID($ID);
 		
 		if($data) {
-			$this->Library 	  = $this->classes("Library", "cpanel");
-			$this->Categories = $this->classes("Categories", "categories");
-			
 			$this->vars["data"]	= $data;
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			

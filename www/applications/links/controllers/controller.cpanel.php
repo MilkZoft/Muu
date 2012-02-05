@@ -11,7 +11,9 @@ class CPanel_Controller extends ZP_Controller {
 	private $vars = array();
 	
 	public function __construct() {		
-		$this->application = $this->app("cpanel");
+		$this->app("cpanel");
+
+		$this->application = "links";
 		
 		$this->CPanel = $this->classes("CPanel");
 		
@@ -28,9 +30,9 @@ class CPanel_Controller extends ZP_Controller {
 	
 	public function index() {
 		if($this->isAdmin) {
-			$this->add();
+			$this->redirect("cpanel");
 		} else {
-			redirect("cpanel");
+			$this->login();
 		}
 	}
 	
@@ -43,7 +45,7 @@ class CPanel_Controller extends ZP_Controller {
 				
 		$this->CSS("forms", "cpanel");
 			
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
@@ -61,7 +63,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["URL"]         = isset($save["error"]) ? recoverPOST("URL") 		: NULL;
 		$this->vars["follow"] 	   = isset($save["error"]) ? recoverPOST("follow") 		: NULL;
 		$this->vars["position"]    = isset($save["error"]) ? recoverPOST("position") 	: NULL;
-		$this->vars["situation"]   = isset($save["error"]) ? recoverPOST("state") 		: NULL;
+		$this->vars["situation"]   = isset($save["error"]) ? recoverPOST("situation") 	: NULL;
 		$this->vars["action"]	   = "save";
 		$this->vars["href"]	       = path("links/cpanel/add");
 
@@ -145,8 +147,10 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->title("Manage ". $this->application);
+		
 		$this->CSS("results", "cpanel");
 		$this->CSS("pagination");
+		
 		$this->js("checkbox");
 		
 		$this->helper("inflect");		

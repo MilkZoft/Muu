@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZanPHP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-04 22:10-0600\n"
-"PO-Revision-Date: 2012-02-04 22:14-0600\n"
+"POT-Creation-Date: 2012-02-05 02:26-0600\n"
+"PO-Revision-Date: 2012-02-05 02:26-0600\n"
 "Last-Translator: \n"
 "Language-Team: Carlos Santana <carlos@santana.ws>\n"
 "MIME-Version: 1.0\n"
@@ -591,12 +591,12 @@ msgstr "E-Mail"
 msgid "Send"
 msgstr "Enviar"
 
-#: www/applications/forums/models/model.forums.php:122
-#: www/applications/forums/models/model.forums.php:223
+#: www/applications/forums/models/model.forums.php:121
+#: www/applications/forums/models/model.forums.php:222
 msgid "There are not replies"
 msgstr "No hay nuevas respuestas"
 
-#: www/applications/forums/models/model.forums.php:278
+#: www/applications/forums/models/model.forums.php:277
 msgid "I posted on"
 msgstr "Publique en"
 
@@ -886,6 +886,23 @@ msgstr "¿Desea editar la respuesta?"
 msgid "Do you want to delete the reply?"
 msgstr "¿Deseas eliminar la respuesta?"
 
+#: www/applications/gallery/views/view.add.php:31
+msgid "Add Image"
+msgstr "Agregar Imagen"
+
+#: www/applications/gallery/views/view.add.php:73
+#: www/applications/gallery/views/view.image.php:46
+msgid "Album"
+msgstr "Álbum"
+
+#: www/applications/gallery/views/view.add.php:73
+msgid "Write a album or select"
+msgstr "Escribe un álbum o selecciona algúno"
+
+#: www/applications/gallery/views/view.add.php:79
+msgid "Select Album"
+msgstr "Selecciona un Álbum"
+
 #: www/applications/gallery/views/view.gallery.php:7
 #: www/applications/gallery/views/view.gallery.php:16
 #: www/applications/gallery/views/view.image.php:6
@@ -903,10 +920,6 @@ msgstr "Anterior"
 #: www/applications/gallery/views/view.image.php:14
 msgid "Next"
 msgstr "Siguiente"
-
-#: www/applications/gallery/views/view.image.php:46
-msgid "Album"
-msgstr "Álbum"
 
 #: www/applications/links/views/view.add.php:23
 msgid "Follow"
@@ -986,7 +999,7 @@ msgstr "Activar Cuenta"
 msgid "The account has been created correctly, we will send you an e-mail so you can activate your account"
 msgstr "Su cuenta ha sido creada correctamente, verifique su e-mail para activar su cuenta."
 
-#: www/applications/users/views/view.add.php:31
+#: www/applications/users/views/view.add.php:29
 msgid "Privilege"
 msgstr "Privilegio"
 
@@ -1114,26 +1127,30 @@ msgstr "Para recuperar tu contraseña, por favor escribe tu nombre de usuario o 
 msgid "Click on the close button below, or out of the box, to return to the forums"
 msgstr "Da click en cerrar, o sal de la caja, para regresar a los foros"
 
-#: www/applications/videos/views/view.add.php:27
+#: www/applications/videos/views/view.add.php:26
 msgid "Add Video"
 msgstr "Agregar Video"
 
-#: www/applications/videos/views/view.add.php:43
+#: www/applications/videos/views/view.add.php:42
 msgid "YouTube"
 msgstr "YouTube"
 
-#: www/applications/videos/views/view.add.php:71
+#: www/applications/videos/views/view.add.php:70
 msgid "There were no results for this search"
 msgstr "No hay resultados para esta búsqueda"
 
-#: www/applications/videos/views/view.add.php:82
-#: www/applications/videos/views/view.add.php:84
+#: www/applications/videos/views/view.add.php:81
+#: www/applications/videos/views/view.add.php:83
 msgid "Next results"
 msgstr "Siguientes resultados"
 
-#: www/applications/videos/views/view.add.php:109
+#: www/applications/videos/views/view.add.php:108
 msgid "State"
 msgstr "Estado"
+
+#: www/applications/works/views/view.add.php:33
+msgid "Add Work"
+msgstr "Agregar Portafolio"
 
 #: www/lib/exceptions/exception.database.php:11
 msgid "An unknown error has occurred"
@@ -1142,6 +1159,110 @@ msgstr "Un error desconocido ha ocurrido"
 #: www/lib/exceptions/exception.database.php:15
 msgid "Connection error"
 msgstr "Error de conexión"
+
+#: www/lib/languages/words.php:2
+msgid "Ads"
+msgstr "Anuncios"
+
+#: www/lib/languages/words.php:3
+msgid "Configuration"
+msgstr "Configuración"
+
+#: www/lib/languages/words.php:4
+msgid "Links"
+msgstr "Enlaces"
+
+#: www/lib/languages/words.php:5
+msgid "Pages"
+msgstr "Páginas"
+
+#: www/lib/languages/words.php:6
+msgid "Polls"
+msgstr "Encuestas"
+
+#: www/lib/languages/words.php:7
+msgid "Users"
+msgstr "Usuarios"
+
+#: www/lib/languages/words.php:8
+msgid "Works"
+msgstr "Portafolio"
+
+#: www/lib/languages/words.php:9
+msgid "Results"
+msgstr "Resultados"
+
+#: www/lib/languages/words.php:10
+msgid "record"
+msgstr "registro"
+
+#: www/lib/languages/words.php:11
+msgid "Manage Users"
+msgstr "Administrar Usuarios"
+
+#: www/lib/languages/words.php:12
+msgid "Action"
+msgstr "Acción"
+
+#: www/lib/languages/words.php:13
+msgid "Manage Ads"
+msgstr "Administrar Anuncios"
+
+#: www/lib/languages/words.php:14
+msgid "records"
+msgstr "registros"
+
+#: www/lib/languages/words.php:15
+msgid "Save"
+msgstr "Guardar"
+
+#: www/lib/languages/words.php:16
+msgid "Manage Feedback"
+msgstr "Administrar Mensajes de Contacto"
+
+#: www/lib/languages/words.php:17
+msgid "Manage Polls"
+msgstr "Administrar Encuestas"
+
+#: www/lib/languages/words.php:18
+msgid "Manage Blog"
+msgstr "Administrar Blog"
+
+#: www/lib/languages/words.php:19
+msgid "Manage Categories"
+msgstr "Administrar Categorías"
+
+#: www/lib/languages/words.php:20
+msgid "posts"
+msgstr "publicaciones"
+
+#: www/lib/languages/words.php:21
+msgid "Application"
+msgstr "Aplicación"
+
+#: www/lib/languages/words.php:22
+msgid "Language"
+msgstr "Idioma"
+
+#: www/lib/languages/words.php:23
+msgid "feedback"
+msgstr "contacto"
+
+#: www/lib/languages/words.php:24
+msgid "Manage Forums"
+msgstr "Administrar Foros"
+
+#: www/lib/languages/words.php:25
+msgid "Support"
+msgstr "Soporte Técnico"
+
+#: www/lib/themes/cpanel/footer.php:6
+msgid "All rights reserved"
+msgstr "Todos los derechos reservados"
+
+#: www/lib/themes/cpanel/footer.php:6
+msgid "Powered by"
+msgstr "Desarrollado por"
 
 #: www/lib/themes/cpanel/header.php:36
 #: www/lib/themes/cpanel/header.php:50
@@ -1220,9 +1341,6 @@ msgstr "Usted está en"
 #~ msgid "Manage Applications"
 #~ msgstr "Administrar Aplicaciones"
 
-#~ msgid "Application"
-#~ msgstr "Aplicación"
-
 #~ msgid "this is your first post, going to your"
 #~ msgstr "este es tu primer post, entra en tu"
 
@@ -1277,9 +1395,6 @@ msgstr "Usted está en"
 
 #~ msgid "State of Comments"
 #~ msgstr "Estado de los comentarios"
-
-#~ msgid "Language"
-#~ msgstr "Idioma"
 
 #~ msgid "Autentify"
 #~ msgstr "Autentificación"
@@ -1338,9 +1453,6 @@ msgstr "Usted está en"
 
 #~ msgid "Published in"
 #~ msgstr "Publicado en"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuración"
 
 #~ msgid "Url Base"
 #~ msgstr "Url Principal"
@@ -1452,9 +1564,6 @@ msgstr "Usted está en"
 
 #~ msgid "Sign up Twitter"
 #~ msgstr "Conectar con Twitter"
-
-#~ msgid "Select an Album"
-#~ msgstr "Selecciona un Álbum"
 
 #~ msgid "Existing Albums"
 #~ msgstr "Albums Existentes"
@@ -1613,9 +1722,6 @@ msgstr "Usted está en"
 
 #~ msgid "Upload Document"
 #~ msgstr "Subir Documento"
-
-#~ msgid "Add Area"
-#~ msgstr "Agregar Area"
 
 #~ msgid "Image 1"
 #~ msgstr "Imagen 1"
@@ -1953,26 +2059,11 @@ msgstr "Usted está en"
 #~ msgid "now"
 #~ msgstr "ahora"
 
-#~ msgid "Manage Ads"
-#~ msgstr "Administrar Anuncios"
-
-#~ msgid "Manage Blog"
-#~ msgstr "Administrar Blog"
-
 #~ msgid "Manage Links"
 #~ msgstr "Administrar Enlaces"
 
-#~ msgid "Manage Users"
-#~ msgstr "Administrar Usuarios"
-
-#~ msgid "Manage Categories"
-#~ msgstr "Administrar Categorías"
-
 #~ msgid "Manage Pages"
 #~ msgstr "Administrar Páginas"
-
-#~ msgid "Manage Feedback"
-#~ msgstr "Administrar Mensajes de Contacto"
 
 #~ msgid "Manage Support"
 #~ msgstr "Administrar Soporte"
@@ -1983,9 +2074,6 @@ msgstr "Usted está en"
 #~ msgid "BeDefault"
 #~ msgstr "Por Defecto"
 
-#~ msgid "Ads"
-#~ msgstr "Anuncios"
-
 #~ msgid "Help"
 #~ msgstr "Ayuda"
 
@@ -1995,29 +2083,11 @@ msgstr "Usted está en"
 #~ msgid "Learning"
 #~ msgstr "Educación"
 
-#~ msgid "Links"
-#~ msgstr "Enlaces"
-
-#~ msgid "Pages"
-#~ msgstr "Páginas"
-
 #~ msgid "SMS"
 #~ msgstr "SMS"
 
-#~ msgid "Users"
-#~ msgstr "Usuarios"
-
 #~ msgid "E-Bill"
 #~ msgstr "Facturación Electrónica"
-
-#~ msgid "Polls"
-#~ msgstr "Encuestas"
-
-#~ msgid "Support"
-#~ msgstr "Soporte Técnico"
-
-#~ msgid "Works"
-#~ msgstr "Portafolio de Trabajos"
 
 #~ msgid "Deleted"
 #~ msgstr "Eliminado"
@@ -2048,9 +2118,6 @@ msgstr "Usted está en"
 
 #~ msgid "Documents"
 #~ msgstr "Documentos"
-
-#~ msgid "Powered by"
-#~ msgstr "Desarrollado por"
 
 #~ msgid "Users Online"
 #~ msgstr "Usuarios en Línea"
@@ -2223,9 +2290,6 @@ msgstr "Usted está en"
 #~ msgid "Developed by"
 #~ msgstr "Desarrollado por"
 
-#~ msgid "All rights reserved"
-#~ msgstr "Todos los derechos reservados"
-
 #~ msgid "Presidency"
 #~ msgstr "Presidencia"
 
@@ -2287,9 +2351,6 @@ msgstr "Usted está en"
 #~ msgid "portfolio"
 #~ msgstr "portafolio"
 
-#~ msgid "feedback"
-#~ msgstr "contacto"
-
 #~ msgid "blog"
 #~ msgstr "blog"
 
@@ -2301,9 +2362,6 @@ msgstr "Usted está en"
 
 #~ msgid "The comment can not be empty"
 #~ msgstr "El Comentario no puede estar vacío"
-
-#~ msgid "Posts"
-#~ msgstr "Posts"
 
 #~ msgid "Parent"
 #~ msgstr "Padre"
@@ -2702,9 +2760,6 @@ msgstr "Usted está en"
 #~ msgid "Modify Post"
 #~ msgstr "Modificar Post"
 
-#~ msgid "Save"
-#~ msgstr "Guardar"
-
 #~ msgid "Separate tags with commas"
 #~ msgstr "Separa las etiquetas con comas"
 
@@ -2850,9 +2905,6 @@ msgstr "Usted está en"
 
 #~ msgid "Do you want to eliminate the photo?"
 #~ msgstr "¿Deseas eliminar la fotografía?"
-
-#~ msgid "Manage Photos"
-#~ msgstr "Administrar Fotografías"
 
 #~ msgid "Themes"
 #~ msgstr "Diseños"

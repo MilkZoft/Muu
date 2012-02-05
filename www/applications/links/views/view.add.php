@@ -1,11 +1,11 @@
 <?php 
-	if(!defined("_access"))) {
-		die("Error: You don't have permission to access here...")); 
+	if(!defined("_access")) {
+		die("Error: You don't have permission to access here..."); 
 	}
 
-	print div("add-form", "class"));
-		print formOpen($href, "form-add", "form-add"));
-			print p(__(_(ucfirst(whichApplication())), "resalt"));
+	print div("add-form", "class");
+		print formOpen($href, "form-add", "form-add");
+			print p(__(_(ucfirst(whichApplication()))), "resalt");
 			
 			print isset($alert) ? $alert : NULL;
 
@@ -23,15 +23,15 @@
 			print formSelect(array("name" => "follow", "class" => "select", "p" => TRUE, "field" => __(_("Follow"))), $options);
 
 			$options = array(
-				0 => array("value" => "Web Friends", "option" => __(_("Web Friends")), "selected" => ($position === "Web Friends")) ? TRUE : FALSE),
-				1 => array("value" => "Directory", "option" => __(_("Directory")),   "selected" => ($position === "Directory"))   ? TRUE : FALSE)
+				0 => array("value" => "Web Friends", "option" => __(_("Web Friends")), "selected" => ($position === "Web Friends") ? TRUE : FALSE),
+				1 => array("value" => "Directory", "option" => __(_("Directory")),   "selected" => ($position === "Directory")   ? TRUE : FALSE)
 			);
 
 			print formSelect(array("name" => "position", "class" => "select", "p" => TRUE, "field" => __(_("Position"))), $options);
 			
 			$options = array(
-				0 => array("value" => "Active",   "option" => __(_("Active")),   "selected" => ($situation === "Active"))   ? TRUE : FALSE),
-				1 => array("value" => "Inactive", "option" => __(_("Inactive")), "selected" => ($situation === "Inactive")) ? TRUE : FALSE)
+				0 => array("value" => "Active",   "option" => __(_("Active")),   "selected" => ($situation === "Active")   ? TRUE : FALSE),
+				1 => array("value" => "Inactive", "option" => __(_("Inactive")), "selected" => ($situation === "Inactive") ? TRUE : FALSE)
 			);
 
 			print formSelect(array("name" => "situation", "class" => "select", "p" => TRUE, "field" => __(_("Situation"))), $options);

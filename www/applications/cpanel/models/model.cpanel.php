@@ -64,7 +64,7 @@ class CPanel_Model extends ZP_Model {
 				$title2   = __(_("Send to Trash"));				
 				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
 					
-				$action = a(span("tiny-image tiny-mail", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1)) . 
+				$action = a(span("tiny-image tiny-mail", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1)) . 
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));										
 			} elseif($delete and !$edit) {
 				$URL1     = path($this->application . _sh . "cpanel" . _sh . "read"  . _sh . $ID);

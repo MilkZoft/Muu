@@ -11,10 +11,9 @@ class Forums_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db          = $this->db();		
 		$this->table       = "forums";
-		$this->application = "forums";
 		$this->language    = whichLanguage(); 
 		
-		$this->helpers(;
+		$this->helpers();
 	}
 	
 	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {
@@ -42,7 +41,7 @@ class Forums_Model extends ZP_Model {
 			if(SESSION("ZanUserPrivilege") === _super) {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanAdminID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
 			if(SESSION("ZanUserPrivilege") === _super) {
@@ -142,7 +141,7 @@ class Forums_Model extends ZP_Model {
 
 						$page = $this->getPage($reply[0]["ID_Parent"]);
 						
-						$data[$i]["Last_URL"] = path("forums/". $data[$i]["Nice"] ."/". $reply[0]["ID_Parent"] ."/page/". $page ."/#bottom";
+						$data[$i]["Last_URL"] = path("forums/". $data[$i]["Nice"] ."/". $reply[0]["ID_Parent"] ."/page/". $page ."/#bottom");
 					} else {
 						$ID_Forum = $forum["ID_Forum"];
 						
@@ -170,7 +169,7 @@ class Forums_Model extends ZP_Model {
 	}
 	
 	public function getByForum($nice, $language = "Spanish") {	
-		$forum = $this->Db->findBySQL("Nice = '$nice' AND Language = '$language' AND Situation = 'Active'", $this->table);
+		$forum = $this->Db->findBySQL("Slug = '$slug' AND Language = '$language' AND Situation = 'Active'", $this->table);
 
 		$dataForum["Forum_Title"] = $forum[0]["Title"];	
 		$dataForum["Forum_Nice"]  = $forum[0]["Nice"];
@@ -241,15 +240,15 @@ class Forums_Model extends ZP_Model {
 		}
 	}
 	
-	public function getIDByForum($nice, $language = "Spanish") {
-		return $this->Db->findBySQL("Nice = '$nice' AND Language = '$language'", $this->table);
+	public function getIDByForum($slug, $language = "Spanish") {
+		return $this->Db->findBySQL("Slug = '$slug' AND Language = '$language'", $this->table);
 	}
 	
 	public function setTopic() {
 		$ID      = POST("ID_Forum");
 		$title   = POST("title", "decode", "escape");
 		$content = cleanTiny(POST("content", "decode", FALSE));
-		$nice    = nice($title);
+		$slug    = slug($title);
 		$ID_User = SESSION("ZanUserID");
 		$author  = SESSION("ZanUser");
 		$date1   = now(4);
@@ -293,7 +292,7 @@ class Forums_Model extends ZP_Model {
 		$ID_Post  = POST("ID_Post");
 		$title    = POST("title", "decode", "escape");
 		$content  = cleanTiny(POST("content", "decode", FALSE));
-		$nice     = nice($title);
+		$slug     = slug($title);
 		$date1    = now(4);
 		$date2    = now(2);
 		$hour     = date("H:i:s", $date1);
@@ -358,11 +357,11 @@ class Forums_Model extends ZP_Model {
 				if(segment(4) === "page" and segment(5) > 0) {
 					$page = segment(5);
 
-					$replies[$i]["deleteURL"] = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/delete/". $reply["ID_Post"] ."/". $page;
-					$replies[$i]["editURL"]   = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/edit/". $reply["ID_Post"] ."/". $page;
+					$replies[$i]["deleteURL"] = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/delete/". $reply["ID_Post"] ."/". $page);
+					$replies[$i]["editURL"]   = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/edit/". $reply["ID_Post"] ."/". $page);
 				} else {
-					$replies[$i]["deleteURL"] = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/delete/". $reply["ID_Post"];
-					$replies[$i]["editURL"]   = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/edit/". $reply["ID_Post"];
+					$replies[$i]["deleteURL"] = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/delete/". $reply["ID_Post"]);
+					$replies[$i]["editURL"]   = path($this->application ."/". segment(2) ."/". $topic[0]["ID_Post"] ."/edit/". $reply["ID_Post"]);
 				}
 				
 				$i++;
@@ -386,7 +385,7 @@ class Forums_Model extends ZP_Model {
 		$ID_Post  = POST("ID_Post");
 		$title    = POST("title", "decode", "escape");
 		$content  = cleanTiny(POST("content", "decode", FALSE));
-		$nice     = nice($title);
+		$slug     = slug($title);
 		$ID_User  = SESSION("ZanUserID");
 		$author   = SESSION("ZanUser");
 		$date1    = now(4);

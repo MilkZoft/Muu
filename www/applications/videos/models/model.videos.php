@@ -11,9 +11,9 @@ class Videos_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 		
-		$this->helpers(;
+		$this->helpers();
 		
-		$this->table       = "videos";
+		$this->table = "videos";
 		
 		$this->language    = whichLanguage(); 
 		$this->application = whichApplication();

@@ -39,15 +39,15 @@ class Works_Model extends ZP_Model {
 	private function all($trash, $order, $limit) {
 		if(!$trash) {
 			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBySQL("State != 'Deleted'", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND State != 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", NULL, $order, $limit);
 			}	
 		} else {
 			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBy("State", "Deleted", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND State = 'Deleted'", $this->table, NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
 			}
 		}
 		
@@ -128,7 +128,8 @@ class Works_Model extends ZP_Model {
 					"Image"		  => $this->image, 
 					"URL"		  => $this->URL, 
 					"Description" => $this->description, 
-					"Situation"   => $this->situation;					
+					"Situation"   => $this->situation
+				);					
 	
 		$this->Db->insert($this->table, $data);
 					
@@ -138,23 +139,22 @@ class Works_Model extends ZP_Model {
 	private function edit() {
 		$data = $this->getByID($this->ID);
 		
-
 		$data["Title"] = $this->title;
 		$data["Slug"]  = $this->slug;
 		
-		if($this->preview1 != "") {
+		if($this->preview1 !== "") {
 			$data["Preview1"] = $this->preview1;
 			
 			@unlink($data[0]["Preview1"]);
 		}
 		
-		if($this->preview2 != "") {
+		if($this->preview2 !== "") {
 			$data["Preview2"] = $this->preview2;
 			
 			@unlink($data[0]["Preview2"]);
 		}
 		
-		if($this->image != "") {
+		if($this->image !== "") {
 			$data["Image"] = $this->image;
 			
 			@unlink($data[0]["Image"]);
@@ -169,9 +169,8 @@ class Works_Model extends ZP_Model {
 		return getAlert("The work has been edit correctly", "success");
 	}
 	
-	public function getByID($ID, $mode = FALSE) {
-		$this->Db->table($this->table);
-		$data = $this->Db->find($ID);
+	public function getByID($ID) {
+		$data = $this->Db->find($ID, $this->table);
 		
 		return $data;
 	}
@@ -185,7 +184,7 @@ class Works_Model extends ZP_Model {
 		$this->Files->fileError = FILES($file, "error");
 		$this->Files->fileTmp   = FILES($file, "tmp_name");
 		
-		$dir = _lib . _sh . _files . _sh . _images . _sh . "works" . _sh;
+		$dir = "www/lib/files/images/works/";
 		
 		if(!file_exists($dir)) {
 			@mkdir($dir, 0777); 				
@@ -193,10 +192,11 @@ class Works_Model extends ZP_Model {
 				
 		$upload = $this->Files->upload($dir);
 		
-		if($upload["upload"] === TRUE) {
-			return $dir  . $upload["filename"];
+		if($upload["upload"]) {
+			return $dir . $upload["filename"];
 		} else {
 			$this->error = getAlert($upload["message"]);
+			
 			return FALSE;
 		}
 	}

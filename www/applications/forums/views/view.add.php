@@ -6,7 +6,7 @@
 		$title       = recoverPOST("title",       $data[0]["Title"]);
 		$description = recoverPOST("description", $data[0]["Description"]);
 		$language    = recoverPOST("language",    $data[0]["Language"]);
-		$state 	     = recoverPOST("state",       $data[0]["State"]);
+		$situation 	 = recoverPOST("situation",   $data[0]["Situation"]);
 		$edit        = TRUE;
 		$action	     = "edit";
 		$href        = path($this->application . _sh . "cpanel" . _sh . "edit" . _sh . $ID);		
@@ -15,7 +15,7 @@
 		$title       = recoverPOST("title");
 		$description = recoverPOST("description");
 		$language    = recoverPOST("language");
-		$state 	     = recoverPOST("state");
+		$situation   = recoverPOST("situation");
 		$edit        = FALSE;
 		$action	     = "save";
 		$href	     = path($this->application . _sh . "cpanel" . _sh . "add" . _sh);

@@ -14,6 +14,105 @@ class Tags_Model extends ZP_Model {
 		$this->table 	= "tags";
 	}
 
+	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {
+		if($action === "edit" or $action === "save") {
+			$validation = $this->editOrSave($action);
+		
+			if($validation) {
+				return $validation;
+			}
+		}
+		
+		if($action === "all") {
+			return $this->all($trash, $order, $limit);
+		} elseif($action === "edit") {
+			return $this->edit();															
+		} elseif($action === "save") {
+			return $this->save();
+		} elseif($action === "search") {
+			return $this->search($search, $field);
+		}
+	}
+	
+	private function all($trash, $order, $limit) {
+		if(!$trash) {
+			if(SESSION("ZanUserPrivilege") === _super) { 
+				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
+			} else {
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
+			}	
+		} else {
+			if(SESSION("ZanUserPrivilege") === _super) {
+				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
+			} else {
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
+			}
+		}
+		
+		return $data;	
+	}
+	
+	private function editOrSave($action) {
+		$validations = array(
+			"exists"  => array(
+							"Slug" 	   => slug(POST("title", "clean")), 
+							"Year"	   => date("Y"),
+							"Month"	   => date("m"),
+							"Day"	   => date("d"),
+							"Language" => POST("language")
+						),
+			"title"   => "required",
+			"content" => "required"
+		);
+		
+		$this->categories = POST("categories"); 
+		$this->tags	  = POST("tags");
+		$this->URL        = PATH("blog/". date("Y")) ."/". date("m") ."/". date("d") ."/". slug(POST("title", "clean"));
+		$this->muralExist = POST("mural_exist");
+				
+		$this->Files = $this->core("Files");
+		
+		$this->mural = FILES("mural");
+		
+		if($this->mural["name"] !== "") {
+			$dir = "www/lib/files/images/mural/";
+
+			$this->mural = $this->Files->uploadImage($dir, "mural", "mural");
+		
+			if(is_array($this->mural)) {
+				return $this->mural["alert"];
+			}
+		}
+		
+		$dir = "www/lib/files/images/blog/";
+		
+		$this->image = $this->Files->uploadImage($dir, "image", "resize", TRUE, TRUE, FALSE);
+
+		$data = array(
+			"ID_User"      => SESSION("ZanUserID"),
+			"ID_URL"       => 1,
+			"Slug"         => slug(POST("title", "clean")),
+			"Content"      => POST("content", "clean"),
+			"Author"       => SESSION("ZanUser"),
+			"Year"	       => date("Y"),
+			"Month"	       => date("m"),
+			"Day"	       => date("d"),
+			"Image_Small"  => isset($this->image["small"])  ? $this->image["small"]  : NULL,
+			"Image_Medium" => isset($this->image["medium"]) ? $this->image["medium"] : NULL,
+			"Pwd"	       => (POST("pwd")) ? POST("pwd", "encrypt") : NULL,
+			"Start_Date"   => now(4),
+			"Text_Date"    => now(2)
+		);
+	
+		$this->Data->ignore(array("categories", "tags", "mural_exists", "mural", "pwd", "category", "language_category", "application", "mural_exist"));
+
+		$this->data = $this->Data->proccess($data, $validations);
+
+		if(isset($this->data["error"])) {
+			return $this->data["error"];
+		}
+	}
+
 	public function getTags($application, $ID) {		
 		$query = "	SELECT * FROM ". _dbPfx ."tags WHERE ". _dbPfx ."tags.ID_Tag IN (
         				SELECT ". _dbPfx ."re_tags_applications.ID_Tag FROM ". _dbPfx ."re_tags_applications 
@@ -50,7 +149,6 @@ class Tags_Model extends ZP_Model {
 				
 		return $data;
 	}
-	
 	
 	public function setTagsByRecord($application, $tags, $ID) {	
 		if($tags) {

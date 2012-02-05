@@ -57,9 +57,7 @@ class YouTube {
 	private function getResult() {
 		switch(strtolower($this->format)) {
 			case "json":
-				$content = @file_get_contents(str_replace(array("&alt=array", "?alt=array");
-				$stream  = stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)));
-				$results = json_decode($content, array("&alt=json", "?alt=json"), $this->uri), FALSE, $stream));
+				$results = json_decode(@file_get_contents(str_replace(array("&alt=array", "?alt=array"), array("&alt=json", "?alt=json"), $this->uri), FALSE, stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)))));
 				
 				if($results) {
 					if($results->{'openSearch$totalResults'}->{'$t'} > 0) {
@@ -78,9 +76,7 @@ class YouTube {
 			break;
 			
 			case "array":
-				$content = @file_get_contents(str_replace(array("&alt=array", "?alt=array");
-				$stream  = stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)));
-				$results = json_decode($content, array("&alt=json", "?alt=json"), $this->uri), FALSE, $stream));
+				$results = json_decode(@file_get_contents(str_replace(array("&alt=array", "?alt=array"), array("&alt=json", "?alt=json"), $this->uri), FALSE, stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)))));
 				
 				if($results) {
 					if(isset($results->entry) and !isset($results->feed)) {
@@ -99,11 +95,11 @@ class YouTube {
 						if($results->feed->{'openSearch$totalResults'}->{'$t'} > 0) {
 							foreach($results->feed->entry as $entry) {
 								$data["videos"][] = array(
-									"id"      => $this->id($entry->id->{'$t'}),
+									"id" 	  => $this->id($entry->id->{'$t'}),
 									"title"   => $entry->title->{'$t'},
-									"cut"     => $this->cut($entry->title->{'$t'}),
+									"cut" 	  => $this->cut($entry->title->{'$t'}),
 									"content" => $entry->content->{'$t'},
-									"views"   => $entry->{'yt$statistics'}->viewCount
+									//"views"   => $entry->{'yt$statistics'}->viewCount
 								);
 							}
 							

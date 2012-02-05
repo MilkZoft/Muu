@@ -28,7 +28,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->Templates = $this->core("Templates");
 		
-		$this->Templates->theme(_cpanel);
+		$this->Templates->theme("cpanel");
 	}
 	
 	public function index() {
@@ -49,7 +49,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->CSS("forms", "cpanel");
 		$this->CSS("categories", $this->application);
 		
-		$this->Library = $this->classes("Library", _cpanel);
+		$this->Library = $this->classes("Library", "cpanel");
 		
 		$this->vars["ID"]          	= 0;
 		$this->vars["ID_URL"]      	= isset($save["error"]) ? recoverPOST("ID_URL") 	: NULL;
@@ -87,9 +87,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash");
+			redirect(path($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash"));
 		} else {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results");
+			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
 		}	
 	}
 	

@@ -1,12 +1,11 @@
 <?php 
-	if(!defined("_access"))) {
-		die("Error: You don't have permission to access here...")); 
+	if(!defined("_access")) {
+		die("Error: You don't have permission to access here..."); 
 	}
 
-	print div("add-form", "class"));
-		print formOpen($href, "form-add", "form-add"));
-			
-			print p(__(_(ucfirst(whichApplication()))), "resalt"));
+	print div("add-form", "class");
+		print formOpen($href, "form-add", "form-add");
+			print p(__(_(ucfirst(whichApplication()))), "resalt");
 			
 			print isset($alert) ? $alert : NULL;
 
@@ -19,7 +18,6 @@
 			print formInput(array("name" => "email", "class" => "input required", "field" => __(_("Email")), "p" => TRUE, "value" => $username));
 			
 			$i = 0;
-			
 			foreach($privileges as $value) { 
 				$options[$i]["value"]    = $value["ID_Privilege"];
 				$options[$i]["option"]   = $value["Privilege"];
@@ -28,14 +26,14 @@
 				$i++;
 			} 
 
-			print formSelect(array("name" => "privilege", "class" => "select", "p" => TRUE, "field" => __(_("Privilege"))), $options);
+			print formSelect(array("name" => "privilege", "class" => "select", "p" => TRUE, "field" => __(_("Privilege")), $options));
 			
 			$options = array(
-				0 => array("value" => "Active",   "option" => __(_("Active")),   "selected" => ($situation === "Active"))   ? TRUE : FALSE),
-				1 => array("value" => "Inactive", "option" => __(_("Inactive")), "selected" => ($situation === "Inactive")) ? TRUE : FALSE)
+				0 => array("value" => "Active",   "option" => __(_("Active")),   "selected" => ($situation === "Active")   ? TRUE : FALSE),
+				1 => array("value" => "Inactive", "option" => __(_("Inactive")), "selected" => ($situation === "Inactive") ? TRUE : FALSE)
 			);
 
-			print formSelect(array("name" => "situation", "class" => "select", "p" => TRUE, "field" => __(_("Situation"))), $options);
+			print formSelect(array("name" => "situation", "class" => "select", "p" => TRUE, "field" => __(_("Situation")), $options));
 			
 			print formSave($action);
 			

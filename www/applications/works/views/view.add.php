@@ -9,98 +9,98 @@
 		$image 	     = recoverPOST("image",       $data[0]["Image"]);
 		$preview1 	 = recoverPOST("preview1",    $data[0]["Preview1"]);
 		$preview2 	 = recoverPOST("preview2",    $data[0]["Preview2"]);
-		$state 	     = recoverPOST("state",       $data[0]["State"]);
+		$situation 	 = recoverPOST("state",       $data[0]["Situation"]);
 		$edit        = TRUE;
 		$action	     = "edit";
-		$href	     = _webBase . _sh . _webLang . _sh . _cpanel . _sh . segment(2) . _sh . _action . _sh . $action . _sh . $ID;
+		$href	     = path($this->application . _sh . "cpanel" . _sh . "edit" . _sh . $ID);
 	} else {
 	    $ID  	     = 0;
 		$title       = recoverPOST("title");
 		$description = recoverPOST("description");
 		$URL         = recoverPOST("URL");
-		$state 	     = recoverPOST("state");
+		$situation   = recoverPOST("situation");
 		$image 	     = NULL;
 		$preview1 	 = NULL;
 		$preview2 	 = NULL;
 		$action	     = "save";
-		$href	     = _webBase . _sh . _webLang . _sh . _cpanel . _sh . segment(2) . _sh . _action . _sh . $action;
+		$href	     = path($this->application . _sh . "cpanel" . _sh . "add" . _sh);
 	}
 ?>
 
 <div class="add-form">
 	<form id="form-add" class="form-add" action="<?php print $href; ?>" method="post" enctype="multipart/form-data">
 		<fieldset>
-			<legend><?php print __("Add Work"); ?></legend>
+			<legend><?php print __(_("Add Work")); ?></legend>
 			
 			<p class="resalt">
-				<?php print __(ucfirst(segment(2))); ?>
+				<?php print __(_(ucfirst(whichApplication()))); ?>
 			</p>
 			
 			<?php print isset($alert) ? $alert : NULL; ?>
 			
 			<p class="field">
-				&raquo; <?php print __("Title"); ?><br />
+				&raquo; <?php print __(_("Title")); ?><br />
 				<input id="title" name="title" type="text" value="<?php print $title; ?>" tabindex="1" class="input required" />
 			</p>
 			
 			<p class="field">
-				&raquo; <?php print __("URL"); ?><br />
+				&raquo; <?php print __(_("URL")); ?><br />
 				<input name="URL" type="text" value="<?php print $URL; ?>" tabindex="4" class="input required" />
 			</p>
 		
 			<p class="field">
-				&raquo; <?php print __("Description"); ?><br />
+				&raquo; <?php print __(_("Description")); ?><br />
 				<textarea id="editor" name="description" tabindex="2" class="textarea"><?php print $description; ?></textarea>
 			</p>
 			
 			<p class="field">
 			
-				&raquo; <?php print __("Image"); ?><br />
+				&raquo; <?php print __(_("Image")); ?><br />
 				<input id="file1" name="image" type="file" tabindex="4" class="input required" />
 				 
-				<?php if($image != NULL) { ?>
+				<?php if($image) { ?>
 					<a class="work-lightbox" title="<?php print $title; ?>" href="<?php print _webURL . _sh . $image;?>">
-						<?php print __("view image");?>
+						<?php print __(_("Preview")); ?>
 					</a>
 				<?php } ?>
 			</p>
 			
 			<p class="field">
-				&raquo; <?php print __("Preview"); ?> 1<br />
+				&raquo; <?php print __(_("Preview")); ?> 1<br />
 				<input id="file2" name="preview1" type="file" tabindex="4" class="input required" />
 				
-				<?php if($preview1 != NULL) { ?>
+				<?php if($preview1) { ?>
 					<a class="work-lightbox" title="<?php print $title; ?>" href="<?php print _webURL . _sh . $preview1;?>">
-						<?php print __("view image");?>
+						<?php print __(_("Preview")) ;?>
 					</a>
 				<?php } ?>
 			</p>
 			
 			<p class="field">
-				&raquo; <?php print __("Preview"); ?> 2<br />
+				&raquo; <?php print __(_("Preview")); ?> 2<br />
 				<input id="file3" name="preview2" type="file" tabindex="4" class="input required" />
-				<?php if($preview2 != NULL) { ?>
+				<?php if($preview2) { ?>
 					<a class="work-lightbox" title="<?php print $title; ?>" href="<?php print _webURL . _sh . $preview2;?>">
-						<?php print __("view image");?>
+						<?php print __(_("Preview"));?>
 					</a>
 				<?php } ?>
 			</p>
 			
 			<p class="field">
-				&raquo; <?php print __("State"); ?><br />
-				<select id="state" name="state" size="1" tabindex="5" class="select">
-					<option value="Active" <?php print ($state === "Active")  ? 'selected="selected"' : NULL; ?>>
-						<?php print __("Active"); ?>
+				&raquo; <?php print __(_("Situation")); ?><br />
+				<select id="situation" name="situation" size="1" tabindex="5" class="select">
+					<option value="Active" <?php print ($situation === "Active")  ? 'selected="selected"' : NULL; ?>>
+						<?php print __(_("Active")); ?>
 					</option>
-					<option value="Inactive" <?php print ($state === "Inactive")  ? 'selected="selected"' : NULL; ?>>
-						<?php print __("Inactive"); ?>
+					<option value="Inactive" <?php print ($situation === "Inactive")  ? 'selected="selected"' : NULL; ?>>
+						<?php print __(_("Inactive")); ?>
 					</option>
 				</select>
 			</p>
 			
 			<p class="save-cancel">
-				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(ucfirst($action)); ?>" type="submit" class="submit save" tabindex="6" />
-				<input id="cancel" name="cancel" value="<?php print __("Cancel"); ?>" type="submit" class="submit cancel" tabindex="7" />
+				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(_(ucfirst($action))); ?>" type="submit" class="submit save" tabindex="6" />
+				<input id="cancel" name="cancel" value="<?php print __(_("Cancel")); ?>" type="submit" class="submit cancel" tabindex="7" />
 			</p>
 			
 			<input name="ID_Work" type="hidden" value="<?php print $ID; ?>" />
@@ -108,6 +108,8 @@
 	</form>
 </div>
 
-<?php print $this->js("lib/scripts/js/droparea.js");?>
-<?php print $this->js("droparea", segment(2));?>
-<?php $this->CSS("style", segment(2), TRUE);?>
+<?php 
+	print $this->js("lib/scripts/js/droparea.js");
+	print $this->js("droparea", "works");
+	
+	$this->CSS("style", segment(2), TRUE);

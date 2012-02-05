@@ -8,7 +8,7 @@
 		$category 	 = recoverPOST("category",    $data[0]["Album"]);
 		$ID_Category = recoverPOST("ID_Category", $data[0]["ID_Category"]);
 		$medium      = recoverPOST("medium",      $data[0]["Medium"]);
-		$state 	     = recoverPOST("state",       $data[0]["State"]);
+		$state 	     = recoverPOST("situation",   $data[0]["State"]);
 		$edit        = TRUE;
 		$action	     = "edit";
 		$href	     = path($this->application . _sh . "cpanel" . _sh . "edit" . _sh . $ID);
@@ -19,7 +19,7 @@
 		$category 	 = recoverPOST("category");
 		$ID_Category = recoverPOST("ID_Category");
 		$medium 	 = recoverPOST("medium");
-		$state 	     = recoverPOST("state");
+		$situation   = recoverPOST("situation");
 		$action	     = "save";
 		$href	     = path($this->application . _sh . "cpanel" . _sh . "add" . _sh);
 	}
@@ -28,22 +28,22 @@
 <div class="add-form">
 	<form id="form-add" class="form-add" action="<?php print $href; ?>" method="post" enctype="multipart/form-data">
 		<fieldset>
-			<legend><?php print __("Add Image"); ?></legend>
+			<legend><?php print __(_("Add Image")); ?></legend>
 			
 			<p class="resalt">
-				<?php print __(ucfirst(segment(2))); ?>
+				<?php print __(_(ucfirst(whichApplication()))); ?>
 			</p>
 			
 			<?php print isset($alert) ? $alert : NULL; ?>
 			
 			<p class="field">
-				&raquo; <?php print __("Title"); ?><br />
+				&raquo; <?php print __(_("Title")); ?><br />
 				<input id="title" name="title" type="text" value="<?php print $title; ?>" tabindex="1" class="input required" />
 			</p>
 		
 			<p class="field">
-				&raquo; <?php print __("Description"); ?><br />
-				<textarea id="description" name="description" type="text" tabindex="2" class="input"><?php print $description;?></textarea>
+				&raquo; <?php print __(_("Description")); ?><br />
+				<textarea id="description" name="description" type="text" tabindex="2" class="input"><?php print $description; ?></textarea>
 			</p>
 			
 			<?php if($medium != NULL) { ?>
@@ -55,7 +55,7 @@
 			<?php if($action === "save") { ?>
 			
 				<p class="field">
-					&raquo; <?php print __("Image"); ?><br />
+					&raquo; <?php print __(_("Image")); ?><br />
 					<input id="file" name="files[]" type="file" tabindex="4" class="addImg input required" />
 					<span id="addImg">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</p>
@@ -64,19 +64,19 @@
 			
 			<?php } else { ?>
 				<p class="field">
-					&raquo; <?php print __("Image"); ?><br />
+					&raquo; <?php print __(_("Image")); ?><br />
 					<input id="file" name="file" type="file" tabindex="4" class="input required" />
 				</p>
 			<?php } ?>
 			
 			<p class="field">
-				&raquo; <?php print __("Album") ." (". __("Write a album or select") .")";?><br />
+				&raquo; <?php print __(_("Album")) ." (". __(_("Write a album or select")) .")"; ?><br />
 				<input id="category" name="category" type="text" value="" tabindex="4" class="input" />
 			</p>
 	
 			<p class="field">
 				<select id="ID_Category" name="ID_Category" size="1" tabindex="5" class="select">
-					<option value="0"><?php print __("Select Album"); ?></option>
+					<option value="0"><?php print __(_("Select Album")); ?></option>
 					<?php if(is_array($categories)) { ?>
 						<?php foreach($categories as $cat) { ?>
 							<?php if($ID_Category === $cat["ID_Category"]) { ?>
@@ -90,21 +90,21 @@
 			</p>
 			
 			<p class="field">
-				&raquo; <?php print __("Situation"); ?><br />
+				&raquo; <?php print __(_("Situation")); ?><br />
 				<select id="situation" name="situation" size="1" tabindex="5" class="select">
 					<option value="Active" <?php print ($situation === "Active") ? 'selected="selected"' : NULL; ?>>
-						<?php print __("Active"); ?>
+						<?php print __(_("Active")); ?>
 					</option>
 
-					<option value="Inactive" <?php print ($state === "Inactive") ? 'selected="selected"' : NULL; ?>>
-						<?php print __("Inactive"); ?>
+					<option value="Inactive" <?php print ($situation === "Inactive") ? 'selected="selected"' : NULL; ?>>
+						<?php print __(_("Inactive")); ?>
 					</option>
 				</select>
 			</p>
 			
 			<p class="save-cancel">
-				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(ucfirst($action)); ?>" type="submit" class="submit save" />
-				<input id="cancel" name="cancel" value="<?php print __("Cancel"); ?>" type="submit" class="submit cancel" />
+				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(_(ucfirst($action))); ?>" type="submit" class="submit save" />
+				<input id="cancel" name="cancel" value="<?php print __(_("Cancel")); ?>" type="submit" class="submit cancel" />
 			</p>
 			
 			<input name="ID_Image" type="hidden" value="<?php print $ID; ?>" />
