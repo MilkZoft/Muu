@@ -386,3 +386,10 @@ a:hover {
 	background-color: #EEE;
 }
 
+.float-left  { 
+	float: left; 
+}
+
+.float-right { 
+	float: right; 
+}

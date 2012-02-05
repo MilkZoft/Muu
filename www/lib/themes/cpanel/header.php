@@ -32,12 +32,12 @@
 		?>
 			<div id="top-bar">
 				<?php
-					$li[] = anchor("&lsaquo;&lsaquo;" . __(_("Go back")), _webBase);
+					$li[] = a("&lsaquo;&lsaquo;" . __(_("Go back")), _webBase);
 					$li[] = " | " . span("bold", __(_("Welcome"))) .": " . SESSION("ZanUser");
 					$li[] = " | " . span("bold", __(_("Online users"))) . ": $online";
-					$li[] = " | " . span("bold", __(_("Registered users")) . ": $registered";
-					$li[] = " | " . span("bold", __(_("Last user"))) . ": " . anchor($lastUser["Username"], path("/users/editprofile/"));
-					$li[] = " | " . anchor(__(_("Logout")) ."&rsaquo;&rsaquo;", path("cpanel/logout/")) ."";			
+					$li[] = " | " . span("bold", __(_("Registered users"))) . ": $registered";
+					$li[] = " | " . span("bold", __(_("Last user"))) . ": " . a($lastUser["Username"], path("/users/editprofile/"));
+					$li[] = " | " . a(__(_("Logout")) ."&rsaquo;&rsaquo;", path("cpanel/logout/")) ."";			
 					
 					print ul($li);				
 				?>
