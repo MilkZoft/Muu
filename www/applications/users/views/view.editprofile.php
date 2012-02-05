@@ -161,7 +161,7 @@
 					<div class="information statistics">
 						<div id="statshide">
 							<p><strong><?php print __(_("Messages")); ?>:</strong> <?php print $user[0][0]["Messages"];?></p>
-							<p><strong><?php print __(_("Recieve Messages")); ?>:</strong> <?php print __(_($user[0][0]["Recieve_Messages"]);?></p>
+							<p><strong><?php print __(_("Receive Messages")); ?>:</strong> <?php print __(_($user[0][0]["Recieve_Messages"]);?></p>
 							<p><strong><?php print __(_("Comments")); ?>:</strong> <?php print $user[0][0]["Comments"];?></p>
 							<p><strong><?php print __(_("Subscribed")); ?>:</strong> <?php print $user[0][0]["Subscribed"];?></p>
 						</div>
