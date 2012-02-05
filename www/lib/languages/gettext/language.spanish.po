@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZanPHP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-04 20:11-0600\n"
-"PO-Revision-Date: 2012-02-04 20:14-0600\n"
+"POT-Creation-Date: 2012-02-04 21:26-0600\n"
+"PO-Revision-Date: 2012-02-04 21:39-0600\n"
 "Last-Translator: \n"
 "Language-Team: Carlos Santana <carlos@santana.ws>\n"
 "MIME-Version: 1.0\n"
@@ -22,9 +22,8 @@ msgid "Title"
 msgstr "Título"
 
 #: www/applications/ads/views/view.add.php:42
-#, fuzzy
 msgid "View Banner"
-msgstr "Banner"
+msgstr "Ver Banner"
 
 #: www/applications/ads/views/view.add.php:45
 msgid "Image"
@@ -88,9 +87,8 @@ msgstr "Inactivo"
 
 #: www/applications/ads/views/view.add.php:115
 #: www/applications/blog/views/view.add.php:59
-#, fuzzy
 msgid "Situation"
-msgstr "Citas"
+msgstr "Situación"
 
 #: www/applications/applications/models/model.applications.php:125
 msgid "Add"
@@ -101,28 +99,24 @@ msgid "Trash"
 msgstr "Papelera"
 
 #: www/applications/applications/models/model.applications.php:139
-#, fuzzy
 msgid "In trash"
-msgstr "En Papelera: "
+msgstr "En Papelera:"
 
 #: www/applications/blog/controllers/controller.cpanel.php:251
 msgid "Manage "
 msgstr "Administrar "
 
 #: www/applications/blog/views/view.access.php:6
-#, fuzzy
 msgid "Private post"
 msgstr "Post Privado"
 
 #: www/applications/blog/views/view.access.php:9
-#, fuzzy
 msgid "Post password"
-msgstr "Contraseña"
+msgstr "Contraseña del post"
 
 #: www/applications/blog/views/view.access.php:14
-#, fuzzy
 msgid "Access"
-msgstr "Dirección"
+msgstr "Acceso"
 
 #: www/applications/blog/views/view.add.php:23
 msgid "Content"
@@ -133,9 +127,8 @@ msgid "Languages"
 msgstr "Idiomas"
 
 #: www/applications/blog/views/view.add.php:52
-#, fuzzy
 msgid "Enable Comments"
-msgstr "Administrar Comentarios"
+msgstr "Habilitar Comentarios"
 
 #: www/applications/blog/views/view.add.php:63
 #: www/applications/blog/views/view.add.php:65
@@ -155,14 +148,12 @@ msgid "Current mural image"
 msgstr "Imagen de mural actual"
 
 #: www/applications/blog/views/view.add.php:92
-#, fuzzy
 msgid "Delete Mural"
-msgstr "Eliminar"
+msgstr "Eliminar Mural"
 
 #: www/applications/blog/views/view.archive.php:13
-#, fuzzy
 msgid "Archive"
-msgstr "Activo"
+msgstr "Archivo"
 
 #: www/applications/blog/views/view.comments.php:16
 msgid "Comments"
@@ -830,12 +821,12 @@ msgstr "Foros"
 #: www/applications/forums/views/view.forum.php:262
 #: www/applications/forums/views/view.forum.php:279
 msgid "You can create new topics"
-msgstr ""
+msgstr "Puedes crear nuevos temas"
 
 #: www/applications/forums/views/view.forum.php:263
 #: www/applications/forums/views/view.forum.php:280
 msgid "You can reply to topics"
-msgstr ""
+msgstr "Puedes responder temas"
 
 #: www/applications/forums/views/view.forum.php:264
 #: www/applications/forums/views/view.forum.php:281
@@ -846,11 +837,11 @@ msgstr "Necesitas escribir el mensaje"
 #: www/applications/forums/views/view.forum.php:278
 #: www/applications/forums/views/view.forum.php:299
 msgid "You can <strong>NOT</strong> create new forums"
-msgstr ""
+msgstr "<strong>No puedes</strong> crear nuevos foros"
 
 #: www/applications/forums/views/view.forum.php:290
 msgid "Hi there!, you should"
-msgstr ""
+msgstr "Hola!, deberías"
 
 #: www/applications/forums/views/view.forum.php:291
 #, fuzzy
@@ -859,11 +850,11 @@ msgstr "Conectar"
 
 #: www/applications/forums/views/view.forum.php:292
 msgid "to enjoy full access to the forums"
-msgstr ""
+msgstr "para disfrutar de acceso total a los foros"
 
 #: www/applications/forums/views/view.forum.php:294
 msgid "If you don't have an account, you can create it"
-msgstr ""
+msgstr "¿No tienes una cuenta?, puedes crear una"
 
 #: www/applications/forums/views/view.forum.php:295
 #, fuzzy
@@ -872,15 +863,15 @@ msgstr "Otro"
 
 #: www/applications/forums/views/view.forum.php:300
 msgid "You can <strong>NOT</strong> create new topics"
-msgstr ""
+msgstr "<strong>No puedes</strong> crear nuevos temas"
 
 #: www/applications/forums/views/view.forum.php:301
 msgid "You can <strong>NOT</strong> reply to topics"
-msgstr ""
+msgstr "<strong>No puedes</strong> responder temas"
 
 #: www/applications/forums/views/view.forum.php:302
 msgid "You can <strong>NOT</strong> send private messages"
-msgstr ""
+msgstr "<strong>No puedes</strong> enviar mensajes privados"
 
 #: www/applications/forums/views/view.forum.php:310
 #, fuzzy
@@ -942,7 +933,7 @@ msgstr "Bienvenido a Milk"
 
 #: www/applications/forums/views/view.topic.php:24
 msgid "Feel free of reply to the topic"
-msgstr ""
+msgstr "Siéntase libre de responder el tema"
 
 #: www/applications/forums/views/view.topic.php:30
 #, fuzzy
@@ -952,7 +943,7 @@ msgstr "Temas Relacionados"
 #: www/applications/forums/views/view.topic.php:34
 #: www/applications/forums/views/view.topic.php:56
 msgid "Back to the forum"
-msgstr ""
+msgstr "Regresar al foro"
 
 #: www/applications/forums/views/view.topic.php:281
 #, fuzzy
@@ -1011,7 +1002,7 @@ msgstr "Respuesta"
 
 #: www/applications/polls/views/view.add.php:15
 msgid "Empty answers not be added"
-msgstr ""
+msgstr "Respuestas vacías no se agregarán"
 
 #: www/applications/polls/views/view.add.php:36
 #, fuzzy
@@ -1020,7 +1011,7 @@ msgstr "Tiempo"
 
 #: www/applications/polls/views/view.add.php:37
 msgid "Multiple"
-msgstr ""
+msgstr "Multiple"
 
 #: www/applications/polls/views/view.add.php:40
 #, fuzzy
@@ -1044,14 +1035,14 @@ msgstr "Recuperar Contraseña"
 #: www/applications/users/models/model.users.php:358
 #: www/applications/users/models/model.users.php:395
 msgid "To recover your password, you need to access here"
-msgstr ""
+msgstr "Para recuperar su contraseña, necesitas acceder aquí"
 
 #: www/applications/users/models/model.users.php:360
 #: www/applications/users/models/model.users.php:396
 #: www/applications/users/models/model.users.php:469
 #: www/applications/users/models/model.users.php:476
 msgid "You need access to this link:"
-msgstr ""
+msgstr "Necesitas acceder a este enlace:"
 
 #: www/applications/users/models/model.users.php:464
 msgid "Account Activation"
@@ -1089,7 +1080,7 @@ msgstr "Información"
 
 #: www/applications/users/views/view.editprofile.php:93
 msgid "Rank"
-msgstr ""
+msgstr "Rango"
 
 #: www/applications/users/views/view.editprofile.php:97
 #, fuzzy
@@ -1156,7 +1147,7 @@ msgstr "Registrate"
 
 #: www/applications/users/views/view.errorprofile.php:4
 msgid "The profile that you are looking for doesn't exists"
-msgstr ""
+msgstr "El perfil que estas buscando no existe"
 
 #: www/applications/users/views/view.login.php:43
 #: www/applications/users/views/view.login.php:44
@@ -1180,7 +1171,7 @@ msgstr "Su cuenta ha sido creada correctamente"
 
 #: www/applications/users/views/view.login.php:71
 msgid "Click on the close button below, or out of the box, to enjoy the forums!"
-msgstr ""
+msgstr "Da clic en el botón de cerrar, o sal de la caja, disfruta de los foros!"
 
 #: www/applications/users/views/view.recover.php:12
 #: www/applications/users/views/view.recover.php:62
@@ -1210,11 +1201,11 @@ msgstr "Contraseña"
 
 #: www/applications/users/views/view.recover.php:48
 msgid "To recover your password, please enter your username or your e-mail"
-msgstr ""
+msgstr "Para recuperar tu contraseña, por favor escribe tu nombre de usuario o tu e-mail"
 
 #: www/applications/users/views/view.register.php:53
 msgid "Click on the close button below, or out of the box, to return to the forums"
-msgstr ""
+msgstr "Da click en cerrar, o sal de la caja, para regresar a los foros"
 
 #: www/applications/videos/views/view.add.php:27
 #, fuzzy
@@ -1223,11 +1214,11 @@ msgstr "Video"
 
 #: www/applications/videos/views/view.add.php:43
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: www/applications/videos/views/view.add.php:71
 msgid "There were no results for this search"
-msgstr ""
+msgstr "No hay resultados para esta búsqueda"
 
 #: www/applications/videos/views/view.add.php:82
 #: www/applications/videos/views/view.add.php:84
@@ -1241,44 +1232,44 @@ msgstr "Estado"
 
 #: www/lib/exceptions/exception.database.php:11
 msgid "An unknown error has occurred"
-msgstr ""
+msgstr "Un error desconocido ha ocurrido"
 
 #: www/lib/exceptions/exception.database.php:15
 #, fuzzy
 msgid "Connection error"
 msgstr "Conectar"
 
-#: www/lib/themes/cpanel/header.php:37
-#: www/lib/themes/cpanel/header.php:51
+#: www/lib/themes/cpanel/header.php:36
+#: www/lib/themes/cpanel/header.php:50
 #, fuzzy
 msgid "Go back"
 msgstr "Regresar"
 
-#: www/lib/themes/cpanel/header.php:38
+#: www/lib/themes/cpanel/header.php:37
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: www/lib/themes/cpanel/header.php:39
+#: www/lib/themes/cpanel/header.php:38
 #, fuzzy
 msgid "Online users"
 msgstr "usuarios conectados"
 
-#: www/lib/themes/cpanel/header.php:40
+#: www/lib/themes/cpanel/header.php:39
 #, fuzzy
 msgid "Registered users"
 msgstr "Registrados"
 
-#: www/lib/themes/cpanel/header.php:41
+#: www/lib/themes/cpanel/header.php:40
 #, fuzzy
 msgid "Last user"
 msgstr "Último"
 
-#: www/lib/themes/cpanel/header.php:86
+#: www/lib/themes/cpanel/header.php:85
 #, fuzzy
 msgid "Gallery Comments"
 msgstr "Comentarios"
 
-#: www/lib/themes/cpanel/header.php:96
+#: www/lib/themes/cpanel/header.php:95
 msgid "You are in"
 msgstr "Usted está en"
 
