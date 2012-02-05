@@ -26,28 +26,28 @@
 			print formInput(array(
 								"name" 	=> "slogan_spanish", 
 								"class" => "input", 
-								"field" => getLanguage("Spanish", TRUE) ." ". __(_("Slogan of the Website"))), 
+								"field" => getLanguage("Spanish", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganEs));
 			
 			print formInput(array(
 								"name" 	=> "slogan_english", 
 								"class" => "input", 
-								"field" => getLanguage("English", TRUE) ." ". __(_("Slogan of the Website"))), 
+								"field" => getLanguage("English", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganEn));							
 		
 			print formInput(array(
 								"name" 	=> "slogan_french", 
 								"class" => "input", 
-								"field" => getLanguage("French", TRUE) ." ". __(_("Slogan of the Website"))), 
+								"field" => getLanguage("French", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganFr));	
 			
 			print formInput(array(
 								"name" 	=> "slogan_portuguese", 
 								"class" => "input", 
-								"field" => getLanguage("Portuguese", TRUE) ." ". __(_("Slogan of the Website"))), 
+								"field" => getLanguage("Portuguese", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganPt));
 			
@@ -145,7 +145,7 @@
 								"p" 	=> TRUE, 
 								"value" => $message));
 			
-			print formField(NULL, __(_("Languages") ."<br />". getLanguageRadios($language));
+			print formField(NULL, __(_("Languages")) ."<br />". getLanguageRadios($language));
 			
 			print formSave("edit");
 

@@ -100,7 +100,7 @@ class ZP_Db extends ZP_Load {
 	 * 
 	 * @var private
 	 */
-	private $Rs = NULL;
+	public $Rs = NULL;
 	
 	/**
 	 * 
@@ -294,7 +294,7 @@ class ZP_Db extends ZP_Load {
 			}
 			
 			$this->Rs = $this->Database->query($query);
-			
+		
 			if($this->rows() === 0) {
 				return FALSE;			
 			} else {

@@ -14,15 +14,12 @@ class Applications_Model extends ZP_Model {
 		$this->CPanel_Model = $this->model("CPanel_Model");
 		$this->Users_Model  = $this->model("Users_Model");
 		
-		$this->helper(array("array", "html"));
+		$this->helpers();
 		
-		$this->language   = whichLanguage();
-		$this->table 	  = "applications";
+		$this->table = "applications";
 	}
 	
-	public function cpanel($action, $limit = NULL, $order = "ID_Application DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		$this->Db->table($this->table);
-		
+	public function cpanel($action, $limit = NULL, $order = "ID_Application DESC", $search = NULL, $field = NULL, $trash = FALSE) {	
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave();
 			
@@ -61,19 +58,19 @@ class Applications_Model extends ZP_Model {
 	}
 	
 	private function editOrSave() {
-		if(POST("title") == "") {
+		if(!POST("title")) {
 			return getAlert("You need to write a title");
 		}
 
-		$this->ID 	    = POST("ID_Application");
-		$this->title    = POST("title", "decode", "escape");
-		$this->slug     = slug($this->title);
-		$this->cpanel   = POST("cpanel");
-		$this->adding   = POST("adding");
-		$this->defult   = POST("defult");
-		$this->category = POST("category");
-		$this->comments = POST("comments");
-		$this->situation    = POST("Situation");
+		$this->ID 	     = POST("ID_Application");
+		$this->title     = POST("title", "decode", "escape");
+		$this->slug      = slug($this->title);
+		$this->cpanel    = POST("cpanel");
+		$this->adding    = POST("adding");
+		$this->defult    = POST("defult");
+		$this->category  = POST("category");
+		$this->comments  = POST("comments");
+		$this->situation = POST("Situation");
 	}
 	
 	private function save() {
@@ -113,21 +110,21 @@ class Applications_Model extends ZP_Model {
 			foreach($data as $application) { 
 				if($application["Situation"] === "Active") {
 					if($application["CPanel"]) {
-						$title = __($application["Title"]);
+						$title = __(_($application["Title"]));
 						
 						if($this->Users_Model->isAllow("view", $application["Title"])) {	
 							if($application["Slug"] === "configuration") {
-								$list[]["item"] = span("bold", a($title, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "edit"));															
+								$list[]["item"] = span("bold", a($title, path($application["Slug"] . _sh . "cpanel" . _sh . "edit")));															
 							} else {
-								$list[]["item"] = span("bold", a($title, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "results"));
+								$list[]["item"] = span("bold", a($title, path($application["Slug"] . _sh . "cpanel" . _sh . "results")));
 							}
 							
 							$list[count($list) - 1]["Class"] = FALSE;								
 									
 							if($application["Adding"]) {
-								$adding = __("Add");
+								$adding = __(_("Add"));
 								
-								$li[0]["item"] = a($adding, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "add");
+								$li[0]["item"] = a($adding, path($application["Slug"] . _sh . "cpanel" . _sh . "add"));
 								
 								$i = count($list);			
 														
@@ -137,9 +134,9 @@ class Applications_Model extends ZP_Model {
 											
 								if($count > 0) {	
 									$span  = span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;");
-									$span .= span("bold italic blue", __("Trash") . " ($count)");
+									$span .= span("bold italic blue", __(_("Trash")) ." ($count)");
 									
-									$li[$i]["item"] = a($span, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "results" . _sh . _trash, FALSE, array("title" => __("In trash") . ": " . $count));
+									$li[$i]["item"] = a($span, path($application["Slug"] ."/cpanel/results/trash", FALSE, array("title" => __(_("In trash")) .": ". $count)));
 									
 									$i = count($list) - 1;
 									
@@ -171,9 +168,7 @@ class Applications_Model extends ZP_Model {
 	}
 	
 	public function getID($title) {		
-		$this->Db->table($this->table, "ID_Application");
-		
-		$applications = $this->Db->findBy("Title", $title);
+		$applications = $this->Db->findBy("Title", $title, $this->table);
 
 		return (is_array($applications)) ? $applications[0]["ID_Application"] : FALSE;
 	}	

@@ -14,16 +14,16 @@ class CPanel extends ZP_Load {
 		$this->config("applications");
 		$this->config("cpanel");
 		
-		$this->helper("routes", _cpanel);
-		$this->helper("cpanel", _cpanel);
+		$this->helper("routes", "cpanel");
+		$this->helper("cpanel", "cpanel");
 					
 		$this->Users_Model		  = $this->model("Users_Model");
 		$this->Applications_Model = $this->model("Applications_Model");
 		$this->Comments_Model     = $this->model("Comments_Model");		
 		$this->Feedback_Model     = $this->model("Feedback_Model");	
-		
+				
 		$this->isAdmin = $this->Users_Model->isAdmin(TRUE);
-			
+	
 		$this->vars["isAdmin"] = $this->isAdmin;
 				
 		return $this->isAdmin;

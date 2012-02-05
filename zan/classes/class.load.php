@@ -517,8 +517,10 @@ class ZP_Load {
 			if(count($parts) === 2) {
 				if(file_exists("www/applications/$this->application/models/model.". strtolower($parts[0]) .".php")) {
 					$file = "www/applications/$this->application/models/model.". strtolower($parts[0]) .".php";
-				} else {
+				} elseif(file_exists("www/applications/$this->application/models/model.". strtolower($parts[0]) .".php")) {
 					$file = "www/applications/$this->application/models/model.". strtolower($parts[0]) .".php";
+				} else {
+					$file = "www/applications/". strtolower($parts[0]) ."/models/model.". strtolower($parts[0]) .".php";
 				}
 			}
 		}

@@ -52,10 +52,10 @@ class ZP_MySQLi_Db extends ZP_Load {
      * @return object value
      */
 	public function connect() {
-		if(self::$connection === NULL) {
+		if(!self::$connection) {
 			self::$connection = mysqli_connect(_dbHost, _dbUser, _dbPwd, _dbName);
 		}
-		
+	
 		return self::$connection;
 	}
 	
@@ -221,7 +221,7 @@ class ZP_MySQLi_Db extends ZP_Load {
      * @return integer value
      */
 	public function rows() {
-		return (!$this->query) ? FALSE : (int) @mysqli_num_rows($this->query);	
+		return (!$this->query) ? FALSE : (int) mysqli_num_rows($this->query);	
 	}
 
 	/**

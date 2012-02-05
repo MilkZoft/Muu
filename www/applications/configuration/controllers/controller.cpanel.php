@@ -23,7 +23,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->Templates = $this->core("Templates");
 		
-		$this->Templates->theme(_cpanel);
+		$this->Templates->theme("cpanel");
 		
 		if(!$this->isAdmin) {
 			$this->login();
@@ -62,10 +62,9 @@ class CPanel_Controller extends ZP_Controller {
 		$data = $this->$Model->getByID(1);
 	
 		if($data) {
-			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");
 			$this->Applications_Model = $this->model("Applications_Model");
-
+			
 			$this->vars["themes"]		       = $this->Templates->getThemes($data[0]["Theme"]);
 			$this->vars["defaultApplications"] = $this->Applications_Model->getDefaultApplications($data[0]["Application"]);
 
