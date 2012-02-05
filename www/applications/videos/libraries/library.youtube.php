@@ -16,27 +16,32 @@ class YouTube {
 	
 	public function query($query = NULL) {
 		$this->uri = $query;
+
 		return $this->data();
 	}
 	
 	public function search($search = "", $max = 9, $start = 1) {
-		$this->uri = $this->client . "videos/?vq=" . str_replace(" ", "+", trim($search)) . "&start-index=" . $start . "&max-results=" . $max . "&alt=" . strtolower($this->format);
+		$search = str_replace(" ", "+", trim($search));
+
+		$this->uri = $this->client ."videos/?vq=". $search ."&start-index=". $start ."&max-results=". $max ."&alt=". strtolower($this->format);
+		
 		return $this->data();
 	}
 	
 	public function getByUser($username = NULL, $max = 9, $start = 1) {
-		$this->uri = $this->client . "users/" . trim($username) . "/uploads/?start-index=" . $start . "&max-results=" . $max . "&alt=" . strtolower($this->format);
+		$this->uri = $this->client ."users/". trim($username) ."/uploads/?start-index=". $start ."&max-results=". $max ."&alt=". strtolower($this->format);
+		
 		return $this->data();
 	}
 	
 	public function getByID($ID = NULL) {
-		$this->uri = $this->client . "videos/" . trim($ID) . "?alt=" . strtolower($this->format);
+		$this->uri = $this->client ."videos/". trim($ID) ."?alt=". strtolower($this->format);
+		
 		return $this->data();
 	}
 	
 	public function data() {
-		 try {
-			 
+		 try {	 
             $this->results = $this->getResult();
             
             if(!$this->results or is_null($this->results)) {
@@ -52,7 +57,9 @@ class YouTube {
 	private function getResult() {
 		switch(strtolower($this->format)) {
 			case "json":
-				$results =  json_decode(@file_get_contents(str_replace(array("&alt=array", "?alt=array"), array("&alt=json", "?alt=json"), $this->uri), FALSE, stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)))));
+				$content = @file_get_contents(str_replace(array("&alt=array", "?alt=array");
+				$stream  = stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)));
+				$results = json_decode($content, array("&alt=json", "?alt=json"), $this->uri), FALSE, $stream));
 				
 				if($results) {
 					if($results->{'openSearch$totalResults'}->{'$t'} > 0) {
@@ -71,7 +78,9 @@ class YouTube {
 			break;
 			
 			case "array":
-				$results = json_decode(@file_get_contents(str_replace(array("&alt=array", "?alt=array"), array("&alt=json", "?alt=json"), $this->uri), FALSE, stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)))));
+				$content = @file_get_contents(str_replace(array("&alt=array", "?alt=array");
+				$stream  = stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)));
+				$results = json_decode($content, array("&alt=json", "?alt=json"), $this->uri), FALSE, $stream));
 				
 				if($results) {
 					if(isset($results->entry) and !isset($results->feed)) {
@@ -113,13 +122,14 @@ class YouTube {
 			break;
 			
 			default:
-				return json_decode(@file_get_contents($this->uri, FALSE, stream_context_create(array('http' => array('timeout' => 5, 'method' => $this->typeRequest)))));
+				return json_decode(@file_get_contents($this->uri, FALSE, stream_context_create(array('http'=>array('timeout' => 5, 'method' => $this->typeRequest)))));
 			break;
 		}
 	}
 	
 	private function id($entry) {
 		$_array = explode("/", $entry);
+
 		return $_array[count($_array) - 1];
 	}
 	

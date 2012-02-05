@@ -8,22 +8,15 @@ if(!defined("_access")) {
 
 class Works_Model extends ZP_Model {
 	
-	private $route;
-	private $table;
-	private $primaryKey;
-	private $error;
-	
 	public function __construct() {
 		$this->Db = $this->db();		
-		$this->helper(array("time", "alerts", "router"));		
-		$this->table      = "works";
-		$this->primaryKey = $this->Db->table($this->table);
-		$this->language   = whichLanguage(); 
+		
+		$this->helpers();		
+		
+		$this->table = "works";
 	}
 	
-	public function cpanel($action, $limit = NULL, $order = "ID_Work DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		$this->Db->table($this->table);
-		
+	public function cpanel($action, $limit = NULL, $order = "ID_Work DESC", $search = NULL, $field = NULL, $trash = FALSE) {		
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave($action);
 			
@@ -44,31 +37,27 @@ class Works_Model extends ZP_Model {
 	}
 	
 	private function all($trash, $order, $limit) {
-		if($trash === FALSE) {
+		if(!$trash) {
 			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBySQL("State != 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("State != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '".$_SESSION["ZanAdminID"]."' AND State != 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND State != 'Deleted'", NULL, $order, $limit);
 			}	
 		} else {
 			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBy("State", "Deleted", NULL, $order, $limit);
+				$data = $this->Db->findBy("State", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanAdminID") ."' AND State = 'Deleted'", NULL, $order, $limit);
+				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND State = 'Deleted'", $this->table, NULL, $order, $limit);
 			}
 		}
 		
 		return $data;	
 	}
 	
-	private function editOrSave($action) {
-		$helpers = array("alerts", "time", "validations");
-		
-		$this->helper($helpers);
-		
-		if(POST("title") === NULL) {
+	private function editOrSave($action) {		
+		if(!POST("title")) {
 			return getAlert("You need to write a title");
-		} elseif(POST("description") === NULL) {
+		} elseif(!POST("description")) {
 			return getAlert("You need to write a description");
 		} elseif(!ping(POST("URL"))) {
 			return getAlert("Invalid URL");
@@ -82,6 +71,7 @@ class Works_Model extends ZP_Model {
 		
 		if(FILES("image", "name") !== "") {
 			$upload = $this->upload("image");
+
 			if($upload) {
 				$this->image = $upload;
 			} else {
@@ -95,6 +85,7 @@ class Works_Model extends ZP_Model {
 		
 		if(FILES("preview1", "name") !== "") {
 			$upload = $this->upload("preview1");
+
 			if($upload) {
 				$this->preview1 = $upload;
 			} else {
@@ -108,6 +99,7 @@ class Works_Model extends ZP_Model {
 		
 		if(FILES("preview2", "name") !== "") {
 			$upload = $this->upload("preview2");
+
 			if($upload) {
 				$this->preview2 = $upload;
 			} else {
@@ -128,15 +120,17 @@ class Works_Model extends ZP_Model {
 	}
 	
 	private function save() {
-		
-		$fields  = "Title, Nice, Preview1, Preview2, Image, URL, Description, State";					
-		$values  = "'$this->title', '$this->nice', '$this->preview1', '$this->preview2', '$this->image',";
-		$values .= "'$this->URL', '$this->description', '$this->state'";
-		
-		$this->Db->table($this->table, $fields);
-		$this->Db->values($values);
-		
-		$this->Db->save();
+		$data  = array(
+					"Title" 	  => $this->title, 
+					"Nice"  	  => $this->nice, 
+					"Preview1" 	  => $this->preview1, 
+					"Preview2" 	  => $this->preview2,
+					"Image"		  => $this->image, 
+					"URL"		  => $this->URL, 
+					"Description" => $this->description, 
+					"Situation"   => $this->situation;					
+	
+		$this->Db->insert($this->table, $data);
 					
 		return getAlert("The work has been saved correctly", "success");	
 	}
@@ -144,28 +138,33 @@ class Works_Model extends ZP_Model {
 	private function edit() {
 		$data = $this->getByID($this->ID);
 		
-		$this->Db->table($this->table);
-		$values = "Title = '$this->title', Nice = '$this->nice', ";
+
+		$data["Title"] = $this->title;
+		$data["Slug"]  = $this->slug;
 		
 		if($this->preview1 != "") {
-			$values .= "Preview1 = '$this->preview1', ";
+			$data["Preview1"] = $this->preview1;
+			
 			@unlink($data[0]["Preview1"]);
 		}
 		
 		if($this->preview2 != "") {
-			$values .= "Preview2 = '$this->preview2', ";
+			$data["Preview2"] = $this->preview2;
+			
 			@unlink($data[0]["Preview2"]);
 		}
 		
 		if($this->image != "") {
-			$values .= "Image = '$this->image', ";
+			$data["Image"] = $this->image;
+			
 			@unlink($data[0]["Image"]);
 		}
 		
-		$values .= "URL = '$this->URL', Description = '$this->description', State = '$this->state'";
+		$data["URL"] 		 = $this->URL;
+		$data["Description"] = $this->description;
+		$data["Situation"]   = $this->situation;
 		
-		$this->Db->values($values);								
-		$this->Db->save($this->ID);
+		$this->Db->update($this->table, $data, $this->ID);
 		
 		return getAlert("The work has been edit correctly", "success");
 	}
