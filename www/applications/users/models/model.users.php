@@ -471,10 +471,10 @@ class Users_Model extends ZP_Model {
 						</p>
 					';
 				} else {
-					$this->Email->message	= 	'
+					$this->Email->message	= '
 						<p>'. __(_("Your account has been created")) .'</p>
 						<p>'. __(_("You need access to this link:")) .' 
-							<a href="'path("users/activate/$code") .'">'. __(_("Activate account")) .'</a>
+							<a href="'. path("users/activate/$code") .'">'. __(_("Activate account")) .'</a>
 						</p>
 					';
 				}
