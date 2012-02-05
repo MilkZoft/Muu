@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZanPHP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-05 02:26-0600\n"
-"PO-Revision-Date: 2012-02-05 02:26-0600\n"
+"POT-Creation-Date: 2012-02-05 15:13-0600\n"
+"PO-Revision-Date: 2012-02-05 15:14-0600\n"
 "Last-Translator: \n"
 "Language-Team: Carlos Santana <carlos@santana.ws>\n"
 "MIME-Version: 1.0\n"
@@ -276,38 +276,42 @@ msgstr "Activación de Cuenta"
 msgid "Message when the Website is inactive"
 msgstr "Mensaje que se mostrará cuando la web este inactiva"
 
-#: www/applications/cpanel/classes/class.library.php:76
+#: www/applications/cpanel/classes/class.library.php:75
 #: www/applications/cpanel/helpers/helper.library.php:72
 msgid "Images library"
 msgstr "Librería de imágenes"
 
-#: www/applications/cpanel/classes/class.library.php:80
+#: www/applications/cpanel/classes/class.library.php:79
 #: www/applications/cpanel/helpers/helper.library.php:76
 msgid "Documents library"
 msgstr "Librería de documentos"
 
-#: www/applications/cpanel/classes/class.library.php:217
+#: www/applications/cpanel/classes/class.library.php:94
+msgid "Do you want to delete the file?"
+msgstr "¿Deseas eliminar el archivo?"
+
+#: www/applications/cpanel/classes/class.library.php:215
 #: www/applications/cpanel/helpers/helper.library.php:183
 msgid "Make directory"
 msgstr "Crear Directorio"
 
-#: www/applications/cpanel/classes/class.library.php:237
+#: www/applications/cpanel/classes/class.library.php:233
 #: www/applications/cpanel/helpers/helper.library.php:156
 msgid "Go"
 msgstr "Ir"
 
-#: www/applications/cpanel/classes/class.library.php:249
+#: www/applications/cpanel/classes/class.library.php:246
 msgid "The new folders will be created and the files will be uploaded in"
-msgstr "Las nuevas carpetas serán creadas y los archivos serán subidos en:"
+msgstr "Las nuevas carpetas serán creadas y los archivos serán subidos en"
 
+#: www/applications/cpanel/classes/class.library.php:251
 #: www/applications/cpanel/classes/class.library.php:254
-#: www/applications/cpanel/classes/class.library.php:257
 #: www/applications/cpanel/helpers/helper.library.php:188
 #: www/applications/cpanel/helpers/helper.library.php:191
 msgid "Support files"
-msgstr "Archivos soportados:"
+msgstr "Archivos soportados"
 
-#: www/applications/cpanel/classes/class.library.php:275
+#: www/applications/cpanel/classes/class.library.php:273
 #: www/applications/cpanel/helpers/helper.cpanel.php:283
 #: www/applications/cpanel/helpers/helper.cpanel.php:285
 #: www/applications/cpanel/helpers/helper.library.php:208
@@ -315,15 +319,15 @@ msgstr "Archivos soportados:"
 msgid "Delete"
 msgstr "Eliminar"
 
-#: www/applications/cpanel/classes/class.library.php:451
+#: www/applications/cpanel/classes/class.library.php:448
 msgid "Insert Image"
 msgstr "Insertar Imagen"
 
-#: www/applications/cpanel/classes/class.library.php:476
+#: www/applications/cpanel/classes/class.library.php:473
 msgid "Insert file"
 msgstr "Insertar Archivo"
 
-#: www/applications/cpanel/classes/class.library.php:485
+#: www/applications/cpanel/classes/class.library.php:482
 #: www/applications/cpanel/helpers/helper.library.php:341
 msgid "Download file"
 msgstr "Descargar archivo"

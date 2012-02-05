@@ -307,7 +307,11 @@ function isNumber($number) {
 	return FALSE;
 }
 
-function path($path, $URL = FALSE) {
+function path($path = FALSE, $URL = FALSE) {
+	if(!$path) {
+		return _webBase . _sh . _webLang . _sh;	
+	}
+
 	if($URL) {
 		return _webURL  . _sh . $path;
 	} else {

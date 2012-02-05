@@ -13,20 +13,20 @@
 	
 	<div class="add-categories">
 		<p>
-			<?php print __(_("New category")); ?> <br />
+			<span style="font-size: 0.8em;"><?php print __(_("New category")); ?></span> <br />
 			
-			<input id="category" name="category" type="text" class="small-input" style="width: 97%" /><br />			
+			<input id="category" name="category" type="text" class="required" style="width: 95%" /><br />			
 			
 			<?php print getLanguageRadios(whichLanguage(), "language_category"); ?>
 		</p>
 		
-		<span class="bold small"><?php print __(_("Parent category")); ?>:</span>
+		<span class="bold"><?php print __(_("Parent category")); ?>:</span>
 		
 		<div id="div-categories-radio" class="add-categories-wrapper">
 			<?php print $categoriesRadio; ?>
 		</div>		
 		
-		<input name="add-category" value="<?php print __(_("Add category")); ?>" type="button" onclick="setCategory();" class="add-category-submit" />		
+		<input name="add-category" value="<?php print __(_("Add category")); ?>" type="button" onclick="setCategory();" class="add-category-submit btn btn-info" />		
 		
 		<input name="application" value="<?php print $application; ?>" id="application" type="hidden" />
 	</div>	

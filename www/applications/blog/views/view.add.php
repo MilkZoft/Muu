@@ -10,7 +10,7 @@
 			print isset($alert) ? $alert : NULL;
 
 			print formInput(array(	"name" 	=> "title", 
-									"class" => "span14 required", 
+									"class" => "span10 required", 
 									"field" => __(_("Title")), 
 									"p" 	=> TRUE, 
 									"value" => ($action === "edit") ? $title : recoverPOST("title")
@@ -18,7 +18,7 @@
 
 			print formTextarea(array(	"id" 	=> "editor", 
 									 	"name" 	=> "content", 
-									 	"class" => "span14",
+									 	"class" => "span10",
 									 	"style" => "height: 400px;", 
 									 	"field" => __(_("Content")), 
 									 	"p" 	=> TRUE, 
@@ -49,18 +49,18 @@
 				1 => array("value" => 0, "option" => __(_("No")))
 			);
 
-			print formSelect(array("name" => "enable_comments", "p" => TRUE, "field" => __(_("Enable Comments"))), $options);				
+			print formSelect(array("name" => "enable_comments", "class" => "required", "p" => TRUE, "field" => __(_("Enable Comments"))), $options);				
 			
 			$options = array(
 				0 => array("value" => "Active",   "option" => __(_("Active")), "selected" => ($situation === "Active")   ? TRUE : FALSE),
 				1 => array("value" => "Inactive", "option" => __(_("Inactive")),  "selected" => ($situation === "Inactive") ? TRUE : FALSE)
 			);
 
-			print formSelect(array("name" => "situation", "p" => TRUE, "field" => __(_("Situation"))), $options);
+			print formSelect(array("name" => "situation", "p" => TRUE, "class" => "required", "field" => __(_("Situation"))), $options);
 			
 						
 			if(!isset($pwd)) { 
-				print formInput(array("name" => "pwd", "class" => "span14", "field" => __(_("Password")), "p" => TRUE, "value" => $pwd));	
+				print formInput(array("name" => "pwd", "class" => "span10", "field" => __(_("Password")), "p" => TRUE, "value" => $pwd));	
 			} else { 
 				print formField(NULL, __(_("Password")) ."<br />");
 				print formInput(array("id" => "lock", "class" => "lock", "type" => "button"));
@@ -78,10 +78,10 @@
 				print img(_webURL . _sh . $medium);
 			}
 			
-			print formInput(array("type" => "file", "name" => "mural", "field" => __(_("Mural image")) ." (". _muralSize .")", "p" => TRUE));
+			print formInput(array("type" => "file", "name" => "mural", "class" => "required", "field" => __(_("Mural image")) ." (". _muralSize .")", "p" => TRUE));
 	
 			if(isset($muralImage) and is_array($muralImage)) {
-				print formInput(array("type" => "hidden", "name" => "mural_exist", "class" => "span14", "field" => __(_("Current mural image")), "p" => TRUE));
+				print formInput(array("type" => "hidden", "name" => "mural_exist", "class" => "span10", "field" => __(_("Current mural image")), "p" => TRUE));
 				
 				print img(_webURL . _sh . $muralImage[0]["Image"], NULL, NULL, array("style" => "width: 98%; border: 1px solid #000;"));
                 

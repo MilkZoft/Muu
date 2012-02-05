@@ -21,10 +21,9 @@ class Library extends ZP_Load {
 		$this->Files = $this->core("Files");
 		$this->Applications_Model = $this->model("Applications_Model");
 		
-		$helpers = array("alerts", "html", "forms", "router");
-		$this->helper($helpers);	
+		$this->helper(array("alerts", "html", "forms", "router"));	
 		
-		$this->application = $this->Applications_Model->getID(segment(2));
+		$this->application = $this->Applications_Model->getID(whichApplication());
 	}	
 
 	public function getAction($type, $files = FALSE, $dir = FALSE, $name = FALSE) {	
@@ -88,49 +87,50 @@ class Library extends ZP_Load {
 			$href   = segment(0) . _sh . segment(1) . _sh;
 		}
 		
-		$URL = _webBase . _sh . _webLang;		
+		$URL = path();
 		
 		$alert  = "onclick=\"document.getElementById('form-add').target='';";
-		$alert .= "document.getElementById('form-add').action='". $URL ."/". $action ."/#". $this->px ."Library';";
-		$alert .= "return confirm('". __("Do you want to delete the file?") ."');\""; 		
+		$alert .= "document.getElementById('form-add').action='". $URL . $action ."/#". $this->px ."Library';";
+		$alert .= "return confirm('". __(_("Do you want to delete the file?")) ."');\""; 		
 		
 		$event  = "onclick=\"document.getElementById('form-add').target=''; ";
-		$event .= "document.getElementById('form-add').action='". $URL . _sh . $action . _sh . "#" . $this->px . "Library';\""; 
+		$event .= "document.getElementById('form-add').action='". $URL . $action . _sh . "#" . $this->px . "Library';\""; 
 		$eventUpload  = "onclick=\"document.getElementById('form-add').target='". $this->px ."Upload';";
-		$eventUpload .= "document.getElementById('form-add').action='". _webBase . _sh . _webLang . _sh . $href . "upload" . _sh . strtolower($this->type) ."/#". $this->px ."Library'; javascript:submit();\"";
+		$eventUpload .= "document.getElementById('form-add').action='". path($href ."/upload/". strtolower($this->type) ."/#". $this->px ."Library") ."; ";
+		$eventUpload .= "javascript:submit();\"";
 							
-		$HTML = a($this->px . "Library");
+		$HTML = a($this->px ."Library");
 		
 		if($this->type === "images") {
-			$aEvents = "onclick=\"showElement(document.getElementById('". $this->px ."-library'));\" title=\"".__("Click to show or hide")."\" class=\"pointer\"";
+			$aEvents = "onclick=\"showElement(document.getElementById('". $this->px ."-library'));\" title=\"". __(_("Click to show or hide")) ."\" class=\"pointer\"";
 		} else {
-			$aEvents = "onclick=\"showElement(document.getElementById('". $this->px ."-library1'));\" title=\"".__("Click to show or hide")."\" class=\"pointer\"";
+			$aEvents = "onclick=\"showElement(document.getElementById('". $this->px ."-library1'));\" title=\"".__(_("Click to show or hide")) ."\" class=\"pointer\"";
 		}
 		
 		$HTML .= formField($aEvents, $text);		
 	
 		if($this->type === "images") {
 			if(POST("iGo") or POST("iMake") or POST("iDelete")) {
-				$HTML .= div($this->px . "-library");			
+				$HTML .= div($this->px ."-library");			
 			} else {
-				$HTML .= div($this->px . "-library", "id/class", "no-display");
+				$HTML .= div($this->px ."-library", "id/class", "no-display");
 			}
 		} else {
 			if(POST("dGo") or POST("dMake") or POST("dDelete")) {
-				$HTML .= div($this->px . "-library1");
+				$HTML .= div($this->px ."-library1");
 			} else {
-				$HTML .= div($this->px . "-library1", "id/class", "no-display");
+				$HTML .= div($this->px ."-library1", "id/class", "no-display");
 			}
 		}
 		
 		$HTML .= div("extra", "class");	
 			$selected = NULL;
 					
-			if(POST($this->px . "Dirbase")) {
-				if(POST($this->px . "Dirbase") !== $this->path) {
-					$dir = str_replace($this->path, "/", POST($this->px . "Dirbase"));
+			if(POST($this->px ."Dirbase")) {
+				if(POST($this->px ."Dirbase") !== $this->path) {
+					$dir = str_replace($this->path, "/", POST($this->px ."Dirbase"));
 					
-					$selected = '<option value="'. POST($this->px . "Dirbase") .'" selected="selected">'. $dir .'</option>';
+					$selected = '<option value="'. POST($this->px ."Dirbase") .'" selected="selected">'. $dir .'</option>';
 				}
 			}			
 			
@@ -140,7 +140,7 @@ class Library extends ZP_Load {
 						$dir = str_replace($this->path, "/", POST("iDir"));
 						
 						$selected  = '<option value="'. POST("iDir") . slug(POST("iDirname")) .'/" selected="selected">';
-						$selected .= $dir . slug(POST("iDirname")).'/</option>';
+						$selected .= $dir . slug(POST("iDirname")) .'/</option>';
 					}						
 				}
 			} elseif($type === "documents") {					
@@ -153,9 +153,9 @@ class Library extends ZP_Load {
 					}						
 				}
 			}
-							
-			$value = (POST($this->px . "Dirbase")) ? POST($this->px . "Dirbase") : $this->path;
-			$value = (POST($this->px . "Make"))    ? POST($this->px . "Dir") . slug(POST($this->px . "Dirname")) : $value;
+				
+			$value = (POST($this->px ."Dirbase")) ? POST($this->px ."Dirbase") : $this->path;
+			$value = (POST($this->px ."Make"))    ? POST($this->px ."Dir") . slug(POST($this->px ."Dirname")) : $value;
 			
 			$parts = explode("/", $value);
 			
@@ -163,14 +163,14 @@ class Library extends ZP_Load {
 				$part = NULL;
 				
 				for($i = 0; $i <= count($parts) - 1; $i++) {
-					$part .= slug($parts[$i]) . "/";	
+					$part .= slug($parts[$i]) ."/";	
 				}			
 				
 				$part = str_replace("//", "/", $part);
 			}
 			
 			$attributes = array(
-							"name"  => $this->px . "Dir", 
+							"name"  => $this->px ."Dir", 
 							"value" => $part, 
 							"type"  => "hidden"
 			);
@@ -178,7 +178,7 @@ class Library extends ZP_Load {
 			$HTML .= formInput($attributes);
 
 			$attributes = array(
-							"name"  => $this->px . "Px", 
+							"name"  => $this->px ."Px", 
 							"value" => $this->px,
 							"type"  => "hidden"
 			);
@@ -186,7 +186,7 @@ class Library extends ZP_Load {
 			$HTML .= formInput($attributes);
 
 			$attributes = array(
-							"name"  => $this->px . "Application", 
+							"name"  => $this->px ."Application", 
 							"value" => $this->application,
 							"type"  => "hidden"
 			);
@@ -194,40 +194,36 @@ class Library extends ZP_Load {
 			$HTML .= formInput($attributes);
 
 			$attributes = array(
-							"name"  => $this->px . "Path", 
+							"name"  => $this->px ."Path", 
 							"value" => $this->path,
 							"type"  => "hidden"
 			);
 			
 			$HTML .= formInput($attributes);					
-		
-			$part = _webURL . _sh . $part;
 			
 			if(SESSION("ZanUserPrivilegeID") < 3) {
 				$attributes = array(
-								"name"  => $this->px . "Dirname", 
+								"name"  => $this->px ."Dirname", 
 								"type"  => "text",								
-								"class" => "small-input"
+								"class" => "required"
 				);
 							
 				$HTML .= formInput($attributes);			
 
 				$attributes = array(
-								"name"   => $this->px . "Make", 
+								"name"   => $this->px ."Make", 
 								"value"  => __(_("Make directory")),
 								"type"   => "submit",
-								"class"  => "small-submit",
+								"class"  => "btn btn-info",
 								"events" => $event
 				);	
 				
 				$HTML .= formInput($attributes);	
-
-				$HTML .= br();
 				
 				if(count($this->getDirs($this->path)) > 1) {
 					$attributes = array(
 									"name"   => $this->px . "Dirbase", 
-									"class"  => "small-select"
+									"class"  => "required"
 					);
 					
 					$HTML .= formSelect($attributes, $this->getDirs($this->path), $selected);
@@ -236,28 +232,29 @@ class Library extends ZP_Load {
 									"name"   => $this->px . "Go", 
 									"value"  => __(_("Go")),
 									"type"   => "submit",
-									"class"  => "small-submit",
+									"class"  => "btn btn-warning",
 									"events" => $event
 					);
 								
 					$HTML .= formInput($attributes);
 					
-					$HTML .= "&nbsp;&nbsp;";
+					$HTML .= br();
+				} else {
+					$HTML .= br();
 				}
 			
-				$HTML .= br();			
-				$HTML .= small(span("bold", __(_("The new folders will be created and the files will be uploaded in")) . ": ") . $part);
+				$HTML .= small(span("bold", __(_("The new folders will be created and the files will be uploaded in")) .": ") . $part);
 				
 				$HTML .= br();
 				
 				if($type === "images") {
-					$HTML .= small(span("bold", __(_("Support files"))) . ": jpg, jpeg, png, gif ". __(_("and")) ." bmp.");				
+					$HTML .= small(span("bold", __(_("Support files"))) .": jpg, jpeg, png, gif ". __(_("and")) ." bmp.");				
 				} elseif($type === "documents") {
-					$formats = "csv, doc, docx, exe, pdf, ppt, pptx, rar, xls, xlsx   ". __(_("and")) ." zip";
+					$formats = "csv, doc, docx, exe, pdf, ppt, pptx, rar, xls, xlsx ". __(_("and")) ." zip";
 					$HTML   .= small(span("bold", __(_("Support files"))) .": ". $formats);					
 				}
 				
-				$HTML .= br();		
+				$HTML .= "<br />";		
 			}
 		
 		$HTML .= div(FALSE);
@@ -266,22 +263,22 @@ class Library extends ZP_Load {
 			$HTML .= $this->getFiles($type);
 		$HTML .= div(FALSE);								
 		
-		$HTML .= br();
-		
-		$HTML .= div($this->px . "-upload-message", TRUE);
+		$HTML .= div($this->px ."-upload-message", TRUE);
+
+			$HTML .= formUploadFrame($this->px, $eventUpload);
+
 			if(SESSION("ZanUserPrivilegeID") < 3) {
 				$attributes = array(
-								"name"   => $this->px . "Delete", 
+								"name"   => $this->px ."Delete", 
 								"value"  => __(_("Delete")),
 								"type"   => "submit",
-								"class"  => "small-submit float-right",
+								"class"  => "btn btn-danger",
 								"events" => $alert
 				);
 							
 				$HTML .= formInput($attributes);			
 			}
-			
-			$HTML .= formUploadFrame($this->px, $eventUpload);		
+					
 		$HTML .= div(FALSE);
 		
 		return $HTML;

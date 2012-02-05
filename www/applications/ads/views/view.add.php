@@ -36,7 +36,7 @@
 			
 			print isset($alert) ? $alert : NULL;
 
-			print formInput(array("name" => "title", "class" => "span14 required", "field" => __(_("Title")), "p" => TRUE, "value" => $title));
+			print formInput(array("name" => "title", "class" => "span10 required", "field" => __(_("Title")), "p" => TRUE, "value" => $title));
 			
 			if(isset($banner)) { 
 				print p(a(__(_("View Banner")), _webURL . _sh . $banner, FALSE, array("class" => "banner-lightbox")), "field");
@@ -76,11 +76,11 @@
 					),
 			);
 
-			print formSelect(array("name" => "position", "p" => TRUE, "field" => __(_("Position"))), $options);
+			print formSelect(array("name" => "position", "class" => "required", "p" => TRUE, "field" => __(_("Position"))), $options);
 			
-			print formInput(array("name" => "URL", "class" => "span14 required", "field" => __(_("URL")), "p" => TRUE, "value" => $URL));
+			print formInput(array("name" => "URL", "class" => "span10 required", "field" => __(_("URL")), "p" => TRUE, "value" => $URL));
 			
-			print formTextarea(array("name" => "code", "class" => "span14 required", "style" => "height: 150px;", "field" => __(_("Code")), "p" => TRUE, "value" => $code));
+			print formTextarea(array("name" => "code", "class" => "span10 required", "style" => "height: 150px;", "field" => __(_("Code")), "p" => TRUE, "value" => $code));
 
 			$options = array(
 				0 => array(
@@ -96,7 +96,7 @@
 					)
 			);
 
-			print formSelect(array("name" => "principal", "p" => TRUE, "field" => __(_("Principal"))), $options);			
+			print formSelect(array("name" => "principal", "class" => "required", "p" => TRUE, "field" => __(_("Principal"))), $options);			
 			
 			$options = array(
 				0 => array(
@@ -112,7 +112,7 @@
 					)
 			);
 
-			print formSelect(array("name" => "situation", "p" => TRUE, "field" => __(_("Situation"))), $options);			
+			print formSelect(array("name" => "situation", "class" => "required", "p" => TRUE, "field" => __(_("Situation"))), $options);			
 			
 			print formSave($action);
 			

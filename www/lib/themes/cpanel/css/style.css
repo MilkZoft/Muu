@@ -336,6 +336,7 @@ a:hover {
 	overflow: auto;
 	border: 1px solid #BBB;
 	background-color: #F5F5F5;
+	margin-bottom: 5px;
 }
 
 .library ul {
