@@ -563,7 +563,7 @@ function getTFoot($trash) {
 		}
 	} else {
 		if($application !== "comments") {
-			redirect(path($application . _sh . "cpanel" . _sh .  "add");
+			redirect(path($application . _sh . "cpanel" . _sh .  "add"));
 		} else {
 			return FALSE;
 		}

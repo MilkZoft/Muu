@@ -117,9 +117,9 @@ class Applications_Model extends ZP_Model {
 						
 						if($this->Users_Model->isAllow("view", $application["Title"])) {	
 							if($application["Slug"] === "configuration") {
-								$list[]["item"] = span("bold", a($title, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . _edit));															
+								$list[]["item"] = span("bold", a($title, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "edit"));															
 							} else {
-								$list[]["item"] = span("bold", a($title, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . _results));
+								$list[]["item"] = span("bold", a($title, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "results"));
 							}
 							
 							$list[count($list) - 1]["Class"] = FALSE;								
@@ -127,7 +127,7 @@ class Applications_Model extends ZP_Model {
 							if($application["Adding"]) {
 								$adding = __("Add");
 								
-								$li[0]["item"] = a($adding, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . _add);
+								$li[0]["item"] = a($adding, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "add");
 								
 								$i = count($list);			
 														
@@ -139,7 +139,7 @@ class Applications_Model extends ZP_Model {
 									$span  = span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;");
 									$span .= span("bold italic blue", __("Trash") . " ($count)");
 									
-									$li[$i]["item"] = a($span, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . _results . _sh . _trash, FALSE, array("title" => __("In trash") . ": " . $count));
+									$li[$i]["item"] = a($span, _webBase . _sh . _webLang . _sh . $application["Slug"] . _sh . _cpanel . _sh . "results" . _sh . _trash, FALSE, array("title" => __("In trash") . ": " . $count));
 									
 									$i = count($list) - 1;
 									
