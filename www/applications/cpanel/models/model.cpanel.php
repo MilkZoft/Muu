@@ -35,10 +35,10 @@ class CPanel_Model extends ZP_Model {
 			if($delete and $edit) {				
 				$URL1     = path($this->application . _sh . "cpanel" . _sh . "validate" . _sh . $ID);
 				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash"    . _sh . $ID);
-				$title1   = __("Validate comment");
-				$title2   = __("Send to trash");
-				$onClick1 = "return confirm('". __("Do you want to validate the comment?") ."')";
-				$onClick2 = "return confirm('". __("Do you want to send to the trash the record?") ."')";			
+				$title1   = __(_("Validate comment"));
+				$title2   = __(_("Send to trash"));
+				$onClick1 = "return confirm('". __(_("Do you want to validate the comment?")) ."')";
+				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";			
 					
 				if($comments) {					
 					$action = a(span("tiny-image tiny-ok", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1, "onclick" => $onClick1)) . 
@@ -49,9 +49,9 @@ class CPanel_Model extends ZP_Model {
 			} elseif($delete and $edit) {
 				$URL1	  = path($this->application . _sh . "cpanel" . _sh . "read"  . _sh . $ID);
 				$URL2 	  = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);	
-				$title1   = __("Read Comment");
-				$title2   = __("Send to Trash");				
-				$onClick2 = "return confirm('".__("Do you want to send to the trash the record?")."')";	
+				$title1   = __(_("Read Comment"));
+				$title2   = __(_("Send to Trash"));				
+				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
 					
 				$action = a(span("tiny-image tiny-mail-off", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1, "onclick" => $onClick1)) . 
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));												
@@ -60,18 +60,18 @@ class CPanel_Model extends ZP_Model {
 			if($delete and $edit) {
 				$URL1     = path($this->application . _sh . "cpanel" . _sh . "read"  . _sh . $ID);
 				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);
-				$title1   = __("Read Message");
-				$title2   = __("Send to Trash");				
-				$onClick2 = "return confirm('".__("Do you want to send to the trash the record?")."')";	
+				$title1   = __(_("Read Message"));
+				$title2   = __(_("Send to Trash"));				
+				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
 					
 				$action = a(span("tiny-image tiny-mail", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1)) . 
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));										
 			} elseif($delete and !$edit) {
 				$URL1     = path($this->application . _sh . "cpanel" . _sh . "read"  . _sh . $ID);
 				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);
-				$title1   = __("Read Message");
-				$title2   = __("Send to Trash");				
-				$onClick2 = "return confirm('".__("Do you want to send to the trash the record?")."')";	
+				$title1   = __(_("Read Message"));
+				$title2   = __(_("Send to Trash"));				
+				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
 					
 				$action = a(span("tiny-image tiny-mail-off", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1, "onclick" => $onClick1)) . 
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));				
@@ -79,10 +79,10 @@ class CPanel_Model extends ZP_Model {
 		} elseif($comments) {
 				$URL1     = path($this->application . _sh . "cpanel" . _sh . "validate" . _sh . $ID);
 				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash"    . _sh . $ID);
-				$title1   = __("Validate Comment");
-				$title2   = __("Send to Trash");
-				$onClick1 = "return confirm('". __("Do you want to validate the comment?") ."')";
-				$onClick2 = "return confirm('". __("Do you want to send to the trash the record?") ."')";	
+				$title1   = __(_("Validate Comment"));
+				$title2   = __(_("Send to Trash"));
+				$onClick1 = "return confirm('". __(_("Do you want to validate the comment?")) ."')";
+				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
 							
 				$action = a(span("tiny-image tiny-ok", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1, "onclick" => $onClick1)) . 
 				  		  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));						 
@@ -90,17 +90,17 @@ class CPanel_Model extends ZP_Model {
 			if($delete and $edit) {
 				$URL1     = path($this->application . _sh . "cpanel" . _sh . "edit"  . _sh . $ID);
 				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);
-				$title1   = __("Edit");
-				$title2   = __("Send to trash");
-				$onClick1 = "return confirm('".__("Do you want to edit the record?")."')";
-				$onClick2 = "return confirm('".__("Do you want to send to the trash the record?")."')";
+				$title1   = __(_("Edit"));
+				$title2   = __(_("Send to trash"));
+				$onClick1 = "return confirm('". __(_("Do you want to edit the record?")) ."')";
+				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";
 				
 				$action = a(span("tiny-image tiny-edit", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1, "onclick" => $onClick1)) . 
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));	
 			} elseif($delete and !$edit) {  				
 				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);				
-				$title2   = __("Send to trash");				
-				$onClick2 = "return confirm('".__("Do you want to send to the trash the record?")."')";
+				$title2   = __(_("Send to trash"));				
+				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";
 				
 				$action = a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));				
 			} elseif(!$delete and !$edit) {
@@ -110,10 +110,10 @@ class CPanel_Model extends ZP_Model {
 		} else {
 			$URL1     = path($this->application . _sh . "cpanel" . _sh . "restore" . _sh . $ID);
 			$URL2     = path($this->application . _sh . "cpanel" . _sh . "delete"  . _sh . $ID);
-			$title1   = __("Restore");
-			$title2   = __("Delete");
-			$onClick1 = "return confirm('".__("Do you want to restore the record?")."')";
-			$onClick2 = "return confirm('".__("Do you want to delete the record permanently?")."')";
+			$title1   = __(_("Restore"));
+			$title2   = __(_("Delete"));
+			$onClick1 = "return confirm('". __(_("Do you want to restore the record?")) ."')";
+			$onClick2 = "return confirm('". __(_("Do you want to delete the record permanently?")) ."')";
 			
 			$action = a(span("tiny-image tiny-restore", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1, "onclick" => $onClick1)) . 
 			  		  a(span("tiny-image tiny-delete", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));	
@@ -181,7 +181,7 @@ class CPanel_Model extends ZP_Model {
 				}
 				
 			} else {
-				$list = __("There are no new pages");
+				$list = __(_("There are no new pages"));
 			}
 			
 			return $list;		
@@ -199,7 +199,7 @@ class CPanel_Model extends ZP_Model {
 				}
 				
 			} else {
-				$list = __("There are no new posts");			
+				$list = __(_("There are no new posts"));			
 			}
 			
 			return $list;			
@@ -215,7 +215,7 @@ class CPanel_Model extends ZP_Model {
 					$i++;
 				}
 			} else {
-				$list = __("There are no new links");			
+				$list = __(_("There are no new links"));			
 			}
 			
 			return $list;
@@ -230,7 +230,7 @@ class CPanel_Model extends ZP_Model {
 					$i++;
 				}
 			} else {
-				$list = __("There are no new users");			
+				$list = __(_("There are no new users"));			
 			}
 			
 			return $list;							
@@ -471,6 +471,8 @@ class CPanel_Model extends ZP_Model {
 	}
 	
 	public function total($trash = FALSE, $singular = "record", $plural = "records", $comments = FALSE) {		
+		$primaryKey = $this->Db->table($this->application);
+		
 		if(POST("seek")) {
 			if(POST("field") === "ID") {
 				if(SESSION("ZanUserPrivilege") === _super) {

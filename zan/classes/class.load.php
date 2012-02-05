@@ -522,14 +522,14 @@ class ZP_Load {
 				}
 			}
 		}
-	
+
 		if(file_exists($file)) {							
 			if(class_exists($model)) { 
 				return ZP_Singleton::instance($model);
 			}
 	
 			include $file;
-							
+
 			return ZP_Singleton::instance($model);
 		}	
 		
