@@ -1,7 +1,7 @@
 <?php if(!defined("_access")) { die("Error: You don't have permission to access here..."); } 
 
 if(is_array($post)) {				
-	$URL 		= path("blog/". $post["Year"] ."/". $post["Month"] ."/". $post["Day"] ."/". $post["Slug"];		
+	$URL 		= path("blog/". $post["Year"] ."/". $post["Month"] ."/". $post["Day"] ."/". $post["Slug"]);		
 	$categories = NULL;
 	$tags		= NULL;
 	

@@ -448,7 +448,7 @@ class Library extends ZP_Load {
 					$attrs = array(
 						"onclick" => "javascript:insertHTML($img);",
 						"class"   => "pointer",
-						"title"   => __("Insert Image")
+						"title"   => __(_("Insert Image"))
 					);
 					
 					$HTML .= li(formCheckbox($attributes) . small($num) .
@@ -473,17 +473,17 @@ class Library extends ZP_Load {
 					unset($attrs);
 					
 					$attrs = array(
-						"title"   => __("Insert file"),
+						"title"   => __(_("Insert file")),
 						"class"   => "pointer",
 						"onclick" => "javascript:insertHTML($img);"
 					);
 					
 					$span  = span("tiny-image tiny-file", "&nbsp;&nbsp;&nbsp;&nbsp;");
 
-					$HTML .= li(formCheckbox($attributes);
+					$HTML .= li(formCheckbox($attributes));
 					$HTML .= small($num);
 					$HTML .= a($span, _webURL . _sh . $path . $files[$i], FALSE, array("title" => __(_("Download file"))));
-					$HTML .= a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs));							
+					$HTML .= a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs);							
 				}
 			}	
 		

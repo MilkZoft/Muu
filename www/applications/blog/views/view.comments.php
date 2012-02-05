@@ -13,7 +13,7 @@ $ID_User        = (SESSION("ZanUserID")) ? (int) SESSION("ZanUserID") : 0;
 ?>
 
 <div id="comments-header">
-	<span class="comments-header uppercase bold"><?php print __(_("Comments"); ?></span>
+	<span class="comments-header uppercase bold"><?php print __(_("Comments")); ?></span>
 </div>
 
 <div id="comments">
