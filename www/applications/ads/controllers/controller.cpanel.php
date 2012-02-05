@@ -202,9 +202,10 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			
+			redirect($this->application . "/cpanel/results");
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _add);
+			redirect($this->application . "/cpanel/add");
 		}
 	}
 	
