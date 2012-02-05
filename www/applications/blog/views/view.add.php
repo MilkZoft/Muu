@@ -57,7 +57,6 @@
 			);
 
 			print formSelect(array("name" => "situation", "p" => TRUE, "class" => "required", "field" => __(_("Situation"))), $options);
-			
 						
 			if(!isset($pwd)) { 
 				print formInput(array("name" => "pwd", "class" => "span10", "field" => __(_("Password")), "p" => TRUE, "value" => $pwd));	

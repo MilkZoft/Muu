@@ -168,73 +168,40 @@ class CPanel_Model extends ZP_Model {
 		}
 	}
 	
-	public function home($type) {
-		if($type === "pages") {						
-			$data = $this->Db->findAll("pages", NULL, "ID_Page DESC", _maxLimit, TRUE);
-			
-			if($data) {
-				$i = 1;	
-							
-				foreach($data as $page) {
-					$list[] = li(a(getLanguage($page["Language"], TRUE) ." $i. ". cut($page["Title"], 4), path("pages/". $page["Slug"]), $page["Title"], TRUE));
-					$i++;
-				}
-				
-			} else {
-				$list = __(_("There are no new pages"));
-			}
-			
-			return $list;		
-		} elseif($type === "blog") {						
-			$data = $this->Db->findAll("blog", NULL, "ID_Post DESC", _maxLimit);							
-		
-			if($data) {
-				$i = 1;		
-						
-				foreach($data as $post) { 	
-					$URL = path("blog/". $post["Year"] ."/". $post["Month"] ."/". $post["Day"] ."/". $post["Slug"]);
+	public function home($application) {
+		$data = $this->Db->findAll($application, NULL, "DESC", _maxLimit);
 
-					$list[] = li(a(getLanguage($post["Language"], TRUE) .' '. $i .'. '. cut($post["Title"], 4), $URL , $post["Title"], TRUE));					
-					$i++;					
-				}
-				
-			} else {
-				$list = __(_("There are no new posts"));			
-			}
-			
-			return $list;			
-		} elseif($type === "links") {						
-			$data = $this->Db->findAll("links", NULL, "ID_Link DESC", _maxLimit);
-			
-			if($data) {
-				$i = 1;
-				
-				foreach($data as $link) {
-					$list[] = li(a($i .". ". $link["Title"], $link["URL"], $link["Description"], TRUE));					
+		if($data) {
+			$i = 1;	
+							
+			foreach($data as $record) {
+				switch($application) {
+					case "pages":
+						$list[] = li(a(getLanguage($record["Language"], TRUE) ." $i. ". $record["Title"], path("pages/". $record["Slug"]), $record["Title"], TRUE));
+					break;
+
+					case "blog":
+						$URL = path("blog/". $record["Year"] ."/". $record["Month"] ."/". $record["Day"] ."/". $record["Slug"]);
+
+						$list[] = li(a(getLanguage($record["Language"], TRUE) .' '. $i .'. '. $record["Title"], $URL , $record["Title"], TRUE));	
+					break;
 					
-					$i++;
+					case "links":
+						$list[] = li(a($i .". ". $record["Title"], $record["URL"], $record["Description"], TRUE));
+					break;
+
+					case "users":
+						$list[] = li(a($i .". ". $record["Username"], path("users/profile/". $record["ID_User"]), $record["Username"], TRUE));
+					break;
 				}
-			} else {
-				$list = __(_("There are no new links"));			
-			}
-			
-			return $list;
-		} elseif($type === "users") {			
-			$data = $this->Db->findAll("users", NULL, "ID_User DESC", _maxLimit);
-			
-			if($data) {
-				$i = 1;
 				
-				foreach($data as $user) {		
-					$list[] = li(a($i .". ". $user["Username"], path("users/profile/". $user["ID_User"]), $user["Username"], TRUE));
-					$i++;
-				}
-			} else {
-				$list = __(_("There are no new users"));			
+				$i++;
 			}
-			
-			return $list;							
+		} else {
+			$list = "<p>&nbsp&nbsp&nbsp". __(_("There are no new records")) ."</p>";
 		}
+
+		return $list;
 	}
 	
 	public function getPagination($trash = FALSE) {

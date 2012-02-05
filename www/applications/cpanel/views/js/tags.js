@@ -1,10 +1,7 @@
-$(document).ready( function (){
-		
+$(document).ready(function() {
 	$("#tags").tagsInput({
-		'height':'100px',
-		'width':'600px',
-		'defaultText':'Agregar tag'
+		'height': '100px',
+		'width': '700px',
+		'defaultText': '+Tag'
 	}); 
-
 });
-

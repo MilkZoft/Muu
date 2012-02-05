@@ -21,7 +21,7 @@
 	?>
 	
 	<script type="text/javascript">
-		var PATH = "<?php print _webBase . _sh . _webLang; ?>";
+		var PATH = "<?php print path(); ?>";
 		
 		var URL  = "<?php print _webURL; ?>";
 	</script>

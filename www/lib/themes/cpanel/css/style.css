@@ -160,75 +160,37 @@ a:hover {
 }
 
 .box {
-	width: 750px;
+	width: 800px;
 	margin: 0 auto;
-	margin-right: 55px;
-}
-
-.box-top {
-	height: 29px; 
-	background-image: url(../images/porlets2.gif);
-	background-position: -20px 0px;
-	background-repeat: repeat-x; 
-	line-height: 29px;
-	margin: 2em 0 0 0;
-}
-
-.box-content {
-	background-image: url(../images/porlets.gif);
-	background-repeat: repeat-y; 
-	background-color: #FFFFFF;
-}
-
-.box-content-wrapper {
-	background-color: #FFFFFF;
-	width: 336px;
-	margin: 0 auto;
-}
-
-.box-content-close {
-	padding: 0 12px 0 12px; 
-	background-image: url(../images/porlets.gif);
-	background-position: right; 
-	background-repeat: repeat-y;
-}
-
-.box-count {
-	width: 35px; 
-	float: left; 
-	text-align: right;
-}
-
-.box-content-wrapper ul {
-	margin: 0px;
-	padding: 0px;
-	margin-left: -10px;
-	list-style: none;
-}
-
-.box-content-wrapper ul li a {
-	display: block;
-	width: 340px;
-	border-bottom: 1px solid #EEEEEE;
-	text-indent: 20px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-webkit-border-radius: 10px; 
+	border-radius: 10px;
+	border: 2px solid #CCC;
 	background-color: #F5F5F5;
-	margin-left: 8px;
+	padding: 5px;
 }
 
-.box-content-wrapper ul li a:hover {
-	display: block;
-	width: 340px;
-	border-bottom: 1px solid #EEEEEE;
-	text-indent: 20px;
-	background-color: #FFFFFF;
-}
-
-.box-bottom {
-	height: 11px; 
-	background-image: url(../images/porlets2.gif);
-	background-position: 0 -62px;
-	background-repeat: repeat-x; 
+.box ul {
 	margin: 0px;
+	margin-left: 20px;
+	padding: 0px;
+	list-style: url(../images/arrow-grey.gif);
+	width: 775px;
+}
+
+.box ul li a {
+	display: block;
+	width: 775px;
+	border-bottom: 1px solid #EEEEEE;
+	background-color: #F5F5F5;
+}
+
+.box ul li a:hover {
+	display: block;
+	width: 775px;
+	border-bottom: 1px solid #EEEEEE;
+	background-color: #FFFFFF;
 }
 
 .resalt {
@@ -385,16 +347,4 @@ a:hover {
 	font-size: 1em;
 	border: 1px solid #333;
 	background-color: #EEE;
-}
-
-.float-left  { 
-	float: left; 
-}
-
-.float-right { 
-	float: right; 
-}
-
-.no-list-style {
-	list-style: none;
 }
