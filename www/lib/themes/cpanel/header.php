@@ -12,6 +12,7 @@
     	
 		$this->CSS("prettyPhoto", "videos"); 
 		$this->CSS("ads", "ads"); 
+		$this->CSS("default"); 
 	
 	 	print $this->getCSS();
 	

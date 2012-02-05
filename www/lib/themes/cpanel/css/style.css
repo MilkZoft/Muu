@@ -393,3 +393,7 @@ a:hover {
 .float-right { 
 	float: right; 
 }
+
+.no-list-style {
+	list-style: none;
+}
