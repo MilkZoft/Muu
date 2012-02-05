@@ -160,7 +160,10 @@ class CPanel_Controller extends ZP_Controller {
 		$this->title("Manage ". $this->application);
 		$this->CSS("results", _cpanel);
 		$this->CSS("pagination");
+		$this->js("www/lib/scripts/js/prettyphoto_3_1_3/js/jquery.prettyPhoto.js");
+		$this->js("banner-lightbox", "ads");
 		$this->js("checkbox");
+		
 		
 		$this->helper("inflect");		
 		

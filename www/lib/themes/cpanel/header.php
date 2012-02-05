@@ -5,7 +5,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title><?php print $this->getTitle(); ?></title>
 	
-	<link href="<?php print _webURL ."www/lib/css/frameworks/bootstrap/bootstrap.min.css"; ?>" rel="stylesheet">
+	<link href="<?php print _webURL ."/www/lib/css/frameworks/bootstrap/bootstrap.min.css"; ?>" rel="stylesheet">
 
 	<?php 
 		print $this->themeCSS("cpanel"); 

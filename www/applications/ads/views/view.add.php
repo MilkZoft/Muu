@@ -15,7 +15,7 @@
 		$principal = recoverPOST("principal", $data[0]["Principal"]);
 		$edit      = TRUE;	
 		$action	   = "edit";
-		$href	   = _webBase . _sh . _webLang . _sh . whichApplication() . _sh . _cpanel . _sh . $action . _sh . $ID . _sh;
+		$href	   = path(whichApplication() . "/cpanel/$action/$ID/");
 	} else {
 		$ID        = 0;
 		$title     = recoverPOST("title");
