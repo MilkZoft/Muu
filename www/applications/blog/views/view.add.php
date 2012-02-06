@@ -126,7 +126,7 @@
 				
 				print img(_webURL . _sh . $muralImage[0]["Image"], NULL, NULL, array("style" => "width: 98%; border: 1px solid #000;"));
                 
-                print javascript("var URL = '$muralDeleteURL';");
+                print $this->js("var URL = '$muralDeleteURL';");
  				
  				print formInput(array(
 									"type" 	=> "submit", 
