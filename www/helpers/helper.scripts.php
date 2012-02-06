@@ -42,17 +42,6 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 							</script>				
 							
 							<noscript><p class="NoDisplay">'. __("Disable Javascript") .'</p></noscript>';		
-			} elseif($js === "nivo-slider") {
-					$HTML .= loadScript("www/lib/scripts/js/nivo-slider/nivo-slider.js");
-					$HTML .= '	<link rel="stylesheet" href="'. _webURL .'/www/lib/scripts/js/nivo-slider/themes/default/default.css" type="text/css" media="screen" />
-								<link rel="stylesheet" href="'. _webURL .'/www/lib/scripts/js/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
-								
-								<script type="text/javascript">
-									$(window).load(function() {
-										$(\'#slider\').nivoSlider();
-									});	
-								</script>													
-					';			
 			} elseif($js === "show-element") {
 				$HTML  = '	<script type="text/javascript">
 								function showElement(obj) {
@@ -215,6 +204,8 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 					
 					<?php
 					return NULL;				
+				} else {
+					$HTML = '<script type="text/javascript" language="javascript">'. $js .'</script>';
 				}
 			
 			return $HTML;
