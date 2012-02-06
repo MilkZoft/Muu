@@ -43,18 +43,18 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->title("Add");
 		
-		$this->CSS("forms", _cpanel);
+		$this->CSS("forms", "cpanel");
 		
 		$this->vars["alert"] = FALSE;
 		
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
 		if(POST("save")) {
-			$this->vars["alert"] = $this->$Model->cpanel("save");
+			$vars["alert"] = $this->$Model->cpanel("save");
 		} elseif(POST("cancel")) {
-			redirect(_webBase . _sh . _webLang . _sh . _cpanel);
+			redirect("cpanel");
 		}
 		
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
@@ -68,9 +68,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results . _sh . _trash);
+			redirect($this->application ."/cpanel/results/trash");
 		} else {
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect($this->application ."/cpanel/results");
 		}	
 	}
 	
@@ -80,43 +80,33 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect(_webBase . _sh . _webLang . _sh . $this->application . _sh . _cpanel . _sh . _results);
+			redirect($this->application ."/cpanel/results");
 		}
 
 		$this->title("Edit");
 		
-		$this->CSS("forms", _cpanel);
-		$this->CSS("misc", _cpanel);
-		$this->CSS("categories", "categories");
+		$this->CSS("forms", "cpanel");		
 		
-		$this->js("tiny-mce");
-		$this->js("insert-html");
-		$this->js("show-element");	
-		
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
 		if(POST("edit")) {
 			$this->vars["alert"] = $this->$Model->cpanel("edit");
 		} elseif(POST("cancel")) {
-			redirect(_webBase . _sh . _webLang . _sh . _cpanel);
+			redirect("cpanel");
 		} 
 		
 		$data = $this->$Model->getByID($ID);
 		
 		if($data) {
-			$this->Library 	  = $this->classes("Library", _cpanel);
-			$this->Categories = $this->classes("Categories", "categories");
-			
-			$this->vars["data"]			= $data;
-			#$this->vars["application"] = $this->CPanel->getApplicationID($this->application);
+			$this->vars["data"]	= $data;			
 		
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect(_webBase. _sh. _webLang. _sh. $this->application. _sh. _cpanel . _sh . _results);
+			redirect($this->application . _sh . "cpanel" . _sh . "results");
 		}
 	}
 	
@@ -158,12 +148,13 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->title("Manage ". $this->application);
-		$this->CSS("results", _cpanel);
+		
+		$this->CSS("results", "cpanel");
 		$this->CSS("pagination");
+		
 		$this->js("www/lib/scripts/js/prettyphoto_3_1_3/js/jquery.prettyPhoto.js");
 		$this->js("banner-lightbox", "ads");
-		$this->js("checkbox");
-		
+		$this->js("checkbox");		
 		
 		$this->helper("inflect");		
 		
@@ -190,7 +181,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["pagination"] = $pagination;
 		$this->vars["trash"]  	  = $trash;	
 		$this->vars["search"] 	  = getSearch(); 
-		$this->vars["table"]      = getTable(__("Manage " . ucfirst($this->application)), $thead, $tFoot, $total);					
+		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
 		$this->vars["view"]       = $this->view("results", TRUE, _cpanel);
 		
 		$this->template("content", $this->vars);
@@ -202,20 +193,10 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {			
-			redirect($this->application . "/cpanel/results");
+			redirect($this->application ."/cpanel/results");
 		} else {
-			redirect($this->application . "/cpanel/add");
+			redirect($this->application ."/cpanel/add");
 		}
-	}
-	
-	public function upload() {
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		$this->Library = $this->classes("Library", _cpanel);	
-			
-		$this->Library->upload();
 	}
 	
 }
