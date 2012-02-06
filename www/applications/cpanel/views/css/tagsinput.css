@@ -1,8 +1,8 @@
 div.tagsinput { 
-	border: 1px solid #000; 
+	border: 1px solid #00B4FF; 
 	background: #FFF; 
 	padding: 5px; 
-	width: 400px; 
+	width: 765px !important; 
 	height: 100px; 
 	overflow-y: auto;
 }

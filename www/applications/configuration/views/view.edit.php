@@ -11,56 +11,56 @@
 
 			print formInput(array(
 								"name" 	=> "name", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => __(_("Name of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $name));
 
 			print formInput(array(
 								"name" 	=> "URL", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => __(_("URL of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $URL));
 
 			print formInput(array(
 								"name" 	=> "slogan_spanish", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => getLanguage("Spanish", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganEs));
 			
 			print formInput(array(
 								"name" 	=> "slogan_english", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => getLanguage("English", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganEn));							
 		
 			print formInput(array(
 								"name" 	=> "slogan_french", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => getLanguage("French", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganFr));	
 			
 			print formInput(array(
 								"name" 	=> "slogan_portuguese", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => getLanguage("Portuguese", TRUE) ." ". __(_("Slogan of the Website")), 
 								"p" 	=> TRUE, 
 								"value" => $sloganPt));
 			
 			print formInput(array(
 								"name" 	=> "email_recieve", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => __(_("E-Mail for recieve notifications")), 
 								"p" 	=> TRUE, 
 								"value" => $emailRecieve));
 
 			print formInput(array(
 								"name" 	=> "email_send", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => __(_("Email for send notifications")), 
 								"p" 	=> TRUE, 
 								"value" => $emailSend));
@@ -140,7 +140,7 @@
 			print formTextarea(array(
 								"id" 	=> "editor", 
 								"name" 	=> "message", 
-								"class" => "required span14", 
+								"class" => "required span10", 
 								"field" => __(_("Message when the Website is inactive")), 
 								"p" 	=> TRUE, 
 								"value" => $message));
