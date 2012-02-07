@@ -135,19 +135,11 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->helper("inflect");		
 		
-		if(isLang()) {
-			if(segment(4) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
+		if(segment(3, isLang()) === "trash") {
+			$trash = TRUE;
 		} else {
-			if(segment(3) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
-		}
+			$trash = FALSE;
+		}	
 		
 		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
@@ -170,9 +162,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."/cpanel/results");
 		} else {
-			redirect($this->application . _sh . "cpanel" . _sh . "add");
+			redirect($this->application ."/cpanel/add");
 		}
 	}
 }

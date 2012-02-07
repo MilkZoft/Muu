@@ -204,7 +204,7 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 					
 					<?php
 					return NULL;				
-				} else {
+				} elseif($application) {
 					$HTML = '<script type="text/javascript" language="javascript">'. $js .'</script>';
 				}
 			

@@ -3,6 +3,17 @@
 		die("Error: You don't have permission to access here..."); 
 	}
 
+	$ID  	     = isset($data) ? recoverPOST("ID", $data[0]["ID_Link"]) 				: 0;
+	$title       = isset($data) ? recoverPOST("title", $data[0]["Title"]) 				: recoverPOST("title");
+	$description = isset($data) ? recoverPOST("description", $data[0]["Description"]) 	: recoverPOST("description";
+	$URL         = isset($data) ? recoverPOST("URL", $data[0]["URL"]) 					: recoverPOST("URL";
+	$follow      = isset($data) ? recoverPOST("follow", $data[0]["Follow"]) 			: recoverPOST("follow");
+	$position    = isset($data) ? recoverPOST("position", $data[0]["Position"]) 		: recoverPOST("position");
+	$situation   = isset($data) ? recoverPOST("situation", $data[0]["Situation"]) 		: recoverPOST("situation");
+	$edit        = isset($data) ? TRUE 													: FALSE;
+	$action	     = isset($data) ? "edit"												: "save";
+	$href	     = isset($data) ? path($this->application ."/cpanel/edit/$ID") 			: path($this->application ."/cpanel/add/");
+	
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");
