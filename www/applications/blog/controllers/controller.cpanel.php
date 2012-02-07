@@ -65,8 +65,8 @@ class CPanel_Controller extends ZP_Controller {
 			redirect("cpanel");
 		}
 		
-		$this->vars["application"]		= $this->CPanel->getApplicationID();
-		$this->vars["categories"]  		= $this->Categories->getCategories("add");
+		$this->vars["application"]	= $this->CPanel->getApplicationID();
+		$this->vars["categories"]  	= $this->Categories->getCategories("add");
 		$this->vars["categoriesRadio"]  = $this->Categories->getCategories("add", "radio", "parent");
 		$this->vars["imagesLibrary"]    = $this->Library->getLibrary("images"); 
 		$this->vars["documentsLibrary"] = $this->Library->getLibrary("documents");
@@ -200,11 +200,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->js("checkbox");
 			
-		if(segment(3, isLang()) === "trash") {
-			$trash = TRUE;
-		} else {
-			$trash = FALSE;
-		}
+		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
 		
 		$total 	    = $this->CPanel_Model->total($trash);
 		$thead 	    = $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
