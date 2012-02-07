@@ -414,9 +414,9 @@ function route() {
  * @param int $segment
  * @return mixed		
  */
-function segment($segment = 0) {
+function segment($segment = 0, $isLang = FALSE) {
 	$route   = route();
-	$segment = (isLang()) ? $segment + 1 : $segment;
+	$segment = ($isLang) ? $segment + 1 : $segment;
 
 	if(count($route) > 0) {		
 		if(isset($route[$segment]) and strlen($route[$segment]) > 0) {
