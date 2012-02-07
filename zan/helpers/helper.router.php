@@ -414,37 +414,22 @@ function route() {
  * @param int $segment
  * @return mixed		
  */
-function segment($segment1 = 0, $segment2 = 0, $isLang = FALSE) {
-	$route = route();
-	
-	if(!$isLang) {
-		if(count($route) > 0) {		
-			if(isset($route[$segment1]) and strlen($route[$segment1]) > 0) {
-				if($route[$segment1] === "0") {
-					return (int) 0;
-				}
-				
-				return filter($route[$segment1]);
-			} else {
-				return FALSE;
+function segment($segment = 0, $isLang = FALSE) {
+	$route   = route();
+	$segment = ($isLang) ? $segment + 1 : $segment;
+
+	if(count($route) > 0) {		
+		if(isset($route[$segment]) and strlen($route[$segment]) > 0) {
+			if($route[$segment] === "0") {
+				return (int) 0;
 			}
+				
+			return filter($route[$segment]);
 		} else {
 			return FALSE;
 		}
 	} else {
-		if(count($route) > 0) {		
-			if(isset($route[$segment2]) and strlen($route[$segment2]) > 0) {
-				if($route[$segment2] === "0") {
-					return (int) 0;
-				}
-				
-				return filter($route[$segment2]);
-			} else {
-				return FALSE;
-			}
-		} else {
-			return FALSE;
-		}
+		return FALSE;
 	}
 }
 
