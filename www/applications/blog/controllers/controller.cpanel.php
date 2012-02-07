@@ -29,7 +29,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->Model = ucfirst($this->application) ."_Model";
 		
-		$this->$this->Model = $this->model($this->Model);		
+		$this->{"$this->Model"} = $this->model($this->Model);		
 	}
 	
 	public function index() {
@@ -58,7 +58,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->Categories = $this->classes("Categories", "categories");
 		
 		if(POST("save")) {
-			$save = $this->$this->Model->cpanel("save");
+			$save = $this->{"$this->Model"}->cpanel("save");
 			
 			$this->vars["alert"] = $save;
 		} elseif(POST("cancel")) {
@@ -118,12 +118,12 @@ class CPanel_Controller extends ZP_Controller {
 		$this->$this->Model = $this->model($this->Model);
 		
 		if(POST("edit")) {
-			$this->vars["alert"] = $this->$this->Model->cpanel("edit");
+			$this->vars["alert"] = $this->{"$this->Model"}->cpanel("edit");
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		} 
 		
-		$data = $this->$this->Model->getByID($ID);
+		$data = $this->{"$this->Model"}->getByID($ID);
 		
 		if($data) {
 			$this->Library 	  = $this->classes("Library", "cpanel");
