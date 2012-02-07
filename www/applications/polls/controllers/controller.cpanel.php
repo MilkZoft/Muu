@@ -152,16 +152,12 @@ class CPanel_Controller extends ZP_Controller {
 
 		$this->js("checkbox");
 		
-		if(segment(3, isLang()) === "trash") {
-			$trash = TRUE;
-		} else {
-			$trash = FALSE;
-		}
-				
-		$total 		= $this->CPanel_Model->total($trash);
-		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
+		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
+		
+		$total 	    = $this->CPanel_Model->total($trash);
+		$thead 	    = $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
 		$pagination = $this->CPanel_Model->getPagination($trash);
-		$tFoot 		= getTFoot($trash);
+		$tFoot 	    = getTFoot($trash);
 		
 		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
 		$this->vars["pagination"] = $pagination;
