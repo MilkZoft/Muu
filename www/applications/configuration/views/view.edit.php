@@ -3,6 +3,25 @@
 		die("Error: You don't have permission to access here..."); 
 	}
 
+	$name         = recoverPOST("name", $data[0]["Name"]);
+	$sloganEn     = recoverPOST("slogan_en", $data[0]["Slogan_English"]);
+	$sloganEs     = recoverPOST("slogan_es", $data[0]["Slogan_Spanish"]);
+	$sloganFr     = recoverPOST("slogan_fr", $data[0]["Slogan_French"]);
+	$sloganPt     = recoverPOST("slogan_pt", $data[0]["Slogan_Portuguese"]);
+	$URL	 	  = recoverPOST("URL", $data[0]["URL"]);
+	$language     = recoverPOST("language", $data[0]["Language"]);
+	$theme	      = recoverPOST("theme", $data[0]["Theme"]);
+	$gallery	  = recoverPOST("gallery", $data[0]["Gallery"]);
+	$validation   = recoverPOST("validation", $data[0]["Validation"]);
+	$application  = recoverPOST("application", $data[0]["Application"]);
+	$message	  = recoverPOST("message", $data[0]["Message"]);
+	$activation   = recoverPOST("activation", $data[0]["Activation"]);
+	$emailRecieve = recoverPOST("email1", $data[0]["Email_Recieve"]);
+	$emailSend    = recoverPOST("email2", $data[0]["Email_Send"]);
+	$situation    = recoverPOST("situation", $data[0]["Situation"]);	
+	$action	      = "edit";
+	$href		  = path($this->application ."/cpanel/edit");
+
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");

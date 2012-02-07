@@ -1,79 +1,74 @@
-<?php if(!defined("_access")) die("Error: You don't have permission to access here..."); ?>
-		
-<?php
-	if(isset($data)) {
-		$ID  	     = recoverPOST("ID", 	      $data[0]["ID_Image"]);
-		$title       = recoverPOST("title",       $data[0]["Title"]);
-		$description = recoverPOST("description", $data[0]["Description"]);
-		$category 	 = recoverPOST("category",    $data[0]["Album"]);
-		$ID_Category = recoverPOST("ID_Category", $data[0]["ID_Category"]);
-		$medium      = recoverPOST("medium",      $data[0]["Medium"]);
-		$state 	     = recoverPOST("situation",   $data[0]["State"]);
-		$edit        = TRUE;
-		$action	     = "edit";
-		$href	     = path($this->application . _sh . "cpanel" . _sh . "edit" . _sh . $ID);
-	} else {
-	    $ID  	     = 0;
-		$title       = recoverPOST("title");
-		$description = recoverPOST("description");
-		$category 	 = recoverPOST("category");
-		$ID_Category = recoverPOST("ID_Category");
-		$medium 	 = recoverPOST("medium");
-		$situation   = recoverPOST("situation");
-		$action	     = "save";
-		$href	     = path($this->application . _sh . "cpanel" . _sh . "add" . _sh);
+<?php 
+	if(!defined("_access")) {
+		die("Error: You don't have permission to access here...");
 	}
-?>
 
-<div class="add-form">
-	<form id="form-add" class="form-add" action="<?php print $href; ?>" method="post" enctype="multipart/form-data">
-		<fieldset>
-			<legend><?php print __(_("Add Image")); ?></legend>
+	$ID  	     = isset($data) ? recoverPOST("ID", $data[0]["ID_Image"]) 				: 0;
+	$title       = isset($data) ? recoverPOST("title", $data[0]["Title"]) 				: recoverPOST("title");
+	$description = isset($data) ? recoverPOST("description", $data[0]["Description"]) 	: recoverPOST("description");
+	$category 	 = isset($data) ? recoverPOST("category", $data[0]["Album"]) 			: recoverPOST("category");
+	$ID_Category = isset($data) ? recoverPOST("ID_Category", $data[0]["ID_Category"]) 	: recoverPOST("ID_Category");
+	$medium      = isset($data) ? recoverPOST("medium", $data[0]["Medium"]) 			: recoverPOST("medium");
+	$situation 	 = isset($data) ? recoverPOST("situation", $data[0]["Situation"]) 		: recoverPOST("situation");
+	$edit        = isset($data) ? TRUE 													: FALSE;
+	$action	     = isset($data) ? "edit" 												: "save";
+	$href	     = isset($data) ? path($this->application ."/cpanel/edit/$ID") 			: path($this->application ."/cpanel/add");
+
+
+	print div("add-form", "class");
+		print formOpen($href, "form-add", "form-add");
+			print p(__(_(ucfirst(whichApplication()))), "resalt");
 			
-			<p class="resalt">
-				<?php print __(_(ucfirst(whichApplication()))); ?>
-			</p>
+			print isset($alert) ? $alert 
 			
-			<?php print isset($alert) ? $alert : NULL; ?>
-			
-			<p class="field">
-				&raquo; <?php print __(_("Title")); ?><br />
-				<input id="title" name="title" type="text" value="<?php print $title; ?>" tabindex="1" class="input required" />
-			</p>
+			print formInput(array(	
+								"name" 	=> "title", 
+								"class" => "span10 required", 
+								"field" => __(_("Title")), 
+								"p" 	=> TRUE, 
+								"value" => $title
+			));
 		
-			<p class="field">
-				&raquo; <?php print __(_("Description")); ?><br />
-				<textarea id="description" name="description" type="text" tabindex="2" class="input"><?php print $description; ?></textarea>
-			</p>
+			print formTextarea(array(
+								"name"  => "description", 
+								"class" => "span10 required", 
+								"style" => "height: 150px;", 
+								"field" => __(_("Description")), 
+								"p" 	=> TRUE, 
+								"value" => $description));
 			
-			<?php if($medium != NULL) { ?>
-				<p class="field">
-					<img src="<?php print _webURL . _sh . $medium;?>" title="<?php print $title; ?>" alt="<?php print $title; ?>"/>
-				</p>
-			<?php } ?>
+			if($medium) { 
+				print p(img(_webURL . _sh . $medium), "field");
+			} 
 			
-			<?php if($action === "save") { ?>
+			if($action === "save") {
+				print formInput(array(	
+									"name" 	=> "files[]", 
+									"type"  => "file"
+									"class" => "add-img required", 
+									"field" => __(_("Image")), 
+									"p" 	=> TRUE
+				));
+
+				print span(FALSE, "&nbsp;&nbsp;&nbsp;&nbsp;", "add-img");
+			} else { 
+				print formInput(array(	
+									"name" 	=> "file",
+									"type"	=> "file", 
+									"class" => "required", 
+									"field" => __(_("Image")), 
+									"p" 	=> TRUE
+				));
+			} 
+
+			print formInput(array(	
+								"name" 	=> "category", 
+								"class" => "span10 required", 
+								"field" => __(_("Album")) ." (". __(_("Write a album or select")) .")", 
+								"p" 	=> TRUE
+			));
 			
-				<p class="field">
-					&raquo; <?php print __(_("Image")); ?><br />
-					<input id="file" name="files[]" type="file" tabindex="4" class="addImg input required" />
-					<span id="addImg">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				</p>
-				
-				<div class="clear"></div>
-			
-			<?php } else { ?>
-				<p class="field">
-					&raquo; <?php print __(_("Image")); ?><br />
-					<input id="file" name="file" type="file" tabindex="4" class="input required" />
-				</p>
-			<?php } ?>
-			
-			<p class="field">
-				&raquo; <?php print __(_("Album")) ." (". __(_("Write a album or select")) .")"; ?><br />
-				<input id="category" name="category" type="text" value="" tabindex="4" class="input" />
-			</p>
-	
+			/*
 			<p class="field">
 				<select id="ID_Category" name="ID_Category" size="1" tabindex="5" class="select">
 					<option value="0"><?php print __(_("Select Album")); ?></option>
@@ -88,26 +83,26 @@
 					<? } ?>
 				</select>
 			</p>
-			
-			<p class="field">
-				&raquo; <?php print __(_("Situation")); ?><br />
-				<select id="situation" name="situation" size="1" tabindex="5" class="select">
-					<option value="Active" <?php print ($situation === "Active") ? 'selected="selected"' : NULL; ?>>
-						<?php print __(_("Active")); ?>
-					</option>
+			*/
 
-					<option value="Inactive" <?php print ($situation === "Inactive") ? 'selected="selected"' : NULL; ?>>
-						<?php print __(_("Inactive")); ?>
-					</option>
-				</select>
-			</p>
+			$options = array(
+				0 => array(
+						"value"    => "Active",
+						"option"   => __(_("Active")),
+						"selected" => ($situation === "Active") ? TRUE : FALSE
+					),
+				
+				1 => array(
+						"value"    => "Inactive",
+						"option"   => __(_("Inactive")),
+						"selected" => ($situation === "Inactive") ? TRUE : FALSE
+					)
+			);
+
+			print formSelect(array("name" => "situation", "class" => "required", "p" => TRUE, "field" => __(_("Situation"))), $options);
 			
-			<p class="save-cancel">
-				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(_(ucfirst($action))); ?>" type="submit" class="submit save" />
-				<input id="cancel" name="cancel" value="<?php print __(_("Cancel")); ?>" type="submit" class="submit cancel" />
-			</p>
+			print formSave($action);
 			
-			<input name="ID_Image" type="hidden" value="<?php print $ID; ?>" />
-		</fieldset>
-	</form>
-</div>
+			print formInput(array("name" => "ID", "type" => "hidden", "value" => $ID));
+		print formClose();
+	print div(FALSE);

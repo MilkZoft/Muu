@@ -57,16 +57,6 @@ class CPanel_Controller extends ZP_Controller {
 			redirect("cpanel");
 		}
 		
-	    $this->vars["ID"]  	       = 0;
-		$this->vars["title"]       = isset($save["error"]) ? recoverPOST("title") 		: NULL;
-		$this->vars["description"] = isset($save["error"]) ? recoverPOST("description") : NULL;
-		$this->vars["URL"]         = isset($save["error"]) ? recoverPOST("URL") 		: NULL;
-		$this->vars["follow"] 	   = isset($save["error"]) ? recoverPOST("follow") 		: NULL;
-		$this->vars["position"]    = isset($save["error"]) ? recoverPOST("position") 	: NULL;
-		$this->vars["situation"]   = isset($save["error"]) ? recoverPOST("situation") 	: NULL;
-		$this->vars["action"]	   = "save";
-		$this->vars["href"]	       = path("links/cpanel/add");
-
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
 		$this->template("content", $this->vars);
@@ -110,22 +100,12 @@ class CPanel_Controller extends ZP_Controller {
 		$data = $this->$Model->getByID($ID);
 		
 		if($data) {
-			$this->vars["ID"]  	       = recoverPOST("ID", 	        $data[0]["ID_Link"]);
-			$this->vars["title"]       = recoverPOST("title",       $data[0]["Title"]);
-			$this->vars["description"] = recoverPOST("description", $data[0]["Description"]);
-			$this->vars["URL"]         = recoverPOST("URL",         $data[0]["URL"]);
-			$this->vars["follow"] 	   = recoverPOST("follow",      $data[0]["Follow"]);
-			$this->vars["position"]    = recoverPOST("state",       $data[0]["Position"]);
-			$this->vars["situation"]   = recoverPOST("state",       $data[0]["Situation"]);
-			$this->vars["edit"]        = TRUE;
-			$this->vars["action"]	   = "edit";
-			$this->vars["href"]	       = path("links/cpanel/edit/$ID");
-		
+			$this->vars["data"] = $data;
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."/cpanel/results");
 		}
 	}
 	

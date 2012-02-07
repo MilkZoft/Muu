@@ -12,7 +12,7 @@
 	$pwd   	   = isset($data) ? recoverPOST("pwd", $data[0]["Pwd"])				 : recoverPOST("pwd");
 	$edit      = isset($data) ? TRUE											 : FALSE;
 	$action	   = isset($data) ? "edit"											 : "save";
-	$href 	   = isset($data) ? path(whichApplication() ."/cpanel/$action/$ID/") : path($this->application ."/cpanel/add");
+	$href 	   = isset($data) ? path($this->application ."/cpanel/$action/$ID/") : path($this->application ."/cpanel/add");
 		
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
@@ -103,7 +103,11 @@
 			
 			print div("addflag", "class") . div(FALSE);			
 
-			print formInput(array("type" => "file", "name" => "image", "field" => __(_("Image for this post")), "p" => TRUE));
+			print formInput(array(
+								"type" 	=> "file", 
+								"name" 	=> "image", 
+								"field" => __(_("Image for this post")), 
+								"p" 	=> TRUE));
 
 			if(isset($medium)) {
 				print img(_webURL . _sh . $medium);
@@ -114,7 +118,7 @@
 								"name" 	=> "mural", 
 								"class" => "required", 
 								"field" => __(_("Mural image")) ." (". _muralSize .")", 
-								"p" => TRUE));
+								"p" 	=> TRUE));
 	
 			if(isset($muralImage) and is_array($muralImage)) {
 				print formInput(array(
@@ -134,7 +138,7 @@
 									"name" 	=> "delete_mural_image", 
 									"value" => __(_("Delete Mural")), 
 									"class" => "btn error", 
-									"p" => TRUE));
+									"p" 	=> TRUE));
 			}
 			
 			print formSave($action);
