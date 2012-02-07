@@ -18,7 +18,7 @@ $(document).ready( function (){
 		$(this).css("background-image", "url(\"http://localhost/muucms/applications/cpanel/views/images/lock-icon.png\"");
 	});
 	
-	$("input[name=trash]").click(function(){
+	$("input[type=checkbox]").click(function(){
 		alert();
 	});
 	
