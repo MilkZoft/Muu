@@ -6,7 +6,7 @@ if(!defined("_access")) {
 	die("Error: You don't have permission to access here...");
 }
 
-function porlet($porlet, $content, $type = "list") {
+function porlet($porlet, $content) {
 	$skin = _webURL . "/www/lib/themes/cpanel";
 	
 	$HTML  = '	<div class="box">

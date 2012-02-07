@@ -40,14 +40,14 @@ class CPanel_Controller extends ZP_Controller {
 	
 	public function home() {
 		$this->title("Home");
-		$this->CSS();
 		
 		$this->helper("porlets", $this->application);
 		
 		$this->vars["lastPosts"] = porlet(__(_("Last posts")), $this->CPanel_Model->home("blog"));
-		$this->vars["lastPages"] = porlet(__(_("Last pages")), $this->CPanel_Model->home("pages"), "list", "right");
+		$this->vars["lastPages"] = porlet(__(_("Last pages")), $this->CPanel_Model->home("pages"));
 		$this->vars["lastLinks"] = porlet(__(_("Last links")), $this->CPanel_Model->home("links"));
-		$this->vars["lastUsers"] = porlet(__(_("Last users")), $this->CPanel_Model->home("users"), "list", "right");
+		$this->vars["lastUsers"] = porlet(__(_("Last users")), $this->CPanel_Model->home("users"));
+		
 		$this->vars["view"] 	 = $this->view("home", TRUE);
 		
 		$this->template("content", $this->vars);

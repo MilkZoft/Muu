@@ -35,42 +35,16 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 	}
-	
-	public function add() {
-		if(!$this->isAdmin) {
-			$this->login();
-		}
 		
-		$this->title("Add");
-		
-		$this->CSS("forms", _cpanel);
-		
-		$this->vars["alert"] = FALSE;
-		
-		$Model = ucfirst($this->application) . "_Model";
-		
-		$this->$Model = $this->model($Model);
-		
-		if(POST("save")) {
-			$this->vars["alert"] = $this->$Model->cpanel("save");
-		} elseif(POST("cancel")) {
-			redirect("cpanel");
-		}
-		
-		$this->vars["view"] = $this->view("add", TRUE, $this->application);
-		
-		$this->template("content", $this->vars);
-	}
-	
 	public function delete($ID = 0) {
 		if(!$this->isAdmin) {
 			$this->login();
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash"));
+			redirect($this->application ."/cpanel/results/trash");
 		} else {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
+			redirect($this->application ."cpanel/results");
 		}	
 	}
 	
@@ -80,14 +54,14 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
+			redirect($this->application ."/cpanel/results");
 		}
 
 		$this->title("Edit");
 		
 		$this->CSS("forms", "cpanel");
 		
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
@@ -105,7 +79,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
+			redirect($this->application ."/cpanel/results"));
 		}
 	}
 	
@@ -123,22 +97,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->template("include", $this->vars);
-		
 		$this->render("header", "footer");
 		
 		exit;
-	}
-	
-	public function restore($ID = 0) { 
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		if($this->CPanel_Model->restore($ID)) {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash"));
-		} else {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
-		}
 	}
 	
 	public function results() {
@@ -147,30 +108,19 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->title("Manage ". $this->application);
-		$this->CSS("results", _cpanel);
+		
+		$this->CSS("results", "cpanel");
 		$this->CSS("pagination");
-		$this->js("checkbox");
 		
-		$this->helper("inflect");		
+		$this->js("checkbox");	
 		
-		if(isLang()) {
-			if(segment(4) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
+		if(segment(3, isLang()) === "trash") {
+			$trash = TRUE;
 		} else {
-			if(segment(3) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
+			$trash = FALSE;
 		}
 		
-		$singular = "feedback";
-		$plural   = "feedbacks";
-		
-		$total 		= $this->CPanel_Model->total($trash, $singular, $plural);
+		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
 		$pagination = $this->CPanel_Model->getPagination($trash);
 		$tFoot 		= getTFoot($trash);
@@ -191,9 +141,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->title("Read");
-		$this->CSS("forms", _cpanel);
+		$this->CSS("forms", "cpanel");
 		
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 
 		$this->$Model = $this->model($Model);
 		
@@ -208,7 +158,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
+			redirect($this->application ."/cpanel/results"));
 		}
 	}
 	
@@ -218,9 +168,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "results"));
+			redirect($this->application ."/cpanel/results"));
 		} else {
-			redirect(path($this->application . _sh . "cpanel" . _sh . "add"));
+			redirect($this->application ."/cpanel/add"));
 		}
 	}
 	

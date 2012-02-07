@@ -84,7 +84,6 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->template("include", $this->vars);
-		
 		$this->render("header", "footer");
 		
 		exit;
