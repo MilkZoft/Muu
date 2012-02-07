@@ -54,7 +54,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->CSS("categories", $this->application);
 		
 		$this->vars["apps"] 	      = getApplicationsArray(array(3, 9, 18));
-		$this->vars["appsCategories"] = $this->Categories_Model->getSomecategories(NULL, 'Spanish');
+		$this->vars["appsCategories"] = $this->Categories_Model->getSomeCategories(NULL, whichLanguage());
 		
 		if(POST("save")) {
 			$this->vars["alert"] = $this->$this->Model->cpanel("save");
@@ -179,9 +179,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application ."/cpanel/results"));
+			redirect($this->application ."/cpanel/results");
 		} else {
-			redirect($this->application ."/cpanel/add"));
+			redirect($this->application ."/cpanel/add");
 		}
 	}
 }
