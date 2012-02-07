@@ -26,6 +26,10 @@ class CPanel_Controller extends ZP_Controller {
 		$this->Templates = $this->core("Templates");
 		
 		$this->Templates->theme("cpanel");
+		
+		$this->Model = ucfirst($this->application) ."_Model";
+		
+		$this->{"$this->Model"} = $this->model($this->Model);		
 	}
 	
 	public function index() {
@@ -47,12 +51,8 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->vars["alert"] = FALSE;
 		
-		$Model = ucfirst($this->application) ."_Model";
-		
-		$this->$Model = $this->model($Model);
-		
 		if(POST("save")) {
-			$vars["alert"] = $this->$Model->cpanel("save");
+			$vars["alert"] = $this->{"$this->Model"}->cpanel("save");
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		}
@@ -87,12 +87,8 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->CSS("forms", "cpanel");		
 		
-		$Model = ucfirst($this->application) ."_Model";
-		
-		$this->$Model = $this->model($Model);
-		
 		if(POST("edit")) {
-			$this->vars["alert"] = $this->$Model->cpanel("edit");
+			$this->vars["alert"] = $this->{"$this->Model"}->cpanel("edit");
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		} 
@@ -100,7 +96,7 @@ class CPanel_Controller extends ZP_Controller {
 		$data = $this->$Model->getByID($ID);
 		
 		if($data) {
-			$this->vars["data"]	= $data;				
+			$this->vars["data"] = $data;				
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
@@ -159,7 +155,7 @@ class CPanel_Controller extends ZP_Controller {
 				
 		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
-		$pagination = $this->CPanel_Model->getPagination($trash);
+		$pagination 	= $this->CPanel_Model->getPagination($trash);
 		$tFoot 		= getTFoot($trash);
 		
 		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
