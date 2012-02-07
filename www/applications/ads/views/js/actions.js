@@ -19,7 +19,7 @@ $(document).ready( function (){
 	});
 	
 	$("input[name=trash]").click(function(){
-		alert("aaa");
+		alert();
 	});
 	
 	
