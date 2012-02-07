@@ -87,7 +87,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->CSS("forms", "cpanel");
 		
-		$Model = ucfirst($this->application) . "_Model";
+		$Model = ucfirst($this->application) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
@@ -105,7 +105,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect($this->application ."/cpanel/results");
+			redirect($this->application . _sh . "cpanel" . _sh . "results");
 		}
 	}
 	
@@ -115,9 +115,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash");
+			redirect($this->application ."/cpanel/results/trash");
 		} else {
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."/cpanel/results");
 		}
 	}
 	
@@ -135,11 +135,11 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->helper("inflect");		
 		
-		if(segment(3, isLang()) === "trash") {
+		if(segment(3) === "trash") {
 			$trash = TRUE;
 		} else {
 			$trash = FALSE;
-		}	
+		}
 		
 		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
@@ -162,9 +162,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application ."/cpanel/results");
+			redirect($this->application . _sh . "cpanel" . _sh . "results");
 		} else {
-			redirect($this->application ."/cpanel/add");
+			redirect($this->application . _sh . "cpanel" . _sh . "add");
 		}
 	}
 }

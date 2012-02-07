@@ -106,7 +106,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."/cpanel/results");
 		}
 	}
 	
@@ -172,7 +172,7 @@ class CPanel_Controller extends ZP_Controller {
 			}
 		}
 				
-		$total 		= $this->CPanel_Model->total($trash, "record", "records");
+		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
 		$pagination = $this->CPanel_Model->getPagination($trash);
 		$tFoot 		= getTFoot($trash);
