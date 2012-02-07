@@ -26,9 +26,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->Templates = $this->core("Templates");
 		
 		$this->Templates->theme("cpanel");
-
-		$this->singular = "video";
-		$this->plural   = "videos";
 	}
 	
 	public function index() {
@@ -167,24 +164,12 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->helper("inflect");		
 		
-		if(isLang()) {
-			if(segment(4) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
-		} else {
-			if(segment(3) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
-		}
+		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
 				
-		$total 		= $this->CPanel_Model->total($trash, $this->singular, $this->plural);
-		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
+		$total 	    = $this->CPanel_Model->total($trash, $this->singular, $this->plural);
+		$thead 	    = $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
 		$pagination = $this->CPanel_Model->getPagination($trash);
-		$tFoot 		= getTFoot($trash);
+		$tFoot 	    = getTFoot($trash);
 		
 		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
 		$this->vars["pagination"] = $pagination;
