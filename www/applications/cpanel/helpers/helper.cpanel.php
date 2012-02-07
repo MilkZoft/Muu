@@ -278,7 +278,7 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 					<a onclick="checkAll(\'records\')" class="pointer" title="'. __(_("All")) .'">'. __(_("All")) .'</a> 
 					<a onclick="unCheckAll(\'records\')" class="pointer" title="'. __(_("None")) .'">'. __(_("None")) .'</a><br />';
 					
-					if(segment(3) === "trash") { 
+					if(segment(3, isLang()) === "trash") { 
 						$HTML .= '	&nbsp;<input name="restore" value="'. __(_("Restore")) .'" type="submit" class="small-input" />
 									&nbsp;<input name="delete" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
 					} elseif($comments) { 
