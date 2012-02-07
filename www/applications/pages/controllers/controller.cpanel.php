@@ -53,7 +53,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->vars["imagesLibrary"]    = $this->Library->getLibrary("images"); 
 		$this->vars["documentsLibrary"] = $this->Library->getLibrary("documents");
-		$this->vars["alert"] 			= FALSE;
+		$this->vars["alert"] 		= FALSE;
 		
 		$Model = ucfirst($this->application) ."_Model";
 		
@@ -116,7 +116,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");
 			
-			$this->vars["data"]	= $data;
+			$this->vars["data"] = $data;
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
@@ -168,16 +168,12 @@ class CPanel_Controller extends ZP_Controller {
 
 		$this->js("checkbox");
 		
-		if(segment(3, isLang()) === "trash") {
-			$trash = TRUE;
-		} else {
-			$trash = FALSE;
-		}
+		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
 		
-		$total 		= $this->CPanel_Model->total($trash);
-		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
+		$total 	    = $this->CPanel_Model->total($trash);
+		$thead 	    = $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
 		$pagination = $this->CPanel_Model->getPagination($trash);
-		$tFoot 		= getTFoot($trash);
+		$tFoot 	    = getTFoot($trash);
 		
 		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
 		$this->vars["pagination"] = $pagination;
