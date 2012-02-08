@@ -43,7 +43,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->title("Add");	
 		
-		$this->CSS("forms", _cpanel);				
+		$this->CSS("forms", "cpanel");				
 		
 		$this->vars["alert"] = FALSE;
 		
@@ -68,9 +68,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect($this->application ."/cpanel/results/trash");
+			redirect("$this->application/cpanel/results/trash");
 		} else {
-			redirect($this->application ."cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}	
 	}
 	
@@ -80,7 +80,7 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect($this->application ."cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 
 		$this->title("Edit");
@@ -105,7 +105,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 	}
 	
@@ -134,9 +134,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect($this->application ."/cpanel/results/trash");
+			redirect("$this->application/cpanel/results/trash");
 		} else {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 	}
 	
@@ -156,7 +156,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
-		$pagination 	= $this->CPanel_Model->getPagination($trash);
+		$pagination = $this->CPanel_Model->getPagination($trash);
 		$tFoot 		= getTFoot($trash);
 		
 		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
@@ -175,9 +175,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		} else {
-			redirect($this->application ."/cpanel/add");
+			redirect("$this->application/cpanel/add");
 		}
 	}	
 }

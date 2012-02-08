@@ -65,8 +65,8 @@ class CPanel_Controller extends ZP_Controller {
 			redirect("cpanel");
 		}
 		
-		$this->vars["application"]	= $this->CPanel->getApplicationID();
-		$this->vars["categories"]  	= $this->Categories->getCategories("add");
+		$this->vars["application"]		= $this->CPanel->getApplicationID();
+		$this->vars["categories"]  		= $this->Categories->getCategories("add");
 		$this->vars["categoriesRadio"]  = $this->Categories->getCategories("add", "radio", "parent");
 		$this->vars["imagesLibrary"]    = $this->Library->getLibrary("images"); 
 		$this->vars["documentsLibrary"] = $this->Library->getLibrary("documents");
@@ -89,9 +89,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect($this->application ."/cpanel/results/trash"));
+			redirect("$this->application/cpanel/results/trash"));
 		} else {
-			redirect($this->application ."cpanel/results"));
+			redirect("$this->application/cpanel/results"));
 		}
 	}
 	
@@ -101,7 +101,7 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect($this->application ."cpanel/results"));
+			redirect("$this->application/cpanel/results"));
 		}
 
 		$this->title("Edit");
@@ -112,10 +112,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->js("tiny-mce");
 		$this->js("insert-html");
 		$this->js("show-element");	
-		
-		$Model = ucfirst($this->application) ."_Model";
-		
-		$this->$this->Model = $this->model($this->Model);
 		
 		if(POST("edit")) {
 			$this->vars["alert"] = $this->{"$this->Model"}->cpanel("edit");
@@ -129,10 +125,10 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");		
 			
-			$this->vars["muralImage"] 	= $this->$Model->getMuralByID(isLang() ? segment(4) : segment(3));
-			$this->vars["muralDeleteURL"] 	= ($this->vars["muralImage"]) ? path($this->application ."/cpanel/delete-mural/$ID")  : NULL;
-			$this->vars["application"]	= $this->CPanel->getApplicationID($this->application);
-			$this->vars["categories"]	= $this->Categories->getCategories("edit");
+			$this->vars["muralImage"] 		= $this->$Model->getMuralByID(isLang() ? segment(4) : segment(3));
+			$this->vars["muralDeleteURL"] 	= ($this->vars["muralImage"]) ? path("$this->application/cpanel/delete-mural/$ID")  : NULL;
+			$this->vars["application"]		= $this->CPanel->getApplicationID($this->application);
+			$this->vars["categories"]		= $this->Categories->getCategories("edit");
 			$this->vars["categoriesRadio"]  = $this->Categories->getCategories("add", "radio", "parent");
 			$this->vars["imagesLibrary"]    = $this->Library->getLibrary("images");
 			$this->vars["documentsLibrary"] = $this->Library->getLibrary("documents");
@@ -153,7 +149,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 	}
 	
@@ -182,9 +178,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect($this->application ."/cpanel/results/trash");
+			redirect("$this->application/cpanel/results/trash");
 		} else {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 	}
 	
@@ -223,9 +219,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		} else {
-			redirect($this->application ."/cpanel/add");
+			redirect("$this->application/cpanel/add");
 		}
 	}
 	
