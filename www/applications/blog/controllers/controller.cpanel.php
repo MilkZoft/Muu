@@ -89,9 +89,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect("$this->application/cpanel/results/trash"));
+			redirect("$this->application/cpanel/results/trash");
 		} else {
-			redirect("$this->application/cpanel/results"));
+			redirect("$this->application/cpanel/results");
 		}
 	}
 	
@@ -101,7 +101,7 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect("$this->application/cpanel/results"));
+			redirect("$this->application/cpanel/results");
 		}
 
 		$this->title("Edit");
@@ -125,7 +125,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");		
 			
-			$this->vars["muralImage"] 		= $this->$Model->getMuralByID(isLang() ? segment(4) : segment(3));
+			$this->vars["muralImage"] 		= $this->$Model->getMuralByID(segment(3, isLang()));
 			$this->vars["muralDeleteURL"] 	= ($this->vars["muralImage"]) ? path("$this->application/cpanel/delete-mural/$ID")  : NULL;
 			$this->vars["application"]		= $this->CPanel->getApplicationID($this->application);
 			$this->vars["categories"]		= $this->Categories->getCategories("edit");
@@ -189,7 +189,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 		
-		$this->title("Manage ". $this->application);
+		$this->title("Manage ". ucfirst($this->application));
 
 		$this->CSS("results", "cpanel");
 		$this->CSS("pagination");

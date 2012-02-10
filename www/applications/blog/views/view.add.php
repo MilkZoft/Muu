@@ -18,7 +18,7 @@
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");
 			
-			print isset($alert) ? $alert 
+			print isset($alert) ? $alert : NULL;
 
 			print formInput(array(	"name" 	=> "title", 
 									"class" => "span10 required", 
@@ -36,14 +36,14 @@
 									 	"value" => $content
 			));
 
-			$vars["application"]     = isset($application)     ? $application 	  
-			$vars["categories"]      = isset($categories) 	   ? $categories   	  
-			$vars["categoriesRadio"] = isset($categoriesRadio) ? $categoriesRadio 
+			$vars["application"]     = isset($application)     ? $application 		: NULL; 
+			$vars["categories"]      = isset($categories) 	   ? $categories 		: NULL; 	  
+			$vars["categoriesRadio"] = isset($categoriesRadio) ? $categoriesRadio	: NULL; 
 				
 			$this->view("categories", $vars, "categories");
 
-			print isset($imagesLibrary)    ? $imagesLibrary    
-			print isset($documentsLibrary) ? $documentsLibrary 
+			print isset($imagesLibrary)    ? $imagesLibrary : NULL;
+			print isset($documentsLibrary) ? $documentsLibrary : NULL; 
 				
 			if(isset($tags)) {
 				$var["tags"] = $tags;
