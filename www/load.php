@@ -106,4 +106,4 @@ if(!version_compare(PHP_VERSION, "5.1.0", ">=")) {
 
 execute();
 
-#print benchMarkEnd();
+print benchMarkEnd();

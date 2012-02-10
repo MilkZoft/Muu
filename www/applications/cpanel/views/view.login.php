@@ -16,16 +16,16 @@
 		
 		<p>
 			<strong><?php print __(_("Username")); ?>:</strong><br />
-			<input id="username" class="username" name="username" type="text" tabindex="1" />
+			<input id="username" class="required" name="username" type="text" tabindex="1" />
 		</p>	
 		
 		<p>
 			<strong><?php print __(_("Password")); ?>:</strong><br />
-			<input id="password" class="password" name="password" type="password" tabindex="2" />
+			<input id="password" class="required" name="password" type="password" tabindex="2" />
 		</p>	
 		
 		<p>
-			<input id="connect" class="submit" name="connect" type="submit" value="<?php print __(_("Connect")); ?>" tabindex="3" />
+			<input id="connect" class="btn btn-info" name="connect" type="submit" value="<?php print __(_("Connect")); ?>" tabindex="3" />
 		</p>
 		
 		<input name="URL" type="hidden" value="<?php print $URL; ?>" />

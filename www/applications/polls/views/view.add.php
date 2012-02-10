@@ -3,6 +3,15 @@
 		die("Error: You don't have permission to access here..."); 
 	}
 
+	$ID  	   = isset($data) ? recoverPOST("ID", $data[0]["ID_Poll"])			 : recoverPOST("ID");
+	$title     = isset($data) ? recoverPOST("title", $data[0]["Title"])			 : recoverPOST("title");
+	$answers   = isset($data) ? recoverPOST("answers", $data[1])				 : recoverPOST("answers");
+	$type 	   = isset($data) ? recoverPOST("type", $data[0]["Type"])			 : recoverPOST("type");
+	$situation = isset($data) ? recoverPOST("situation", $data[0]["Situation"])	 : recoverPOST("situation");
+	$edit      = isset($data) ? TRUE 											 : FALSE;
+	$action	   = isset($data) ? "edit"											 : "save";
+	$href	   = isset($data) ? path($this->application ."/cpanel/$action/$ID/") : path($this->application ."/cpanel/add/");
+
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");
@@ -30,7 +39,7 @@
 
 			print div(FALSE);
 			
-			print span(NULL, repeat("&nbsp;", 4), "addImg");
+			print span(NULL, repeat("&nbsp;", 4), "add-img");
 
 			$options = array(
 				0 => array("value" => "Simple",   "option" => __(_("Simple")),   "selected" => ($type === "Simple")   ? TRUE : FALSE),

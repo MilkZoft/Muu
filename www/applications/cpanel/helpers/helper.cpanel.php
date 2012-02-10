@@ -305,6 +305,7 @@ function getTFoot($trash) {
 		$colors[2] = _color3;
 		$colors[3] = _color4;
 		$colors[4] = _color5;		
+
 		$i = 0;
 		$a = 0;
 		$j = 2;		
@@ -633,14 +634,14 @@ function getSearch() {
 			)
 	);
 
-	$HTML  = formOpen(path($application . _sh . "cpanel" . _sh . "results"), "form-results-search");
+	$HTML  = formOpen(path($application ."/cpanel/results"), "form-results-search");
 	$HTML .= br();
 	$HTML .= bold("&nbsp". __(_("Search")) .":", FALSE);
 
 	$attributes = array(
 		"p" 	=> FALSE,
 		"name" 	=> "search",
-		"class" => "small-input"
+		"class" => "span 1 required"
 	);
 
 	$HTML .= formInput($attributes);
@@ -657,7 +658,7 @@ function getSearch() {
 		$i++;
 	}
 	
-	$HTML .= formSelect(array("name" => "field", "class" => "span2"), $fields);
+	$HTML .= formSelect(array("name" => "field", "class" => "span2 required"), $fields);
 	
 	$HTML .= bold(__(_("Order")) . ":", FALSE);
 	
@@ -668,8 +669,8 @@ function getSearch() {
 	$options[1]["option"]   = __(_("Descending"));
 	$options[1]["selected"] = FALSE;
 	
-	$HTML .= formSelect(array("name" => "order"), $options);
-	$HTML .= formInput(array("name" => "seek", "type" => "submit", "class" => "btn info", "value" => __(_("Seek"))));	
+	$HTML .= formSelect(array("name" => "order", "class" => "span2 required"), $options);
+	$HTML .= formInput(array("name" => "seek", "type" => "submit", "class" => "btn btn-info", "value" => __(_("Seek"))));	
 	
 	return $HTML;
 }

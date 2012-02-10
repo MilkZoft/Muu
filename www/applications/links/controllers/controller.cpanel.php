@@ -68,9 +68,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect($this->application . _sh . "cpanel" . _sh . "results" . _sh . "trash");
+			redirect($this->application ."/cpanel/results/trash");
 		} else {
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."cpanel/results");
 		}	
 	}
 	
@@ -80,7 +80,7 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."/cpanel/results");
 		}
 
 		$this->title("Edit");
@@ -105,7 +105,7 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."/cpanel/results");
 		}
 	}
 	
@@ -135,15 +135,11 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->helper("inflect");		
 		
-		if(segment(3) === "trash") {
-			$trash = TRUE;
-		} else {
-			$trash = FALSE;
-		}
+		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
 		
 		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
-		$pagination = $this->CPanel_Model->getPagination($trash);
+		$pagination 	= $this->CPanel_Model->getPagination($trash);
 		$tFoot 		= getTFoot($trash);
 		
 		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
@@ -162,9 +158,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application . _sh . "cpanel" . _sh . "results");
+			redirect($this->application ."/cpanel/results");
 		} else {
-			redirect($this->application . _sh . "cpanel" . _sh . "add");
+			redirect($this->application ."/cpanel/add");
 		}
 	}
 }

@@ -26,6 +26,10 @@ class CPanel_Controller extends ZP_Controller {
 		$this->Templates = $this->core("Templates");
 		
 		$this->Templates->theme("cpanel");
+		
+		$this->Model = ucfirst($this->application) ."_Model";
+		
+		$this->{"$this->Model"} = $this->model($this->Model);		
 	}
 	
 	public function index() {
@@ -47,12 +51,8 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->vars["alert"] = FALSE;
 		
-		$Model = ucfirst($this->application) ."_Model";
-		
-		$this->$Model = $this->model($Model);
-		
 		if(POST("save")) {
-			$vars["alert"] = $this->$Model->cpanel("save");
+			$vars["alert"] = $this->{"$this->Model"}->cpanel("save");
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		}
@@ -68,9 +68,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
-			redirect($this->application ."/cpanel/results/trash");
+			redirect("$this->application/cpanel/results/trash");
 		} else {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}	
 	}
 	
@@ -80,19 +80,15 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if((int) $ID === 0) { 
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 
 		$this->title("Edit");
 		
 		$this->CSS("forms", "cpanel");		
 		
-		$Model = ucfirst($this->application) ."_Model";
-		
-		$this->$Model = $this->model($Model);
-		
 		if(POST("edit")) {
-			$this->vars["alert"] = $this->$Model->cpanel("edit");
+			$this->vars["alert"] = $this->{"$this->Model"}->cpanel("edit");
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		} 
@@ -100,13 +96,12 @@ class CPanel_Controller extends ZP_Controller {
 		$data = $this->$Model->getByID($ID);
 		
 		if($data) {
-			$this->vars["data"]	= $data;			
-		
+			$this->vars["data"] = $data;				
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
 			$this->template("content", $this->vars);
 		} else {
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 	}
 	
@@ -120,11 +115,10 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Users_Controller->login("cpanel");
 		} else {
 			$this->vars["URL"]  = getURL();
-			$this->vars["view"] = $this->view("login", TRUE, _cpanel);
+			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
 		$this->template("include", $this->vars);
-		
 		$this->render("header", "footer");
 		
 		exit;
@@ -136,9 +130,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
-			redirect($this->application . "/cpanel/results/trash");
+			redirect("$this->application/cpanel/results/trash");
 		} else {
-			redirect($this->application . "/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		}
 	}
 	
@@ -155,23 +149,9 @@ class CPanel_Controller extends ZP_Controller {
 		$this->js("www/lib/scripts/js/prettyphoto_3_1_3/js/jquery.prettyPhoto.js");
 		$this->js("actions", "ads");
 		$this->js("banner-lightbox", "ads");	
-		$this->js("checkbox");		
+		$this->js("checkbox");			
 		
-		$this->helper("inflect");		
-		
-		if(isLang()) {
-			if(segment(4) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
-		} else {
-			if(segment(3) === "trash") {
-				$trash = TRUE;
-			} else {
-				$trash = FALSE;
-			}
-		}
+		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
 				
 		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
@@ -183,7 +163,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["trash"]  	  = $trash;	
 		$this->vars["search"] 	  = getSearch(); 
 		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
-		$this->vars["view"]       = $this->view("results", TRUE, _cpanel);
+		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
 		
 		$this->template("content", $this->vars);
 	}
@@ -194,9 +174,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {			
-			redirect($this->application ."/cpanel/results");
+			redirect("$this->application/cpanel/results");
 		} else {
-			redirect($this->application ."/cpanel/add");
+			redirect("$this->application/cpanel/add");
 		}
 	}
 	

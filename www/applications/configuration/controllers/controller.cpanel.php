@@ -24,10 +24,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->Templates = $this->core("Templates");
 		
 		$this->Templates->theme("cpanel");
-		
-		if(!$this->isAdmin) {
-			$this->login();
-		}
 	}
 	
 	public function index() {
@@ -58,9 +54,9 @@ class CPanel_Controller extends ZP_Controller {
 		if($data) {
 			$this->Applications_Model = $this->model("Applications_Model");
 			
-			$this->vars["themes"]		       = $this->Templates->getThemes($data[0]["Theme"]);
+			$this->vars["themes"]		   = $this->Templates->getThemes($data[0]["Theme"]);
 			$this->vars["defaultApplications"] = $this->Applications_Model->getDefaultApplications($data[0]["Application"]);
-			$this->vars["data"]				   = $data;
+			$this->vars["data"]		   = $data;
 		
 			$this->vars["view"] = $this->view("edit", TRUE, $this->application);
 			
@@ -84,7 +80,6 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		$this->template("include", $this->vars);
-		
 		$this->render("header", "footer");
 		
 		exit;

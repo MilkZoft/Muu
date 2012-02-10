@@ -456,9 +456,9 @@ class CPanel_Model extends ZP_Model {
 			}
 			
 			if($total === 0) {
-				$total = "0 " . __(_("Records founded"));
+				$total = "0 ". __(_("Records founded"));
 			} elseif($total === 1) {
-				$total = "1 " . __(_("Record found"));
+				$total = "1 ". __(_("Record found"));
 			} else {
 				$total = $total . " " .__(_("Records founded"));	
 			}
