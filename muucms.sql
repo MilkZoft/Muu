@@ -821,7 +821,7 @@ CREATE TABLE IF NOT EXISTS `muu_users` (
 --
 
 INSERT INTO `muu_users` (`ID_User`, `Username`, `Pwd`, `Email`, `Website`, `Avatar`, `Rank`, `Sign`, `Messages`, `Recieve_Messages`, `Topics`, `Replies`, `Visits`, `Comments`, `Subscribed`, `Start_Date`, `Code`, `God`, `Privilege`, `Type`, `Situation`) VALUES
-(1, 'admin', '99b94460aa941d668e60262be137c7187045ed45', 'carlos@milkzoft.com', 'www.facebook.com', '', 'Administrator', '', 0, 1, 9, 1, 92, 0, 0, 1304740493, '3628FB9CC0', 1, 'Super Admin', 'Normal', 'Active');
+(1, 'admin', 'b9223847e1566884893656e84798ff39cea2b8c4', 'carlos@milkzoft.com', 'www.facebook.com', '', 'Administrator', '', 0, 1, 9, 1, 92, 0, 0, 1304740493, '3628FB9CC0', 1, 'Super Admin', 'Normal', 'Active');
 
 -- --------------------------------------------------------
 
