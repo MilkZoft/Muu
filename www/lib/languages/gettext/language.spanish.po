@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZanPHP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-05 15:13-0600\n"
-"PO-Revision-Date: 2012-02-05 15:14-0600\n"
+"POT-Creation-Date: 2012-02-09 23:30-0600\n"
+"PO-Revision-Date: 2012-02-09 23:30-0600\n"
 "Last-Translator: \n"
 "Language-Team: Carlos Santana <carlos@santana.ws>\n"
 "MIME-Version: 1.0\n"
@@ -16,77 +16,82 @@ msgstr ""
 "X-Poedit-Basepath: /Applications/XAMPP/htdocs/MuuCMS\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: www/applications/ads/views/view.add.php:39
-#: www/applications/blog/views/view.add.php:14
+#: www/applications/ads/controllers/controller.cpanel.php:165
+#: www/applications/blog/controllers/controller.cpanel.php:210
+msgid "Manage "
+msgstr "Administrar "
+
+#: www/applications/ads/views/view.add.php:27
+#: www/applications/blog/views/view.add.php:25
 msgid "Title"
 msgstr "Título"
 
-#: www/applications/ads/views/view.add.php:42
+#: www/applications/ads/views/view.add.php:32
 msgid "View Banner"
 msgstr "Ver Banner"
 
-#: www/applications/ads/views/view.add.php:45
+#: www/applications/ads/views/view.add.php:39
 msgid "Image"
 msgstr "Imagen"
 
-#: www/applications/ads/views/view.add.php:50
+#: www/applications/ads/views/view.add.php:45
 msgid "Top"
 msgstr "Superior"
 
-#: www/applications/ads/views/view.add.php:56
+#: www/applications/ads/views/view.add.php:51
 msgid "Left"
 msgstr "Izquierda"
 
-#: www/applications/ads/views/view.add.php:62
+#: www/applications/ads/views/view.add.php:57
 msgid "Right"
 msgstr "Derecha"
 
-#: www/applications/ads/views/view.add.php:68
+#: www/applications/ads/views/view.add.php:63
 msgid "Bottom"
 msgstr "Inferior"
 
-#: www/applications/ads/views/view.add.php:74
+#: www/applications/ads/views/view.add.php:69
 msgid "Center"
 msgstr "Centro"
 
-#: www/applications/ads/views/view.add.php:79
+#: www/applications/ads/views/view.add.php:78
 msgid "Position"
 msgstr "Posición"
 
-#: www/applications/ads/views/view.add.php:81
+#: www/applications/ads/views/view.add.php:84
 msgid "URL"
 msgstr "URL"
 
-#: www/applications/ads/views/view.add.php:83
+#: www/applications/ads/views/view.add.php:92
 msgid "Code"
 msgstr "Código"
 
-#: www/applications/ads/views/view.add.php:88
-#: www/applications/blog/views/view.add.php:48
+#: www/applications/ads/views/view.add.php:99
+#: www/applications/blog/views/view.add.php:59
 msgid "Yes"
 msgstr "Si"
 
-#: www/applications/ads/views/view.add.php:94
-#: www/applications/blog/views/view.add.php:49
+#: www/applications/ads/views/view.add.php:105
+#: www/applications/blog/views/view.add.php:60
 msgid "No"
 msgstr "No"
 
-#: www/applications/ads/views/view.add.php:99
+#: www/applications/ads/views/view.add.php:114
 msgid "Principal"
 msgstr "Principal"
 
-#: www/applications/ads/views/view.add.php:104
-#: www/applications/blog/views/view.add.php:55
+#: www/applications/ads/views/view.add.php:120
+#: www/applications/blog/views/view.add.php:71
 msgid "Active"
 msgstr "Activo"
 
-#: www/applications/ads/views/view.add.php:110
-#: www/applications/blog/views/view.add.php:56
+#: www/applications/ads/views/view.add.php:126
+#: www/applications/blog/views/view.add.php:72
 msgid "Inactive"
 msgstr "Inactivo"
 
-#: www/applications/ads/views/view.add.php:115
-#: www/applications/blog/views/view.add.php:59
+#: www/applications/ads/views/view.add.php:135
+#: www/applications/blog/views/view.add.php:79
 msgid "Situation"
 msgstr "Situación"
 
@@ -102,10 +107,6 @@ msgstr "Papelera"
 msgid "In trash"
 msgstr "En Papelera:"
 
-#: www/applications/blog/controllers/controller.cpanel.php:251
-msgid "Manage "
-msgstr "Administrar "
-
 #: www/applications/blog/views/view.access.php:6
 msgid "Private post"
 msgstr "Post Privado"
@@ -118,36 +119,36 @@ msgstr "Contraseña del post"
 msgid "Access"
 msgstr "Acceso"
 
-#: www/applications/blog/views/view.add.php:23
+#: www/applications/blog/views/view.add.php:34
 msgid "Content"
 msgstr "Contenido"
 
-#: www/applications/blog/views/view.add.php:45
+#: www/applications/blog/views/view.add.php:56
 msgid "Languages"
 msgstr "Idiomas"
 
-#: www/applications/blog/views/view.add.php:52
+#: www/applications/blog/views/view.add.php:67
 msgid "Enable Comments"
 msgstr "Habilitar Comentarios"
 
-#: www/applications/blog/views/view.add.php:63
-#: www/applications/blog/views/view.add.php:65
+#: www/applications/blog/views/view.add.php:86
+#: www/applications/blog/views/view.add.php:90
 msgid "Password"
 msgstr "Contraseña"
 
-#: www/applications/blog/views/view.add.php:75
+#: www/applications/blog/views/view.add.php:109
 msgid "Image for this post"
 msgstr "Imagen para el post"
 
-#: www/applications/blog/views/view.add.php:81
+#: www/applications/blog/views/view.add.php:120
 msgid "Mural image"
 msgstr "Imagen de mural"
 
-#: www/applications/blog/views/view.add.php:84
+#: www/applications/blog/views/view.add.php:128
 msgid "Current mural image"
 msgstr "Imagen de mural actual"
 
-#: www/applications/blog/views/view.add.php:92
+#: www/applications/blog/views/view.add.php:139
 msgid "Delete Mural"
 msgstr "Eliminar Mural"
 
@@ -225,54 +226,54 @@ msgstr "Categoría Padre"
 msgid "Add category"
 msgstr "Agregar Categoría"
 
-#: www/applications/configuration/views/view.edit.php:15
+#: www/applications/configuration/views/view.edit.php:34
 msgid "Name of the Website"
 msgstr "Nombre del Sitio Web"
 
-#: www/applications/configuration/views/view.edit.php:22
+#: www/applications/configuration/views/view.edit.php:41
 msgid "URL of the Website"
 msgstr "URL del Sitio Web"
 
-#: www/applications/configuration/views/view.edit.php:29
-#: www/applications/configuration/views/view.edit.php:36
-#: www/applications/configuration/views/view.edit.php:43
-#: www/applications/configuration/views/view.edit.php:50
+#: www/applications/configuration/views/view.edit.php:48
+#: www/applications/configuration/views/view.edit.php:55
+#: www/applications/configuration/views/view.edit.php:62
+#: www/applications/configuration/views/view.edit.php:69
 msgid "Slogan of the Website"
 msgstr "Slogan de la Web"
 
-#: www/applications/configuration/views/view.edit.php:57
+#: www/applications/configuration/views/view.edit.php:76
 msgid "E-Mail for recieve notifications"
 msgstr "Email para recibir notificaciones"
 
-#: www/applications/configuration/views/view.edit.php:64
+#: www/applications/configuration/views/view.edit.php:83
 msgid "Email for send notifications"
 msgstr "Email para enviar notificaciones"
 
-#: www/applications/configuration/views/view.edit.php:72
+#: www/applications/configuration/views/view.edit.php:91
 msgid "Default theme"
 msgstr "Diseño por Defecto"
 
-#: www/applications/configuration/views/view.edit.php:78
+#: www/applications/configuration/views/view.edit.php:97
 msgid "Default application"
 msgstr "Aplicación por Defecto"
 
-#: www/applications/configuration/views/view.edit.php:98
+#: www/applications/configuration/views/view.edit.php:117
 msgid "Comments validations"
 msgstr "Validación de comentarios"
 
-#: www/applications/configuration/views/view.edit.php:103
+#: www/applications/configuration/views/view.edit.php:122
 msgid "User"
 msgstr "Usuario"
 
-#: www/applications/configuration/views/view.edit.php:109
+#: www/applications/configuration/views/view.edit.php:128
 msgid "Administrator"
 msgstr "Administrador"
 
-#: www/applications/configuration/views/view.edit.php:118
+#: www/applications/configuration/views/view.edit.php:137
 msgid "Accounts activation"
 msgstr "Activación de Cuenta"
 
-#: www/applications/configuration/views/view.edit.php:144
+#: www/applications/configuration/views/view.edit.php:163
 msgid "Message when the Website is inactive"
 msgstr "Mensaje que se mostrará cuando la web este inactiva"
 
@@ -332,19 +333,19 @@ msgstr "Insertar Archivo"
 msgid "Download file"
 msgstr "Descargar archivo"
 
-#: www/applications/cpanel/controllers/controller.cpanel.php:47
+#: www/applications/cpanel/controllers/controller.cpanel.php:46
 msgid "Last posts"
 msgstr "Últimos Posts"
 
-#: www/applications/cpanel/controllers/controller.cpanel.php:48
+#: www/applications/cpanel/controllers/controller.cpanel.php:47
 msgid "Last pages"
 msgstr "Últimas Páginas"
 
-#: www/applications/cpanel/controllers/controller.cpanel.php:49
+#: www/applications/cpanel/controllers/controller.cpanel.php:48
 msgid "Last links"
 msgstr "Últimos Enlaces"
 
-#: www/applications/cpanel/controllers/controller.cpanel.php:50
+#: www/applications/cpanel/controllers/controller.cpanel.php:49
 msgid "Last users"
 msgstr "Últimos Usuarios"
 
@@ -385,32 +386,32 @@ msgstr "Restaurar"
 msgid "Send to trash"
 msgstr "Enviar a la papelera"
 
-#: www/applications/cpanel/helpers/helper.cpanel.php:617
+#: www/applications/cpanel/helpers/helper.cpanel.php:618
 #: www/applications/cpanel/views/view.login.php:18
 msgid "Username"
 msgstr "Usuario"
 
-#: www/applications/cpanel/helpers/helper.cpanel.php:638
+#: www/applications/cpanel/helpers/helper.cpanel.php:639
 msgid "Search"
 msgstr "Búsqueda"
 
-#: www/applications/cpanel/helpers/helper.cpanel.php:648
+#: www/applications/cpanel/helpers/helper.cpanel.php:649
 msgid "Field"
 msgstr "Campo"
 
-#: www/applications/cpanel/helpers/helper.cpanel.php:662
+#: www/applications/cpanel/helpers/helper.cpanel.php:663
 msgid "Order"
 msgstr "Ordenar"
 
-#: www/applications/cpanel/helpers/helper.cpanel.php:665
+#: www/applications/cpanel/helpers/helper.cpanel.php:666
 msgid "Ascending"
 msgstr "Ascendente"
 
-#: www/applications/cpanel/helpers/helper.cpanel.php:668
+#: www/applications/cpanel/helpers/helper.cpanel.php:669
 msgid "Descending"
 msgstr "Descendente"
 
-#: www/applications/cpanel/helpers/helper.cpanel.php:672
+#: www/applications/cpanel/helpers/helper.cpanel.php:673
 msgid "Seek"
 msgstr "Buscar"
 
@@ -494,28 +495,16 @@ msgstr "¿Desea restaurar el registro?"
 msgid "Do you want to delete the record permanently?"
 msgstr "¿Desea eliminar el registro permanentemente?"
 
-#: www/applications/cpanel/models/model.cpanel.php:184
-msgid "There are no new pages"
-msgstr "No hay nuevas páginas"
+#: www/applications/cpanel/models/model.cpanel.php:201
+msgid "There are no new records"
+msgstr "No hay nuevos registros"
 
-#: www/applications/cpanel/models/model.cpanel.php:202
-msgid "There are no new posts"
-msgstr "No hay nuevos posts"
-
-#: www/applications/cpanel/models/model.cpanel.php:218
-msgid "There are no new links"
-msgstr "No hay nuevos enlaces"
-
-#: www/applications/cpanel/models/model.cpanel.php:233
-msgid "There are no new users"
-msgstr "No hay nuevos usuarios"
-
-#: www/applications/cpanel/models/model.cpanel.php:492
-#: www/applications/cpanel/models/model.cpanel.php:496
+#: www/applications/cpanel/models/model.cpanel.php:459
+#: www/applications/cpanel/models/model.cpanel.php:463
 msgid "Records founded"
 msgstr "Registros encontrados"
 
-#: www/applications/cpanel/models/model.cpanel.php:494
+#: www/applications/cpanel/models/model.cpanel.php:461
 msgid "Record found"
 msgstr "Registro encontrado"
 
@@ -604,17 +593,9 @@ msgstr "No hay nuevas respuestas"
 msgid "I posted on"
 msgstr "Publique en"
 
-#: www/applications/forums/views/view.add.php:28
-msgid "Add Page"
-msgstr "Agrega Página"
-
-#: www/applications/forums/views/view.add.php:42
+#: www/applications/forums/views/view.add.php:33
 msgid "Description"
 msgstr "Descripción"
-
-#: www/applications/forums/views/view.add.php:62
-msgid "Cancel"
-msgstr "Cancelar"
 
 #: www/applications/forums/views/view.forum.php:20
 msgid "Welcome to the forum, "
@@ -853,6 +834,11 @@ msgstr "Editar Tema"
 msgid "Post in Twitter"
 msgstr "Publicar en Twitter"
 
+#: www/applications/forums/views/view.newtopic.php:43
+#: www/applications/forums/views/view.reply.php:44
+msgid "Cancel"
+msgstr "Cancelar"
+
 #: www/applications/forums/views/view.reply.php:11
 msgid "New Reply"
 msgstr "Nueva Respuesta"
@@ -890,22 +876,14 @@ msgstr "¿Desea editar la respuesta?"
 msgid "Do you want to delete the reply?"
 msgstr "¿Deseas eliminar la respuesta?"
 
-#: www/applications/gallery/views/view.add.php:31
-msgid "Add Image"
-msgstr "Agregar Imagen"
-
-#: www/applications/gallery/views/view.add.php:73
+#: www/applications/gallery/views/view.add.php:67
 #: www/applications/gallery/views/view.image.php:46
 msgid "Album"
 msgstr "Álbum"
 
-#: www/applications/gallery/views/view.add.php:73
+#: www/applications/gallery/views/view.add.php:67
 msgid "Write a album or select"
 msgstr "Escribe un álbum o selecciona algúno"
-
-#: www/applications/gallery/views/view.add.php:79
-msgid "Select Album"
-msgstr "Selecciona un Álbum"
 
 #: www/applications/gallery/views/view.gallery.php:7
 #: www/applications/gallery/views/view.gallery.php:16
@@ -925,39 +903,39 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Siguiente"
 
-#: www/applications/links/views/view.add.php:23
+#: www/applications/links/views/view.add.php:34
 msgid "Follow"
 msgstr "Seguimiento"
 
-#: www/applications/links/views/view.add.php:26
+#: www/applications/links/views/view.add.php:37
 msgid "Web Friends"
 msgstr "Webs Amigas"
 
-#: www/applications/links/views/view.add.php:27
+#: www/applications/links/views/view.add.php:38
 msgid "Directory"
 msgstr "Directorio"
 
-#: www/applications/polls/views/view.add.php:12
+#: www/applications/polls/views/view.add.php:21
 msgid "Question"
 msgstr "Pregunta"
 
-#: www/applications/polls/views/view.add.php:15
+#: www/applications/polls/views/view.add.php:24
 msgid "Answers"
 msgstr "Respuestas"
 
-#: www/applications/polls/views/view.add.php:15
+#: www/applications/polls/views/view.add.php:24
 msgid "Empty answers not be added"
 msgstr "Respuestas vacías no se agregarán"
 
-#: www/applications/polls/views/view.add.php:36
+#: www/applications/polls/views/view.add.php:45
 msgid "Simple"
 msgstr "Simple"
 
-#: www/applications/polls/views/view.add.php:37
+#: www/applications/polls/views/view.add.php:46
 msgid "Multiple"
 msgstr "Multiple"
 
-#: www/applications/polls/views/view.add.php:40
+#: www/applications/polls/views/view.add.php:49
 msgid "Type"
 msgstr "Tipo"
 
@@ -1260,6 +1238,22 @@ msgstr "Administrar Foros"
 msgid "Support"
 msgstr "Soporte Técnico"
 
+#: www/lib/languages/words.php:26
+msgid "Title is required"
+msgstr "El título es requerido"
+
+#: www/lib/languages/words.php:27
+msgid "Invalid URL"
+msgstr "URL Inválida"
+
+#: www/lib/languages/words.php:28
+msgid "You need to upload an image or write the ad code"
+msgstr "Necesitas subir una imagen o escribir el código del anuncio"
+
+#: www/lib/languages/words.php:29
+msgid "The ad has been saved correctly"
+msgstr "El anuncio se ha guardado correctamente"
+
 #: www/lib/themes/cpanel/footer.php:6
 msgid "All rights reserved"
 msgstr "Todos los derechos reservados"
@@ -1296,6 +1290,24 @@ msgstr "Comentarios de la Galería"
 #: www/lib/themes/cpanel/header.php:95
 msgid "You are in"
 msgstr "Usted está en"
+
+#~ msgid "There are no new pages"
+#~ msgstr "No hay nuevas páginas"
+
+#~ msgid "There are no new posts"
+#~ msgstr "No hay nuevos posts"
+
+#~ msgid "There are no new links"
+#~ msgstr "No hay nuevos enlaces"
+
+#~ msgid "Add Page"
+#~ msgstr "Agrega Página"
+
+#~ msgid "Add Image"
+#~ msgstr "Agregar Imagen"
+
+#~ msgid "Select Album"
+#~ msgstr "Selecciona un Álbum"
 
 #~ msgid "Hello"
 #~ msgstr "Hola2"
@@ -1865,9 +1877,6 @@ msgstr "Usted está en"
 #~ msgid "Your message is very vulgar, please edit it"
 #~ msgstr "Su mensaje es muy vulgar, editelo porfavor"
 
-#~ msgid "You need to write a code"
-#~ msgstr "Necesitas escribir el código"
-
 #~ msgid "Write a code or upload a banner"
 #~ msgstr "Escribe un código o sube un banner"
 
@@ -1910,9 +1919,6 @@ msgstr "Usted está en"
 
 #~ msgid "You need to write a url"
 #~ msgstr "Necesitas escribir una URL"
-
-#~ msgid "Invalid URL"
-#~ msgstr "URL Inválida"
 
 #~ msgid "Invalid size for mural image"
 #~ msgstr "Tamaño invalido para la imagen del mural"
@@ -2101,9 +2107,6 @@ msgstr "Usted está en"
 
 #~ msgid "The image has been saved correctly"
 #~ msgstr "La imagen ha sido guardada correctamente"
-
-#~ msgid "The page has been saved correctly"
-#~ msgstr "La página ha sido guardada correctamente"
 
 #~ msgid "The page has been edited correctly"
 #~ msgstr "La página ha sido modificada correctamente"

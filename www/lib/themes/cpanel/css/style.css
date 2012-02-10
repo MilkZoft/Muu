@@ -325,7 +325,7 @@ a:hover {
 	color: #909090;
 }
 
-#addImg {
+#add-img {
 	background-image:url(../images/icons/plus2.png);
 	display:block;
 	float:right;
@@ -335,7 +335,7 @@ a:hover {
 	background-repeat:no-repeat;
 }
 
-#addImg:hover {
+#add-img:hover {
 	background-image:url(../images/icons/plus2_hover.png);
 }
 

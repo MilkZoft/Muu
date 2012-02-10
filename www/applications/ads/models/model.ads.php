@@ -17,7 +17,6 @@ class Ads_Model extends ZP_Model {
 
 		$this->Data = $this->core("Data");
 		
-		$this->config("applications");
 		$this->config("images");
 	}
 
@@ -92,15 +91,17 @@ class Ads_Model extends ZP_Model {
 				return getAlert("Upload error"); 
 			}
 		} else {
-			if(is_null($this->data["code"])) {
+			if(!isset($this->data["code"])) {
 				return getAlert("You need to upload an image or write the ad code");
 			}
 		}		
 	}
 	
 	private function save() {		
-		if($this->data["Principal"] > 0) {		
-			if($this->Db->findBySQL("Position = '". $this->data["Position"] ."' AND Principal = 1", $this->table)) {
+		if($this->data["Principal"] > 0) {
+			$data = $this->Db->findBySQL("Position = '". $this->data["Position"] ."' AND Principal = 1", $this->table);
+					
+			if($data) {
 				$this->Db->updateBySQL($this->table, "Principal = 0 WHERE Position = '". $this->data["Position"] ."'");				
 			}
 		}

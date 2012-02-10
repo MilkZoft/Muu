@@ -1,6 +1,3 @@
-/**
- * Text classes
- */
 .center {
 	text-align: center;
 }
@@ -46,9 +43,7 @@
 .uppercase {
 	text-transform: uppercase;
 }
-/**
- * Lists
- */
+
 .blue {
 	color: #0088d9;
 }
@@ -57,16 +52,10 @@
 	color: #555;
 }
 
-/**
- * Lists
- */
 .no-list-style {
 	list-style: none;
 }
 
-/**
- * Floats
- */
 .float-left {
 	float: left;
 }
@@ -75,16 +64,10 @@
 	float: right;
 }
 
-/**
- * Fixes
- */
 .clear {
 	clear: both;
 }
 
-/**
- * General
- */
 .no-display {
 	display: none;
 }
@@ -93,14 +76,6 @@
 	cursor:pointer;
 }
 
-.extra {
-	width:740px;
-}
-
 .no-border {
 	border: none;
-}
-
-.padding_5 {
-	padding:5px;
 }

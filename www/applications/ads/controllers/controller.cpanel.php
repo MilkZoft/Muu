@@ -52,11 +52,11 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["alert"] = FALSE;
 		
 		if(POST("save")) {
-			$vars["alert"] = $this->{"$this->Model"}->cpanel("save");
+			$this->vars["alert"] = $this->{"$this->Model"}->cpanel("save");
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		}
-		
+
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
 		$this->template("content", $this->vars);

@@ -11,6 +11,10 @@
 </head>
 
 <body>
+	<div id="top-ads" class="div-ads">
+		<?php $this->execute("Ads_Controller", "ads", array("Top")); ?>
+	</div>
+	
 	<div id="container">
 		<div id="header">
 			<div id="top-bar">

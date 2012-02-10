@@ -867,9 +867,7 @@ class ZP_Db extends ZP_Load {
 		if($table) {
 			$query = "SELECT TOP 1 $this->primaryKey FROM $this->table ORDER BY $this->primaryKey DESC";
 			 	
-			$this->Rs = $this->_query($query);
-			
-			$data = $this->Rs->getArray(1);
+			$data = $this->data($query);
 			
 			return $data[0]["$primaryKey"];
 		} else {
@@ -1323,7 +1321,7 @@ class ZP_Db extends ZP_Load {
 		
 		$query = "UPDATE $table SET $SQL";
 		
-		return ($this->_query($query)) ? TRUE : FALSE;
+		return ($this->Database->query($query)) ? TRUE : FALSE;
 	}
 
     /**

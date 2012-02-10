@@ -3,6 +3,9 @@
             </div>
         </div>
 		
-		<?php print $this->getJs(); ?>
+		<?php 
+			$this->js("ad", "ads");
+			print $this->getJs(); 
+		?>
     </body>
 </html>
