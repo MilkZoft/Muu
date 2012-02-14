@@ -1,4 +1,4 @@
-var timeads = 7000;
+var timeads = 4000;
 var temp    = 0;
  
 $(document).ready(function() {
@@ -23,7 +23,7 @@ function ads(position) {
 	} else if(random == temp) {
 		ads(position);
 	} else {
-		temp = ran;
+		temp = random;
 
 		$(position + ' .ads').hide();
 		$(position + ' .ads').eq(random).fadeIn("slow");

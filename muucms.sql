@@ -1347,24 +1347,6 @@ ALTER TABLE `muu_gallery`
   ADD CONSTRAINT `muu_gallery_ibfk_1` FOREIGN KEY (`ID_User`) REFERENCES `muu_users` (`ID_User`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `muu_hotels_contacts`
---
-ALTER TABLE `muu_hotels_contacts`
-  ADD CONSTRAINT `fk_muu_hotels_contacts_1` FOREIGN KEY (`ID_Hotel`) REFERENCES `muu_hotels` (`ID_Hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `muu_hotels_information`
---
-ALTER TABLE `muu_hotels_information`
-  ADD CONSTRAINT `fk_muu_hotels_information_1` FOREIGN KEY (`ID_Hotel`) REFERENCES `muu_hotels` (`ID_Hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `muu_hotels_policy`
---
-ALTER TABLE `muu_hotels_policy`
-  ADD CONSTRAINT `fk_muu_hotels_policy_1` FOREIGN KEY (`ID_Hotel`) REFERENCES `muu_hotels` (`ID_Hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `muu_links`
 --
 ALTER TABLE `muu_links`
@@ -1411,27 +1393,6 @@ ALTER TABLE `muu_re_categories_records`
 --
 ALTER TABLE `muu_re_comments_records`
   ADD CONSTRAINT `muu_re_comments_records_ibfk_1` FOREIGN KEY (`ID_Comment2Application`) REFERENCES `muu_re_comments_applications` (`ID_Comment2Application`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `muu_re_hotels_amenities`
---
-ALTER TABLE `muu_re_hotels_amenities`
-  ADD CONSTRAINT `fk_muu_re_hotels_amenities_1` FOREIGN KEY (`ID_Amenity`) REFERENCES `muu_hotels_amenities` (`ID_Amenity`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_muu_re_hotels_amenities_2` FOREIGN KEY (`ID_Hotel`) REFERENCES `muu_hotels` (`ID_Hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `muu_re_hotels_rates`
---
-ALTER TABLE `muu_re_hotels_rates`
-  ADD CONSTRAINT `fk_muu_re_hotels_rates_1` FOREIGN KEY (`ID_Rate`) REFERENCES `muu_hotels_rates` (`ID_Rate`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_muu_re_hotels_rates_2` FOREIGN KEY (`ID_Hotel`) REFERENCES `muu_hotels` (`ID_Hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `muu_re_hotels_rooms`
---
-ALTER TABLE `muu_re_hotels_rooms`
-  ADD CONSTRAINT `fk_muu_re_hotels_rooms_1` FOREIGN KEY (`ID_Room`) REFERENCES `muu_hotels_rooms` (`ID_Room`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_muu_re_hotels_rooms_2` FOREIGN KEY (`ID_Hotel`) REFERENCES `muu_hotels` (`ID_Hotel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `muu_re_permissions_privileges`

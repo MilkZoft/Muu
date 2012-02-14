@@ -7,13 +7,12 @@
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/fonts.css" type="text/css">
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/style.css" type="text/css">
 	<?php print $this->getCSS(); ?>
-	<?php print $this->js("lib/scripts/js/jquery.js"); ?>
+	<?php print $this->js("jquery", NULL, NULL, TRUE); ?>
 </head>
 
 <body>
-	<div id="top-ads" class="div-ads">
-		<?php $this->execute("Ads_Controller", "ads", array("Top")); ?>
-	</div>
+	
+	<?php $this->execute("Ads_Controller", "ads", array("Top")); ?>
 	
 	<div id="container">
 		<div id="header">
