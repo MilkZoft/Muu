@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZanPHP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 23:30-0600\n"
-"PO-Revision-Date: 2012-02-09 23:30-0600\n"
+"POT-Creation-Date: 2012-02-10 18:37-0600\n"
+"PO-Revision-Date: 2012-02-10 18:37-0600\n"
 "Last-Translator: \n"
 "Language-Team: Carlos Santana <carlos@santana.ws>\n"
 "MIME-Version: 1.0\n"
@@ -1254,6 +1254,10 @@ msgstr "Necesitas subir una imagen o escribir el código del anuncio"
 msgid "The ad has been saved correctly"
 msgstr "El anuncio se ha guardado correctamente"
 
+#: www/lib/languages/words.php:30
+msgid "Deleted"
+msgstr "Eliminado"
+
 #: www/lib/themes/cpanel/footer.php:6
 msgid "All rights reserved"
 msgstr "Todos los derechos reservados"
@@ -1291,6 +1295,10 @@ msgstr "Comentarios de la Galería"
 msgid "You are in"
 msgstr "Usted está en"
 
+#: www/lib/themes/cpanel/left.php:3
+msgid "Applications"
+msgstr "Aplicaciones"
+
 #~ msgid "There are no new pages"
 #~ msgstr "No hay nuevas páginas"
 
@@ -1314,9 +1322,6 @@ msgstr "Usted está en"
 
 #~ msgid "Url"
 #~ msgstr "Url"
-
-#~ msgid "Applications"
-#~ msgstr "Aplicaciones"
 
 #~ msgid "Adding"
 #~ msgstr "Agregar"
@@ -2098,9 +2103,6 @@ msgstr "Usted está en"
 
 #~ msgid "E-Bill"
 #~ msgstr "Facturación Electrónica"
-
-#~ msgid "Deleted"
-#~ msgstr "Eliminado"
 
 #~ msgid "Unpublished"
 #~ msgstr "Sin Publicar"

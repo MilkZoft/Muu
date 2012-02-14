@@ -78,11 +78,11 @@ class CPanel_Controller extends ZP_Controller {
 		if(!$this->isAdmin) {
 			$this->login();
 		}
-		
-		if((int) $ID === 0) { 
+				
+		if((int) $ID === 0 and !POST("ID")) { 
 			redirect("$this->application/cpanel/results");
 		}
-
+		
 		$this->title("Edit");
 		
 		$this->CSS("forms", "cpanel");		
@@ -93,7 +93,7 @@ class CPanel_Controller extends ZP_Controller {
 			redirect("cpanel");
 		} 
 		
-		$data = $this->$Model->getByID($ID);
+		$data = $this->{"$this->Model"}->getByID(((int) $ID === 0) ? POST("ID") : $ID);
 		
 		if($data) {
 			$this->vars["data"] = $data;				
@@ -141,7 +141,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 		
-		$this->title("Manage ". $this->application);
+		$this->title("Manage ". ucfirst($this->application));
 		
 		$this->CSS("results", "cpanel");
 		$this->CSS("pagination");

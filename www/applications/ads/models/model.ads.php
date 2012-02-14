@@ -91,7 +91,7 @@ class Ads_Model extends ZP_Model {
 				return getAlert("Upload error"); 
 			}
 		} else {
-			if(!isset($this->data["code"])) {
+			if(!isset($this->data["Code"])) {
 				return getAlert("You need to upload an image or write the ad code");
 			}
 		}		
@@ -111,16 +111,16 @@ class Ads_Model extends ZP_Model {
 		return getAlert("The ad has been saved correctly", "success");	
 	}
 	
-	private function edit() {				
+	private function edit() {	
 		if($this->data["Principal"] > 0) {		
 			if($this->Db->findBySQL("Position = '$this->position' AND Principal = 1", $this->table)) {
 				$this->Db->updateBySQL($this->table, "Principal = 0 WHERE Position = '". $this->data["Position"] ."'");				
 			}
 		}
-		
+
 		$this->Db->update($this->table, $this->data, POST("ID"));
 		
-		return getAlert("The ad has been edited correctly", "success", $this->URL);
+		return getAlert("The ad has been edited correctly", "success");
 	}
 	
 	private function search($search, $field) {

@@ -27,4 +27,5 @@ _("Title is required");
 _("Invalid URL");
 _("You need to upload an image or write the ad code");
 _("The ad has been saved correctly");
+_("Deleted");
 ?>
