@@ -1,4 +1,16 @@
-img.medium {
-	height: 120px; 
-	width: 100px; 
+#top-ads {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#center-ads {
+	width: 600px;
+	float: right;
+	margin-top: -125px;
+	margin-right: 10px;
+}
+
+#right-ads {
+	text-align: center;
+	margin: 0 auto;
 }

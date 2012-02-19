@@ -7,7 +7,7 @@ $(document).ready(function() {
 	
 	$('.div-ads').each(function(index) {
 		var length = $("#" + $(this).attr("id") + " .ads").length;
-		
+			
 		if(length > 1) {
 			setTimeout("ads('#" + $(this).attr("id") + "')", timeads);
 		}

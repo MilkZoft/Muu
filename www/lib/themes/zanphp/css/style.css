@@ -78,10 +78,16 @@ body {
 }
 
 #content {
-	width: 98%;
+	width: 700px;
 	height: 100%;
+	float: left;
 	margin: 0 auto;
 	padding-top: 5px;
+}
+
+#sidebar {
+	float: right;
+	width: 200px;
 }
 
 #footer p {

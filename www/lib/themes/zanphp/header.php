@@ -4,8 +4,15 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title><?php print $this->getTitle(); ?></title>
+	<link rel="stylesheet" href="<?php print _webURL; ?>/www/lib/css/default.css" type="text/css">
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/fonts.css" type="text/css">
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/style.css" type="text/css">
+	
+	<?php 
+		$this->CSS("default");
+		$this->CSS("ads", "ads");
+	?>
+
 	<?php print $this->getCSS(); ?>
 	<?php print $this->js("jquery", NULL, NULL, TRUE); ?>
 </head>
@@ -24,6 +31,10 @@
 			<div id="logo">
 				<h1>ZanPHP Framework v.1.0</h1>
 			</div>
+
+			<?php $this->execute("Ads_Controller", "ads", array("Center")); ?>
+
+			<div class="clear"></div>
 
 			<div id="top-menu">
 				<ul>
