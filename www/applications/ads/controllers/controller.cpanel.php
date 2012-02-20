@@ -79,10 +79,8 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 				
-		if((int) $ID === 0 and !POST("ID")) { 
-			redirect("$this->application/cpanel/results");
-		}
-		
+		$ID = ((int) $ID === 0) ? (int) POST("ID") : (int) $ID;
+
 		$this->title("Edit");
 		
 		$this->CSS("forms", "cpanel");		
@@ -92,9 +90,9 @@ class CPanel_Controller extends ZP_Controller {
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		} 
-		
-		$data = $this->{"$this->Model"}->getByID(((int) $ID === 0) ? POST("ID") : $ID);
-		
+
+		$data = $this->{"$this->Model"}->getByID($ID);
+	
 		if($data) {
 			$this->vars["data"] = $data;				
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);

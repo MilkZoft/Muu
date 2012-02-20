@@ -81,6 +81,10 @@ class Ads_Model extends ZP_Model {
 		}
 
 		if(FILES("image", "name")) {
+			if(POST("banner")) {
+				@unlink(POST("banner"));
+			}
+			
 			$dir = "www/lib/files/images/ads/";
 			
 			$this->Files = $this->core("Files");										
@@ -113,7 +117,7 @@ class Ads_Model extends ZP_Model {
 	
 	private function edit() {	
 		if($this->data["Principal"] > 0) {		
-			if($this->Db->findBySQL("Position = '$this->position' AND Principal = 1", $this->table)) {
+			if($this->Db->findBySQL("Position = '". $this->data["Position"] ."' AND Principal = 1", $this->table)) {
 				$this->Db->updateBySQL($this->table, "Principal = 0 WHERE Position = '". $this->data["Position"] ."'");				
 			}
 		}
