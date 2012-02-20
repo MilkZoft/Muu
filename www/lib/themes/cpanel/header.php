@@ -5,17 +5,15 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title><?php print $this->getTitle(); ?></title>
 	
-	<link href="<?php print _webURL ."/www/lib/css/frameworks/bootstrap/bootstrap.min.css"; ?>" rel="stylesheet">
-
-	<?php 
-		print $this->themeCSS("cpanel"); 
-    	
+	<?php
+    	$this->CSS("bootstrap", NULL, TRUE);
 		$this->CSS("prettyPhoto", "videos"); 
 		$this->CSS("ads", "ads"); 
 		$this->CSS("default"); 
 	
 	 	print $this->getCSS();
-	
+		print $this->themeCSS("cpanel"); 
+		
 		print $this->js("jquery", NULL, NULL, TRUE); 
 		print $this->js("js/jquery.prettyPhoto", "videos", NULL, TRUE); 
 	?>

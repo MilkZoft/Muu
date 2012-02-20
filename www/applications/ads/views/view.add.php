@@ -14,7 +14,7 @@
 	$principal = isset($data) ? recoverPOST("principal", $data[0]["Principal"]) 	: recoverPOST("principal");
 	$edit      = isset($data) ? TRUE 												: FALSE;	
 	$action	   = isset($data) ? "edit" 												: "save";
-	$href	   = isset($data) ? path($this->application ."cpanel/$action/$ID/") 	: path($this->application ."cpanel/add/");
+	$href	   = isset($data) ? path(whichApplication() ."cpanel/$action/$ID/") 	: path(whichApplication() ."cpanel/add/");
 
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");

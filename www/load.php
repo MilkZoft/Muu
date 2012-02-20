@@ -11,16 +11,16 @@ session_start();
 
 define("_dir", dirname(__FILE__));
 
-if(file_exists(_dir . "/config/config.basics.php") and file_exists(_dir . "/config/config.core.php")) { 
+if(file_exists(_dir ."/config/config.basics.php") and file_exists(_dir ."/config/config.core.php")) { 
 	include "config/config.basics.php";
 	include "config/config.core.php";
 } else { 
 	die("Error: config.basics.php or config.core.php doesn't exists");
 }
 
-include _corePath . "/classes/class.load.php";
-include _corePath . "/classes/class.controller.php";
-include _corePath . "/classes/class.model.php";
+include _corePath ."/classes/class.load.php";
+include _corePath ."/classes/class.controller.php";
+include _corePath ."/classes/class.model.php";
 
 $Load = new ZP_Load(); 
 
@@ -76,8 +76,6 @@ if(is_array($data)) {
 	}
 }
 
-define("_webPath", _webBase . _sh . _webLang . _sh);
-
 if(_translation === "gettext") {
 	$Load->library("class.gettext", "gettext");
 	$Load->library("class.streams", "gettext");
@@ -92,7 +90,7 @@ if(_translation === "gettext") {
 	}
 }
 
-benchMarkStart();
+#benchMarkStart();
 
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
@@ -106,4 +104,4 @@ if(!version_compare(PHP_VERSION, "5.1.0", ">=")) {
 
 execute();
 
-print benchMarkEnd();
+#print benchMarkEnd();

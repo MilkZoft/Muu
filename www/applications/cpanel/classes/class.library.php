@@ -79,13 +79,8 @@ class Library extends ZP_Load {
 			$text = __(_("Documents library"));
 		}
 				
-		if(isLang()) {
-			$action = segment(1) . _sh . segment(2) . _sh . segment(3);
-			$href   = segment(1) . _sh . segment(2) . _sh;
-		} else {
-			$action = segment(0) . _sh . segment(1) . _sh . segment(2);
-			$href   = segment(0) . _sh . segment(1) . _sh;
-		}
+		$action = segment(0, isLang()) . _sh . segment(1, isLang()) . _sh . segment(2, isLang());
+		$href   = segment(0, isLang()) . _sh . segment(1, isLang());
 		
 		$URL = path();
 		
@@ -94,11 +89,11 @@ class Library extends ZP_Load {
 		$alert .= "return confirm('". __(_("Do you want to delete the file?")) ."');\""; 		
 		
 		$event  = "onclick=\"document.getElementById('form-add').target=''; ";
-		$event .= "document.getElementById('form-add').action='". $URL . $action . _sh . "#" . $this->px . "Library';\""; 
-		$eventUpload  = "onclick=\"document.getElementById('form-add').target='". $this->px ."Upload';";
+		$event .= "document.getElementById('form-add').action='". $URL . $action . _sh ."#". $this->px ."Library';\""; 
+		$eventUpload  = "onclick=\"document.getElementById('form-add').target='". $this->px ."Upload1';";
 		$eventUpload .= "document.getElementById('form-add').action='". path($href ."/upload/". strtolower($this->type) ."/#". $this->px ."Library") ."; ";
 		$eventUpload .= "javascript:submit();\"";
-							
+
 		$HTML = a($this->px ."Library");
 		
 		if($this->type === "images") {
@@ -285,30 +280,16 @@ class Library extends ZP_Load {
 	}
 	
 	public function upload() {
-		if(isLang()) {
-			if(segment(3) === "upload" and segment(4) === "images") {		
-				$value = (POST("iDirbase")) ? POST("iDirbase") : 'www/lib/files/images/uploaded/';
-				$value = (POST("iMake"))    ? POST("iDir") . slug(POST("iDirname")) : $value;
-				
-				$parts = explode("/", $value);					
-			} elseif(segment(3) === "upload" and segment(4) === "documents") {
-				$value = (POST("dDirbase")) ? POST("dDirbase") : 'www/lib/files/documents/uploaded/';
-				$value = (POST("dMake"))    ? POST("dDir") . slug(POST("dDirname")) : $value;
-				
-				$parts = explode("/", $value);	
-			}
-		} else {
-			if(segment(2) === "upload" and segment(3) === "images") {		
-				$value = (POST("iDirbase")) ? POST("iDirbase") : 'www/lib/files/images/uploaded/';
-				$value = (POST("iMake"))    ? POST("iDir") . slug(POST("iDirname")) : $value;
-				
-				$parts = explode("/", $value);					
-			} elseif(segment(2) === "upload" and segment(3) === "documents") {
-				$value = (POST("dDirbase")) ? POST("dDirbase") : 'www/lib/files/documents/uploaded/';
-				$value = (POST("dMake"))    ? POST("dDir") . slug(POST("dDirname")) : $value;
-				
-				$parts = explode("/", $value);	
-			}
+		if(segment(2, isLang()) === "upload" and segment(3, isLang()) === "images") {		
+			$value = (POST("iDirbase")) ? POST("iDirbase") : 'www/lib/files/images/uploaded/';
+			$value = (POST("iMake"))    ? POST("iDir") . slug(POST("iDirname")) : $value;
+			
+			$parts = explode("/", $value);					
+		} elseif(segment(2, isLang()) === "upload" and segment(3, isLang()) === "documents") {
+			$value = (POST("dDirbase")) ? POST("dDirbase") : 'www/lib/files/documents/uploaded/';
+			$value = (POST("dMake"))    ? POST("dDir") . slug(POST("dDirname")) : $value;
+			
+			$parts = explode("/", $value);	
 		}
 						
 		if(count($parts) > 0) {

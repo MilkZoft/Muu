@@ -94,7 +94,7 @@ class Categories extends ZP_Load {
 							if($type === "radio") {
 								if($name === "parent" and $i === 0) {
 									$input = formInput(array("name" => $name, "type" => "radio", "value" => 0));
-									$link  = repeat("&nbsp;", 1) . a(span("bold", __("Principal")), FALSE, FALSE, array("title" => __("Principal")));
+									$link  = a(span("bold", __("Principal")), FALSE, FALSE, array("title" => __("Principal")));
 
 									$this->HTML .= li($input . $link);
 
@@ -109,7 +109,7 @@ class Categories extends ZP_Load {
 								);
 
 								$input = formRadio($attrs);
-								$link  = repeat("&nbsp;", 1) . a(span("bold", $title), FALSE, FALSE, array("title" => $title));
+								$link  = a(span("bold", $title), FALSE, FALSE, array("title" => $title));
 								
 								$this->HTML .= li($input . $link, TRUE);
 
@@ -130,14 +130,14 @@ class Categories extends ZP_Load {
 								$attrs = array(
 									"id" 	   => $name, 
 									"text" 	   => getLanguage($category["Language"], TRUE), 
-									"name" 	   => $name . "[]", 
+									"name" 	   => $name ."[]", 
 									"value"    => $category["ID_Category"], 
 									"position" => "right",
 									"checked"  => $check
 								);
 						
 								$input = formCheckbox($attrs);
-								$link  = repeat("&nbsp;", 1) . a(span("bold", $title), FALSE, FALSE, array("title" => $title));
+								$link  = a(span("bold", $title), FALSE, FALSE, array("title" => $title));
 								
 								$this->HTML .= li($input . $link, TRUE);
 								
@@ -147,7 +147,7 @@ class Categories extends ZP_Load {
 								
 								$this->HTML .= li(FALSE);	
 							} else {
-								$link = repeat("&nbsp;", 1) . a($title, $URL . $category["Slug"], FALSE, array("title" => $title));
+								$link = a($title, $URL . $category["Slug"], FALSE, array("title" => $title));
 								
 								$this->HTML .= li($link, TRUE);
 								
@@ -190,7 +190,7 @@ class Categories extends ZP_Load {
 							);
 
 							$input = formRadio($attrs);
-							$link  = repeat("&nbsp;", 1) . a($title, FALSE, FALSE, array("title" => $title));
+							$link  = a($title, FALSE, FALSE, array("title" => $title));
 							
 							$this->HTML .= li($input . $link, TRUE);	
 								
@@ -200,9 +200,9 @@ class Categories extends ZP_Load {
 								
 							$this->HTML .= li(FALSE);																		
 						} else {
-							$link = repeat("&nbsp;", 1) . a($title, FALSE, FALSE, array("title" => $title));
+							$link = a($title, FALSE, FALSE, array("title" => $title));
 
-							$this->HTML .= li(repeat("&nbsp;", 6) . getLanguage($category["Language"], TRUE) . $link);
+							$this->HTML .= li(getLanguage($category["Language"], TRUE) . $link);
 							
 								if($this->parents($categories, $category["ID_Category"]) === TRUE) { 
 									$this->build($categories, $category["ID_Category"], $type); 
