@@ -90,9 +90,13 @@ class Library extends ZP_Load {
 		
 		$event  = "onclick=\"document.getElementById('form-add').target=''; ";
 		$event .= "document.getElementById('form-add').action='". $URL . $action . _sh ."#". $this->px ."Library';\""; 
-		$eventUpload  = "onclick=\"document.getElementById('form-add').target='". $this->px ."Upload1';";
-		$eventUpload .= "document.getElementById('form-add').action='". path($href ."/upload/". strtolower($this->type) ."/#". $this->px ."Library") ."; ";
-		$eventUpload .= "javascript:submit();\"";
+		
+		$path   = path($href ."/upload/". strtolower($this->type) ."/#". $this->px ."Library");
+		$target = "document.getElementById('form-add').target='". $this->px ."Upload1';";
+		$action = "document.getElementById('form-add').action='". $path .";";
+		$submit = "javascript:submit();";
+
+		$eventUpload = 'onclick="'. $target . $action . $submit .'"';
 
 		$HTML = a($this->px ."Library");
 		

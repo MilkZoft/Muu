@@ -38,7 +38,7 @@ if(is_array($data)) {
 	if(whichLanguage() === _webLanguage) { 
 		define("_webLang", $data[0]["Lang"]);
 	} else {
-		define("_webLang", getXMLang(whichLanguage(), FALSE));
+		define("_webLang", getLang(whichLanguage(), FALSE));
 	}
 
 	define("_webName", 		   $data[0]["Name"]);
@@ -55,7 +55,7 @@ if(is_array($data)) {
 	define("_defaultApplication", $data[0]["Application"]);
 
 	if(!_modRewrite) {
-		define("_webBase", _webURL . _sh . "index.php");
+		define("_webBase", _webURL . _sh ."index.php");
 	} else {
 		define("_webBase", _webURL);
 	}
@@ -70,7 +70,7 @@ if(is_array($data)) {
 	define("_webEmailSend",  	  _wEmailSend);
 	
 	if(!_modRewrite) {
-		define("_webBase", _wURL . _sh . "index.php");
+		define("_webBase", _wURL . _sh ."index.php");
 	} else {
 		define("_webBase", _wURL);
 	}
@@ -81,9 +81,9 @@ if(_translation === "gettext") {
 	$Load->library("class.streams", "gettext");
 	$Load->config("languages");
 	
-	$languageFile = _dir . "/lib/languages/gettext/language.". whichLanguage() .".mo";
-
-	if(file_exists($languageFile)) {
+	$languageFile = _dir ."/lib/languages/gettext/language.". whichLanguage(TRUE, TRUE) .".mo";
+	
+	if(file_exists($languageFile)) { 
 		$Gettext_Reader = new Gettext_Reader($languageFile);
 		
 		$Gettext_Reader->load_tables();
