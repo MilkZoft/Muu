@@ -13,7 +13,7 @@
 	$edit      = isset($data) ? TRUE											 : FALSE;
 	$action	   = isset($data) ? "edit"											 : "save";
 	$href 	   = isset($data) ? path(whichApplication() ."/cpanel/$action/$ID/") : path(whichApplication() ."/cpanel/add");
-	
+
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");

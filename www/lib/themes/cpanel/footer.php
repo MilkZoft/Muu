@@ -8,7 +8,9 @@
         </div>
 		
 		<?php
-			print $this->js("www/lib/scripts/js/main.js");
+			$this->js("upload");
+			$this->js("www/lib/scripts/js/main.js");
+			
 			print $this->getJs();
 		?>
     </body>

@@ -92,9 +92,9 @@ class Library extends ZP_Load {
 		$event .= "document.getElementById('form-add').action='". $URL . $action . _sh ."#". $this->px ."Library';\""; 
 		
 		$path   = path($href ."/upload/". strtolower($this->type) ."/#". $this->px ."Library");
-		$target = "document.getElementById('form-add').target='". $this->px ."Upload1';";
-		$action = "document.getElementById('form-add').action='". $path .";";
-		$submit = "javascript:submit();";
+		$target = "document.getElementById('form-add').target='". $this->px ."Upload'; ";
+		$action = "document.getElementById('form-add').action='". $path ."'; ";
+		$submit = "javascript:submit(); ";
 
 		$eventUpload = 'onclick="'. $target . $action . $submit .'"';
 
@@ -433,8 +433,8 @@ class Library extends ZP_Load {
 						"title"   => __(_("Insert Image"))
 					);
 					
-					$HTML .= li(formCheckbox($attributes) . small($num) .
-								a(span("tiny-image tiny-search", "&nbsp;&nbsp;&nbsp;&nbsp;"), _webURL . _sh . $path . $files[$i], FALSE, array("title" => __("Preview image"))) .														
+					$HTML .= li(formCheckbox($attributes) ." ". small($num) .
+								a(span("tiny-image tiny-search", "&nbsp;&nbsp;&nbsp;&nbsp;"), _webURL . _sh . $path . $files[$i], FALSE, array("title" => __(_("Preview image")))) .														
 								a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs));								
 				} elseif($type == "documents") {												
 					$icon = $this->Files->getType($files[$i], TRUE, TRUE, TRUE);
@@ -462,10 +462,9 @@ class Library extends ZP_Load {
 					
 					$span  = span("tiny-image tiny-file", "&nbsp;&nbsp;&nbsp;&nbsp;");
 
-					$HTML .= li(formCheckbox($attributes));
-					$HTML .= small($num);
-					$HTML .= a($span, _webURL . _sh . $path . $files[$i], FALSE, array("title" => __(_("Download file"))));
-					$HTML .= a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs);							
+					$HTML .= li(formCheckbox($attributes) ." ". small($num) .
+								a($span, _webURL . _sh . $path . $files[$i], FALSE, array("title" => __(_("Download file")))).
+								a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs));							
 				}
 			}	
 		
