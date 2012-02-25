@@ -125,6 +125,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");		
 			
+			$this->vars["data"]				= $data;
 			$this->vars["muralImage"] 		= $this->{"$this->Model"}->getMuralByID(segment(3, isLang()));
 			$this->vars["muralDeleteURL"] 	= ($this->vars["muralImage"]) ? path("$this->application/cpanel/delete-mural/$ID")  : NULL;
 			$this->vars["application"]		= $this->CPanel->getApplicationID($this->application);

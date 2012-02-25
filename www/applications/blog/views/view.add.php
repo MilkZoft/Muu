@@ -13,27 +13,29 @@
 	$edit      = isset($data) ? TRUE											 : FALSE;
 	$action	   = isset($data) ? "edit"											 : "save";
 	$href 	   = isset($data) ? path(whichApplication() ."/cpanel/$action/$ID/") : path(whichApplication() ."/cpanel/add");
-
+	
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");
 			
 			print isset($alert) ? $alert : NULL;
 
-			print formInput(array(	"name" 	=> "title", 
-									"class" => "span10 required", 
-									"field" => __(_("Title")), 
-									"p" 	=> TRUE, 
-									"value" => $title
+			print formInput(array(	
+								"name" 	=> "title", 
+								"class" => "span10 required", 
+								"field" => __(_("Title")), 
+								"p" 	=> TRUE, 
+								"value" => $title
 			));
 
-			print formTextarea(array(	"id" 	=> "editor", 
-									 	"name" 	=> "content", 
-									 	"class" => "span10",
-									 	"style" => "height: 400px;", 
-									 	"field" => __(_("Content")), 
-									 	"p" 	=> TRUE, 
-									 	"value" => $content
+			print formTextarea(array(	
+									"id" 	 => "editor", 
+									"name" 	 => "content", 
+									"class"  => "span10",
+									"style"  => "height: 400px;", 
+									"field"  => __(_("Content")), 
+									"p" 	 => TRUE, 
+									"value"  => $content
 			));
 
 			$vars["application"]     = isset($application)     ? $application 		: NULL; 
