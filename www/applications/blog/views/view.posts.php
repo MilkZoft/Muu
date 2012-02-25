@@ -55,7 +55,7 @@ if(is_array($posts)) {
 		}
 		
 		if(strlen($post["Pwd"]) === 40) { 
-			$lock = img(_webURL . _sh . _lock, __("Private"));
+			$lock = img(_webURL . _sh . _lock, array("alt" => __("Private"), "class" => "no-border"));
 		} else {
 			$lock = NULL;
 		}

@@ -78,9 +78,8 @@ body {
 }
 
 #content {
-	width: 700px;
+	width: 98%;
 	height: 100%;
-	float: left;
 	margin: 0 auto;
 	padding-top: 5px;
 }

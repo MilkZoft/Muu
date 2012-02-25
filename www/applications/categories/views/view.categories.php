@@ -17,7 +17,7 @@
 			
 			<input id="category" name="category" type="text" class="required" style="width: 95%" /><br />			
 			
-			<?php print getLanguageRadios(whichLanguage(), "language_category"); ?>
+			<?php print getLanguagesInput(whichLanguage(), "language_category", "select"); ?>
 		</p>
 		
 		<span class="bold"><?php print __(_("Parent category")); ?>:</span>

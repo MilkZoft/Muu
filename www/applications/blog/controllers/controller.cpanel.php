@@ -125,7 +125,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Library 	  = $this->classes("Library", "cpanel");
 			$this->Categories = $this->classes("Categories", "categories");		
 			
-			$this->vars["muralImage"] 		= $this->$Model->getMuralByID(segment(3, isLang()));
+			$this->vars["muralImage"] 		= $this->{"$this->Model"}->getMuralByID(segment(3, isLang()));
 			$this->vars["muralDeleteURL"] 	= ($this->vars["muralImage"]) ? path("$this->application/cpanel/delete-mural/$ID")  : NULL;
 			$this->vars["application"]		= $this->CPanel->getApplicationID($this->application);
 			$this->vars["categories"]		= $this->Categories->getCategories("edit");
@@ -136,8 +136,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->Tags_Model = $this->model("Tags_Model");
 			
 			$this->vars["tags"] = $this->Tags_Model->getTagsByRecord(3, segment(3, isLang()), TRUE);
-		
-			$this->js("actions", "cpanel");
+
 			$this->js("www/lib/scripts/ajax/password.js", TRUE);
 			$this->js("tagsinput.min", "cpanel");
 			$this->js("jquery-ui.min", "cpanel");

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZanPHP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-10 18:37-0600\n"
-"PO-Revision-Date: 2012-02-10 18:37-0600\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2012-02-24 22:33-0600\n"
+"PO-Revision-Date: 2012-02-24 22:33-0600\n"
+"Last-Translator: Carlos Santana <carlos@milkzoft.com>\n"
 "Language-Team: Carlos Santana <carlos@santana.ws>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,81 +16,81 @@ msgstr ""
 "X-Poedit-Basepath: /Applications/XAMPP/htdocs/MuuCMS\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: www/applications/ads/controllers/controller.cpanel.php:165
+#: www/applications/ads/controllers/controller.cpanel.php:163
 #: www/applications/blog/controllers/controller.cpanel.php:210
 msgid "Manage "
 msgstr "Administrar "
 
-#: www/applications/ads/views/view.add.php:27
+#: www/applications/ads/views/view.add.php:28
 #: www/applications/blog/views/view.add.php:25
 msgid "Title"
 msgstr "Título"
 
-#: www/applications/ads/views/view.add.php:32
-msgid "View Banner"
-msgstr "Ver Banner"
+#: www/applications/ads/views/view.add.php:33
+msgid "If you change the banner image, this image will be deleted"
+msgstr "Si cambias la imagen del banner, la imagen actual será eliminada"
 
-#: www/applications/ads/views/view.add.php:39
+#: www/applications/ads/views/view.add.php:42
 msgid "Image"
 msgstr "Imagen"
 
-#: www/applications/ads/views/view.add.php:45
+#: www/applications/ads/views/view.add.php:48
 msgid "Top"
 msgstr "Superior"
 
-#: www/applications/ads/views/view.add.php:51
+#: www/applications/ads/views/view.add.php:54
 msgid "Left"
 msgstr "Izquierda"
 
-#: www/applications/ads/views/view.add.php:57
+#: www/applications/ads/views/view.add.php:60
 msgid "Right"
 msgstr "Derecha"
 
-#: www/applications/ads/views/view.add.php:63
+#: www/applications/ads/views/view.add.php:66
 msgid "Bottom"
 msgstr "Inferior"
 
-#: www/applications/ads/views/view.add.php:69
+#: www/applications/ads/views/view.add.php:72
 msgid "Center"
 msgstr "Centro"
 
-#: www/applications/ads/views/view.add.php:78
+#: www/applications/ads/views/view.add.php:81
 msgid "Position"
 msgstr "Posición"
 
-#: www/applications/ads/views/view.add.php:84
+#: www/applications/ads/views/view.add.php:87
 msgid "URL"
 msgstr "URL"
 
-#: www/applications/ads/views/view.add.php:92
+#: www/applications/ads/views/view.add.php:95
 msgid "Code"
 msgstr "Código"
 
-#: www/applications/ads/views/view.add.php:99
+#: www/applications/ads/views/view.add.php:102
 #: www/applications/blog/views/view.add.php:59
 msgid "Yes"
 msgstr "Si"
 
-#: www/applications/ads/views/view.add.php:105
+#: www/applications/ads/views/view.add.php:108
 #: www/applications/blog/views/view.add.php:60
 msgid "No"
 msgstr "No"
 
-#: www/applications/ads/views/view.add.php:114
+#: www/applications/ads/views/view.add.php:117
 msgid "Principal"
 msgstr "Principal"
 
-#: www/applications/ads/views/view.add.php:120
+#: www/applications/ads/views/view.add.php:123
 #: www/applications/blog/views/view.add.php:71
 msgid "Active"
 msgstr "Activo"
 
-#: www/applications/ads/views/view.add.php:126
+#: www/applications/ads/views/view.add.php:129
 #: www/applications/blog/views/view.add.php:72
 msgid "Inactive"
 msgstr "Inactivo"
 
-#: www/applications/ads/views/view.add.php:135
+#: www/applications/ads/views/view.add.php:138
 #: www/applications/blog/views/view.add.php:79
 msgid "Situation"
 msgstr "Situación"
@@ -124,8 +124,8 @@ msgid "Content"
 msgstr "Contenido"
 
 #: www/applications/blog/views/view.add.php:56
-msgid "Languages"
-msgstr "Idiomas"
+msgid "Language of the post"
+msgstr "Idioma del post"
 
 #: www/applications/blog/views/view.add.php:67
 msgid "Enable Comments"
@@ -136,19 +136,19 @@ msgstr "Habilitar Comentarios"
 msgid "Password"
 msgstr "Contraseña"
 
-#: www/applications/blog/views/view.add.php:109
+#: www/applications/blog/views/view.add.php:107
 msgid "Image for this post"
 msgstr "Imagen para el post"
 
-#: www/applications/blog/views/view.add.php:120
+#: www/applications/blog/views/view.add.php:118
 msgid "Mural image"
 msgstr "Imagen de mural"
 
-#: www/applications/blog/views/view.add.php:128
+#: www/applications/blog/views/view.add.php:126
 msgid "Current mural image"
 msgstr "Imagen de mural actual"
 
-#: www/applications/blog/views/view.add.php:139
+#: www/applications/blog/views/view.add.php:137
 msgid "Delete Mural"
 msgstr "Eliminar Mural"
 
@@ -277,6 +277,10 @@ msgstr "Activación de Cuenta"
 msgid "Message when the Website is inactive"
 msgstr "Mensaje que se mostrará cuando la web este inactiva"
 
+#: www/applications/configuration/views/view.edit.php:167
+msgid "Languages"
+msgstr "Idiomas"
+
 #: www/applications/cpanel/classes/class.library.php:75
 #: www/applications/cpanel/helpers/helper.library.php:72
 msgid "Images library"
@@ -287,32 +291,32 @@ msgstr "Librería de imágenes"
 msgid "Documents library"
 msgstr "Librería de documentos"
 
-#: www/applications/cpanel/classes/class.library.php:94
+#: www/applications/cpanel/classes/class.library.php:89
 msgid "Do you want to delete the file?"
 msgstr "¿Deseas eliminar el archivo?"
 
-#: www/applications/cpanel/classes/class.library.php:215
+#: www/applications/cpanel/classes/class.library.php:214
 #: www/applications/cpanel/helpers/helper.library.php:183
 msgid "Make directory"
 msgstr "Crear Directorio"
 
-#: www/applications/cpanel/classes/class.library.php:233
+#: www/applications/cpanel/classes/class.library.php:232
 #: www/applications/cpanel/helpers/helper.library.php:156
 msgid "Go"
 msgstr "Ir"
 
-#: www/applications/cpanel/classes/class.library.php:246
+#: www/applications/cpanel/classes/class.library.php:245
 msgid "The new folders will be created and the files will be uploaded in"
 msgstr "Las nuevas carpetas serán creadas y los archivos serán subidos en"
 
-#: www/applications/cpanel/classes/class.library.php:251
-#: www/applications/cpanel/classes/class.library.php:254
+#: www/applications/cpanel/classes/class.library.php:250
+#: www/applications/cpanel/classes/class.library.php:253
 #: www/applications/cpanel/helpers/helper.library.php:188
 #: www/applications/cpanel/helpers/helper.library.php:191
 msgid "Support files"
 msgstr "Archivos soportados"
 
-#: www/applications/cpanel/classes/class.library.php:273
+#: www/applications/cpanel/classes/class.library.php:272
 #: www/applications/cpanel/helpers/helper.cpanel.php:283
 #: www/applications/cpanel/helpers/helper.cpanel.php:285
 #: www/applications/cpanel/helpers/helper.library.php:208
@@ -320,15 +324,20 @@ msgstr "Archivos soportados"
 msgid "Delete"
 msgstr "Eliminar"
 
-#: www/applications/cpanel/classes/class.library.php:448
+#: www/applications/cpanel/classes/class.library.php:433
 msgid "Insert Image"
 msgstr "Insertar Imagen"
 
-#: www/applications/cpanel/classes/class.library.php:473
+#: www/applications/cpanel/classes/class.library.php:437
+#: www/applications/cpanel/helpers/helper.library.php:319
+msgid "Preview image"
+msgstr "Previsualizar imagen"
+
+#: www/applications/cpanel/classes/class.library.php:458
 msgid "Insert file"
 msgstr "Insertar Archivo"
 
-#: www/applications/cpanel/classes/class.library.php:482
+#: www/applications/cpanel/classes/class.library.php:466
 #: www/applications/cpanel/helpers/helper.library.php:341
 msgid "Download file"
 msgstr "Descargar archivo"
@@ -364,7 +373,7 @@ msgstr "Previsualizar"
 
 #: www/applications/cpanel/helpers/helper.cpanel.php:277
 msgid "Select"
-msgstr "Seleccionar:"
+msgstr "Seleccionar"
 
 #: www/applications/cpanel/helpers/helper.cpanel.php:278
 msgid "All"
@@ -422,10 +431,6 @@ msgstr "Las nuevas carpetas serán creadas y los archivos serán subidos en:"
 #: www/applications/cpanel/helpers/helper.library.php:212
 msgid "Upload"
 msgstr "Subir archivo"
-
-#: www/applications/cpanel/helpers/helper.library.php:319
-msgid "Preview image"
-msgstr "Previsualizar imagen"
 
 #: www/applications/cpanel/helpers/helper.library.php:323
 msgid "Insert image"
@@ -1053,7 +1058,7 @@ msgstr "Información Social"
 msgid "Sign"
 msgstr "Regístrate"
 
-#: www/applications/users/views/view.errorprofile.php:4
+#: www/applications/users/views/view.errorProfile.php:4
 msgid "The profile that you are looking for doesn't exists"
 msgstr "El perfil que estas buscando no existe"
 
@@ -1258,6 +1263,30 @@ msgstr "El anuncio se ha guardado correctamente"
 msgid "Deleted"
 msgstr "Eliminado"
 
+#: www/lib/languages/words.php:31
+msgid "Spanish"
+msgstr "Español"
+
+#: www/lib/languages/words.php:32
+msgid "English"
+msgstr "Inglés"
+
+#: www/lib/languages/words.php:33
+msgid "Arabic"
+msgstr "Árabe"
+
+#: www/lib/languages/words.php:34
+msgid "Chinese"
+msgstr "Chino"
+
+#: www/lib/languages/words.php:35
+msgid "French"
+msgstr "Francés"
+
+#: www/lib/languages/words.php:36
+msgid "Blog"
+msgstr "Blog"
+
 #: www/lib/themes/cpanel/footer.php:6
 msgid "All rights reserved"
 msgstr "Todos los derechos reservados"
@@ -1266,38 +1295,94 @@ msgstr "Todos los derechos reservados"
 msgid "Powered by"
 msgstr "Desarrollado por"
 
-#: www/lib/themes/cpanel/header.php:36
-#: www/lib/themes/cpanel/header.php:50
+#: www/lib/themes/cpanel/header.php:34
+#: www/lib/themes/cpanel/header.php:48
 msgid "Go back"
 msgstr "Regresar"
 
-#: www/lib/themes/cpanel/header.php:37
+#: www/lib/themes/cpanel/header.php:35
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: www/lib/themes/cpanel/header.php:38
+#: www/lib/themes/cpanel/header.php:36
 msgid "Online users"
 msgstr "Usuarios conectados"
 
-#: www/lib/themes/cpanel/header.php:39
+#: www/lib/themes/cpanel/header.php:37
 msgid "Registered users"
 msgstr "Usuarios registrados"
 
-#: www/lib/themes/cpanel/header.php:40
+#: www/lib/themes/cpanel/header.php:38
 msgid "Last user"
 msgstr "Último usuario"
 
-#: www/lib/themes/cpanel/header.php:85
+#: www/lib/themes/cpanel/header.php:83
 msgid "Gallery Comments"
 msgstr "Comentarios de la Galería"
 
-#: www/lib/themes/cpanel/header.php:95
+#: www/lib/themes/cpanel/header.php:93
 msgid "You are in"
 msgstr "Usted está en"
 
 #: www/lib/themes/cpanel/left.php:3
 msgid "Applications"
 msgstr "Aplicaciones"
+
+#: zan/classes/class.files.php:124
+msgid "Text File"
+msgstr "Archivo de Texto"
+
+#: zan/classes/class.files.php:125
+#: zan/classes/class.files.php:126
+msgid "Document File"
+msgstr "Documento"
+
+#: zan/classes/class.files.php:127
+msgid "PDF File"
+msgstr "Archivo PDF"
+
+#: zan/classes/class.files.php:128
+#: zan/classes/class.files.php:129
+msgid "Power Point File"
+msgstr "Archivo Power Point"
+
+#: zan/classes/class.files.php:130
+msgid "WinRAR File"
+msgstr "Archivo WinRAR"
+
+#: zan/classes/class.files.php:131
+msgid "ISO File"
+msgstr "Archivo ISO"
+
+#: zan/classes/class.files.php:132
+#: zan/classes/class.files.php:133
+#: zan/classes/class.files.php:134
+msgid "Excel File"
+msgstr "Archivo Excel"
+
+#: zan/classes/class.files.php:135
+msgid "WinZIP File"
+msgstr "Archivo WinZIP"
+
+#: zan/classes/class.files.php:136
+msgid "7z File"
+msgstr "Archivo 7z"
+
+#: zan/classes/class.files.php:137
+#: zan/classes/class.files.php:138
+msgid "Adobe Illustrator File"
+msgstr "Archivo de Adobe Illustrator"
+
+#: zan/classes/class.files.php:139
+msgid "Corel Draw File"
+msgstr "Archivo de Corel Draw"
+
+#: zan/classes/class.files.php:140
+msgid "Executable File"
+msgstr "Archivo Ejecutable"
+
+#~ msgid "View Banner"
+#~ msgstr "Ver Banner"
 
 #~ msgid "There are no new pages"
 #~ msgstr "No hay nuevas páginas"
@@ -1541,9 +1626,6 @@ msgstr "Aplicaciones"
 #~ msgid "Send Message"
 #~ msgstr "Enviar Mensaje"
 
-#~ msgid "Blog"
-#~ msgstr "Blog"
-
 #~ msgid "From"
 #~ msgstr "De"
 
@@ -1732,9 +1814,6 @@ msgstr "Aplicaciones"
 #~ msgid "Hide"
 #~ msgstr "Esconder"
 
-#~ msgid "Area"
-#~ msgstr "Area"
-
 #~ msgid "Select a option"
 #~ msgstr "Selecciona una opción"
 
@@ -1801,38 +1880,8 @@ msgstr "Aplicaciones"
 #~ msgid "Counting"
 #~ msgstr "Total"
 
-#~ msgid "Text File"
-#~ msgstr "Archivo de Texto"
-
-#~ msgid "Document File"
-#~ msgstr "Documento"
-
-#~ msgid "PDF File"
-#~ msgstr "Archivo PDF"
-
-#~ msgid "Power Point File"
-#~ msgstr "Archivo Power Point"
-
-#~ msgid "Winrar File"
-#~ msgstr "Archivo Winrar"
-
-#~ msgid "Excel File"
-#~ msgstr "Archivo Excel"
-
 #~ msgid "Winzip File"
 #~ msgstr "Archivo Winzip"
-
-#~ msgid "7z File"
-#~ msgstr "Archivo 7z"
-
-#~ msgid "Adobe Illustrator File"
-#~ msgstr "Archivo de Adobe Illustrator"
-
-#~ msgid "Corel Draw File"
-#~ msgstr "Archivo de Corel Draw"
-
-#~ msgid "Executable File"
-#~ msgstr "Archivo Ejecutable"
 
 #~ msgid "Do you really want to cancel?"
 #~ msgstr "¿Realmente deseas cancelar?"
@@ -2034,15 +2083,6 @@ msgstr "Aplicaciones"
 #, fuzzy
 #~ msgid "The Work has been saved"
 #~ msgstr "El foro ha sido guardado correctamente"
-
-#~ msgid "Spanish"
-#~ msgstr "Español"
-
-#~ msgid "English"
-#~ msgstr "Inglés"
-
-#~ msgid "French"
-#~ msgstr "Francés"
 
 #~ msgid "Portuguese"
 #~ msgstr "Portugués"
@@ -3118,9 +3158,6 @@ msgstr "Aplicaciones"
 
 #~ msgid "Brazil"
 #~ msgstr "Brasil"
-
-#~ msgid "Chile"
-#~ msgstr "Chile"
 
 #~ msgid "Colombia"
 #~ msgstr "Colombia"

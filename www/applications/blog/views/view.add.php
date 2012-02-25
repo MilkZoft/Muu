@@ -53,7 +53,7 @@
 				$this->view("tags", NULL, "tags");
 			}
 			
-			print formField(NULL, __(_("Languages")) ."<br />". getLanguageRadios($language));
+			print formField(NULL, __(_("Language of the post")) ."<br />". getLanguagesInput($language, "language", "select"));
 
 			$options = array(
 				0 => array("value" => 1, "option" => __(_("Yes")), "selected" => TRUE),
@@ -101,8 +101,6 @@
 									"value" => $pwd));
 			}
 			
-			print div("addflag", "class") . div(FALSE);			
-
 			print formInput(array(
 								"type" 	=> "file", 
 								"name" 	=> "image", 

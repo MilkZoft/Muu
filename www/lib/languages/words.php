@@ -28,4 +28,10 @@ _("Invalid URL");
 _("You need to upload an image or write the ad code");
 _("The ad has been saved correctly");
 _("Deleted");
+_("Spanish");
+_("English");
+_("Arabic");
+_("Chinese");
+_("French");
+_("Blog");
 ?>

@@ -20,19 +20,6 @@
 	margin-left: 45px;
 }
 
-.post img {
-	width: auto;
-	float: right; 
-	display: inline;
-	padding: 2px;
-	margin: 3px;
-	border: 1px solid #06F;
-}
-
-.post img:hover {
-	background-color: #09F;	
-}
-
 .post {
 	width: 98%;
 	height: auto;
