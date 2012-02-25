@@ -92,7 +92,7 @@ class Library extends ZP_Load {
 		$event .= "document.getElementById('form-add').action='". $URL . $action . _sh ."#". $this->px ."Library';\""; 
 		
 		$path   = path($href ."/upload/". strtolower($this->type) ."/#". $this->px ."Library");
-		$target = "document.getElementById('form-add').target='". $this->px ."Upload'; ";
+		$target = "document.getElementById('form-add').target='". $this->px ."Upload1'; ";
 		$action = "document.getElementById('form-add').action='". $path ."'; ";
 		$submit = "javascript:submit(); ";
 
@@ -263,7 +263,6 @@ class Library extends ZP_Load {
 		$HTML .= div(FALSE);								
 		
 		$HTML .= div($this->px ."-upload-message", TRUE);
-
 			$HTML .= formUploadFrame($this->px, $eventUpload);
 
 			if(SESSION("ZanUserPrivilegeID") < 3) {
@@ -277,7 +276,7 @@ class Library extends ZP_Load {
 							
 				$HTML .= formInput($attributes);			
 			}
-					
+				
 		$HTML .= div(FALSE);
 		
 		return $HTML;

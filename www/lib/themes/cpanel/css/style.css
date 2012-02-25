@@ -314,6 +314,10 @@ a:hover {
 	border-bottom: 1px solid #BBB;
 }
 
+#i-upload-message {
+	display: none;
+}
+
 .error-box{
 	border: 1px solid #CACACA;
 	background-color: #C5C5C5;

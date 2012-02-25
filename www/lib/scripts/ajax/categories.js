@@ -1,20 +1,16 @@
-function setCategory() {
-	
+function setCategory() {	
 	var post = {
 			"category"    : $("#category").val(),
 			"application" : $("#application").val(),
 			"parent" 	  : $('[name="parent"]:checked').val(),
-			"language"    : $('[name="language_category"]:checked').val()
+			"language"    : $('[name="language_category"]').val()
 		}
-		
+
 	$.ajax({
-		type: "POST",
-		url: PATH + "/categories/ajax/setcategory",
-		data: post,
-		dataType: "json",
-		beforeSend: function(jqXHR, settings){
-			
-		},
+		type 		: "POST",
+		url			: PATH + "/categories/ajax/setcategory",
+		data  		: "value", "value", post,
+		dataType	: "json",
 		
 		success: function(response, textStatus, jqXHR) {
 			if(response["response"] != false) {						
@@ -22,13 +18,5 @@ function setCategory() {
 				$("#div-categories-radio").html(response["response"]["c2"]);													
 			}
 		},
-		
-		error: function(jqXHR, textStatus){
-			
-		},
-		
-		complete: function(jqXHR, textStatus){
-			
-		}
 	});
 }
