@@ -52,7 +52,11 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->js("tiny-mce");
 		$this->js("insert-html");
-		$this->js("show-element");		
+		$this->js("show-element");
+
+		//Uploader...
+		$this->CSS("www/lib/scripts/js/upload/client/fileuploader.css");
+		$this->js("www/lib/scripts/js/upload/client/fileuploader.js");
 		
 		$this->Library 	  = $this->classes("Library", "cpanel");
 		$this->Categories = $this->classes("Categories", "categories");
@@ -68,8 +72,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["application"]		= $this->CPanel->getApplicationID();
 		$this->vars["categories"]  		= $this->Categories->getCategories("add");
 		$this->vars["categoriesRadio"]  = $this->Categories->getCategories("add", "radio", "parent");
-		$this->vars["imagesLibrary"]    = $this->Library->getLibrary("images"); 
-		$this->vars["documentsLibrary"] = $this->Library->getLibrary("documents");
 
 		$this->js("actions", $this->application);
 		$this->js("tagsinput.min", "cpanel");

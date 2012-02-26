@@ -92,7 +92,7 @@ class Library extends ZP_Load {
 		$event .= "document.getElementById('form-add').action='". $URL . $action . _sh ."#". $this->px ."Library';\""; 
 		
 		$path   = path($href ."/upload/". strtolower($this->type) ."/#". $this->px ."Library");
-		$target = "document.getElementById('form-add').target='". $this->px ."Upload1'; ";
+		$target = "document.getElementById('form-add').target='". $this->px ."Upload'; ";
 		$action = "document.getElementById('form-add').action='". $path ."'; ";
 		$submit = "javascript:submit(); ";
 
@@ -367,9 +367,9 @@ class Library extends ZP_Load {
 					
 					@unlink($dir . $upload["filename"]);
 					
-					print "<script>window.parent.uploadResponse('6', '". $original ."');</script>";
+					print "<script>uploadResponse('6', '". $original ."');</script>";
 				} else {
-					print "<script>window.parent.uploadResponse('6', '". $upload["filename"] ."');</script>";
+					print "<script>uploadResponse('6', '". $upload["filename"] ."');</script>";
 				}						
 			}
 		} elseif($extension === "document") {
@@ -377,7 +377,7 @@ class Library extends ZP_Load {
 			
 			$upload = $this->Files->upload($dir, "document");
 			$file   = $this->Files->getFileInformation();
-			
+					
 			if(is_array($file["icon"])) {
 				if($upload["message"] === "The file size exceed the permited limit") {
 					print "<script>window.parent.uploadDocumentsResponse('1', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";
@@ -389,7 +389,7 @@ class Library extends ZP_Load {
 					print "<script>window.parent.uploadDocumentsResponse('4', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";
 				} elseif($upload["message"] === "The file already exists") {
 					print "<script>window.parent.uploadDocumentsResponse('5', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";							
-				} else {
+				} else { 
 					print "<script>window.parent.uploadDocumentsResponse('6', '". $upload["filename"] ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";			
 				}
 			}

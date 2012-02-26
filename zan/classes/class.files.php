@@ -123,6 +123,7 @@ class ZP_Files extends ZP_Load {
 				 	"msi"  => array(_webURL ."/www/lib/images/icons/files/exe.png", __(_("Executable File"))),
 				 	"exe"  => array(_webURL ."/www/lib/images/icons/files/exe.png", __(_("Executable File"))),
 				 	"dmg"  => array(_webURL ."/www/lib/images/icons/files/exe.png", __(_("Executable File"))),
+				 	"pkg"  => array(_webURL ."/www/lib/images/icons/files/exe.png", __(_("Executable File"))),
 				 );
 						
 			foreach($icons as $extension => $icon) { 
@@ -161,7 +162,8 @@ class ZP_Files extends ZP_Load {
 			return $error;
 		}
 		
-		$URL = $path . code(5, FALSE) ."_". slug($file["name"]) .".". $file["extension"];		
+		$filename = code(5, FALSE) ."_". slug($file["name"]) .".". $file["extension"];
+		$URL 	  = $path . $filename;		
 		
 		if(file_exists($URL)) {
 			$error["upload"]   = FALSE;
@@ -170,19 +172,19 @@ class ZP_Files extends ZP_Load {
 		} elseif($this->fileSize > _fileSize) {
 			$error["upload"]  = FALSE;
 			$error["message"] = "The file size exceed the permited limit"; 
-		} elseif($this->fileError === 1) {
+		} elseif($this->fileError === 1) { 
 			$error["upload"]  = FALSE;
 			$error["message"] = "An error has ocurred"; 
-		} elseif($file["type"] !== $type) {
+		} elseif($file["type"] !== $type) { 
 			$error["upload"]  = FALSE;
 			$error["message"] = "The file type is not permited"; 
-		} elseif(@move_uploaded_file($this->fileTmp, $file)) {
-			@chmod($path . $filename, 0777);
-			
+		} elseif(@move_uploaded_file($this->fileTmp, $URL)) {
+			@chmod($URL, 0777);
+		
 			$error["upload"]   = TRUE;
-			$error["message"]  = "The image has been upload correctly"; 
-			$error["filename"] = $filename; 
-		} else {
+			$error["message"]  = "The file has been upload correctly"; 
+			$error["filename"] = $filename;
+		} else { 
 			$error["upload"]  = FALSE;
 			$error["message"] = "A problem occurred when trying to upload file";
 		}
