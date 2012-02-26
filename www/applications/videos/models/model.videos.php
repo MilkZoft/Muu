@@ -18,8 +18,8 @@ class Videos_Model extends ZP_Model {
 		$this->language    = whichLanguage(); 
 		$this->application = whichApplication();
 		
-		$this->library("youtube", NULL, "videos");
-		$this->YouTube = new YouTube;
+		$this->YouTube = $this->library("youtube", "Youtube", NULL, "videos");
+		
 	}
 	
 	public function cpanel($action, $limit = NULL, $order = "ID_Video DESC", $search = NULL, $field = NULL, $trash = FALSE) {	

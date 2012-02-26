@@ -44,10 +44,14 @@ class CPanel_Controller extends ZP_Controller {
 		$this->title("Add");
 
 		$this->js("ajax/search", $this->application);
+		$this->js("custom-actions", $this->application);
 		
 		$this->CSS("forms", _cpanel);
 		
 		$this->config("videos", $this->application);
+		
+		//$this->Youtube = $this->library("youtube", $this->application);
+		
 		
 		$Model        = ucfirst($this->application) . "_Model";
 		$this->$Model = $this->model($Model);
