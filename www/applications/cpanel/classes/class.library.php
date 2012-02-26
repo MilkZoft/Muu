@@ -376,21 +376,21 @@ class Library extends ZP_Load {
 			@chmod($dir, 0777);
 			
 			$upload = $this->Files->upload($dir, "document");
-			$icon   = $this->Files->getType($this->Files->filename, TRUE, TRUE, TRUE);
+			$file   = $this->Files->getFileInformation();
 			
-			if(is_array($icon)) {
+			if(is_array($file["icon"])) {
 				if($upload["message"] === "The file size exceed the permited limit") {
-					print "<script>window.parent.uploadDocumentsResponse('1', '". $this->Files->filename ."', '". $icon[0] ."', '". $icon[1] ."');</script>";
+					print "<script>window.parent.uploadDocumentsResponse('1', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";
 				} elseif($upload["message"] === "An error has ocurred") {
-					print "<script>window.parent.uploadDocumentsResponse('2', '". $this->Files->filename ."', '". $icon[0] ."', '". $icon[1] ."');</script>";
+					print "<script>window.parent.uploadDocumentsResponse('2', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";
 				} elseif($upload["message"] === "The file type is not permited") {
-					print "<script>window.parent.uploadDocumentsResponse('3', '". $this->Files->filename ."', '". $icon[0] ."', '". $icon[1] ."');</script>";
+					print "<script>window.parent.uploadDocumentsResponse('3', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";
 				} elseif($upload["message"] === "A problem occurred when trying to upload file") {
-					print "<script>window.parent.uploadDocumentsResponse('4', '". $this->Files->filename ."', '". $icon[0] ."', '". $icon[1] ."');</script>";
+					print "<script>window.parent.uploadDocumentsResponse('4', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";
 				} elseif($upload["message"] === "The file already exists") {
-					print "<script>window.parent.uploadDocumentsResponse('5', '". $this->Files->filename ."', '". $icon[0] ."', '". $icon[1] ."');</script>";							
+					print "<script>window.parent.uploadDocumentsResponse('5', '". $this->Files->filename ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";							
 				} else {
-					print "<script>window.parent.uploadDocumentsResponse('6', '". $upload["filename"] ."', '". $icon[0] ."', '". $icon[1] ."');</script>";			
+					print "<script>window.parent.uploadDocumentsResponse('6', '". $upload["filename"] ."', '". $file["icon"][0] ."', '". $file["icon"][1] ."');</script>";			
 				}
 			}
 		}								
@@ -436,9 +436,9 @@ class Library extends ZP_Load {
 								a(span("tiny-image tiny-search", "&nbsp;&nbsp;&nbsp;&nbsp;"), _webURL . _sh . $path . $files[$i], FALSE, array("title" => __(_("Preview image")))) .														
 								a(span("tiny-image tiny-add", "&nbsp;&nbsp;&nbsp;&nbsp;") . $files[$i], FALSE, FALSE, $attrs));								
 				} elseif($type == "documents") {												
-					$icon = $this->Files->getType($files[$i], TRUE, TRUE, TRUE);
+					$file = $this->Files->getFileInformation($files[$i]);
 					
-					$img = '\'<a href=\\\''. _webURL . _sh . $path . $files[$i] .'\\\' title=\\\''.$files[$i].'\\\'><img src=\\\''. $icon[0] .'\\\' alt=\\\''. $files[$i] .'\\\' /></a>\'';
+					$img = '\'<a href=\\\''. _webURL . _sh . $path . $files[$i] .'\\\' title=\\\''.$files[$i].'\\\'><img src=\\\''. $file["icon"][0] .'\\\' alt=\\\''. $files[$i] .'\\\' /></a>\'';
 					
 					if($i < 9) {
 						$num = "0" . ($i + 1); 
@@ -525,14 +525,14 @@ class Library extends ZP_Load {
 							$options[] = '<option>'. $element .'</option>';
 						}
 					} else {
-						$type = $this->Files->getType($element, TRUE);
+						$file = $this->Files->getFileInformation($element);
 
 						if($this->type === "documents") {
-							if($type === "document") {
+							if($file["type"] === "document") {
 								$options[] = encode($element);
 							}
 						} elseif($this->type === "images") {
-							if($type === "image") {
+							if($file["type"] === "image") {
 								$options[] = encode($element);
 							}
 						}
