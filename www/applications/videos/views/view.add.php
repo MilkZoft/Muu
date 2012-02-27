@@ -34,13 +34,13 @@
 			<?php if($action == "save") { ?>
 				<p class="field">
 					&raquo; <?php print __(_("URL")); ?>  <?php print "(http://www.youtube.com/watch?v=N_1KfUDB1zU)"; ?><br />
-					<input id="URL" name="URL" type="text" value="<?php print $URL; ?>" tabindex="1" class="input required" />
+					<input id="URL" name="URL" type="text" value="<?php print $URL; ?>" tabindex="1" class="span10 required" />
 				</p>
 				
 				<div id="seek">
 					<p class="field">
 						&raquo; <?php print __(_("Search")); ?> (<?php print __(_("YouTube"));?>)<br />
-						<input name="search" type="text" tabindex="1" class="input required" />
+						<input name="search" type="text" tabindex="1" class="span10 required" />
 						<input id="hsearch" name="hsearch" type="hidden" />
 						
 						<p>
@@ -106,7 +106,7 @@
 			
 			<p class="field">
 				&raquo; <?php print __(_("State")); ?><br />
-				<select id="situation" name="situation" size="1" tabindex="5" class="select">
+				<select id="situation" name="situation" size="1" tabindex="5" class="required">
 					<option value="Active" <?php print ($situation === "Active") ? $selected : NULL; ?>>
 						<?php print __(_("Active")); ?>
 					</option>
@@ -118,8 +118,8 @@
 			</p>
 			
 			<p class="save-cancel">
-				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(_(ucfirst($action))); ?>" type="submit" class="submit save" />
-				<input id="cancel" name="cancel" value="<?php print __(_("Cancel")); ?>" type="submit" class="submit cancel" tabindex="6" />
+				<input id="<?php print $action; ?>" name="<?php print $action; ?>" value="<?php print __(_(ucfirst($action))); ?>" type="submit" class="btn btn-success" />
+				<input id="cancel" name="cancel" value="<?php print __(_("Cancel")); ?>" type="submit" class="btn btn-danger" tabindex="6" />
 			</p>
 		</fieldset>
 	</form>

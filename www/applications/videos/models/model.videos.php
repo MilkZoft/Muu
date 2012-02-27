@@ -19,6 +19,7 @@ class Videos_Model extends ZP_Model {
 		$this->application = whichApplication();
 		
 		$this->YouTube = $this->library("youtube", "Youtube", NULL, "videos");
+		$this->Data = $this->core("Data");
 		
 	}
 	
@@ -65,6 +66,32 @@ class Videos_Model extends ZP_Model {
 			return getAlert("You need select video o write URL");
 		}
 		
+		if(POST("URL")) {
+			$validations = array(
+				"URL"=> "required"
+			);
+			
+			$data = array(
+				"URL" => POST("URL")
+			);
+		} elseif(POST("videos")) {
+			$validations = array(
+				"videos" => "required"
+			);
+			
+			$data = array(
+				"videos" => POST("videos")
+			);
+		}
+			
+		$this->ID 	  = POST("ID");		
+		$this->URL    = POST("URL");
+		$this->videos = POST("videos");
+		$this->date1  	   = now(4);
+		$this->date2  	   = now(2);
+		$this->situation   = POST("situation");
+		
+		/*		
 		$this->URL    	   = POST("URL");
 		$this->ID 	  	   = POST("ID");		
 		$this->videos 	   = POST("videos");
@@ -73,6 +100,13 @@ class Videos_Model extends ZP_Model {
 		$this->date1  	   = now(4);
 		$this->date2  	   = now(2);
 		$this->situation   = POST("situation");
+		*/
+		
+		$this->data = $this->Data->proccess($data, $validations);
+		
+		if(isset($this->data["error"])) {
+			return $this->data["error"];
+		}
 	}
 	
 	private function save() {
@@ -84,14 +118,13 @@ class Videos_Model extends ZP_Model {
 			}
 			
 			$video  = $this->YouTube->getByID($_array[1]);
-			
 			if($video and is_array($video)) {	
 				$values = array(
 					"ID_User"     => SESSION("ZanUserID"),
 					"ID_YouTube"  => $video["id"],
-					"Title"	      => trim(filter(encode($video["title"]), "escape")),
-					"Slug" 	      => slug(filter(encode($video["title"]), "escape")),
-					"Description" => trim(filter(encode($video["content"]), "escape")),
+					"Title"	      => trim(filter(decode($video["title"]), "escape")),
+					"Slug" 	      => slug(filter(decode($video["title"]), "escape")),
+					"Description" => trim(filter(decode($video["content"]), "escape")),
 					"URL"    	  => $this->URL,
 					"Start_Date"  => $this->date1,
 					"Text_Date"   => $this->date2,
@@ -116,9 +149,9 @@ class Videos_Model extends ZP_Model {
 						$values = array(
 							"ID_User"     => SESSION("ZanUserID"),
 							"ID_YouTube"  => $video["id"],
-							"Title"	      => filter(encode($video["title"]), "escape"),
-							"Slug" 	      => slug(filter(encode($video["title"]), "escape")),
-							"Description" => filter(encode($video["content"]), "escape"),
+							"Title"	      => filter(decode($video["title"]), "escape"),
+							"Slug" 	      => slug(filter(decode($video["title"]), "escape")),
+							"Description" => filter(decode($video["content"]), "escape"),
 							"URL"    	  => $this->URL,
 							"Start_Date"  => $this->date1,
 							"Text_Date"   => $this->date2,
