@@ -118,89 +118,93 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 					$application = isLang() ? ucfirst(segment(1)) : ucfirst(segment(0));
 					?>
 						<script type="text/javascript">
-						<!-- 
-							function uploadResponse(state, file) {
-								var path, insert, ok, error, form, message; 
+							$(document).on("ready", function() {
+								function uploadResponse(state, file) {
+									var path, insert, ok, error, form, message; 
+									
+									path = '<?php print _webURL . _sh . $iPath;?>' + file;
+
+									HTML = '\'<img src=\\\'' + path + '\\\' alt=\\\'' + file + '\\\' />\'';
+									
+									insert = '<li><input name="iLibrary[]" type="checkbox" value="' + path + '" /> <span class="small">00<' + '/span>';
+									insert = insert + '<a href="' + path + '" rel="external" title="<?php print __(_("Preview")); ?>"><span class="tiny-image tiny-search">&nbsp;&nbsp;&nbsp;&nbsp;</span><' + '/a>';
+									insert = insert + '<a class="pointer" onclick="javascript:insertHTML(' + HTML + ');" title="<?php print __(_("Insert image")); ?>"><span class="tiny-image tiny-add">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;';
+									insert = insert + '<span class="bold">' + file + '<' + '/span><' + '/a><' + '/li>';						
+									
+									if(state == 1) {
+										message = '<?php print __(_("The file size exceed the permited limit")); ?>';
+									}
+									
+									if(state == 2) {
+										message = '<?php print __(_("An error has ocurred")); ?>';
+									}
+									
+									if(state == 3) {
+										message = '<?php print __(_("The file type is not permited")); ?>';
+									}
+									
+									if(state == 4) {
+										message = '<?php print __(_("A problem occurred when trying to upload file")); ?>';
+									}
+									
+									if(state == 5) {
+										message = '<?php print __(_("The file already exists")); ?>';
+									}
+									
+									if(state == 6) {
+										message = '<?php print __(_("Successfully uploaded file")); ?>';
+
+										$('#i-add-upload').html = insert + $('#i-add-upload').html;
+									}
+									
+									document.getElementById('i-upload-message').innerHTML = message;
+								}												
 								
-								path = '<?php print _webURL . _sh . $iPath;?>' + file;
-								HTML = '\'<img src=\\\'' + path + '\\\' alt=\\\'' + file + '\\\' />\'';
-								insert = '<li><input name="iLibrary[]" type="checkbox" value="' + path + '" /><span class="small">00<' + '/span>';
-								insert = insert + '<a href="' + path + '" rel="external" title="<?php print __("Preview"); ?>"><span class="tiny-image tiny-search">&nbsp;&nbsp;&nbsp;&nbsp;</span><' + '/a>';
-								insert = insert + '<a class="pointer" onclick="javascript:insertHTML(' + HTML + ');" title="<?php print __("Insert image"); ?>"><span class="tiny-image tiny-add">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;';
-								insert = insert + '<span class="bold">' + file + '<' + '/span><' + '/a><' + '/li>';						
-								
-								if(state == 1) {
-									message = '<?php print __("The file size exceed the permited limit"); ?>';
-								}
-								
-								if(state == 2) {
-									message = '<?php print __("An error has ocurred"); ?>';
-								}
-								
-								if(state == 3) {
-									message = '<?php print __("The file type is not permited"); ?>';
-								}
-								
-								if(state == 4) {
-									message = '<?php print __("A problem occurred when trying to upload file"); ?>';
-								}
-								
-								if(state == 5) {
-									message = '<?php print __("The file already exists"); ?>';
-								}
-								
-								if(state == 6) {
-									message = '<?php print __("Successfully uploaded file"); ?>';
-									document.getElementById('i-add-upload').innerHTML = insert + document.getElementById('i-add-upload').innerHTML;
-								}
-								
-								document.getElementById('i-upload-message').innerHTML = message;
-							}												
+								function uploadDocumentsResponse(dState, dFile, dIcon, dAlt) {
+									var dPath, dInsert, dOk, dError, dForm, dMessage, dHTML;
+									
+									dPath = '<?php print _webURL . _sh . $dPath; ?>' + dFile;					
+									dHTML = '\'<a href=\\\'' + dPath + '\\\' title=\\\'' + dFile + '\\\'><img src=\\\'' + dIcon + '\\\' alt=\\\'' + dAlt + '\\\' /></a>\'';
+									
+									dInsert = '<li><input name="dLibrary[]" type="checkbox" value="' + dPath + '" />';
+									dInsert = dInsert + ' <span class="small">00<' + '/span><a href="' + dPath + '" title="<?php print __(_("Download file")); ?>">';
+									dInsert = dInsert + '<span class="tiny-image tiny-file">&nbsp;&nbsp;&nbsp;&nbsp;</span><' + '/a>';
+									dInsert = dInsert + '<a class="pointer" onclick="javascript:insertHTML(' + dHTML + ');" title="<?php print __(_("Insert file")); ?>">';
+									dInsert = dInsert + '<span class="tiny-image tiny-add">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									dInsert = dInsert + '<span class="bold">' + dFile + '<' + '/span><' + '/a><' + '/li>';								
 							
-							function uploadDocumentsResponse(dState, dFile, dIcon, dAlt) {
-								var dPath, dInsert, dOk, dError, dForm, dMessage, dHTML;
-								
-								dPath = '<?php print _webURL . _sh . $dPath; ?>' + dFile;					
-								dHTML = '\'<a href=\\\'' + dPath + '\\\' title=\\\'' + dFile + '\\\'><img src=\\\'' + dIcon + '\\\' alt=\\\'' + dAlt + '\\\' /></a>\'';
-								
-								dInsert = '<li><input name="dLibrary[]" type="checkbox" value="' + dPath + '" />';
-								dInsert = dInsert + '<span class="small">00<' + '/span><a href="' + dPath + '" title="<?php print __("Download file"); ?>">';
-								dInsert = dInsert + '<span class="tiny-image tiny-file">&nbsp;&nbsp;&nbsp;&nbsp;</span><' + '/a>';
-								dInsert = dInsert + '<a class="pointer" onclick="javascript:insertHTML(' + dHTML + ');" title="<?php print __("Insert file"); ?>">';
-								dInsert = dInsert + '<span class="tiny-image tiny-add">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-								dInsert = dInsert + '<span class="bold">' + dFile + '<' + '/span><' + '/a><' + '/li>';								
-						
-								if(dState == 1) {
-									message = '<?php print __("The file size exceed the permited limit"); ?>';
+									if(dState == 1) {
+										message = '<?php print __(_("The file size exceed the permited limit")); ?>';
+									}
+									
+									if(dState == 2) {
+										message = '<?php print __(_("An error has ocurred")); ?>';
+									}
+									
+									if(dState == 3) {
+										message = '<?php print __(_("The file type is not permited")); ?>';
+									}
+									
+									if(dState == 4) {
+										message = '<?php print __(_("A problem occurred when trying to upload file")); ?>';
+									}
+									
+									if(dState == 5) {
+										message = '<?php print __(_("The file already exists")); ?>';
+									}								
+									
+									if(dState == 6) {
+										message = '<?php print __(_("Successfully uploaded file")); ?>';
+
+										document.getElementById('d-add-upload').innerHTML = dInsert + document.getElementById('d-add-upload').innerHTML;
+									}
+									
+									document.getElementById('d-upload-message').innerHTML = message;
 								}
-								
-								if(dState == 2) {
-									message = '<?php print __("An error has ocurred"); ?>';
-								}
-								
-								if(dState == 3) {
-									message = '<?php print __("The file type is not permited"); ?>';
-								}
-								
-								if(dState == 4) {
-									message = '<?php print __("A problem occurred when trying to upload file"); ?>';
-								}
-								
-								if(dState == 5) {
-									message = '<?php print __("The file already exists"); ?>';
-								}								
-								
-								if(dState == 6) {
-									message = '<?php print __("Successfully uploaded file"); ?>';
-									document.getElementById('d-add-upload').innerHTML = dInsert + document.getElementById('d-add-upload').innerHTML;
-								}
-								
-								document.getElementById('d-upload-message').innerHTML = message;
-							}
-						 -->
+						 	});
 						</script>
 						
-						<noscript><p class="no-display"><?php print __("Disable Javascript"); ?></p></noscript>
+						<noscript><p class="no-display"><?php print __(_("Disable Javascript")); ?></p></noscript>
 					
 					<?php
 					return NULL;				

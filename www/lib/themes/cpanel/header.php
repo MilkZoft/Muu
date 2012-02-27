@@ -15,7 +15,6 @@
 		print $this->themeCSS("cpanel"); 
 		
 		print $this->js("jquery", NULL, NULL, TRUE); 
-		print $this->js("js/jquery.prettyPhoto", "videos", NULL, TRUE); 
 	?>
 	
 	<script type="text/javascript">

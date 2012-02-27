@@ -191,7 +191,7 @@ class Users_Model extends ZP_Model {
 		$this->Db->table($this->table);
 	
 		$data = $this->Db->findBySQL("Username = '$username' AND Pwd = '$password' AND Privilege != 'Member'");
-		
+
 		if($data) {
 			return TRUE;
 		} else {		

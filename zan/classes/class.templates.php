@@ -93,6 +93,14 @@ class ZP_Templates extends ZP_Load {
      * @return void
      */	
 	public function CSS($CSS = NULL, $application = NULL, $print = FALSE) {
+		if(file_exists($CSS)) { 
+			if($print) {
+				print '<link rel="stylesheet" href="'. _webURL . _sh . $CSS .'" type="text/css" />' . "\n";
+			} else { 
+				$this->CSS .= '<link rel="stylesheet" href="'. _webURL . _sh . $CSS .'" type="text/css" />' . "\n";
+			}
+		} 
+
 		if($CSS === "bootstrap") {
 			if(is_null($this->CSS)) {
 				if($print) {

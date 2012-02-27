@@ -21,21 +21,21 @@
 			print isset($alert) ? $alert : NULL;
 
 			print formInput(array(	
-								"name" 	=> "title", 
-								"class" => "span10 required", 
-								"field" => __(_("Title")), 
-								"p" 	=> TRUE, 
-								"value" => $title
+				"name" 	=> "title", 
+				"class" => "span10 required", 
+				"field" => __(_("Title")), 
+				"p" 	=> TRUE, 
+				"value" => $title
 			));
 
 			print formTextarea(array(	
-									"id" 	 => "editor", 
-									"name" 	 => "content", 
-									"class"  => "span10",
-									"style"  => "height: 400px;", 
-									"field"  => __(_("Content")), 
-									"p" 	 => TRUE, 
-									"value"  => $content
+				"id" 	 => "editor", 
+				"name" 	 => "content", 
+				"class"  => "span10",
+				"style"  => "height: 400px;", 
+				"field"  => __(_("Content")), 
+				"p" 	 => TRUE, 
+				"value"  => $content
 			));
 
 			$vars["application"]     = isset($application)     ? $application 		: NULL; 
@@ -46,6 +46,15 @@
 
 			print isset($imagesLibrary)    ? $imagesLibrary : NULL;
 			print isset($documentsLibrary) ? $documentsLibrary : NULL; 
+
+			?>
+			<div id="file-uploader">		
+				<noscript>			
+					<p>Please enable JavaScript to use file uploader.</p>
+					<!-- or put a simple form for upload here -->
+				</noscript>         
+			</div>
+			<?php
 				
 			if(isset($tags)) {
 				$var["tags"] = $tags;
@@ -114,11 +123,12 @@
 			}
 			
 			print formInput(array(
-								"type" 	=> "file", 
-								"name" 	=> "mural", 
-								"class" => "required", 
-								"field" => __(_("Mural image")) ." (". _muralSize .")", 
-								"p" 	=> TRUE));
+				"type" 	=> "file", 
+				"name" 	=> "mural", 
+				"class" => "required", 
+				"field" => __(_("Mural image")) ." (". _muralSize .")", 
+				"p" 	=> TRUE
+			));
 	
 			if(isset($muralImage) and is_array($muralImage)) {
 				print formInput(array(

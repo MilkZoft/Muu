@@ -48,19 +48,15 @@ class CPanel_Controller extends ZP_Controller {
 		$this->title("Add");
 		
 		$this->CSS("forms", "cpanel");
-		$this->CSS("categories", "categories");
-		
-		$this->js("tiny-mce");
-		$this->js("insert-html");
-		$this->js("show-element");
+		$this->CSS("www/lib/scripts/js/uploader/styles.css");
+		$this->js("www/lib/scripts/js/uploader/filedrag.js");
 
-		//Uploader...
-		$this->CSS("www/lib/scripts/js/upload/client/fileuploader.css");
-		$this->js("www/lib/scripts/js/upload/client/fileuploader.js");
-		
-		$this->Library 	  = $this->classes("Library", "cpanel");
-		$this->Categories = $this->classes("Categories", "categories");
-		
+		$this->vars["uploaded"] = FALSE; 
+
+		if(POST("upload")) {
+			$this->vars["uploaded"] = TRUE; 
+		}
+
 		if(POST("save")) {
 			$save = $this->{"$this->Model"}->cpanel("save");
 			
@@ -68,17 +64,6 @@ class CPanel_Controller extends ZP_Controller {
 		} elseif(POST("cancel")) {
 			redirect("cpanel");
 		}
-		
-		$this->vars["application"]		= $this->CPanel->getApplicationID();
-		$this->vars["categories"]  		= $this->Categories->getCategories("add");
-		$this->vars["categoriesRadio"]  = $this->Categories->getCategories("add", "radio", "parent");
-
-		$this->js("actions", $this->application);
-		$this->js("tagsinput.min", "cpanel");
-		$this->js("jquery-ui.min", "cpanel");
-		$this->js("tags", "cpanel");
-		
-		$this->CSS("tagsinput", "cpanel");
 		
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
@@ -227,13 +212,13 @@ class CPanel_Controller extends ZP_Controller {
 		}
 	}
 	
-	public function upload() {
+	public function upload($size) {
 		if(!$this->isAdmin) {
 			$this->login();
 		}
+
+		$this->Files = $this->core("Files");
 		
-		$this->Library = $this->classes("Library", "cpanel");	
-			
-		$this->Library->upload();
+		print $this->Files->uploadResource();
 	}
 }

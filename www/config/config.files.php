@@ -9,4 +9,4 @@ if(!defined("_access")) {
 /**
  * Files
  */
-define("_fileSize", 104857600);
+define("_fileSize", 10485760);
