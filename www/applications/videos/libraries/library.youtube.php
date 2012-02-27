@@ -176,7 +176,6 @@ class YouTube {
 	}
 	
 	private function validateVideo($videoID) {
-		$this->validate = file_get_contents("http://gdata.youtube.com/feeds/api/videos/videoID");
-		____($this->validate);
+		$this->validate = $this->client."videos/".$videoID;
 	}
 }
