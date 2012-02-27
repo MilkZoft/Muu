@@ -15,22 +15,12 @@
 		print $this->themeCSS("cpanel"); 
 		
 		print $this->js("jquery", NULL, NULL, TRUE); 
-		print $this->js("js/jquery.prettyPhoto", "videos", NULL, TRUE); 
 	?>
 	
 	<script type="text/javascript">
 		var PATH = "<?php print path(); ?>";
 		
 		var URL  = "<?php print _webURL; ?>";
-
-		function createUploader() {    
-            var uploader = new qq.FileUploader({
-			    element: document.getElementById('file-uploader'),
-			    action: '<?php print _webURL; ?>/www/lib/scripts/js/server/php.php'
-			});           
-        }
-        
-        window.onload = createUploader; 
 	</script>
 </head>
 
