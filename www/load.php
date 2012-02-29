@@ -70,9 +70,9 @@ if(is_array($data)) {
 	define("_webEmailSend",  	  _wEmailSend);
 	
 	if(!_modRewrite) {
-		define("_webBase", _wURL . _sh ."index.php");
+		define("_webBase", _webURL . _sh ."index.php");
 	} else {
-		define("_webBase", _wURL);
+		define("_webBase", _webURL);
 	}
 }
 
