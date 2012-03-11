@@ -117,8 +117,15 @@ class Videos_Model extends ZP_Model {
 				return getAlert("This video already exists");
 			}
 			
+			$validateVideo = $this->YouTube->validVideo($_array[1]);
+			
+			if(!is_null($_array[1]) or !$validateVideo) {
+				return getAlert("Invalid URL");
+			}
+			
 			$video  = $this->YouTube->getByID($_array[1]);
-			if($video and is_array($video)) {	
+				
+			if($video and is_array($video) and $validateVideo) {	
 				$values = array(
 					"ID_User"     => SESSION("ZanUserID"),
 					"ID_YouTube"  => $video["id"],

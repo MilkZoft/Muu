@@ -175,7 +175,14 @@ class YouTube {
 		}
 	}
 	
-	private function validateVideo($videoID) {
-		$this->validate = $this->client."videos/".$videoID;
+	public function validVideo($videoID) {
+		$headers = @get_headers($this->client."videos/".$videoID);
+		
+		if (!strpos($headers[0], '200')) {
+			#echo "The YouTube video you entered does not exist";
+			return false;
+		}
+		
+		return TRUE;
 	}
 }
