@@ -26,26 +26,31 @@
 		}
 	}
 
-	function parseFile(file) {
-		output(
-			"<p>" +
-				"<span class=\"field\">» Título</span>" +
-				"<br />" +
-				"<input class=\"span10 required\" type=\"text\" value=\"" + file.name + "\" name=\"title\" />" +
-			"</p>" +
-			"<p>" +
-				"<span class=\"field\">» Descripción</span>" +
-				"<br />" +
-				"<textarea id=\"editor\" class=\"span10 required\" name=\"description\"></textarea>"
-		);
+	function rename(str) {
+		console.log(str);
+		if(str.length > 15) {
+			return str.substring(0, 15) + '...';
+		} else {
+			return str;
+		}
+	}
 
+	function parseFile(file) {
 		if(file.type.indexOf("image") == 0) {
 			var reader = new FileReader();
 			
 			reader.onload = function(e) {
 				output(
-					"<p><strong>" + file.name + ":</strong><br />" +
-					'<img src="' + e.target.result + '" /></p>'
+					'<div style="width: 250px; height: 370px; padding: 5px; margin-bottom: 10px; float: left; text-align: center;">' +
+						'<strong>' + rename(file.name) + ':</strong>' +
+						'<img style="max-width: 220px; max-height: 270px; padding: 2px; border: 1px solid #00B4FF;" src="' + e.target.result + '" /> <br />' +
+						'<span class="field">» Título</span>' +
+						'<br />' +
+						'<input class="span3 required" type="text" name="title" value="' + file.name + '">' +
+						'<br /><span class="field">» Descripción</span>' +
+						'<br />' +
+						'<textarea id="editor" class="span3 required" name="description"></textarea>' +
+					'</div>'
 				);
 			}
 
