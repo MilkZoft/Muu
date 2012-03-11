@@ -33,8 +33,12 @@
 			print div("filedrag"); 
 				print __(_("Drag & drop your files here"));
 			print div(FALSE);
+
 			print div("progress") . div(FALSE);
+
 			print div("response") . div(FALSE);
+
+			print '<div class="clear"></div>';
 
 			if($uploaded) {
 				print formSave($action);
