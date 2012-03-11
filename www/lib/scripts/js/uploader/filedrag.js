@@ -29,10 +29,14 @@
 	function parseFile(file) {
 		output(
 			"<p>" +
-				"<span class=\"field\">» Titulo</span>" +
+				"<span class=\"field\">» Título</span>" +
 				"<br />" +
 				"<input class=\"span10 required\" type=\"text\" value=\"" + file.name + "\" name=\"title\" />" +
-			"</p>"
+			"</p>" +
+			"<p>" +
+				"<span class=\"field\">» Descripción</span>" +
+				"<br />" +
+				"<textarea id=\"editor\" class=\"span10 required\" name=\"description\"></textarea>"
 		);
 
 		if(file.type.indexOf("image") == 0) {
