@@ -84,12 +84,12 @@ class Videos_Model extends ZP_Model {
 			);
 		}
 			
-		$this->ID 	  = POST("ID");		
-		$this->URL    = POST("URL");
-		$this->videos = POST("videos");
-		$this->date1  	   = now(4);
-		$this->date2  	   = now(2);
-		$this->situation   = POST("situation");
+		$this->ID 	     = POST("ID");		
+		$this->URL       = POST("URL");
+		$this->videos    = POST("videos");
+		$this->date1  	 = now(4);
+		$this->date2  	 = now(2);
+		$this->situation = POST("situation");
 		
 		/*		
 		$this->URL    	   = POST("URL");
@@ -118,8 +118,8 @@ class Videos_Model extends ZP_Model {
 			}
 			
 			$validateVideo = $this->YouTube->validVideo($_array[1]);
-			
-			if(!is_null($_array[1]) or !$validateVideo) {
+	
+			if(is_null($_array[1]) or !$validateVideo) {
 				return getAlert("Invalid URL");
 			}
 			
@@ -171,6 +171,8 @@ class Videos_Model extends ZP_Model {
 							return getAlert("Insert error");
 						}
 					}
+				} else {
+						return getAlert("At least one of the Videos you choose already exists");
 				}
 			}
 		}
