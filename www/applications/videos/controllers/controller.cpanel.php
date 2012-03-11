@@ -162,7 +162,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->CSS("pagination");
 		
 		$this->js("checkbox");
-		//$this->js("js/jquery.prettyPhoto", $this->application);
 		$this->js("js/pretty-photo", $this->application);
 		$this->js("js/videos-lightbox", $this->application);		
 		
