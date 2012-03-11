@@ -10,7 +10,7 @@ class Videos_Controller extends ZP_Controller {
 	
 	public function __construct() {
 		$this->Templates   = $this->core("Templates");
-		$this->Pagination   = $this->core("Pagination");
+		#$this->Pagination   = $this->core("Pagination");
 		$this->Videos_Model = $this->model("Videos_Model");
 		
 		$this->config("videos");
