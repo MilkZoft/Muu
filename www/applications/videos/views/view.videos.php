@@ -6,9 +6,9 @@
 		<?php 
 			foreach($videos as $video) {				
 				if(strlen($video["Title"]) > 30) {
-					$title = encode(substr($video["Title"],0 , 30) . "...");
+					$title = substr($video["Title"],0 , 30) . "...";
 				} else {
-					$title = encode($video["Title"]);
+					$title = $video["Title"];
 				}
 				
 				print '	
