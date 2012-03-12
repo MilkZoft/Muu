@@ -29,7 +29,7 @@
 	function parseFile(file) {
 		if(file.type.indexOf("image") == 0) {
 			var reader = new FileReader();
-			
+			console.log(file);
 			reader.onload = function(e) {
 				output(
 					'<div class="span3" style="margin-bottom: 10px; text-align: center;">' +
