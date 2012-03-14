@@ -26,10 +26,16 @@
 		}
 	}
 
+	function getPath(filename) {
+		var parts = filename.split(".");
+		var extension = parts.pop();
+	}
+
 	function parseFile(file) {
 		if(file.type.indexOf("image") == 0) {
 			var reader = new FileReader();
-			console.log(file);
+			var path = getPath(file.name);
+
 			reader.onload = function(e) {
 				output(
 					'<div class="span3" style="margin-bottom: 10px; text-align: center;">' +

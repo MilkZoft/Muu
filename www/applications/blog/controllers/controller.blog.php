@@ -320,98 +320,52 @@ class Blog_Controller extends ZP_Controller {
 	
 	private function limit($type = "posts") { 
 		$start = 0;
+		$limit = $start .", ". _maxLimit;	
+		$count = $this->Blog_Model->count("posts");
 
 		if($type === "posts") {
-			if(isLang()) {
-				if(segment(2) === "page" and segment(3) > 0) {
-					$start = (segment(3) * _maxLimit) - _maxLimit;
-				} 	
-			} else {
-				if(segment(1) === "page" and segment(2) > 0) {
-					$start = (segment(2) * _maxLimit) - _maxLimit;
-				} 
-			}		
-			
-			$limit = $start .", ". _maxLimit;			
+			if(segment(1, isLang()) === "page" and segment(2, isLang()) > 0) {
+				$start = (segment(2, isLang()) * _maxLimit) - _maxLimit;
+			} 
+							
 			$count = $this->Blog_Model->count();
 			$URL   = path("blog/page/");		
 		} elseif($type === "categories") {
-			if(isLang()) { 
-				if(segment(2) === "category" and segment(3) !== "page" and segment(4) === "page" and segment(5) > 0) {
-					$start = (segment(5) * _maxLimit) - _maxLimit;
-				} 		
-			} else {
-				if(segment(1) === "category" and segment(2) !== "page" and segment(3) === "page" and segment(4) > 0) {
-					$start = (segment(4) * _maxLimit) - _maxLimit;
-				}
-			}	
+			if(segment(1, isLang()) === "category" and segment(2, isLang()) !== "page" and segment(3, isLang()) === "page" and segment(4, isLang()) > 0) {
+				$start = (segment(4) * _maxLimit) - _maxLimit;
+			}
 			
-			$limit = $start .", ". _maxLimit;		
-			$URL   = path("blog/category/". segment(3) ."/page");					
+			$URL   = path("blog/category/". segment(3, isLang()) ."/page");					
 			$count = $this->Blog_Model->count("categories");			
 		} elseif($type === "day") {
-			if(isLang()) {
-				if(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4)) and segment(5) === "page" and segment(6) > 0) {
-					$start = (segment(6) * _maxLimit) - _maxLimit;
-				}			
-			} else {
-				if(isYear(segment(1)) and isMonth(segment(2)) and isDay(segment(3)) and segment(4) === "page" and segment(5) > 0) {
-					$start = (segment(5) * _maxLimit) - _maxLimit;
-				}
+			if(isYear(segment(1, isLang())) and isMonth(segment(2, isLang())) and isDay(segment(3, isLang())) and segment(4, isLang()) === "page" and segment(5, isLang()) > 0) {
+				$start = (segment(5) * _maxLimit) - _maxLimit;
 			}
-			
-			$limit = $start .", ". _maxLimit;	
-			$count = $this->Blog_Model->count("posts");
-			$URL   = path("blog/". segment(2) ."/". segment(3) ."/". segment(4) ."/page/");			
+				
+			$URL = path("blog/". segment(2, isLang()) ."/". segment(3, isLang()) ."/". segment(4, isLang()) ."/page/");			
 		} elseif($type === "month") {
-			if(isLang()) {
-				if(isYear(segment(2)) and isMonth(segment(3)) and segment(4) === "page" and segment(5) > 0) {
-					$start = (segment(5) * _maxLimit) - _maxLimit;
-				}			
-			} else {
-				if(isYear(segment(1)) and isMonth(segment(2)) and segment(3) === "page" and segment(4) > 0) {
-					$start = (segment(4) * _maxLimit) - _maxLimit;
-				}
-			}
-		
-			$limit = $start .", ". _maxLimit;			
-			$count = $this->Blog_Model->count("posts");
-			$URL   = path("blog/". segment(2) ."/". segment(3) ."/page/");		
-		} elseif($type === "year") {
-			if(isLang()) {
-				if(isYear(segment(2)) and segment(3) === "page" and segment(4) > 0) {
-					$start = (segment(4) * _maxLimit) - _maxLimit;
-				}			
-			} else {
-				if(isYear(segment(1)) and segment(2) === "page" and segment(3) > 0) {
-					$start = (segment(3) * _maxLimit) - _maxLimit;
-				}
-			}
-		
-			$limit = $start .", ". _maxLimit;			
-			$count = $this->Blog_Model->count("posts");
-			$URL   = path("blog/". segment(2) ."/page/");			
-		} elseif($type === "tag") {
-			if(isLang()) {
-				if(segment(2) === "tag" and segment(3) and segment(4) === "page" and segment(5) > 0) {
-					$start = (segment(5) * _maxLimit) - _maxLimit;
-				}
-			} else {
-				if(segment(1) === "tag" and segment(2) and segment(3) === "page" and segment(4) > 0) {
-					$start = (segment(4) * _maxLimit) - _maxLimit;
-				}
+			if(isYear(segment(1, isLang())) and isMonth(segment(2, isLang())) and segment(3, isLang()) === "page" and segment(4, isLang()) > 0) {
+				$start = (segment(4) * _maxLimit) - _maxLimit;
 			}
 			
-			$limit = $start .", ". _maxLimit;
+			$URL = path("blog/". segment(2, isLang()) ."/". segment(3, isLang()) ."/page/");		
+		} elseif($type === "year") {
+			if(isYear(segment(1, isLang())) and segment(2, isLang()) === "page" and segment(3, isLang()) > 0) {
+				$start = (segment(3, isLang()) * _maxLimit) - _maxLimit;
+			}
+			
+			$URL = path("blog/". segment(2) ."/page/");			
+		} elseif($type === "tag") {	
+			if(segment(1, isLang()) === "tag" and segment(2, isLang()) and segment(3, isLang()) === "page" and segment(4, isLang()) > 0) {
+				$start = (segment(4, isLang()) * _maxLimit) - _maxLimit;
+			}
+			
 			$count = $this->Blog_Model->count("tag");
 			$URL   = path("blog/tag/". segment(3) ."/page/");
 		}
 		
-		if($count > _maxLimit) { 
-			$this->pagination = paginate($count, _maxLimit, $start, $URL);
-		} else {
-			$this->pagination = NULL;
-		}	
+		
+		$this->pagination = ($count > _maxLimit) ? paginate($count, _maxLimit, $start, $URL) : NULL;
 		
 		return $limit;
 	}
