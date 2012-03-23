@@ -14,9 +14,9 @@ $ZP["db"]["dbController"] = "mysqli";
 $ZP["db"]["dbHost"] 	  = "localhost";
 $ZP["db"]["dbUser"] 	  = "root";
 $ZP["db"]["dbPwd"] 	      = "";
-$ZP["db"]["dbName"] 	  = "muucms";
+$ZP["db"]["dbName"] 	  = "";
 $ZP["db"]["dbPort"] 	  = 3306;
-$ZP["db"]["dbPfx"] 	      = "muu_";
+$ZP["db"]["dbPfx"] 	      = "zan_";
 $ZP["db"]["dbSocket"]     = NULL;
 
 /**

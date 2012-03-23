@@ -92,10 +92,10 @@ class Categories_Model extends ZP_Model {
 	}
 	
 	public function getCategoriesByRecord($application, $ID) {		
-		$query = "	SELECT * FROM muu_categories WHERE ". _dbPfx ."categories.ID_Category IN (
-        				SELECT ". _dbPfx ."re_categories_applications.ID_Category FROM ". _dbPfx ."re_categories_applications 
-        					WHERE ". _dbPfx ."re_categories_applications.ID_Application = $application AND ". _dbPfx ."re_categories_applications.ID_Category2Application IN (
-            					SELECT ". _dbPfx ."re_categories_records.ID_Category2Application FROM ". _dbPfx ."re_categories_records WHERE ID_Record = $ID
+		$query = "	SELECT * FROM muu_categories WHERE muu_categories.ID_Category IN (
+        				SELECT muu_re_categories_applications.ID_Category FROM muu_re_categories_applications 
+        					WHERE muu_re_categories_applications.ID_Application = $application AND muu_re_categories_applications.ID_Category2Application IN (
+            					SELECT muu_re_categories_records.ID_Category2Application FROM muu_re_categories_records WHERE ID_Record = $ID
         					)
 
     				);";
@@ -111,11 +111,9 @@ class Categories_Model extends ZP_Model {
 		$ID_Application = $this->Db->query($query);
 		$ID_Application = $ID_Application[0]["ID_Application"];
 		
-		$query = 
-		"SELECT muu_categories.ID_Category, Title, Slug, Language, Situation 
-		FROM muu_categories
-		INNER JOIN muu_re_categories_applications ON muu_categories.ID_Category = muu_re_categories_applications.ID_Category
-		WHERE muu_re_categories_applications.ID_Application = '$ID_Application' AND muu_categories.Language = '$language' ORDER BY ID_Category DESC;";
+		$query = "SELECT muu_categories.ID_Category, Title, Slug, Language, Situation FROM muu_categories 
+					INNER JOIN muu_re_categories_applications ON muu_categories.ID_Category = muu_re_categories_applications.ID_Category
+					WHERE muu_re_categories_applications.ID_Application = '$ID_Application' AND muu_categories.Language = '$language' ORDER BY ID_Category DESC;";
 		
 		$this->data = $this->Db->query($query);
 			
@@ -124,9 +122,8 @@ class Categories_Model extends ZP_Model {
 	
 	
 	public function categories() {			
-		$query = "SELECT ". _dbPfx ."re_categories_applications.ID_Category, ID_Application, ID_Parent, Title, Slug, Language, Situation 
-										FROM ". _dbPfx ."re_categories_applications     
-										INNER JOIN ". _dbPfx ."categories ON muu_categories.ID_Category = ". _dbPfx ."re_categories_applications.ID_Category ORDER BY Title";		
+		$query = "SELECT muu_re_categories_applications.ID_Category, ID_Application, ID_Parent, Title, Slug, Language, Situation FROM muu_re_categories_applications     
+					INNER JOIN muu_categories ON muu_categories.ID_Category = muu_re_categories_applications.ID_Category ORDER BY Title";		
 
 		$this->data = $this->Db->query($query);					
 
@@ -139,11 +136,9 @@ class Categories_Model extends ZP_Model {
 			$lastID = "AND muu_categories.ID_Category > $lastID";
 		}
 			
-		$query = 
-		"SELECT DISTINCT (muu_re_categories_applications.ID_Application) AS App, muu_categories.ID_Category, muu_categories.Title, muu_categories.Situation
-		FROM muu_categories, muu_re_categories_applications
-		WHERE muu_categories.ID_Category = muu_re_categories_applications.ID_Category
-		AND Language = '$language' $lastID ORDER BY ID_Category"; 		
+		$query = "SELECT DISTINCT (muu_re_categories_applications.ID_Application) AS App, muu_categories.ID_Category, muu_categories.Title, muu_categories.Situation
+					FROM muu_categories, muu_re_categories_applications
+					WHERE muu_categories.ID_Category = muu_re_categories_applications.ID_Category AND Language = '$language' $lastID ORDER BY ID_Category"; 		
 
 		$this->data = $this->Db->query($query);					
 		

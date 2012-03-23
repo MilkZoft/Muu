@@ -1,6 +1,6 @@
 <?php if(!defined("_access")) { die("Error: You don't have permission to access here..."); } ?>
 <!DOCTYPE html>
-<html lang="<?php print _webLang; ?>">
+<html lang="<?php print get("webLang"); ?>">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title><?php print $this->getTitle(); ?></title>
@@ -30,7 +30,7 @@
 		?>
 			<div id="top-bar">
 				<?php
-					$li[] = a("&lsaquo;&lsaquo;" . __(_("Go back")), _webBase);
+					$li[] = a("&lsaquo;&lsaquo;" . __(_("Go back")), path());
 					$li[] = " | " . span("bold", __(_("Welcome"))) .": " . SESSION("ZanUser");
 					$li[] = " | " . span("bold", __(_("Online users"))) . ": $online";
 					$li[] = " | " . span("bold", __(_("Registered users"))) . ": $registered";
@@ -44,7 +44,7 @@
 		} else {
 		?>
 			<div id="top-bar-logout">
-				<a href="<?php print _webBase; ?>" title="<?php print __(_("Go back")); ?>">&lsaquo;&lsaquo; <?php print __(_("Go back")); ?></a>
+				<a href="<?php print path(); ?>" title="<?php print __(_("Go back")); ?>">&lsaquo;&lsaquo; <?php print __(_("Go back")); ?></a>
 			</div>
 		<?php		
 		}

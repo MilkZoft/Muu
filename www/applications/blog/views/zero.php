@@ -2,7 +2,7 @@
 
 <div class="post">
 	<div class="post-title">
-		<?php print a($hello, _webBase); ?>
+		<?php print a($hello, get("webBase")); ?>
 	</div>
 	
 	<div class="post-left">

@@ -67,7 +67,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
-		$this->template("content", $this->vars);
+		$this->render("content", $this->vars);
 	}
 	
 	public function delete($ID = 0) {
@@ -119,7 +119,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["data"] = $data;
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
-			$this->template("content", $this->vars);
+			$this->render("content", $this->vars);
 		} else {
 			redirect($this->application ."/cpanel/results");
 		}
@@ -138,7 +138,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
-		$this->template("include", $this->vars);
+		$this->render("include", $this->vars);
 		$this->render("header", "footer");
 		
 		exit;
@@ -182,7 +182,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["table"]      = getTable(__(_("Manage " . ucfirst($this->application))), $thead, $tFoot, $total);					
 		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
 		
-		$this->template("content", $this->vars);
+		$this->render("content", $this->vars);
 	}
 	
 	public function trash($ID = 0) {

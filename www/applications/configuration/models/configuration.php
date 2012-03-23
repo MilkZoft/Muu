@@ -61,7 +61,7 @@ class Configuration_Model extends ZP_Model {
 	
 	public function getByID() { 				
 		$data = $this->Db->find(1, $this->table);
-
+		
 		return $data;
 	}
 

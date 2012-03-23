@@ -11,20 +11,20 @@ session_start();
 
 define("_dir", dirname(__FILE__));
 
-if(file_exists(_dir ."/config/config.basics.php") and file_exists(_dir ."/config/config.core.php")) { 
-	include "config/config.basics.php";
-	include "config/config.core.php";
+if(file_exists(_dir ."/config/basics.php") and file_exists(_dir ."/config/core.php")) { 
+	include "config/basics.php";
+	include "config/core.php";
 } else { 
-	die("Error: config.basics.php or config.core.php doesn't exists");
+	die("Error: basics.php or config.core.php doesn't exists");
 }
 
-include _corePath ."/classes/class.load.php";
-include _corePath ."/classes/class.controller.php";
-include _corePath ."/classes/class.model.php";
+include _corePath ."/classes/load.php";
+include _corePath ."/classes/controller.php";
+include _corePath ."/classes/model.php";
 
 $Load = new ZP_Load(); 
 
-$helpers = array("debugging", "i18n", "router", "benchmark", "string", "sessions", "security");
+$helpers = array("config", "debugging", "i18n", "router", "benchmark", "string", "sessions", "security");
 
 $Load->helper($helpers);
 
@@ -33,55 +33,42 @@ $Configuration_Model = $Load->model("Configuration_Model");
 $data = $Configuration_Model->getConfig();
 
 if(is_array($data)) {
-	define("_webLanguage", $data[0]["Language"]);
+	set("webLanguage", $data[0]["Language"]);
 
-	if(whichLanguage() === _webLanguage) { 
-		define("_webLang", $data[0]["Lang"]);
+	if(whichLanguage() === get("webLanguage")) { 
+		set("webLang", $data[0]["Lang"]);
 	} else {
-		define("_webLang", getLang(whichLanguage(), FALSE));
+		set("webLang", getLang(whichLanguage(), FALSE));
 	}
 
-	define("_webName", 		   $data[0]["Name"]);
-	define("_webSlogan",       $data[0]["Slogan_" . _webLanguage]);
-	define("_webURL", 		   $data[0]["URL"]);
-	define("_webTheme", 	   $data[0]["Theme"]);
-	define("_webGallery", 	   $data[0]["Gallery"]);
-	define("_webValidation",   $data[0]["Validation"]);
-	define("_webMessage",      $data[0]["Message"]);
-	define("_webActivation",   $data[0]["Activation"]);
-	define("_webEmailRecieve", $data[0]["Email_Recieve"]);
-	define("_webEmailSend",    $data[0]["Email_Send"]);
-	define("_webSituation",    $data[0]["Situation"]);
-	define("_defaultApplication", $data[0]["Application"]);
+	set("webName", 		   $data[0]["Name"]);
+	set("webSlogan",       $data[0]["Slogan_" . _webLanguage]);
+	set("webURL", 		   $data[0]["URL"]);
+	set("webTheme", 	   $data[0]["Theme"]);
+	set("webGallery", 	   $data[0]["Gallery"]);
+	set("webValidation",   $data[0]["Validation"]);
+	set("webMessage",      $data[0]["Message"]);
+	set("webActivation",   $data[0]["Activation"]);
+	set("webEmailRecieve", $data[0]["Email_Recieve"]);
+	set("webEmailSend",    $data[0]["Email_Send"]);
+	set("webSituation",    	$data[0]["Situation"]);
+	set("defaultApplication", $data[0]["Application"]);
 
-	if(!_modRewrite) {
-		define("_webBase", _webURL . _sh ."index.php");
+	if(!get("modRewrite")) {
+		set("webBase", get("webURL") . _sh . _index);
 	} else {
-		define("_webBase", _webURL);
-	}
-} else {
-	define("_webURL", 		 	  $config["wURL"]);
-	define("_webName", 		 	  $config["wName"]);
-	define("_webTheme", 	 	  $config["wTheme"]);
-	define("_webSituation",  	  $config["wSituation"]);
-	define("_webLanguage",   	  $config["wLanguage"]);
-	define("_webLang", 		 	  $config["wLang"]);
-	define("_defaultApplication", $config["application"]);
-	define("_webEmailSend",  	  _wEmailSend);
-	
-	if(!_modRewrite) {
-		define("_webBase", _wURL . _sh ."index.php");
-	} else {
-		define("_webBase", _wURL);
+		set("webBase", get("webURL"));
 	}
 }
 
-if(_translation === "gettext") {
-	$languageFile = _dir ."/lib/languages/gettext/language.". whichLanguage(TRUE, TRUE) .".mo";
+if(get("translation") === "gettext") {
+	$languageFile = _dir ."/lib/languages/gettext/". whichLanguage(TRUE, TRUE) .".mo";
 		
 	if(file_exists($languageFile)) { 			
-		$Load->library("class.streams", NULL, NULL, "gettext");
-		$Gettext_Reader = $Load->library("class.gettext", "Gettext_Reader", array($languageFile), "gettext");
+		$Load->library("streams", NULL, NULL, "gettext");
+
+		$Gettext_Reader = $Load->library("gettext", "Gettext_Reader", array($languageFile), "gettext");
+		
 		$Load->config("languages");
 	
 		$Gettext_Reader->load_tables();

@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title><?php print $this->getTitle(); ?></title>
-	<link rel="stylesheet" href="<?php print _webURL; ?>/www/lib/css/default.css" type="text/css">
+	<link rel="stylesheet" href="<?php print path("www/lib/css/default.css", TRUE); ?>" type="text/css">
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/fonts.css" type="text/css">
 	<link rel="stylesheet" href="<?php print $this->themePath; ?>/css/style.css" type="text/css">
 	
@@ -38,16 +38,16 @@
 
 			<div id="top-menu">
 				<ul>
-					<li><a href="<?php print _webBase; ?>" title="<?php print __("Home"); ?>"><?php print __("Home"); ?></a></li>
-					<li><a href="<?php print _webBase; ?>/<?php print _webLang; ?>/pages/downloads" title="<?php print __("Downloads"); ?>"><?php print __("Downloads"); ?></a></li>
-					<li><a href="<?php print _webURL; ?>/documentation/<?php print _webLang; ?>" target="_blank" title="<?php print __("Documentation"); ?>"><?php print __("Documentation"); ?></a></li>
-					<li><a href="<?php print _webBase; ?>/<?php print _webLang; ?>/forums" title="<?php print __("Forums"); ?>"><?php print __("Forums"); ?></a></li>
-					<li><a href="<?php print _webBase; ?>/<?php print _webLang; ?>/blog" title="<?php print __("Blog"); ?>"><?php print __("Blog"); ?></a></li>
+					<li><a href="<?php print path(); ?>" title="<?php print __("Home"); ?>"><?php print __("Home"); ?></a></li>
+					<li><a href="<?php print path("pages/downloads"); ?>" title="<?php print __("Downloads"); ?>"><?php print __("Downloads"); ?></a></li>
+					<li><a href="<?php print path("documentation", TRUE); ?>" target="_blank" title="<?php print __("Documentation"); ?>"><?php print __("Documentation"); ?></a></li>
+					<li><a href="forums" title="<?php print __("Forums"); ?>"><?php print __("Forums"); ?></a></li>
+					<li><a href="blog" title="<?php print __("Blog"); ?>"><?php print __("Blog"); ?></a></li>
                     <?php
-						if(_webLang === "es") {
-							print '<li><a href="'. _webBase .'/en" title="English Version">English Version</a></li>';
+						if(get("webLang") === "es") {
+							print '<li><a href="en" title="English Version">English Version</a></li>';
 						} else {
-							print '<li><a href="'. _webBase .'/es" title="Versi&oacute;n Espa&ntilde;ol">Versi&oacute;n Espa&ntilde;ol</a></li>';
+							print '<li><a href="es" title="Versi&oacute;n Espa&ntilde;ol">Versi&oacute;n Espa&ntilde;ol</a></li>';
 						}
 					?>
 				</ul>

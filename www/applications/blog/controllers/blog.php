@@ -24,7 +24,7 @@ class Blog_Controller extends ZP_Controller {
 				
 		$this->journal = FALSE;
 		
-		$this->Templates->theme(_webTheme);
+		$this->Templates->theme();
 	}
 	
 	public function index() {
@@ -93,7 +93,7 @@ class Blog_Controller extends ZP_Controller {
 			$vars["posts"] = $data;
 			$vars["view"]  = $this->view("journal", TRUE);			
 	
-			$this->template("content", $vars);
+			$this->render("content", $vars);
 		} 
 	}
 	
@@ -111,9 +111,9 @@ class Blog_Controller extends ZP_Controller {
 			$vars["pagination"] = $this->pagination;
 			$vars["view"]  	    = $this->view("posts", TRUE);
 			
-			$this->template("content", $vars);			
+			$this->render("content", $vars);			
 		} else {
-			$this->template("error404");
+			$this->render("error404");
 		}
 	}
 	
@@ -131,12 +131,12 @@ class Blog_Controller extends ZP_Controller {
 			$vars["pagination"] = $this->pagination;
 			$vars["view"]  	    = $this->view("posts", TRUE);
 			
-			$this->template("content", $vars);			
+			$this->render("content", $vars);			
 		} else {
 			$vars["error"] = __("There is not a publications in this month");
 			$vars["view"]  = $this->view("error404", TRUE);
 			
-			$this->template("content", $vars);
+			$this->render("content", $vars);
 		}
 	}
 	
@@ -154,9 +154,9 @@ class Blog_Controller extends ZP_Controller {
 			$vars["pagination"] = $this->pagination;
 			$vars["view"]       = $this->view("posts", TRUE);
 			
-			$this->template("content", $vars);			
+			$this->render("content", $vars);			
 		} else {
-			$this->template("error404");
+			$this->render("error404");
 		}
 	}
 
@@ -194,9 +194,9 @@ class Blog_Controller extends ZP_Controller {
 				$vars["view"] = $this->view("posts", TRUE);
 			}
 			
-			$this->template("content", $vars);
+			$this->render("content", $vars);
 		} else {
-			$this->template("error404");
+			$this->render("error404");
 		}
 	}
 	
@@ -212,9 +212,9 @@ class Blog_Controller extends ZP_Controller {
 			$vars["pagination"] = $this->pagination;
 			$vars["view"]  	    = $this->view("posts", TRUE);
 			
-			$this->template("content", $vars);		
+			$this->render("content", $vars);		
 		} else {
-			$this->template("error404");
+			$this->render("error404");
 		}
 	}
 	
@@ -280,9 +280,9 @@ class Blog_Controller extends ZP_Controller {
 				$vars["view"] 	  = $this->view("access", TRUE);						
 			}
 			
-			$this->template("content", $vars);
+			$this->render("content", $vars);
 		} else {
-			$this->template("error404");
+			$this->render("error404");
 		}
 	}
 	
@@ -300,11 +300,11 @@ class Blog_Controller extends ZP_Controller {
 			$vars["pagination"] = $this->pagination;
 			$vars["view"]       = $this->view("posts", TRUE);
 			
-			$this->template("content", $vars);
+			$this->render("content", $vars);
 		} else {
-			$post  = __("Welcome to") . " ";
-			$post .= a(_webName, _webBase) . " ";
-			$post .= __("this is your first post, going to your") . " ";
+			$post  = __("Welcome to") ." ";
+			$post .= a(get("webName"), get("webBase")) ." ";
+			$post .= __("this is your first post, going to your") ." ";
 			$post .= a(__("Control Panel"), path("cpanel")) ." ";
 			$post .= __("and when you add a new post this post will be disappear automatically, enjoy it!");				
 			
@@ -314,7 +314,7 @@ class Blog_Controller extends ZP_Controller {
 			$vars["comments"] = __("No Comments");				
 			$vars["view"]  	  = $this->view("zero", TRUE);
 			
-			$this->template("content", $vars);				
+			$this->render("content", $vars);				
 		}
 	}
 	

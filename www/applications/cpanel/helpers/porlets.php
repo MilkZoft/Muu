@@ -7,7 +7,7 @@ if(!defined("_access")) {
 }
 
 function porlet($porlet, $content) {
-	$skin = _webURL . "/www/lib/themes/cpanel";
+	$skin = path("www/lib/themes/cpanel", TRUE);
 	
 	$HTML  = '	<div class="box">
 					&nbsp; <span class="bold grey">'. $porlet .'</span> <span class="float-right bold small grey">X</span>';

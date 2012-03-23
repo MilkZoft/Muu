@@ -60,7 +60,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 			$this->vars["view"] = $this->view("edit", TRUE, $this->application);
 			
-			$this->template("content", $this->vars);
+			$this->render("content", $this->vars);
 		} else {
 			redirect(path($this->application ."/cpanel/results"));
 		}
@@ -79,8 +79,8 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
-		$this->template("include", $this->vars);
-		$this->render("header", "footer");
+		$this->render("include", $this->vars);
+		$this->rendering("header", "footer");
 		
 		exit;
 	}	

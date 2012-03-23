@@ -16,7 +16,7 @@ class Users_Controller extends ZP_Controller {
 		
 		$this->application = $this->app("users");
 		
-		$this->Templates->theme(_webTheme);
+		$this->Templates->theme();
 	}
 	
 	public function index() {	
@@ -29,7 +29,7 @@ class Users_Controller extends ZP_Controller {
 		if(segment(3)) {
 			unsetSessions(path(segment(3)));
 		} else {
-			unsetSessions(_webBase);
+			unsetSessions();
 		}		
 	}
 	
@@ -41,7 +41,7 @@ class Users_Controller extends ZP_Controller {
 		}
 		
 		if(!$code) {
-			redirect(_webBase);
+			redirect();
 		} else {
 			$user = $this->Users_Model->activate($code);
 			
@@ -56,13 +56,13 @@ class Users_Controller extends ZP_Controller {
 					
 					redirect(path("users" . _sh . "editprofile" . _sh . "activate"));	
 				} else {
-					showAlert("An error occurred when attempting to activate your account!", _webBase);
+					showAlert("An error occurred when attempting to activate your account!");
 				}
 			} else { 
 				if($user) {
-					showAlert("Your account has been activated correctly!", _webBase);
+					showAlert("Your account has been activated correctly!");
 				} else {
-					showAlert("An error occurred when attempting to activate your account!", _webBase);
+					showAlert("An error occurred when attempting to activate your account!");
 				}
 			}
 		}

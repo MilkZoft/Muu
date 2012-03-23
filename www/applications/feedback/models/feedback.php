@@ -14,10 +14,10 @@ class Feedback_Model extends ZP_Model {
 		$this->config("email");
 		
 		$this->Email = $this->core("Email");
-		$this->Email->setLibrary(_wEmailLibrary);
+		$this->Email->setLibrary("PHPMailer");
 		
-		$this->Email->fromName  = _webName;
-		$this->Email->fromEmail = _webEmailSend;
+		$this->Email->fromName  = get("webName");
+		$this->Email->fromEmail = get("webEmailSend");
 		
 		$this->helpers();
 		
