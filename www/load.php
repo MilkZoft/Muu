@@ -11,15 +11,22 @@ session_start();
 
 define("_dir", dirname(__FILE__));
 
-if(file_exists(_dir ."/config/basics.php") and file_exists(_dir ."/config/core.php")) { 
-	include "config/basics.php";
-	include "config/core.php";
+if(file_exists(_dir . "/config/config.php")) { 
+	include "config/config.php";
 } else { 
-	die("Error: basics.php or config.core.php doesn't exists");
+	die("Error: config.php doesn't exists");
 }
 
-include _corePath ."/classes/load.php";
-include _corePath ."/classes/controller.php";
+if($ZP["production"]) { 
+	error_reporting(FALSE);
+
+	ini_set("display_errors", FALSE); 
+} else {
+	error_reporting(E_ALL);
+}
+
+include _corePath ."/classes/load.php"; 
+include _corePath ."/classes/controller.php"; 
 include _corePath ."/classes/model.php";
 
 $Load = new ZP_Load(); 
@@ -42,7 +49,7 @@ if(is_array($data)) {
 	}
 
 	set("webName", 		   $data[0]["Name"]);
-	set("webSlogan",       $data[0]["Slogan_" . _webLanguage]);
+	set("webSlogan",       $data[0]["Slogan_" . get("webLanguage")]);
 	set("webURL", 		   $data[0]["URL"]);
 	set("webTheme", 	   $data[0]["Theme"]);
 	set("webGallery", 	   $data[0]["Gallery"]);

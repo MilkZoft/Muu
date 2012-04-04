@@ -72,7 +72,7 @@ class CPanel_Controller extends ZP_Controller {
 	}
 	
 	public function logout() {
-		unsetSessions(path("cpanel"));
+		unsetSessions("cpanel");
 	}
 	
 }

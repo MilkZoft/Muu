@@ -43,13 +43,13 @@ class Blog_Model extends ZP_Model {
 	
 	private function all($trash, $order, $limit) {
 		if(!$trash) {
-			if(SESSION("ZanUserPrivilege") === _super) { 
+			if(SESSION("ZanUserPrivilegeID") === 1) { 
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
@@ -73,7 +73,7 @@ class Blog_Model extends ZP_Model {
 		);
 		
 		$this->categories = POST("categories"); 
-		$this->tags	  = POST("tags");
+		$this->tags	  	  = POST("tags");
 		$this->URL        = PATH("blog/". date("Y")) ."/". date("m") ."/". date("d") ."/". slug(POST("title", "clean"));
 		$this->muralExist = POST("mural_exist");
 				
@@ -222,11 +222,7 @@ class Blog_Model extends ZP_Model {
 	
 	private function search($search, $field) {
 		if($search and $field) {
-			if($field === "ID") {
-				$data = $this->Db->find($search, $this->table);	
-			} else {
-				$data = $this->Db->findBySQL("$field LIKE '%$search%'", $this->table);
-			}
+			$data = ($field === "ID") ? $this->Db->find($search, $this->table) : $this->Db->findBySQL("$field LIKE '%$search%'", $this->table);	      
 		} else {
 			return FALSE;
 		}
@@ -356,10 +352,10 @@ class Blog_Model extends ZP_Model {
 			$limit = NULL;
 		}
 		
-		$posts = $this->Db->query("SELECT * FROM ". _dbPfx ."blog WHERE ". _dbPfx ."blog.ID_Post IN (
-									SELECT ". _dbPfx ."re_categories_records.ID_Record FROM ". _dbPfx ."re_categories_records WHERE ". _dbPfx ."re_categories_records.ID_Category2Application IN (
-										SELECT ". _dbPfx ."re_categories_applications.ID_Category2Application FROM ". _dbPfx ."re_categories_applications WHERE ". _dbPfx ."re_categories_applications.ID_Application = 3 AND  ". _dbPfx ."re_categories_applications.ID_Category IN (
-											SELECT ". _dbPfx ."categories.ID_Category FROM ". _dbPfx ."categories WHERE Slug = '$category'
+		$posts = $this->Db->query("SELECT * FROM muu_blog WHERE muu_blog.ID_Post IN (
+									SELECT muu_re_categories_records.ID_Record FROM muu_re_categories_records WHERE muu_re_categories_records.ID_Category2Application IN (
+										SELECT muu_re_categories_applications.ID_Category2Application FROM muu_re_categories_applications WHERE muu_re_categories_applications.ID_Application = 3 AND  muu_re_categories_applications.ID_Category IN (
+											SELECT muu_categories.ID_Category FROM muu_categories WHERE Slug = '$category'
 										)
 									)
 								 ) ORDER BY ID_Post DESC $limit");
@@ -430,11 +426,11 @@ class Blog_Model extends ZP_Model {
 			$limit = NULL;
 		}
 				
-		$query = "	SELECT * FROM ". _dbPfx ."blog WHERE ". _dbPfx ."blog.ID_Post IN (
-						SELECT ". _dbPfx ."re_tags_records.ID_Record FROM ". _dbPfx ."re_tags_records WHERE ". _dbPfx ."re_tags_records.ID_Tag2Application IN (
-							SELECT ". _dbPfx ."re_tags_applications.ID_Tag2Application FROM ". _dbPfx ."re_tags_applications 
-							WHERE ". _dbPfx ."re_tags_applications.ID_Application = 3 AND  ". _dbPfx ."re_tags_applications.ID_Tag IN (
-								SELECT ". _dbPfx ."tags.ID_Tag FROM ". _dbPfx ."tags WHERE Slug = '$tag'
+		$query = "	SELECT * FROM muu_blog WHERE muu_blog.ID_Post IN (
+						SELECT muu_re_tags_records.ID_Record FROM muu_re_tags_records WHERE muu_re_tags_records.ID_Tag2Application IN (
+							SELECT muu_re_tags_applications.ID_Tag2Application FROM muu_re_tags_applications 
+							WHERE muu_re_tags_applications.ID_Application = 3 AND  muu_re_tags_applications.ID_Tag IN (
+								SELECT muu_tags.ID_Tag FROM muu_tags WHERE Slug = '$tag'
 							)
 						)
 					) ORDER BY ID_Post DESC $limit";

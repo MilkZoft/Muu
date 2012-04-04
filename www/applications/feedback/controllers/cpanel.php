@@ -77,9 +77,9 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["data"] = $data;
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
-			$this->template("content", $this->vars);
+			$this->render("content", $this->vars);
 		} else {
-			redirect($this->application ."/cpanel/results"));
+			redirect($this->application ."/cpanel/results");
 		}
 	}
 	
@@ -96,8 +96,8 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
-		$this->template("include", $this->vars);
-		$this->render("header", "footer");
+		$this->render("include", $this->vars);
+		$this->rendering("header", "footer");
 		
 		exit;
 	}
@@ -128,7 +128,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
 		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
 		
-		$this->template("content", $this->vars);
+		$this->render("content", $this->vars);
 	}
 	
 	public function read($ID = 0) {
@@ -152,9 +152,9 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["data"]	 = $data;
 			$this->vars["view"]  = $this->view("read", TRUE, $this->application);
 			
-			$this->template("content", $this->vars);
+			$this->render("content", $this->vars);
 		} else {
-			redirect($this->application ."/cpanel/results"));
+			redirect($this->application ."/cpanel/results");
 		}
 	}
 	
@@ -164,9 +164,9 @@ class CPanel_Controller extends ZP_Controller {
 		}
 		
 		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application ."/cpanel/results"));
+			redirect($this->application ."/cpanel/results");
 		} else {
-			redirect($this->application ."/cpanel/add"));
+			redirect($this->application ."/cpanel/add");
 		}
 	}
 	

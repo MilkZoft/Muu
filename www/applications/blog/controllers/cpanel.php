@@ -40,7 +40,7 @@ class CPanel_Controller extends ZP_Controller {
 		}
 	}
 	
-	public function add() {
+	public function add() { 
 		if(!$this->isAdmin) {
 			$this->login();
 		}
@@ -54,7 +54,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->js("insert-html");
 		$this->js("show-element");
 
-		//Uploader...
 		$this->CSS("www/lib/scripts/js/upload/client/fileuploader.css");
 		$this->js("www/lib/scripts/js/upload/client/fileuploader.js");
 		

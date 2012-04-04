@@ -20,6 +20,8 @@ class CPanel_Controller extends ZP_Controller {
 		$this->isAdmin = $this->CPanel->load();
 		
 		$this->vars = $this->CPanel->notifications();
+
+		$this->helper("pagination");
 		
 		$this->CPanel_Model = $this->model("CPanel_Model");
 		
@@ -68,7 +70,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["href"] = path($this->application ."/cpanel/add");
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
-		$this->template("content", $this->vars);
+		$this->render("content", $this->vars);
 	}
 	
 	public function edit($ID = 0) {
@@ -103,7 +105,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["href"] = path($this->application ."/cpanel/edit/$ID");	
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
-			$this->template("content", $this->vars);
+			$this->render("content", $this->vars);
 		} else {
 			redirect($this->application ."/cpanel/results");
 		}
@@ -134,8 +136,8 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
-		$this->template("include", $this->vars);
-		$this->render("header", "footer");
+		$this->render("include", $this->vars);
+		$this->rendering("header", "footer");
 		
 		exit;
 	}
@@ -179,7 +181,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
 		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
 		
-		$this->template("content", $this->vars);
+		$this->render("content", $this->vars);
 	}
 	
 	public function trash($ID = 0) {

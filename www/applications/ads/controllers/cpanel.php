@@ -59,7 +59,7 @@ class CPanel_Controller extends ZP_Controller {
 
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
-		$this->template("content", $this->vars);
+		$this->render("content", $this->vars);
 	}
 	
 	public function delete($ID = 0) {
@@ -97,7 +97,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["data"] = $data;				
 			$this->vars["view"] = $this->view("add", TRUE, $this->application);
 			
-			$this->template("content", $this->vars);
+			$this->render("content", $this->vars);
 		} else {
 			redirect("$this->application/cpanel/results");
 		}
@@ -116,8 +116,8 @@ class CPanel_Controller extends ZP_Controller {
 			$this->vars["view"] = $this->view("login", TRUE, "cpanel");
 		}
 		
-		$this->template("include", $this->vars);
-		$this->render("header", "footer");
+		$this->render("include", $this->vars);
+		$this->rendering("header", "footer");
 		
 		exit;
 	}
@@ -144,7 +144,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->CSS("results", "cpanel");
 		$this->CSS("pagination");
 		
-		$this->js("www/lib/scripts/js/prettyphoto_3_1_3/js/jquery.prettyPhoto.js");
+		$this->js("www/lib/scripts/js/prettyphoto/js/jquery.prettyphoto.js");
 		$this->js("actions", "ads");
 		$this->js("banner-lightbox", "ads");	
 		$this->js("checkbox");			
@@ -163,7 +163,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
 		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
 		
-		$this->template("content", $this->vars);
+		$this->render("content", $this->vars);
 	}
 	
 	public function trash($ID = 0) {

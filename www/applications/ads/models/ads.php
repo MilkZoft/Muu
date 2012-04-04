@@ -16,8 +16,6 @@ class Ads_Model extends ZP_Model {
 		$this->table = "ads";
 
 		$this->Data = $this->core("Data");
-		
-		$this->config("images");
 	}
 
 	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {	
@@ -42,13 +40,13 @@ class Ads_Model extends ZP_Model {
 	
 	private function all($trash, $order, $limit) {	
 		if(!$trash) {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilege") === "Super Admin") {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilege") === "Super Admin") {
 				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);

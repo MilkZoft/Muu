@@ -11,7 +11,6 @@ class CPanel extends ZP_Load {
 	public function __construct() {}
 	
 	public function load() {	
-		$this->config("applications");
 		$this->config("cpanel");
 		
 		$this->helper("routes", "cpanel");

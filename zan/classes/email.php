@@ -50,7 +50,7 @@ class ZP_Email extends ZP_Load {
 	 */
 	public $fromEmail;
 	
-    /*
+    	/*
 	 * Contains the name string of the Sender
 	 * 
 	 * @var public $fromName
@@ -75,6 +75,8 @@ class ZP_Email extends ZP_Load {
 	 */
 	public $subject;
 	
+	public $library = "PHPMailer";
+	
 	/*
 	 * send
 	 * 
@@ -86,7 +88,7 @@ class ZP_Email extends ZP_Load {
 		if($this->library === strtolower("phpmailer")) {
 			$this->config("email");
 
-			$this->PHPMailer = $this->library("class.phpmailer", "PHPMailer");
+			$this->PHPMailer = $this->library("phpmailer", "PHPMailer");
 
 			$this->PHPMailer->isHTML(TRUE);		
 			$this->PHPMailer->isSMTP();
@@ -109,9 +111,9 @@ class ZP_Email extends ZP_Load {
 		} else {
 			$headers  = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=utf-8\r\n";
-			$headers .= "From: " . $this->fromName . " <" . $this->fromEmail . ">\r\n";			
+			$headers .= "From: ". $this->fromName ." <". $this->fromEmail .">\r\n";			
 			
-			if(@mail($this->email, $this->subject, $this->message, $headers) === FALSE) {
+			if(!@mail($this->email, $this->subject, $this->message, $headers)) {
 				return FALSE;
 			} else {
 				return TRUE;

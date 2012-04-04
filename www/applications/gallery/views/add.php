@@ -19,7 +19,7 @@
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");
 			
-			print isset($alert) ? $alert 
+			print isset($alert) ? $alert : NULL;
 			
 			print formInput(array(	
 								"name" 	=> "title", 
@@ -44,7 +44,7 @@
 			if($action === "save") {
 				print formInput(array(	
 									"name" 	=> "files[]", 
-									"type"  => "file"
+									"type"  => "file",
 									"class" => "add-img required", 
 									"field" => __(_("Image")), 
 									"p" 	=> TRUE

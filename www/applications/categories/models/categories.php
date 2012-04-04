@@ -39,13 +39,13 @@ class Categories_Model extends ZP_Model {
 	
 	private function all($trash, $order, $limit) {
 		if(!$trash) {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$data = $this->Db->findBy("State", "Deleted", NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND State = 'Deleted'", $this->table, NULL, $order, $limit);
@@ -140,28 +140,32 @@ class Categories_Model extends ZP_Model {
 					FROM muu_categories, muu_re_categories_applications
 					WHERE muu_categories.ID_Category = muu_re_categories_applications.ID_Category AND Language = '$language' $lastID ORDER BY ID_Category"; 		
 
-		$this->data = $this->Db->query($query);					
+		$data = $this->Db->query($query);					
 		
 		$temp = NULL;
 		$i = 0;
-		foreach($this->data as $category) {
-			if($temp !== $category["ID_Category"]) {
-				$categories[$i]["ID_Category"] = $category["ID_Category"];
-				$categories[$i]["Title"]       = $category["Title"];
-				$categories[$i]["Situation"]   = $category["Situation"];
-				$categories[$i]["Apps"][]      = $category["App"];
-			} else {
-				$categories[$i]["ID_Category"] = $category["ID_Category"];
-				$categories[$i]["Title"]       = $category["Title"];
-				$categories[$i]["Situation"]   = $category["Situation"];
-				$categories[$i]["Apps"][]      = $category["App"];
+		$categories = FALSE;
+
+		if($data) {
+			foreach($data as $category) {
+				if($temp !== $category["ID_Category"]) {
+					$categories[$i]["ID_Category"] = $category["ID_Category"];
+					$categories[$i]["Title"]       = $category["Title"];
+					$categories[$i]["Situation"]   = $category["Situation"];
+					$categories[$i]["Apps"][]      = $category["App"];
+				} else {
+					$categories[$i]["ID_Category"] = $category["ID_Category"];
+					$categories[$i]["Title"]       = $category["Title"];
+					$categories[$i]["Situation"]   = $category["Situation"];
+					$categories[$i]["Apps"][]      = $category["App"];
+				}
+				
+				$temp = $category["ID_Category"];
+				$i++;
 			}
-			
-			$temp = $category["ID_Category"];
-			$i++;
 		}
 	
-		return $this->data;
+		return $categories;
 	}
 
 	

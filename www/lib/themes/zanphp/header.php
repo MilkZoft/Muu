@@ -19,7 +19,7 @@
 
 <body>
 	
-	<?php $this->execute("Ads_Controller", "ads", array("Top")); ?>
+	<?php $this->execute("Ads_Controller", "ads", array("Top"));  ?>
 	
 	<div id="container">
 		<div id="header">

@@ -15,7 +15,7 @@ class Ads_Controller extends ZP_Controller {
 	}
 	
 	public function index($action = NULL, $position = "Top") {
-		redirect(_webBase);	
+		redirect();	
 	}
 	
 	public function ads($position) {

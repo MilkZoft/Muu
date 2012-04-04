@@ -1,11 +1,11 @@
 <?php if(!defined("_access")) die("Error: You don't have permission to access here..."); ?>
 
-<form class="login" action="<?php print _webBase; ?>/<?php print _webLang; ?>/cpanel/login/" method="post">
+<form class="login" action="<?php print path("cpanel/login"); ?>" method="post">
 	<fieldset>
 		<legend><?php print __(_("Login")); ?></legend>
 		
 		<?php
-			if(isset($error) and $error === TRUE) {
+			if(isset($error) and $error) {
 				print showError(__(_("Incorrect Login")));
 			}
 		?>

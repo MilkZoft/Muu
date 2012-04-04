@@ -19,9 +19,7 @@ class CPanel_Model extends ZP_Model {
 		
 		$this->Email->fromName  = get("webName");
 		$this->Email->fromEmail = get("webEmailSend");
-		
-		$this->config("applications");
-		
+				
 		$this->helper("router");
 		
 		$this->application = whichApplication();
@@ -33,8 +31,8 @@ class CPanel_Model extends ZP_Model {
 		
 		if($this->application === "comments") {
 			if($delete and $edit) {				
-				$URL1     = path($this->application . _sh . "cpanel" . _sh . "validate" . _sh . $ID);
-				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash"    . _sh . $ID);
+				$URL1     = path($this->application ."/cpanel/validate/$ID");
+				$URL2     = path($this->application ."/cpanel/trash/$ID");
 				$title1   = __(_("Validate comment"));
 				$title2   = __(_("Send to trash"));
 				$onClick1 = "return confirm('". __(_("Do you want to validate the comment?")) ."')";
@@ -47,8 +45,8 @@ class CPanel_Model extends ZP_Model {
 					$action = a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));
 				}
 			} elseif($delete and $edit) {
-				$URL1	  = path($this->application . _sh . "cpanel" . _sh . "read"  . _sh . $ID);
-				$URL2 	  = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);	
+				$URL1	  = path($this->application ."/cpanel/read/$ID");
+				$URL2 	  = path($this->application ."/cpanel/trash/$ID");	
 				$title1   = __(_("Read Comment"));
 				$title2   = __(_("Send to Trash"));				
 				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
@@ -58,8 +56,8 @@ class CPanel_Model extends ZP_Model {
 			}
 		} elseif($this->application === "feedback") {
 			if($delete and $edit) {
-				$URL1     = path($this->application . _sh . "cpanel" . _sh . "read"  . _sh . $ID);
-				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);
+				$URL1     = path($this->application ."/cpanel/read/$ID");
+				$URL2     = path($this->application ."/cpanel/trash/$ID");
 				$title1   = __(_("Read Message"));
 				$title2   = __(_("Send to Trash"));				
 				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
@@ -67,8 +65,8 @@ class CPanel_Model extends ZP_Model {
 				$action = a(span("tiny-image tiny-mail", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1)) . 
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));										
 			} elseif($delete and !$edit) {
-				$URL1     = path($this->application . _sh . "cpanel" . _sh . "read"  . _sh . $ID);
-				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);
+				$URL1     = path($this->application ."/cpanel/read/$ID");
+				$URL2     = path($this->application ."/cpanel/trash/$ID");
 				$title1   = __(_("Read Message"));
 				$title2   = __(_("Send to Trash"));				
 				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";	
@@ -77,8 +75,8 @@ class CPanel_Model extends ZP_Model {
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));				
 			}	
 		} elseif($comments) {
-				$URL1     = path($this->application . _sh . "cpanel" . _sh . "validate" . _sh . $ID);
-				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash"    . _sh . $ID);
+				$URL1     = path($this->application ."/cpanel/validate/$ID");
+				$URL2     = path($this->application ."/cpanel/trash/$ID");
 				$title1   = __(_("Validate Comment"));
 				$title2   = __(_("Send to Trash"));
 				$onClick1 = "return confirm('". __(_("Do you want to validate the comment?")) ."')";
@@ -88,8 +86,8 @@ class CPanel_Model extends ZP_Model {
 				  		  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));						 
 		} elseif(!$trash) {
 			if($delete and $edit) {
-				$URL1     = path($this->application . _sh . "cpanel" . _sh . "edit"  . _sh . $ID);
-				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);
+				$URL1     = path($this->application ."/cpanel/edit/$ID");
+				$URL2     = path($this->application ."/cpanel/trash/$ID");
 				$title1   = __(_("Edit"));
 				$title2   = __(_("Send to trash"));
 				$onClick1 = "return confirm('". __(_("Do you want to edit the record?")) ."')";
@@ -98,7 +96,7 @@ class CPanel_Model extends ZP_Model {
 				$action = a(span("tiny-image tiny-edit", "&nbsp;&nbsp;&nbsp;&nbsp;"), $URL1, FALSE, array("title" => $title1, "onclick" => $onClick1)) . 
 						  a(span("tiny-image tiny-trash", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"), $URL2, FALSE, array("title" => $title2, "onclick" => $onClick2));	
 			} elseif($delete and !$edit) {  				
-				$URL2     = path($this->application . _sh . "cpanel" . _sh . "trash" . _sh . $ID);				
+				$URL2     = path($this->application ."/cpanel/trash/$ID");				
 				$title2   = __(_("Send to trash"));				
 				$onClick2 = "return confirm('". __(_("Do you want to send to the trash the record?")) ."')";
 				
@@ -108,8 +106,8 @@ class CPanel_Model extends ZP_Model {
 				   		  span("tiny-image tiny-trash-off", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 			}
 		} else {
-			$URL1     = path($this->application . _sh . "cpanel" . _sh . "restore" . _sh . $ID);
-			$URL2     = path($this->application . _sh . "cpanel" . _sh . "delete"  . _sh . $ID);
+			$URL1     = path($this->application ."/cpanel/restore/$ID");
+			$URL2     = path($this->application ."/cpanel/delete/$ID");
 			$title1   = __(_("Restore"));
 			$title2   = __(_("Delete"));
 			$onClick1 = "return confirm('". __(_("Do you want to restore the record?")) ."')";
@@ -161,7 +159,7 @@ class CPanel_Model extends ZP_Model {
 	}
 
 	public function deletedRecords($table) {
-		if(SESSION("ZanUserPrivilege") === _super) {
+		if(SESSION("ZanUserPrivilegeID") === 1) {
 			return $this->Db->countBySQL("Situation = 'Deleted'", $table);
 		} else {
 			return	$this->Db->countBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $table);	
@@ -212,34 +210,16 @@ class CPanel_Model extends ZP_Model {
 		$start = 0;
 		
 		if($trash) {	
-			if(isLang()) {
-				if(segment(5) === "page" and segment(6) > 0) {
-					$start = (segment(6) * _maxLimit) - _maxLimit;
-				}
-			} else {
-				if(segment(4) === "page" and segment(5) > 0) {
-					$start = (segment(5) * _maxLimit) - _maxLimit;
-				}
-			}
-			
-			$limit = $start .", ". _maxLimit;
+			$start = (segment(4, isLang()) === "page" and segment(5, isLang()) > 0) ? (segment(5, isLang()) * _maxLimit) - _maxLimit : 0;
 		} else {
-			if(isLang()) {
-				if(segment(4) === "page" and segment(5) > 0) {
-					$start = (segment(5) * _maxLimit) - _maxLimit;
-				}	
-			} else {
-				if(segment(3) === "page" and segment(4) > 0) {
-					$start = (segment(4) * _maxLimit) - _maxLimit;
-				}
-			}
-			
-			$limit = $start .", ". _maxLimit;				
-		}				
+			$start = (segment(3, isLang()) === "page" and segment(4, isLang()) > 0) ? (segment(4, isLang()) * _maxLimit) - _maxLimit : 0;	
+		}	
+
+		$limit = $start .", ". _maxLimit;			
 		
 		if(POST("seek")) {
 			if(POST("field") === "ID") {
-				if(SESSION("ZanUserPrivilege") === _super) {
+				if(SESSION("ZanUserPrivilegeID") === 1) {
 					$count = $this->Db->countBySQL("$primaryKey = '". POST("search") ."' AND Situation != 'Deleted'", $this->application);
 				} else {
 					$query = "ID_User = '". SESSION("ZanUserID") ."' AND $primaryKey = '". POST("search") ."' AND Situation != 'Deleted'";
@@ -247,7 +227,7 @@ class CPanel_Model extends ZP_Model {
 					$count = $this->Db->countBySQL($query, $this->application);
 				}
 			} else {
-				if(SESSION("ZanUserPrivilege") === _super) {
+				if(SESSION("ZanUserPrivilegeID") === 1) {
 					$count = $this->Db->countBySQL("". POST("field") ." LIKE '%". POST("search") ."%' AND Situation != 'Deleted'", $this->application);
 				} else {
 					$query = "ID_User = '". SESSION("ZanUserID") ."' AND ". POST("field") ." LIKE '%". POST("search") ."%' AND Situation != 'Deleted'";
@@ -256,7 +236,7 @@ class CPanel_Model extends ZP_Model {
 				}
 			}
 		} elseif(!$trash) {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$count = $this->Db->countBySQL("Situation != 'Deleted'", $this->application);
 			} else {
 				$count = $this->Db->countBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->application);
@@ -264,7 +244,7 @@ class CPanel_Model extends ZP_Model {
 			
 			$URL = path("$application/cpanel/results/page/");
 		} else {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$count = $this->Db->countBySQL("Situation = 'Deleted'", $this->application);
 			} else {
 				$count = $this->Db->countBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->application);
@@ -272,16 +252,8 @@ class CPanel_Model extends ZP_Model {
 			
 			$URL = path("$application/cpanel/results/trash/page/");
 		}
-		
-		if(!POST("seek")) {			
-			if($count > _maxLimit) {
-				$pagination = paginate($count, _maxLimit, $start, $URL);
-			} else {
-				$pagination = NULL;
-			}			
-		} else {
-			$pagination = NULL;	
-		}
+					
+		$pagination = ($count > _maxLimit) ? paginate($count, _maxLimit, $start, $URL) : NULL;				
 		
 		return $pagination;		
 	}
@@ -297,11 +269,7 @@ class CPanel_Model extends ZP_Model {
 	}
 	
 	public function records($trash = FALSE, $order = NULL) {
-		if(isLang()) {
-			$Model = ucfirst(segment(1)) . "_Model";
-		} else {
-			$Model = ucfirst(segment(0)) . "_Model";
-		}
+		$Model = ucfirst(segment(0, isLang())) ."_Model";
 		
 		$this->$Model = $this->model($Model);
 		
@@ -310,45 +278,22 @@ class CPanel_Model extends ZP_Model {
 				$data = $this->$Model->cpanel("search", NULL, POST("field") ." ". POST("order"), POST("search"), POST("field"));
 				
 				if(!$data) {
-					showAlert("Results not found", path(whichApplication() . _sh . "cpanel" . _sh . "results"));
+					showAlert("Results not found", path(whichApplication() ."/cpanel/results"));
 				}
 			} else {
 				$start = 0;
 				
-				if($trash) {	
-					if(isLang()) {
-						if(segment(5) === "page" and segment(6) > 0) {
-							$start = (segment(6) * _maxLimit) - _maxLimit;
-						}
-					} else {
-						if(segment(4) === "page" and segment(5) > 0) {
-							$start = (segment(5) * _maxLimit) - _maxLimit;
-						}
-					}
-					
-					$limit = $start .", ". _maxLimit;
-				} else {
-					if(isLang()) {
-						if(segment(4) === "page" and segment(5) > 0) {
-							$start = (segment(5) * _maxLimit) - _maxLimit;
-						}	
-					} else {
-						if(segment(3) === "page" and segment(4) > 0) {
-							$start = (segment(4) * _maxLimit) - _maxLimit;
-						}
-					}
-					
-					$limit = $start .", ". _maxLimit;				
+				if($trash) {		
+					$start = (segment(4) === "page" and segment(5) > 0) ? (segment(5) * _maxLimit) - _maxLimit : 0;
+				} else {	 
+					$start = (segment(3) === "page" and segment(4) > 0) ? (segment(4) * _maxLimit) - _maxLimit : 0;
 				}			
+
+				$limit = $start .", ". _maxLimit;
 				
-				if(segment(3) === "order") {				
-					if(segment(4)) {
-						$i = 3; 
-						$j = 4;
-					} else {
-						$i = 4;
-						$j = 5;
-					}
+				if(segment(3) === "order") {
+					$i = (segment(4)) ? 3 : 4; 
+					$j = (segment(4)) ? 4 : 5;
 					
 					if(segment($i) === "id") {
 						$field = "ID";
@@ -368,11 +313,7 @@ class CPanel_Model extends ZP_Model {
 						$data = $this->$Model->cpanel("all", $limit, "$field DESC", NULL, NULL, $trash);
 					}
 				} else {
-					if(!$trash) {
-						$data = $this->$Model->cpanel("all", $limit, $order, NULL, NULL);
-					} else {
-						$data = $this->$Model->cpanel("all", $limit, $order, NULL, NULL, $trash);			
-					}
+					$data = $this->$Model->cpanel("all", $limit, $order, NULL, NULL, $trash);
 				}
 			}
 			
@@ -384,29 +325,19 @@ class CPanel_Model extends ZP_Model {
 	
 	public function restore($ID) {		
 		if(!is_array($ID)) {
-			$data = array("Situation" => "Active");
-
-			$this->Db->update($this->application, $data, $ID);
+			$this->Db->update($this->application, array("Situation" => "Active"), $ID);
 			
 			$count = $this->Db->countBySQL("Situation = 'Deleted'", $this->application);
 			
-			if($count > 0) {
-				return TRUE;
-			}
-			
-			return FALSE;
+			return ($count > 0) ? TRUE : FALSE;
 		} else {
 			for($i = 0; $i <= count($ID) - 1; $i++) {
-				$this->Db->update($this->application, $data, $ID[$i]);
+				$this->Db->update($this->application, array("Situation" => "Active"), $ID[$i]);
 			}	
 					
 			$count = $this->Db->countBySQL("Situation = 'Deleted'", $this->application);
 			
-			if($count > 0) {
-				return TRUE;
-			}
-			
-			return FALSE;			
+			return ($count > 0) ? TRUE : FALSE;		
 		}
 	}
 	
@@ -427,7 +358,7 @@ class CPanel_Model extends ZP_Model {
 				}
 			}
 		} else {
-			$thead[0] = __($positions);	
+			$thead[0] = __(_($positions));	
 		}
 		
 		$return = $thead;
@@ -442,13 +373,13 @@ class CPanel_Model extends ZP_Model {
 		
 		if(POST("seek")) {
 			if(POST("field") === "ID") {
-				if(SESSION("ZanUserPrivilege") === _super) {
+				if(SESSION("ZanUserPrivilegeID") === 1) {
 					$total = $this->Db->countBySQL("$primaryKey = '". POST("search") ."'", $this->application);
 				} else {
 					$total = $this->Db->countBySQL("ID_User = '". SESSION("ZanUserID") ."' AND $primaryKey = '". POST("search") ."'", $this->application);
 				}
 			} else {
-				if(SESSION("ZanUserPrivilege") === _super) {
+				if(SESSION("ZanUserPrivilegeID") === 1) {
 					$total = $this->Db->countBySQL("". POST("field") ." LIKE '%". POST("search") ."%'", $this->application);
 				} else {
 					$total = $this->Db->countBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ". POST("field") ." LIKE '%". POST("search") ."%'", $this->application);
@@ -465,13 +396,13 @@ class CPanel_Model extends ZP_Model {
 			
 			return $total;
 		} elseif(!$trash) { 
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$total = $this->Db->countBySQL("Situation != 'Deleted'", $this->application);
 			} else {
 				$total = $this->Db->countBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->application);
 			}
 		} else {
-			if(SESSION("ZanUserPrivilege") === _super) {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$total = $this->Db->countBySQL("Situation = 'Deleted'", $this->application);
 			} else {
 				$total = $this->Db->countBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->application);
@@ -507,11 +438,7 @@ class CPanel_Model extends ZP_Model {
 			
 			$count = $this->Db->countBySQL("Situation = 'Active'", $this->application);
 			
-			if($count > 0) {
-				return TRUE;
-			}
-			
-			return FALSE;
+			return ($count > 0) ? TRUE : FALSE;
 		} else {
 			for($i = 0; $i <= count($ID) - 1; $i++) {
 				$this->Db->update($this->application, $data, $ID[$i]);
@@ -519,11 +446,7 @@ class CPanel_Model extends ZP_Model {
 			
 			$count = $this->Db->countBySQL("Situation = 'Active'", $this->application);
 			
-			if($count > 0) {
-				return TRUE;
-			}
-			
-			return FALSE;			
+			return ($count > 0) ? TRUE : FALSE;
 		}
 	}
 	
@@ -535,11 +458,7 @@ class CPanel_Model extends ZP_Model {
 			
 			$count = $this->Db->countBySQL("Situation = 'Inactive'", $this->application);
 			
-			if($count > 0) {
-				return TRUE;
-			}
-			
-			return FALSE;
+			return ($count > 0) ? TRUE : FALSE;
 		} else {
 			for($i = 0; $i <= count($ID) -1; $i++) {
 				$this->Db->update($this->application, $data, $ID[$i]);
@@ -547,11 +466,7 @@ class CPanel_Model extends ZP_Model {
 			
 			$count = $this->Db->countBySQL("Situation = 'Inactive'", $this->application);
 			
-			if($count > 0) {
-				return TRUE;
-			}
-			
-			return FALSE;
+			return ($count > 0) ? TRUE : FALSE;
 		}
 	}
 }

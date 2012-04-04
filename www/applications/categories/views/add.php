@@ -3,7 +3,6 @@
 		die("Error: You don't have permission to access here..."); 
 	}
 	
-	
 	print div("add-form", "class");
 		print formOpen($href, "form-add", "form-add");
 			print p(__(_(ucfirst(whichApplication()))), "resalt");

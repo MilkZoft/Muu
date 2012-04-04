@@ -11,8 +11,6 @@ class Feedback_Model extends ZP_Model {
 	public function __construct() {
 		$this->Db = $this->db();
 		
-		$this->config("email");
-		
 		$this->Email = $this->core("Email");
 		$this->Email->setLibrary("PHPMailer");
 		

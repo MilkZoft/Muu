@@ -207,7 +207,7 @@ class Users_Controller extends ZP_Controller {
 			redirect(_webBase);
 		}
 		
-		$this->template("content", $vars);
+		$this->render("content", $vars);
 	}
 	
 	public function profile() {
@@ -276,7 +276,7 @@ class Users_Controller extends ZP_Controller {
 			$vars["view"] = $this->view("errorProfile", TRUE);
 		}		
 		
-		$this->template("content", $vars);
+		$this->render("content", $vars);
 	}
 	
 	public function login($from = "users") {
@@ -338,7 +338,7 @@ class Users_Controller extends ZP_Controller {
 			}
 		}
 		
-		$this->template("content", $vars);
+		$this->render("content", $vars);
 	}
 	
 	private function recover() {
@@ -373,7 +373,7 @@ class Users_Controller extends ZP_Controller {
 			$vars["view"] = $this->view("recover", TRUE);		
 		}
 		
-		$this->template("content", $vars);
+		$this->render("content", $vars);
 	}
 	
 	public function register() {
@@ -417,6 +417,6 @@ class Users_Controller extends ZP_Controller {
 			}			
 		}
 	
-		$this->template("content", $vars);
+		$this->render("content", $vars);
 	}
 }

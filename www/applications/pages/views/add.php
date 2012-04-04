@@ -38,7 +38,7 @@
 			print isset($imagesLibrary)    ? $imagesLibrary    : NULL;
 			print isset($documentsLibrary) ? $documentsLibrary : NULL;
 
-			print formField(NULL, __("Languages") ."<br />". getLanguageRadios($language));
+			print formField(NULL, __("Languages") ."<br />". getLanguagesInput($language));
 			
 			$options = array(
 				0 => array(

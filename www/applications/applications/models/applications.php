@@ -174,9 +174,7 @@ class Applications_Model extends ZP_Model {
 	}	
 	
 	public function getApplications() {
-		$applications = $this->Db->findBy("Situation", "Active", $this->table);
-
-		return $applications;
+		return $this->Db->findBy("Situation", "Active", $this->table);
 	}
 	
 	public function getDefaultApplications($default = FALSE) {	
@@ -202,14 +200,12 @@ class Applications_Model extends ZP_Model {
 	}	
 
 	public function getApplicationByCategory($ID) {		
-		$this->data = $this->Db->query("SELECT ". _dbPfx ."categories2applications.ID_Application FROM ". _dbPfx. "categories2applications WHERE ". _dbPfx ."categories2applications.ID_Category = '$ID'");
+		$this->data = $this->Db->query("SELECT muu_categories2applications.ID_Application FROM muu_categories2applications WHERE muu_categories2applications.ID_Category = '$ID'");
 
 		return $this->data[0]["ID_Application"];
 	}
 	
 	public function getByID($ID) {		
-		$data = $this->Db->find($ID, $this->table);
-		
-		return $data;
+		return $this->Db->find($ID, $this->table);
 	}
 }

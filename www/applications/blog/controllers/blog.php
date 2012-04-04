@@ -13,7 +13,6 @@ class Blog_Controller extends ZP_Controller {
 	public function __construct() {		
 		$this->application = $this->app("blog");
 		$this->config($this->application);
-		$this->config("applications");
 		
 		$this->Templates  = $this->core("Templates");
 		
@@ -83,8 +82,6 @@ class Blog_Controller extends ZP_Controller {
 		$this->title("Journal");
 		$this->CSS("posts", $this->application);
 		$this->CSS("journal", $this->application);
-		$this->CSS("videos", "videos");
-		$this->CSS("prettyPhoto", "videos");		
 		$this->CSS("pagination");						
 		
 		$data = $this->Blog_Model->getPosts(_maxLimitJournal, FALSE);
@@ -239,8 +236,8 @@ class Blog_Controller extends ZP_Controller {
 		
 		$vars["alert"]          = $alert;
 		$vars["ID_Post"]        = $data[0]["post"][0]["ID_Post"];
-		$vars["dataTags"] 	= $data[0]["tags"];
-		$vars["post"] 		= $data[0]["post"][0];
+		$vars["dataTags"] 		= $data[0]["tags"];
+		$vars["post"] 			= $data[0]["post"][0];
 		$vars["dataCategories"] = $data[0]["categories"];
 		$vars["dataComments"] 	= $data[0]["comments"];
 		$vars["URL"] 	        = $URL;					
@@ -264,7 +261,7 @@ class Blog_Controller extends ZP_Controller {
 					
 					redirect($URL);
 				} else {
-					showAlert("Incorrect password", _webBase . _sh . _webLang . _sh . _blog);
+					showAlert("Incorrect password", "blog");
 				}				
 			} elseif(!SESSION("access-id") and strlen($data[0]["post"][0]["Pwd"]) === 40 and !POST("access")) {
 				$vars["password"] = $data[0]["post"][0]["Pwd"];
@@ -307,15 +304,15 @@ class Blog_Controller extends ZP_Controller {
 			$post .= __("this is your first post, going to your") ." ";
 			$post .= a(__("Control Panel"), path("cpanel")) ." ";
 			$post .= __("and when you add a new post this post will be disappear automatically, enjoy it!");				
-			
+				
 			$vars["hello"]    =  __("Hello World");
 			$vars["date"]     = now(1);
 			$vars["post"]     = $post;
 			$vars["comments"] = __("No Comments");				
 			$vars["view"]  	  = $this->view("zero", TRUE);
 			
-			$this->render("content", $vars);				
-		}
+			$this->render("content", $vars);		
+		} 
 	}
 	
 	private function limit($type = "posts") { 

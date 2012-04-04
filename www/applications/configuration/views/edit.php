@@ -164,7 +164,7 @@
 								"p" 	=> TRUE, 
 								"value" => $message));
 			
-			print formField(NULL, __(_("Languages")) ."<br />". getLanguageRadios($language));
+			print formField(NULL, __(_("Languages")) ."<br />". getLanguagesInput($language));
 			
 			print formSave("edit");
 
