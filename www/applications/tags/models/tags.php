@@ -114,10 +114,10 @@ class Tags_Model extends ZP_Model {
 	}
 
 	public function getTags($application, $ID) {		
-		$query = "	SELECT * FROM ". _dbPfx ."tags WHERE ". _dbPfx ."tags.ID_Tag IN (
-        				SELECT ". _dbPfx ."re_tags_applications.ID_Tag FROM ". _dbPfx ."re_tags_applications 
-        				WHERE ". _dbPfx ."re_tags_applications.ID_Application = $application AND ". _dbPfx ."re_tags_applications.ID_Tag2Application IN (
-            				SELECT ". _dbPfx ."re_tags_records.ID_Tag2Application FROM ". _dbPfx ."re_tags_records WHERE ID_Record = $ID
+		$query = "	SELECT * FROM muu_tags WHERE muu_tags.ID_Tag IN (
+        				SELECT muu_re_tags_applications.ID_Tag FROM muu_re_tags_applications 
+        				WHERE muu_re_tags_applications.ID_Application = $application AND muu_re_tags_applications.ID_Tag2Application IN (
+            				SELECT muu_re_tags_records.ID_Tag2Application FROM muu_re_tags_records WHERE ID_Record = $ID
         				)
     				);";
     	
@@ -127,10 +127,10 @@ class Tags_Model extends ZP_Model {
 	}
 	
 	public function getTagsByRecord($application, $ID, $formattedData = FALSE) {
-		$query = "	SELECT * FROM ". _dbPfx ."tags WHERE ". _dbPfx ."tags.ID_Tag IN (
-		        		SELECT ". _dbPfx ."re_tags_applications.ID_Tag FROM ". _dbPfx ."re_tags_applications 
-		        		WHERE ". _dbPfx ."re_tags_applications.ID_Application = $application AND ". _dbPfx ."re_tags_applications.ID_Tag2Application IN (
-		            		SELECT ". _dbPfx ."re_tags_records.ID_Tag2Application FROM ". _dbPfx ."re_tags_records WHERE ID_Record = $ID
+		$query = "	SELECT * FROM muu_tags WHERE muu_tags.ID_Tag IN (
+		        		SELECT muu_re_tags_applications.ID_Tag FROM muu_re_tags_applications 
+		        		WHERE muu_re_tags_applications.ID_Application = $application AND muu_re_tags_applications.ID_Tag2Application IN (
+		            		SELECT muu_re_tags_records.ID_Tag2Application FROM muu_re_tags_records WHERE ID_Record = $ID
 		        		)
 		    		);";
 
@@ -152,9 +152,9 @@ class Tags_Model extends ZP_Model {
 	
 	public function setTagsByRecord($application, $tags, $ID) {	
 		if($tags) {
-			/*$query = "	DELETE FROM ". _dbPfx ."re_tags_records 
-						WHERE ". _dbPfx ."re_tags_records.ID_Record = '$ID' AND ". _dbPfx ."re_tags_records.ID_Tag2Application IN (
-							SELECT ". _dbPfx ."re_tags_applications.ID_Tag2Application FROM ". _dbPfx ."re_tags_applications 
+			/*$query = "	DELETE FROM muu_re_tags_records 
+						WHERE muu_re_tags_records.ID_Record = '$ID' AND muu_re_tags_records.ID_Tag2Application IN (
+							SELECT muu_re_tags_applications.ID_Tag2Application FROM muu_re_tags_applications 
 							WHERE ID_Application = '$application'
 						)";*/
 			
@@ -207,10 +207,10 @@ class Tags_Model extends ZP_Model {
 				}
 			}
 		} else {
-			$query = "	DELETE FROM ". _dbPfx ."re_tags_records 
-						WHERE ". _dbPfx ."re_tags_records.ID_Record = '$ID' AND ". _dbPfx ."re_tags_records.ID_Tag2Application IN (
-							SELECT ". _dbPfx ."re_tags_applications.ID_Tag2Application FROM ". _dbPfx ."re_tags_applications  
-							WHERE ID_Application = '$application' AND ". _dbPfx ."re_tags_applications.ID_Tag2Application
+			$query = "	DELETE FROM muu_re_tags_records 
+						WHERE muu_re_tags_records.ID_Record = '$ID' AND muu_re_tags_records.ID_Tag2Application IN (
+							SELECT muu_re_tags_applications.ID_Tag2Application FROM muu_re_tags_applications  
+							WHERE ID_Application = '$application' AND muu_re_tags_applications.ID_Tag2Application
 						)";
 			
 			$this->Db->query($query);

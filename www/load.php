@@ -75,8 +75,6 @@ if(get("translation") === "gettext") {
 		$Load->library("streams", NULL, NULL, "gettext");
 
 		$Gettext_Reader = $Load->library("gettext", "Gettext_Reader", array($languageFile), "gettext");
-		
-		$Load->config("languages");
 	
 		$Gettext_Reader->load_tables();
 	}

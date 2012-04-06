@@ -74,7 +74,7 @@ class Blog_Model extends ZP_Model {
 		
 		$this->categories = POST("categories"); 
 		$this->tags	  	  = POST("tags");
-		$this->URL        = PATH("blog/". date("Y")) ."/". date("m") ."/". date("d") ."/". slug(POST("title", "clean"));
+		$this->URL        = path("blog/". date("Y")) ."/". date("m") ."/". date("d") ."/". slug(POST("title", "clean"));
 		$this->muralExist = POST("mural_exist");
 				
 		$this->Files = $this->core("Files");
@@ -144,22 +144,14 @@ class Blog_Model extends ZP_Model {
 		$this->Tags_Model = $this->model("Tags_Model");
 		
 		$insert = $this->Tags_Model->setTagsByRecord(3, $this->tags, $insertID2);
-
-		if($insertID1 === "rollback" or $insertID2 === "rollback") {					
-			$this->Db->rollBack();
-			
-			return array("error" => TRUE, "alert" => getAlert("Insert error"));
-		} else {
-			$this->Db->commit();
-			
-			if(SESSION("ZanUserMethod") === "twitter") {
-				$this->Twitter_Model = $this->model("Twitter_Model");
+	
+		if(SESSION("ZanUserMethod") === "twitter") {
+			$this->Twitter_Model = $this->model("Twitter_Model");
 				
-				$this->Twitter_Model->publish('"'. $this->title .'"', $this->URL);
-			}
+			$this->Twitter_Model->publish('"'. $this->title .'"', $this->URL);
+		}
 			
-			return getAlert("The post has been saved correctly", "success", $this->URL);
-		}		
+		return getAlert("The post has been saved correctly", "success", $this->URL);
 	}
 	
 	private function edit() {	
@@ -317,7 +309,7 @@ class Blog_Model extends ZP_Model {
 		return FALSE;
 	}
 	
-	public function getPost($slug, $year, $month, $day) {		
+	public function getPost($year, $month, $day, $slug) {		
 		$post = $this->Db->findBySQL("Slug = '$slug' AND Year = '$year' AND Month = '$month' AND Day = '$day' AND Situation = 'Active'", $this->table);
 		
 		if($post) {			

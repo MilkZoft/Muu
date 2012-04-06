@@ -32,7 +32,7 @@ $ZP["defaultApplication"] = "default";
  * Languages
  */
 $ZP["webLanguage"] = "Spanish";
-$ZP["translation"] = "normal";
+$ZP["translation"] = "gettext";
 
 /**
  * Constants

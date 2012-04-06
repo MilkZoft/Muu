@@ -8,8 +8,6 @@ if(!defined("_access")) {
 
 class Blog_Controller extends ZP_Controller {
 	
-	private $pagination = NULL;
-	
 	public function __construct() {		
 		$this->application = $this->app("blog");
 		$this->config($this->application);
@@ -26,19 +24,15 @@ class Blog_Controller extends ZP_Controller {
 		$this->Templates->theme();
 	}
 	
-	public function index() {
-		if(segment(2) === "category" and segment(3) !== "page") {
-			$this->category();					
-		} elseif(segment(2) === "tag" and segment(3)) {
-			$this->tag();
-		} elseif(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4)) and segment(5) and segment(5) !== "page") { 
-			$this->slug();
-		} elseif(isYear(segment(2)) and isMonth(segment(3)) and isDay(segment(4))) { 
-			$this->day();
-		} elseif(isYear(segment(2)) and isMonth(segment(3))) {
-			$this->month();
-		} elseif(isYear(segment(2))) {
-			$this->year();
+	public function index($year = NULL, $month = NULL, $day = NULL, $slug = NULL) {
+		if(isYear($year) and isMonth($month) and isDay($day) and $slug and $slug !== "page") {
+			$this->slug($year, $month, $day, $slug);
+		} elseif(isYear($year) and isMonth($month) and isDay($day)) { 
+			$this->getPosts($year, $month, $day);
+		} elseif(isYear($year) and isMonth($month)) {
+			$this->getPosts($year, $month);
+		} elseif(isYear($year)) {
+			$this->getPosts($year);
 		} else {
 			if($this->journal and !segment(1)) { 
 				$this->journal();
@@ -94,15 +88,22 @@ class Blog_Controller extends ZP_Controller {
 		} 
 	}
 	
-	private function day() {
+	private function getPosts($year = NULL, $month = NULL, $day = NULL) {
 		$this->CSS("posts", $this->application);
 		$this->CSS("pagination");
 		
-		$limit = $this->limit("day");		
-		$data  = $this->Blog_Model->getByDate($limit, segment(2), segment(3), segment(4));	
+		if($day) {
+			$limit = $this->limit("day");		
+		} elseif($month) {
+			$limit = $this->limit("day");
+		} else {
+			$limit = $this->limit("year");
+		}
+
+		$data = $this->Blog_Model->getByDate($limit, $year, $month, $day);	
 	
 		if($data) {
-			$this->title("Blog - ". segment(2) ."/". segment(3) ."/". segment(4));
+			$this->title("Blog - ". $year ."/". $month ."/". $day);
 			
 			$vars["posts"] 	    = $data;
 			$vars["pagination"] = $this->pagination;
@@ -114,49 +115,6 @@ class Blog_Controller extends ZP_Controller {
 		}
 	}
 	
-	private function month() {
-		$this->CSS("posts", $this->application);
-		$this->CSS("pagination");
-		
-		$limit = $this->limit("month");	
-		$data  = $this->Blog_Model->getByDate($limit, segment(2), segment(3));	
-
-		if($data) {
-			$this->title("Blog - ". segment(2) ."/". segment(3));
-			
-			$vars["posts"] 	    = $data;
-			$vars["pagination"] = $this->pagination;
-			$vars["view"]  	    = $this->view("posts", TRUE);
-			
-			$this->render("content", $vars);			
-		} else {
-			$vars["error"] = __("There is not a publications in this month");
-			$vars["view"]  = $this->view("error404", TRUE);
-			
-			$this->render("content", $vars);
-		}
-	}
-	
-	private function year() {
-		$this->CSS("posts", $this->application);
-		$this->CSS("pagination");
-		
-		$limit = $this->limit("year");	
-		$data  = $this->Blog_Model->getByDate($limit, segment(2));	
-
-		if($data) {
-			$this->title("Blog - ". segment(2));
-			
-			$vars["posts"] 	    = $data;
-			$vars["pagination"] = $this->pagination;
-			$vars["view"]       = $this->view("posts", TRUE);
-			
-			$this->render("content", $vars);			
-		} else {
-			$this->render("error404");
-		}
-	}
-
 	public function getLastPostByCategory($category) {
 		$data = $this->Blog_Model->getByCategory($category, 1);
 
@@ -215,23 +173,16 @@ class Blog_Controller extends ZP_Controller {
 		}
 	}
 	
-	private function slug() {	
+	private function slug($year = NULL, $month = NULL, $day = NULL, $slug = NULL) {	
 		$this->Comments_Model = $this->model("Comments_Model");
 		
 		$this->CSS("posts", $this->application);
 		$this->CSS("comments", $this->application);
 				
-		if(POST("post-comment")) {
-			$alert = $this->Comments_Model->saveComments();
-		} else {
-			$alert = FALSE;
-		}
+		$alert = (POST("post-comment")) ? $this->Comments_Model->saveComments() : FALSE;
 		
-		$data = $this->Blog_Model->getPost(segment(5), segment(2), segment(3), segment(4));
+		$data = $this->Blog_Model->getPost($year, $month, $day, $slug);
 		
-		$year  = (isYear(segment(2)))  ? segment(2) : NULL;
-		$month = (isMonth(segment(3))) ? segment(3) : NULL;
-		$day   = (isDay(segment(4)))   ? segment(4) : NULL; 
 		$URL   = path("blog/$year/$month/$day/". segment(5));
 		
 		$vars["alert"]          = $alert;
@@ -358,7 +309,7 @@ class Blog_Controller extends ZP_Controller {
 			}
 			
 			$count = $this->Blog_Model->count("tag");
-			$URL   = path("blog/tag/". segment(3) ."/page/");
+			$URL   = path("blog/tag/". segment(2, isLang()) ."/page/");
 		}
 		
 		

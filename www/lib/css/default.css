@@ -64,10 +64,6 @@
 	float: right;
 }
 
-.clear {
-	clear: both;
-}
-
 .no-display {
 	display: none;
 }
@@ -78,4 +74,50 @@
 
 .no-border {
 	border: none;
+}
+
+.image-center {
+	display: block;
+	margin: 0 auto;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.line {
+	width: 250px;
+	height: 2px;
+	background-image: url('../images/line.png');
+	margin-left: 10px;
+}
+
+.full-line {
+	width: 700px;
+	height: 2px;
+	background-image: url('../images/line.png');
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.clear {
+	clear: both;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: block;
+}
+
+.right {
+	text-align: right;
 }

@@ -56,8 +56,7 @@ class CPanel_Controller extends ZP_Controller {
 
 		$this->CSS("www/lib/scripts/js/upload/client/fileuploader.css");
 		$this->js("www/lib/scripts/js/upload/client/fileuploader.js");
-		
-		$this->Library 	  = $this->classes("Library", "cpanel");
+
 		$this->Categories = $this->classes("Categories", "categories");
 		
 		if(POST("save")) {
