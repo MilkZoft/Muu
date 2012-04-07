@@ -104,25 +104,25 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 							}
 						</script>';
 			} elseif($js === "upload") {
-					$iPx   = (POST("iPx"))            ? POST("iPx")                                                  : 'i';
-					$iPath = (POST("iPath"))          ? POST("iPath")                                                : 'www/lib/files/images/uploaded/';
-					$iPath = (POST($iPx . "Dirbase")) ? POST($iPx . "Dirbase")                                       : $iPath;
-					$iPath = (POST($iPx . "Make"))    ? POST($iPx . "Dir") . nice(POST($iPx . "Dirname")) . _sh 	 : $iPath;				
+					$iPx   = (POST("iPx"))            ? POST("iPx")                                          : 'i';
+					$iPath = (POST("iPath"))          ? POST("iPath")                                        : 'www/lib/files/images/uploaded/';
+					$iPath = (POST($iPx ."Dirbase")) ? POST($iPx ."Dirbase")                                 : $iPath;
+					$iPath = (POST($iPx ."Make"))    ? POST($iPx ."Dir") . slug(POST($iPx ."Dirname")) . _sh : $iPath;				
 						
 					$dPx   = (POST("dPx"))   ? POST("dPx")   : "d";
 					$dPath = (POST("dPath")) ? POST("dPath") : "www/lib/files/documents/uploaded/";
 					
-					$dPath = (POST($dPx . "Dirbase")) ? POST($dPx . "Dirbase")                                       : $dPath;
-					$dPath = (POST($dPx . "Make"))    ? POST($dPx . "Dir") . nice(POST($dPx . "Dirname")) . _sh 	 : $dPath;
+					$dPath = (POST($dPx ."Dirbase")) ? POST($dPx ."Dirbase")                                  : $dPath;
+					$dPath = (POST($dPx ."Make"))    ? POST($dPx ."Dir") . nice(POST($dPx . "Dirname")) . _sh : $dPath;
 					
-					$application = isLang() ? ucfirst(segment(1)) : ucfirst(segment(0));
+					$application = whichApplication();
 					?>
 						<script type="text/javascript">
 							$(document).on("ready", function() {
 								function uploadResponse(state, file) {
 									var path, insert, ok, error, form, message; 
 									
-									path = '<?php print _webURL . _sh . $iPath;?>' + file;
+									path = '<?php print path($iPath, TRUE);?>' + file;
 
 									HTML = '\'<img src=\\\'' + path + '\\\' alt=\\\'' + file + '\\\' />\'';
 									
@@ -163,7 +163,7 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 								function uploadDocumentsResponse(dState, dFile, dIcon, dAlt) {
 									var dPath, dInsert, dOk, dError, dForm, dMessage, dHTML;
 									
-									dPath = '<?php print _webURL . _sh . $dPath; ?>' + dFile;					
+									dPath = '<?php print path($dPath, TRUE); ?>' + dFile;					
 									dHTML = '\'<a href=\\\'' + dPath + '\\\' title=\\\'' + dFile + '\\\'><img src=\\\'' + dIcon + '\\\' alt=\\\'' + dAlt + '\\\' /></a>\'';
 									
 									dInsert = '<li><input name="dLibrary[]" type="checkbox" value="' + dPath + '" />';

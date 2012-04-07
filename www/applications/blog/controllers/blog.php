@@ -268,15 +268,13 @@ class Blog_Controller extends ZP_Controller {
 	
 	private function limit($type = "posts") { 
 		$start = 0;
-		$limit = $start .", ". _maxLimit;	
 		$count = $this->Blog_Model->count("posts");
 
 		if($type === "posts") {
-			if(segment(1, isLang()) === "page" and segment(2, isLang()) > 0) {
+			if(segment(1, isLang()) === "page" and segment(2, isLang()) > 0) { 
 				$start = (segment(2, isLang()) * _maxLimit) - _maxLimit;
 			} 
 							
-			$count = $this->Blog_Model->count();
 			$URL   = path("blog/page/");		
 		} elseif($type === "categories") {
 			if(segment(1, isLang()) === "category" and segment(2, isLang()) !== "page" and segment(3, isLang()) === "page" and segment(4, isLang()) > 0) {
@@ -311,7 +309,8 @@ class Blog_Controller extends ZP_Controller {
 			$count = $this->Blog_Model->count("tag");
 			$URL   = path("blog/tag/". segment(2, isLang()) ."/page/");
 		}
-		
+
+		$limit = $start .", ". _maxLimit;
 		
 		$this->pagination = ($count > _maxLimit) ? paginate($count, _maxLimit, $start, $URL) : NULL;
 		

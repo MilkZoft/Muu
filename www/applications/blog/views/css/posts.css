@@ -37,7 +37,7 @@
 }
 
 .post-title {
-	font-size: 1.4em;
+	font-size: 1.8em;
 	color: #333;
 	font-weight: bold;
 }
@@ -48,24 +48,23 @@
 }
 
 .post-title a:hover {
-	color: #0088fc;
+	color: #7cbb21;
 }
 
 .post-left {
 	float: left;
-	font-size: 0.85em;
+	font-size: 0.75em;
 	color: #666;
 }
 
 .post-right {
 	float: right;
-	font-size: 0.85em;
+	font-size: 0.75em;
 	color: #666;
 }
 
 .post-content {
 	text-align: justify;
-	margin-top: 20px;
 	margin-bottom: 20px;
 }
 

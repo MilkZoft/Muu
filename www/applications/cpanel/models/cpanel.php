@@ -20,7 +20,7 @@ class CPanel_Model extends ZP_Model {
 		$this->Email->fromName  = get("webName");
 		$this->Email->fromEmail = get("webEmailSend");
 				
-		$this->helper("router");
+		$this->helper(array("pagination", "router"));
 		
 		$this->application = whichApplication();
 	}

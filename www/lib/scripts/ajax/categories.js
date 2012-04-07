@@ -7,10 +7,10 @@ function setCategory() {
 		}
 
 	$.ajax({
-		type 		: "POST",
-		url			: PATH + "/categories/ajax/setcategory",
-		data  		: "value", "value", post,
-		dataType	: "json",
+		type 	 : "POST",
+		url		 : PATH + "/categories/ajax/setcategory",
+		data  	 : post,
+		dataType : "json",
 		
 		success: function(response, textStatus, jqXHR) {
 			if(response["response"] != false) {						

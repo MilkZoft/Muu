@@ -20,7 +20,7 @@
 	<script type="text/javascript">
 		var PATH = "<?php print path(); ?>";
 		
-		var URL  = "<?php print _webURL; ?>";
+		var URL  = "<?php print get('webURL'); ?>";
 	</script>
 </head>
 
