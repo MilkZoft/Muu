@@ -32,7 +32,7 @@
 			
 			if(isset($banner)) {
 				print __(_("If you change the banner image, this image will be deleted")) . "<br />";
-				print img(path($banner, TRUE), "Banner", "no-border", array("style" => "max-width: 780px;"));
+				print img(path($banner, TRUE), array("alt" => "Banner", "class" => "no-border", "style" => "max-width: 780px;"));
 				print formInput(array("name" => "banner", "type" => "hidden", "value" => $banner));
 			} 
 
