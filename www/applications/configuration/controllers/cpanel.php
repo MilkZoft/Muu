@@ -13,7 +13,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->application = whichApplication();
 		
-		$this->CPanel = $this->classes("CPanel");
+		$this->CPanel = $this->classes("CPanel", "cpanel");
 		
 		$this->isAdmin = $this->CPanel->load();
 		
