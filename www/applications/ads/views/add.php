@@ -23,24 +23,26 @@
 			print isset($alert) ? $alert : NULL;
 
 			print formInput(array(
-								"name" 	=> "title", 
-								"class" => "span10 required", 
-								"field" => __(_("Title")), 
-								"p" 	=> TRUE, 
-								"value" => $title));
+				"name" 	=> "title", 
+				"class" => "span10 required", 
+				"field" => __(_("Title")), 
+				"p" 	=> TRUE, 
+				"value" => $title
+			));
 			
 			if(isset($banner)) {
 				print __(_("If you change the banner image, this image will be deleted")) . "<br />";
-				print img(_webURL . _sh . $banner, "Banner", "no-border", array("style" => "max-width: 780px;"));
+				print img(path($banner, TRUE), "Banner", "no-border", array("style" => "max-width: 780px;"));
 				print formInput(array("name" => "banner", "type" => "hidden", "value" => $banner));
 			} 
 
 			print formInput(array(
-								"type" 	=> "file", 
-								"name" 	=> "image", 
-								"class" => "required", 
-								"field" => __(_("Image")), 
-								"p" 	=> TRUE));
+				"type" 	=> "file", 
+				"name" 	=> "image", 
+				"class" => "required", 
+				"field" => __(_("Image")), 
+				"p" 	=> TRUE
+			));
 
 			$options = array(
 				0 => array(
@@ -75,26 +77,29 @@
 			);
 
 			print formSelect(array(
-								"name" 	=> "position", 
-								"class" => "required", 
-								"p" 	=> TRUE, 
-								"field" => __(_("Position"))), 
-								$options);
+				"name" 	=> "position", 
+				"class" => "required", 
+				"p" 	=> TRUE, 
+				"field" => __(_("Position"))), 
+				$options
+			);
 			
 			print formInput(array(
-								"name" 	=> "URL", 
-								"class" => "span10 required", 
-								"field" => __(_("URL")), 
-								"p" 	=> TRUE, 
-								"value" => $URL));
+				"name" 	=> "URL", 
+				"class" => "span10 required", 
+				"field" => __(_("URL")), 
+				"p" 	=> TRUE, 
+				"value" => $URL
+			));
 			
 			print formTextarea(array(
-								"name" 	=> "code", 
-								"class" => "span10 required", 
-								"style" => "height: 150px;", 
-								"field" => __(_("Code")), 
-								"p" 	=> TRUE, 
-								"value" => $code));
+				"name" 	=> "code", 
+				"class" => "span10 required", 
+				"style" => "height: 150px;", 
+				"field" => __(_("Code")), 
+				"p" 	=> TRUE, 
+				"value" => $code
+			));
 
 			$options = array(
 				0 => array(
@@ -111,11 +116,12 @@
 			);
 
 			print formSelect(array(
-								"name" 	=> "principal", 
-								"class" => "required", 
-								"p" 	=> TRUE, 
-								"field" => __(_("Principal"))), 
-								$options);			
+				"name" 	=> "principal", 
+				"class" => "required", 
+				"p" 	=> TRUE, 
+				"field" => __(_("Principal"))), 
+				$options
+			);			
 			
 			$options = array(
 				0 => array(
@@ -132,11 +138,12 @@
 			);
 
 			print formSelect(array(
-								"name" 	=> "situation", 
-								"class" => "required", 
-								"p" 	=> TRUE, 
-								"field" => __(_("Situation"))), 
-								$options);			
+				"name" 	=> "situation", 
+				"class" => "required", 
+				"p" 	=> TRUE, 
+				"field" => __(_("Situation"))), 
+				$options
+			);			
 			
 			print formSave($action);
 			
