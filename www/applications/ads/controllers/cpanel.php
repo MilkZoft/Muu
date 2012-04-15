@@ -39,6 +39,30 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 	}
+
+	public function check() {
+		if(POST("trash") and is_array(POST("records"))) { 
+			foreach(POST("records") as $record) {
+				$this->trash($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		} elseif(POST("restore") and is_array(POST("records"))) {
+			foreach(POST("records") as $record) {
+				$this->restore($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		} elseif(POST("delete") and is_array(POST("records"))) {
+			foreach(POST("records") as $record) {
+				$this->delete($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		}
+
+		return FALSE;
+	}
 	
 	public function add() {
 		if(!$this->isAdmin) {
@@ -155,19 +179,7 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 		
-		if(POST("trash") and is_array(POST("records"))) { 
-			foreach(POST("records") as $record) {
-				$this->trash($record, TRUE); 
-			}
-
-			redirect("$this->application/cpanel/results");
-		} elseif(POST("restore") and is_array(POST("records"))) {
-			foreach(POST("records") as $record) {
-				$this->restore($record, TRUE); 
-			}
-
-			redirect("$this->application/cpanel/results");
-		}
+		$this->check();
 
 		$this->title("Manage ". ucfirst($this->application));
 		
