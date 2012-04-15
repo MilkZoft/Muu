@@ -48,7 +48,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["lastLinks"] = porlet(__(_("Last links")), $this->CPanel_Model->home("links"));
 		$this->vars["lastUsers"] = porlet(__(_("Last users")), $this->CPanel_Model->home("users"));
 		
-		$this->vars["view"] 	 = $this->view("home", TRUE);
+		$this->vars["view"] = $this->view("home", TRUE);
 		
 		$this->render("content", $this->vars);
 	}

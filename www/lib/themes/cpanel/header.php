@@ -30,12 +30,12 @@
 		?>
 			<div id="top-bar">
 				<?php
-					$li[] = a("&lsaquo;&lsaquo;" . __(_("Go back")), path());
-					$li[] = " | " . span("bold", __(_("Welcome"))) .": " . SESSION("ZanUser");
-					$li[] = " | " . span("bold", __(_("Online users"))) . ": $online";
-					$li[] = " | " . span("bold", __(_("Registered users"))) . ": $registered";
-					$li[] = " | " . span("bold", __(_("Last user"))) . ": " . a($lastUser["Username"], path("/users/editprofile/"));
-					$li[] = " | " . a(__(_("Logout")) ."&rsaquo;&rsaquo;", path("cpanel/logout/")) ."";			
+					$li[] = a("&lsaquo;&lsaquo;". __(_("Go back")), path());
+					$li[] = " | ". span("bold", __(_("Welcome"))) .": " . SESSION("ZanUser");
+					$li[] = " | ". span("bold", __(_("Online users"))) .": $online";
+					$li[] = " | ". span("bold", __(_("Registered users"))) .": $registered";
+					$li[] = " | ". span("bold", __(_("Last user"))) .": ". a($lastUser["Username"], path("/users/editprofile/"));
+					$li[] = " | ". a(__(_("Logout")) ."&rsaquo;&rsaquo;", path("cpanel/logout/")) ."";			
 					
 					print ul($li);				
 				?>

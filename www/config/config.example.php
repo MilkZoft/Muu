@@ -14,6 +14,7 @@ $ZP["webName"] 	    = "ZanPHP";
 $ZP["webTheme"]     = "default";
 $ZP["webSituation"] = "Active";
 $ZP["webMessage"]   = "";
+$ZP["benchMark"]	= FALSE;
 
 /**
  * Server
