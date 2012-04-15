@@ -62,14 +62,22 @@ class CPanel_Controller extends ZP_Controller {
 		$this->render("content", $this->vars);
 	}
 	
-	public function delete($ID = 0) {
+	public function delete($ID = 0, $return = FALSE) {
 		if(!$this->isAdmin) {
 			$this->login();
 		}
 		
 		if($this->CPanel_Model->delete($ID)) {
+			if($return) {
+				return TRUE;
+			}
+
 			redirect("$this->application/cpanel/results/trash");
 		} else {
+			if($return) {
+				return FALSE;
+			}
+
 			redirect("$this->application/cpanel/results");
 		}	
 	}
@@ -122,14 +130,22 @@ class CPanel_Controller extends ZP_Controller {
 		exit;
 	}
 	
-	public function restore($ID = 0) { 
+	public function restore($ID = 0, $return = FALSE) { 
 		if(!$this->isAdmin) {
 			$this->login();
 		}
 		
 		if($this->CPanel_Model->restore($ID)) {
+			if($return) {
+				return TRUE;
+			}
+
 			redirect("$this->application/cpanel/results/trash");
 		} else {
+			if($return) {
+				return FALSE;
+			}
+
 			redirect("$this->application/cpanel/results");
 		}
 	}
@@ -139,6 +155,20 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 		
+		if(POST("trash") and is_array(POST("records"))) { 
+			foreach(POST("records") as $record) {
+				$this->trash($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		} elseif(POST("restore") and is_array(POST("records"))) {
+			foreach(POST("records") as $record) {
+				$this->restore($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		}
+
 		$this->title("Manage ". ucfirst($this->application));
 		
 		$this->CSS("results", "cpanel");
@@ -166,14 +196,22 @@ class CPanel_Controller extends ZP_Controller {
 		$this->render("content", $this->vars);
 	}
 	
-	public function trash($ID = 0) {
+	public function trash($ID = 0, $return = FALSE) {
 		if(!$this->isAdmin) {
 			$this->login();
 		}
 		
-		if($this->CPanel_Model->trash($ID)) {			
+		if($this->CPanel_Model->trash($ID)) {		
+			if($return) {
+				return TRUE;
+			}	
+
 			redirect("$this->application/cpanel/results");
 		} else {
+			if($return) {
+				return FALSE;
+			}
+
 			redirect("$this->application/cpanel/add");
 		}
 	}

@@ -279,12 +279,12 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 					<a onclick="unCheckAll(\'records\')" class="pointer" title="'. __(_("None")) .'">'. __(_("None")) .'</a><br />';
 					
 					if(segment(3, isLang()) === "trash") { 
-						$HTML .= '	&nbsp;<input name="restore" value="'. __(_("Restore")) .'" type="submit" class="small-input" />
-									&nbsp;<input name="delete" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
+						$HTML .= '	&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to restore the records?")) .'\')" name="restore" value="'. __(_("Restore")) .'" type="submit" class="small-input" />
+									&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to delete the records?")) .'\')" name="delete" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
 					} elseif($comments) { 
-						$HTML .= '	&nbsp;<input name="deleteComments" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
+						$HTML .= '	&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to delete the comments?")) .'\')" name="deleteComments" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
 					} else { 
-						$HTML .= '	&nbsp;<input name="trash" value="'. __(_("Send to trash")) .'" type="submit" class="small-input" />';
+						$HTML .= '	&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to send to trash the records?")) .'\')" name="trash" value="'. __(_("Send to trash")) .'" type="submit" class="small-input" />';
 					}
 					
 	$HTML .= '	</div>';
