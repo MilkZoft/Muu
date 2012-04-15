@@ -284,14 +284,14 @@ class CPanel_Model extends ZP_Model {
 				$start = 0;
 				
 				if($trash) {		
-					$start = (segment(4) === "page" and segment(5) > 0) ? (segment(5) * _maxLimit) - _maxLimit : 0;
+					$start = (segment(4, isLang()) === "page" and segment(5, isLang()) > 0) ? (segment(5, isLang()) * _maxLimit) - _maxLimit : 0;
 				} else {	 
-					$start = (segment(3) === "page" and segment(4) > 0) ? (segment(4) * _maxLimit) - _maxLimit : 0;
+					$start = (segment(3, isLang()) === "page" and segment(4, isLang()) > 0) ? (segment(4, isLang()) * _maxLimit) - _maxLimit : 0;
 				}			
 
 				$limit = $start .", ". _maxLimit;
 				
-				if(segment(3) === "order") {
+				if(segment(3, isLang()) === "order") {
 					$i = (segment(4)) ? 3 : 4; 
 					$j = (segment(4)) ? 4 : 5;
 					

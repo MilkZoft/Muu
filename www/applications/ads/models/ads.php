@@ -40,18 +40,12 @@ class Ads_Model extends ZP_Model {
 	
 	private function all($trash, $order, $limit) {	
 		if(!$trash) {
-			if(SESSION("ZanUserPrivilegeID") === 1) {
-				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
-			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
-			}	
+			$query = (SESSION("ZanUserPrivilegeID") === 1) ? "Situation != 'Deleted'" : "ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'";	
 		} else {
-			if(SESSION("ZanUserPrivilegeID") === 1) {
-				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
-			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
-			}
+			$query = (SESSION("ZanUserPrivilegeID") === 1) ? "Situation = 'Deleted'"  : "ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'";
 		}
+
+		$data = $this->Db->findBySQL($query, $this->table, NULL, $order, $limit);
 		
 		return $data;	
 	}
@@ -61,6 +55,10 @@ class Ads_Model extends ZP_Model {
 			"title" => "required",
 			"URL"   => "ping"
 		);
+
+		if(POST("code")) {
+			unset($validations["URL"]);
+		}
 
 		$data = array(
 			"ID_User"    => SESSION("ZanUserID"),

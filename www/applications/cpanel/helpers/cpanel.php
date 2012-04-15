@@ -207,12 +207,19 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							}
 							
 							if(isset($column["Banner"])) {
-								$HTML .= '
-								<td class="center">
-									<a href="'. path($column["Banner"], TRUE) .'" title="Banner" class="banner-lightbox">
-										'. __(_("Preview")) .'
-									</a>
-								</td>';
+								if($column["Banner"] !== "") { 
+										$HTML .= '
+											<td class="center">
+												<a href="'. path($column["Banner"], TRUE) .'" title="Banner" class="banner-lightbox">
+													'. __(_("Preview")) .'
+												</a>
+											</td>';
+								} else {
+										$HTML .= '
+											<td class="center">
+												'. __(_("Preview")) .'
+											</td>';
+								}
 							}
 							
 							if(isset($column["Principal"])) { 
@@ -274,17 +281,17 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 				</table>
 		
 				<div class="table-options" style="position: relative; z-index: 1; margin-bottom: 25px;">
-					&nbsp;'. __(_("Select")) .': 
-					<a onclick="checkAll(\'records\')" class="pointer" title="'. __(_("All")) .'">'. __(_("All")) .'</a> 
-					<a onclick="unCheckAll(\'records\')" class="pointer" title="'. __(_("None")) .'">'. __(_("None")) .'</a><br />';
+					'. __(_("Select")) .': <br />
+					<a onclick="checkAll(\'records\')" class="pointer" title="'. __(_("All")) .'">'. __(_("All")) .'</a> |
+					<a onclick="unCheckAll(\'records\')" class="pointer" title="'. __(_("None")) .'">'. __(_("None")) .'</a><br /><br />';
 					
 					if(segment(3, isLang()) === "trash") { 
-						$HTML .= '	&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to restore the records?")) .'\')" name="restore" value="'. __(_("Restore")) .'" type="submit" class="small-input" />
-									&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to delete the records?")) .'\')" name="delete" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
+						$HTML .= '	<input class="btn btn-success" onclick="javascript:return confirm(\''. __(_("Do you want to restore the records?")) .'\')" name="restore" value="'. __(_("Restore")) .'" type="submit" class="small-input" />
+									<input class="btn btn-danger" onclick="javascript:return confirm(\''. __(_("Do you want to delete the records?")) .'\')" name="delete" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
 					} elseif($comments) { 
-						$HTML .= '	&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to delete the comments?")) .'\')" name="deleteComments" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
+						$HTML .= ' <input class="btn btn-danger" onclick="javascript:return confirm(\''. __(_("Do you want to delete the comments?")) .'\')" name="deleteComments" value="'. __(_("Delete")) .'" type="submit" class="small-input" />';
 					} else { 
-						$HTML .= '	&nbsp;<input onclick="javascript:return confirm(\''. __(_("Do you want to send to trash the records?")) .'\')" name="trash" value="'. __(_("Send to trash")) .'" type="submit" class="small-input" />';
+						$HTML .= '	<input class="btn btn-warning" onclick="javascript:return confirm(\''. __(_("Do you want to send to trash the records?")) .'\')" name="trash" value="'. __(_("Send to trash")) .'" type="submit" class="small-input" />';
 					}
 					
 	$HTML .= '	</div>';
@@ -634,7 +641,13 @@ function getSearch() {
 			)
 	);
 
-	$HTML  = formOpen(path($application ."/cpanel/results"), "form-results-search");
+	$trash = NULL;
+
+	if(segment(3, isLang()) === "trash") {
+		$trash = "trash";
+	}
+
+	$HTML  = formOpen(path($application ."/cpanel/results/$trash"), "form-results-search");
 	$HTML .= br();
 	$HTML .= bold("&nbsp". __(_("Search")) .":", FALSE);
 

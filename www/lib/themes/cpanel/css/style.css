@@ -124,9 +124,8 @@ a:hover {
 }
 
 #sidebar {
-	width: 160px;
+	width: 190px;
 	float: left;
-	border-right: 1px solid #DDDDDD;
 	padding: 10px;
 	color: #00A0DE;
 	font-size: 0.8em;
@@ -147,7 +146,7 @@ a:hover {
 }
 
 #content {
-	width: 839px;
+	width: 809px;
 	float: right;
 	font-size: 0.8em;
 }
@@ -161,7 +160,7 @@ a:hover {
 }
 
 .box {
-	width: 800px;
+	width: 770px;
 	margin: 0 auto;
 	-moz-border-radius: 10px;
 	-ms-border-radius: 10px;
@@ -177,19 +176,19 @@ a:hover {
 	margin-left: 20px;
 	padding: 0px;
 	list-style: url(../images/arrow-grey.gif);
-	width: 775px;
+	width: 745px;
 }
 
 .box ul li a {
 	display: block;
-	width: 775px;
+	width: 745px;
 	border-bottom: 1px solid #EEEEEE;
 	background-color: #F5F5F5;
 }
 
 .box ul li a:hover {
 	display: block;
-	width: 775px;
+	width: 745px;
 	border-bottom: 1px solid #EEEEEE;
 	background-color: #FFFFFF;
 }
