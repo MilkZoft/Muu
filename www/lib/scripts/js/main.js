@@ -1,8 +1,7 @@
-$(document).ready(function() {
-	
+$(document).on("ready", function() {
 	$("#alert-message").delay(5000).fadeOut(2000);
 
-	$("#alert-message").click(function() {
-		$("#alert-message").fadeOut("slow");
+	$("#alert-message").on("click", function() {
+		$("#alert-message").hide();
 	});
 });
