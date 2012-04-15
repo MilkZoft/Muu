@@ -40,13 +40,13 @@ class Ads_Model extends ZP_Model {
 	
 	private function all($trash, $order, $limit) {	
 		if(!$trash) {
-			if(SESSION("ZanUserPrivilege") === "Super Admin") {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
 			}	
 		} else {
-			if(SESSION("ZanUserPrivilege") === "Super Admin") {
+			if(SESSION("ZanUserPrivilegeID") === 1) {
 				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
 			} else {
 				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);

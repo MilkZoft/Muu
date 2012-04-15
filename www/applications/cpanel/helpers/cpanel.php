@@ -209,7 +209,7 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							if(isset($column["Banner"])) {
 								$HTML .= '
 								<td class="center">
-									<a href="'. _webURL . _sh . $column["Banner"] .'" title="Banner" class="banner-lightbox">
+									<a href="'. path($column["Banner"], TRUE) .'" title="Banner" class="banner-lightbox">
 										'. __(_("Preview")) .'
 									</a>
 								</td>';
