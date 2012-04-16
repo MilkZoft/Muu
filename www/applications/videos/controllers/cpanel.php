@@ -217,6 +217,8 @@ class CPanel_Controller extends ZP_Controller {
 		if(!$this->isAdmin) {
 			$this->login();
 		}
+
+		$this->check();
 		
 		$this->title("Manage ". $this->application);
 		$this->CSS("results", "cpanel");

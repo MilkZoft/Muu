@@ -132,7 +132,7 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 									insert = insert + '<span class="bold">' + file + '<' + '/span><' + '/a><' + '/li>';						
 									
 									if(state == 1) {
-										message = '<?php print __(_("The file size exceed the permited limit")); ?>';
+										message = '<?php print __(_("The file size exceed the permitted limit")); ?>';
 									}
 									
 									if(state == 2) {
@@ -140,7 +140,7 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 									}
 									
 									if(state == 3) {
-										message = '<?php print __(_("The file type is not permited")); ?>';
+										message = '<?php print __(_("The file type is not permitted")); ?>';
 									}
 									
 									if(state == 4) {
@@ -174,7 +174,7 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 									dInsert = dInsert + '<span class="bold">' + dFile + '<' + '/span><' + '/a><' + '/li>';								
 							
 									if(dState == 1) {
-										message = '<?php print __(_("The file size exceed the permited limit")); ?>';
+										message = '<?php print __(_("The file size exceed the permitted limit")); ?>';
 									}
 									
 									if(dState == 2) {
@@ -182,7 +182,7 @@ function getScript($js, $application = NULL, $extra = NULL, $getJs = FALSE, $ext
 									}
 									
 									if(dState == 3) {
-										message = '<?php print __(_("The file type is not permited")); ?>';
+										message = '<?php print __(_("The file type is not permitted")); ?>';
 									}
 									
 									if(dState == 4) {
