@@ -35,6 +35,90 @@ class CPanel_Controller extends ZP_Controller {
 			$this->login();
 		}
 	}
+
+	public function check() {
+		if(POST("trash") and is_array(POST("records"))) { 
+			foreach(POST("records") as $record) {
+				$this->trash($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		} elseif(POST("restore") and is_array(POST("records"))) {
+			foreach(POST("records") as $record) {
+				$this->restore($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		} elseif(POST("delete") and is_array(POST("records"))) {
+			foreach(POST("records") as $record) {
+				$this->delete($record, TRUE); 
+			}
+
+			redirect("$this->application/cpanel/results");
+		}
+
+		return FALSE;
+	}
+
+	public function delete($ID = 0, $return = FALSE) {
+		if(!$this->isAdmin) {
+			$this->login();
+		}
+		
+		if($this->CPanel_Model->delete($ID)) {
+			if($return) {
+				return TRUE;
+			}
+
+			redirect("$this->application/cpanel/results/trash");
+		} else {
+			if($return) {
+				return FALSE;
+			}
+
+			redirect("$this->application/cpanel/results");
+		}	
+	}
+
+	public function restore($ID = 0, $return = FALSE) { 
+		if(!$this->isAdmin) {
+			$this->login();
+		}
+		
+		if($this->CPanel_Model->restore($ID)) {
+			if($return) {
+				return TRUE;
+			}
+
+			redirect("$this->application/cpanel/results/trash");
+		} else {
+			if($return) {
+				return FALSE;
+			}
+
+			redirect("$this->application/cpanel/results");
+		}
+	}
+
+	public function trash($ID = 0, $return = FALSE) {
+		if(!$this->isAdmin) {
+			$this->login();
+		}
+		
+		if($this->CPanel_Model->trash($ID)) {		
+			if($return) {
+				return TRUE;
+			}	
+
+			redirect("$this->application/cpanel/results");
+		} else {
+			if($return) {
+				return FALSE;
+			}
+
+			redirect("$this->application/cpanel/add");
+		}
+	}
 	
 	public function add() {
 		if(!$this->isAdmin) {
@@ -60,18 +144,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
 		$this->render("content", $this->vars);
-	}
-	
-	public function delete($ID = 0) {
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		if($this->CPanel_Model->delete($ID)) {
-			redirect($this->application ."/cpanel/results/trash");
-		} else {
-			redirect($this->application ."cpanel/results");
-		}	
 	}
 	
 	public function edit($ID = 0) {
@@ -109,22 +181,12 @@ class CPanel_Controller extends ZP_Controller {
 		}
 	}
 	
-	public function restore($ID = 0) { 
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		if($this->CPanel_Model->restore($ID)) {
-			redirect($this->application ."/cpanel/results/trash");
-		} else {
-			redirect($this->application ."/cpanel/results");
-		}
-	}
-	
 	public function results() {
 		if(!$this->isAdmin) {
 			$this->login();
 		}
+
+		$this->check();
 		
 		$this->title("Manage ". $this->application);
 		
@@ -139,7 +201,7 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$total 		= $this->CPanel_Model->total($trash);
 		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
-		$pagination 	= $this->CPanel_Model->getPagination($trash);
+		$pagination = $this->CPanel_Model->getPagination($trash);
 		$tFoot 		= getTFoot($trash);
 		
 		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
@@ -151,16 +213,5 @@ class CPanel_Controller extends ZP_Controller {
 		
 		$this->render("content", $this->vars);
 	}
-	
-	public function trash($ID = 0) {
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		if($this->CPanel_Model->trash($ID)) {
-			redirect($this->application ."/cpanel/results");
-		} else {
-			redirect($this->application ."/cpanel/add");
-		}
-	}
+
 }

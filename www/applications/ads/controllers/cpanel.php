@@ -63,6 +63,100 @@ class CPanel_Controller extends ZP_Controller {
 
 		return FALSE;
 	}
+
+	public function delete($ID = 0, $return = FALSE) {
+		if(!$this->isAdmin) {
+			$this->login();
+		}
+		
+		if($this->CPanel_Model->delete($ID)) {
+			if($return) {
+				return TRUE;
+			}
+
+			redirect("$this->application/cpanel/results/trash");
+		} else {
+			if($return) {
+				return FALSE;
+			}
+
+			redirect("$this->application/cpanel/results");
+		}	
+	}
+
+	public function restore($ID = 0, $return = FALSE) { 
+		if(!$this->isAdmin) {
+			$this->login();
+		}
+		
+		if($this->CPanel_Model->restore($ID)) {
+			if($return) {
+				return TRUE;
+			}
+
+			redirect("$this->application/cpanel/results/trash");
+		} else {
+			if($return) {
+				return FALSE;
+			}
+
+			redirect("$this->application/cpanel/results");
+		}
+	}
+
+	public function trash($ID = 0, $return = FALSE) {
+		if(!$this->isAdmin) {
+			$this->login();
+		}
+		
+		if($this->CPanel_Model->trash($ID)) {		
+			if($return) {
+				return TRUE;
+			}	
+
+			redirect("$this->application/cpanel/results");
+		} else {
+			if($return) {
+				return FALSE;
+			}
+
+			redirect("$this->application/cpanel/add");
+		}
+	}
+	
+	public function results() {
+		if(!$this->isAdmin) {
+			$this->login();
+		}
+		
+		$this->check();
+
+		$this->title("Manage ". ucfirst($this->application));
+		
+		$this->CSS("results", "cpanel");
+		$this->CSS("pagination");
+		
+		$this->js("www/lib/scripts/js/prettyphoto/js/jquery.prettyphoto.js");
+		$this->js("actions", "ads");
+		$this->js("banner-lightbox", "ads");	
+		$this->js("checkbox");			
+		
+		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
+				
+		$total 		= $this->CPanel_Model->total($trash);
+		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
+		$pagination = $this->CPanel_Model->getPagination($trash);
+		$tFoot 		= getTFoot($trash);
+		
+		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
+		$this->vars["pagination"] = $pagination;
+		$this->vars["trash"]  	  = $trash;	
+		$this->vars["search"] 	  = getSearch(); 
+		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
+		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
+		
+		$this->render("content", $this->vars);
+	}
 	
 	public function add() {
 		if(!$this->isAdmin) {
@@ -84,26 +178,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["view"] = $this->view("add", TRUE, $this->application);
 		
 		$this->render("content", $this->vars);
-	}
-	
-	public function delete($ID = 0, $return = FALSE) {
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		if($this->CPanel_Model->delete($ID)) {
-			if($return) {
-				return TRUE;
-			}
-
-			redirect("$this->application/cpanel/results/trash");
-		} else {
-			if($return) {
-				return FALSE;
-			}
-
-			redirect("$this->application/cpanel/results");
-		}	
 	}
 	
 	public function edit($ID = 0) {
@@ -152,80 +226,6 @@ class CPanel_Controller extends ZP_Controller {
 		$this->rendering("header", "footer");
 		
 		exit;
-	}
-	
-	public function restore($ID = 0, $return = FALSE) { 
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		if($this->CPanel_Model->restore($ID)) {
-			if($return) {
-				return TRUE;
-			}
-
-			redirect("$this->application/cpanel/results/trash");
-		} else {
-			if($return) {
-				return FALSE;
-			}
-
-			redirect("$this->application/cpanel/results");
-		}
-	}
-	
-	public function results() {
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		$this->check();
-
-		$this->title("Manage ". ucfirst($this->application));
-		
-		$this->CSS("results", "cpanel");
-		$this->CSS("pagination");
-		
-		$this->js("www/lib/scripts/js/prettyphoto/js/jquery.prettyphoto.js");
-		$this->js("actions", "ads");
-		$this->js("banner-lightbox", "ads");	
-		$this->js("checkbox");			
-		
-		$trash = (segment(3, isLang()) === "trash") ? TRUE : FALSE;
-				
-		$total 		= $this->CPanel_Model->total($trash);
-		$thead 		= $this->CPanel_Model->thead("checkbox, ". getFields($this->application) .", Action", FALSE);
-		$pagination = $this->CPanel_Model->getPagination($trash);
-		$tFoot 		= getTFoot($trash);
-		
-		$this->vars["message"]    = (!$tFoot) ? "Error" : NULL;
-		$this->vars["pagination"] = $pagination;
-		$this->vars["trash"]  	  = $trash;	
-		$this->vars["search"] 	  = getSearch(); 
-		$this->vars["table"]      = getTable(__(_("Manage ". ucfirst($this->application))), $thead, $tFoot, $total);					
-		$this->vars["view"]       = $this->view("results", TRUE, "cpanel");
-		
-		$this->render("content", $this->vars);
-	}
-	
-	public function trash($ID = 0, $return = FALSE) {
-		if(!$this->isAdmin) {
-			$this->login();
-		}
-		
-		if($this->CPanel_Model->trash($ID)) {		
-			if($return) {
-				return TRUE;
-			}	
-
-			redirect("$this->application/cpanel/results");
-		} else {
-			if($return) {
-				return FALSE;
-			}
-
-			redirect("$this->application/cpanel/add");
-		}
 	}
 	
 }
