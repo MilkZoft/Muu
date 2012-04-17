@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZanPHP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-15 19:27-0600\n"
-"PO-Revision-Date: 2012-04-15 19:28-0600\n"
+"POT-Creation-Date: 2012-04-16 21:59-0600\n"
+"PO-Revision-Date: 2012-04-16 21:59-0600\n"
 "Last-Translator: Carlos Santana <carlos@milkzoft.com>\n"
 "Language-Team: Carlos Santana <carlos@santana.ws>\n"
 "MIME-Version: 1.0\n"
@@ -125,24 +125,24 @@ msgstr "Idioma del post"
 msgid "Enable Comments"
 msgstr "Habilitar Comentarios"
 
-#: www/applications/blog/views/add.php:97
-#: www/applications/blog/views/add.php:101
+#: www/applications/blog/views/add.php:98
+#: www/applications/blog/views/add.php:103
 msgid "Password"
 msgstr "Contraseña"
 
-#: www/applications/blog/views/add.php:118
+#: www/applications/blog/views/add.php:122
 msgid "Image for this post"
 msgstr "Imagen para el post"
 
-#: www/applications/blog/views/add.php:129
+#: www/applications/blog/views/add.php:134
 msgid "Mural image"
 msgstr "Imagen de mural"
 
-#: www/applications/blog/views/add.php:138
+#: www/applications/blog/views/add.php:143
 msgid "Current mural image"
 msgstr "Imagen de mural actual"
 
-#: www/applications/blog/views/add.php:149
+#: www/applications/blog/views/add.php:155
 msgid "Delete Mural"
 msgstr "Eliminar Mural"
 
@@ -1273,72 +1273,84 @@ msgid "Manage Categories"
 msgstr "Administrar Categorías"
 
 #: www/lib/languages/words.php:20
+msgid "Manage Pages"
+msgstr "Administrar Páginas"
+
+#: www/lib/languages/words.php:21
 msgid "posts"
 msgstr "publicaciones"
 
-#: www/lib/languages/words.php:21
+#: www/lib/languages/words.php:22
 msgid "Application"
 msgstr "Aplicación"
 
-#: www/lib/languages/words.php:22
+#: www/lib/languages/words.php:23
 msgid "Language"
 msgstr "Idioma"
 
-#: www/lib/languages/words.php:23
+#: www/lib/languages/words.php:24
 msgid "feedback"
 msgstr "contacto"
 
-#: www/lib/languages/words.php:24
+#: www/lib/languages/words.php:25
 msgid "Manage Forums"
 msgstr "Administrar Foros"
 
-#: www/lib/languages/words.php:25
+#: www/lib/languages/words.php:26
 msgid "Support"
 msgstr "Soporte Técnico"
 
-#: www/lib/languages/words.php:26
+#: www/lib/languages/words.php:27
 msgid "Title is required"
 msgstr "El título es requerido"
 
-#: www/lib/languages/words.php:27
+#: www/lib/languages/words.php:28
 msgid "Invalid URL"
 msgstr "URL Inválida"
 
-#: www/lib/languages/words.php:28
+#: www/lib/languages/words.php:29
 msgid "You need to upload an image or write the ad code"
 msgstr "Necesitas subir una imagen o escribir el código del anuncio"
 
-#: www/lib/languages/words.php:29
+#: www/lib/languages/words.php:30
 msgid "The ad has been saved correctly"
 msgstr "El anuncio se ha guardado correctamente"
 
-#: www/lib/languages/words.php:30
+#: www/lib/languages/words.php:31
 msgid "Deleted"
 msgstr "Eliminado"
 
-#: www/lib/languages/words.php:31
+#: www/lib/languages/words.php:32
 msgid "Spanish"
 msgstr "Español"
 
-#: www/lib/languages/words.php:32
+#: www/lib/languages/words.php:33
 msgid "English"
 msgstr "Inglés"
 
-#: www/lib/languages/words.php:33
+#: www/lib/languages/words.php:34
 msgid "Arabic"
 msgstr "Árabe"
 
-#: www/lib/languages/words.php:34
+#: www/lib/languages/words.php:35
 msgid "Chinese"
 msgstr "Chino"
 
-#: www/lib/languages/words.php:35
+#: www/lib/languages/words.php:36
 msgid "French"
 msgstr "Francés"
 
-#: www/lib/languages/words.php:36
+#: www/lib/languages/words.php:37
 msgid "Blog"
 msgstr "Blog"
+
+#: www/lib/languages/words.php:38
+msgid "Monday"
+msgstr "Lunes"
+
+#: www/lib/languages/words.php:39
+msgid "Tuesday"
+msgstr "Martes"
 
 #: www/lib/themes/cpanel/footer.php:6
 msgid "All rights reserved"
@@ -2227,9 +2239,6 @@ msgstr "Diciembre"
 #~ msgid "Manage Links"
 #~ msgstr "Administrar Enlaces"
 
-#~ msgid "Manage Pages"
-#~ msgstr "Administrar Páginas"
-
 #~ msgid "Manage Support"
 #~ msgstr "Administrar Soporte"
 
@@ -2364,12 +2373,6 @@ msgstr "Diciembre"
 #~ msgstr ""
 #~ "La página ha sido editada correctamente. Existe una página de traducción "
 #~ "que necesita ser actualizada, serás redireccionado automáticamente."
-
-#~ msgid "Monday"
-#~ msgstr "Lunes"
-
-#~ msgid "Tuesday"
-#~ msgstr "Martes"
 
 #~ msgid "Wednesday"
 #~ msgstr "Miércoles"

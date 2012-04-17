@@ -17,6 +17,7 @@ _("Manage Feedback");
 _("Manage Polls");
 _("Manage Blog");
 _("Manage Categories");
+_("Manage Pages");
 _("posts");
 _("Application");
 _("Language");
@@ -34,4 +35,7 @@ _("Arabic");
 _("Chinese");
 _("French");
 _("Blog");
+_("Monday");
+_("Tuesday");
+
 ?>

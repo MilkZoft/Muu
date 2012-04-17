@@ -16,16 +16,14 @@ class Pages_Controller extends ZP_Controller {
 		
 		$this->application = $this->app("pages");
 		
-		$this->Templates->theme(_webTheme);
+		$this->Templates->theme();
 	}
 	
-	public function index() {
+	public function index($slug = NULL) {
 		$this->CSS("style", $this->application);
 		
-		if(isLang() and segment(2)) {
-			$this->getBySlug(segment(2));
-		} elseif(!isLang() and segment(1)) {
-			$this->getBySlug(segment(1));		
+		if(!is_null($slug)) {
+			$this->getBySlug($slug);		
 		} else {
 			$this->getByDefault();			
 		}		
@@ -34,7 +32,7 @@ class Pages_Controller extends ZP_Controller {
 		$view = segment(2);
 		$vars["view"] = $this->view("$view", TRUE);
 		
-		$this->template("content", $vars);			
+		$this->render("content", $vars);			
 	}
 		
 	private function getBySlug($slug = NULL) {		
@@ -67,9 +65,9 @@ class Pages_Controller extends ZP_Controller {
 			$vars["content"] = $data[0]["Content"];
 			$vars["view"]    = $this->view("page", TRUE);
 			
-			$this->template("content", $vars);			
+			$this->render("content", $vars);			
 		} else {
-			$this->template("error404");
+			$this->render("error404");
 		}
 	}
 	
@@ -83,9 +81,9 @@ class Pages_Controller extends ZP_Controller {
 			$vars["content"] = $data[0]["Content"];
 			$vars["view"]    = $this->view("page", TRUE);
 			
-			$this->template("content", $vars);
+			$this->render("content", $vars);
 		} else {
-			$this->template("error404");
+			$this->render("error404");
 		}
 	}
 }

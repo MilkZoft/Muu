@@ -2,7 +2,7 @@
 	<a name="top"></a>
 				
 	<p>
-		<?php print $content; ?>
+		<?php print bbCode($content); ?>
 	</p>
 				
 	<?php

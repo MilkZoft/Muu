@@ -41,20 +41,14 @@ class Pages_Model extends ZP_Model {
 		}
 	}
 	
-	private function all($trash, $order, $limit) {
+	private function all($trash, $order, $limit) {	
 		if(!$trash) {
-			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
-			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'", $this->table, NULL, $order, $limit);
-			}	
+			$query = (SESSION("ZanUserPrivilegeID") === 1) ? "Situation != 'Deleted'" : "ID_User = '". SESSION("ZanUserID") ."' AND Situation != 'Deleted'";	
 		} else {
-			if(SESSION("ZanUserPrivilege") === _super) {
-				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
-			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'", $this->table, NULL, $order, $limit);
-			}
+			$query = (SESSION("ZanUserPrivilegeID") === 1) ? "Situation = 'Deleted'"  : "ID_User = '". SESSION("ZanUserID") ."' AND Situation = 'Deleted'";
 		}
+
+		$data = $this->Db->findBySQL($query, $this->table, NULL, $order, $limit);
 		
 		return $data;	
 	}

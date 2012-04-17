@@ -31,12 +31,24 @@
 			
 			print isset($alert) ? $alert : NULL;
 
-			print formInput(array("type" => "text", "name" => "title", "class" => "input required", "field" => __("Title"), "p" => TRUE, "value" => $title));
+			print formInput(array(
+				"type" 	=> "text", 
+				"name" 	=> "title", 
+				"class" => "span10 required", 
+				"field" => __(_("Title")), 
+				"p" 	=> TRUE, 
+				"value" => $title)
+			);
 
-			print formTextarea(array("id" => "editor", "name" => "content", "class" => "textarea", "field" => __("Content"), "p" => TRUE, "value" => $content));
-
-			print isset($imagesLibrary)    ? $imagesLibrary    : NULL;
-			print isset($documentsLibrary) ? $documentsLibrary : NULL;
+			print formTextarea(array(
+				"id" 	=> "editor", 
+				"name" 	=> "content", 
+				"class" => "span10",
+				"style" => "height: 400px;", 
+				"field" => __(_("Content")), 
+				"p" 	=> TRUE, 
+				"value" => $content)
+			);
 
 			print formField(NULL, __("Languages") ."<br />". getLanguagesInput($language));
 			
@@ -54,7 +66,13 @@
 					)
 			);
 
-			print formSelect(array("name" => "principal", "class" => "select", "p" => TRUE, "field" => __("Principal")), $options);
+			print formSelect(array(
+				"name" 	=> "principal", 
+				"class" => "required", 
+				"p" 	=> TRUE, 
+				"field" => __(_("Principal"))), 
+				$options
+			);
 
 			$options = array(
 				0 => array(
@@ -70,7 +88,13 @@
 					)
 			);
 
-			print formSelect(array("name" => "situation", "class" => "select", "p" => TRUE, "field" => __("Situation")), $options);
+			print formSelect(array(
+				"name" 	=> "situation", 
+				"class" => "required", 
+				"p" 	=> TRUE, 
+				"field" => __(_("Situation"))), 
+				$options
+			);
 
 			print formSave($action);
 

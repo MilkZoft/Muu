@@ -84,42 +84,47 @@
 			);
 
 			print formSelect(array(
-								"name" 	=> "situation", 
-								"p" 	=> TRUE, 
-								"class" => "required", 
-								"field" => __(_("Situation"))), 
-								$options);
+				"name" 	=> "situation", 
+				"p" 	=> TRUE, 
+				"class" => "required", 
+				"field" => __(_("Situation"))), 
+				$options
+			);
 						
 			if(!isset($pwd)) { 
 				print formInput(array(
-									"name" 	=> "pwd", 
-									"class" => "span10", 
-									"field" => __(_("Password")), 
-									"p" 	=> TRUE, 
-									"value" => $pwd));	
+					"name" 	=> "pwd", 
+					"class" => "span10", 
+					"field" => __(_("Password")), 
+					"p" 	=> TRUE, 
+					"value" => $pwd)
+				);	
 			} else { 
 				print formField(NULL, __(_("Password")) ."<br />");
 				
 				print formInput(array(
-									"id" 	=> "lock", 
-									"class" => "lock", 
-									"type" 	=> "button"));
-	
+					"id" 	=> "lock", 
+					"class" => "lock", 
+					"type" 	=> "button")
+				);
+
 							
 				print formInput(array(
-									"id" 	=> "password", 
-									"type" 	=> "hidden", 
-									"value" => $pwd));
+					"id" 	=> "password", 
+					"type" 	=> "hidden", 
+					"value" => $pwd
+				));
 			}
 			
 			print formInput(array(
-								"type" 	=> "file", 
-								"name" 	=> "image", 
-								"field" => __(_("Image for this post")), 
-								"p" 	=> TRUE));
+				"type" 	=> "file", 
+				"name" 	=> "image", 
+				"field" => __(_("Image for this post")), 
+				"p" 	=> TRUE
+			));
 
 			if(isset($medium)) {
-				print img(_webURL . _sh . $medium);
+				print img(path($medium, TRUE));
 			}
 			
 			print formInput(array(
@@ -132,23 +137,25 @@
 	
 			if(isset($muralImage) and is_array($muralImage)) {
 				print formInput(array(
-									"type" 	=> "hidden", 
-									"name" 	=> "mural_exist", 
-									"class" => "span10", 
-									"field" => __(_("Current mural image")), 
-									"p" 	=> TRUE));
+					"type" 	=> "hidden", 
+					"name" 	=> "mural_exist", 
+					"class" => "span10", 
+					"field" => __(_("Current mural image")), 
+					"p" 	=> TRUE)
+				);
 				
-				print img(_webURL . _sh . $muralImage[0]["Image"], NULL, NULL, array("style" => "width: 98%; border: 1px solid #000;"));
+				print img(path($muralImage[0]["Image"], TRUE), array("style" => "width: 98%; border: 1px solid #000;"));
                 
                 print $this->js("var URL = '$muralDeleteURL';", TRUE);
  				
  				print formInput(array(
-									"type" 	=> "submit", 
-									"id" 	=> "delete_mural", 
-									"name" 	=> "delete_mural_image", 
-									"value" => __(_("Delete Mural")), 
-									"class" => "btn error", 
-									"p" 	=> TRUE));
+					"type" 	=> "submit", 
+					"id" 	=> "delete_mural", 
+					"name" 	=> "delete_mural_image", 
+					"value" => __(_("Delete Mural")), 
+					"class" => "btn error", 
+					"p" 	=> TRUE
+				));
 			}
 			
 			print formSave($action);

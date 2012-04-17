@@ -121,3 +121,7 @@
 .right {
 	text-align: right;
 }
+
+#alert-message {
+	width: 90%;
+}
